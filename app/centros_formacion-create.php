@@ -66,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $pdo = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
-          exit('Something weird happened'); //something a user can understand
+          exit('Algo extraño sucedió'); //something a user can understand
         }
         $stmt = $pdo->prepare("INSERT INTO centros_formacion (nombreCorto,nombreLargo,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
         
@@ -74,7 +74,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $stmt = null;
                 header("location: centros_formacion-index.php");
             } else{
-                echo "Something went wrong. Please try again later.";
+                echo "Algo falló. Por favor intente de nuevo.";
             }
 
 }
@@ -84,7 +84,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Record</title>
+    <title>Crear Registro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
@@ -93,9 +93,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="row">
                 <div class="col-md-6 mx-auto">
                     <div class="page-header">
-                        <h2>Create Record</h2>
+                        <h2>Crear Registro</h2>
                     </div>
-                    <p>Please fill this form and submit to add a record to the database.</p>
+                    <p>Por favor diligencie todo el formulario para adicionar un registro a la Base de Datos</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                         <div class="form-group">
@@ -154,8 +154,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
                         </div>
 
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="centros_formacion-index.php" class="btn btn-secondary">Cancel</a>
+                        <input type="submit" class="btn btn-primary" value="Actualizar">
+                        <a href="centros_formacion-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>
             </div>

@@ -23,16 +23,16 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Roles del sistema Details</h2>
-                        <a href="roles_sistema-create.php" class="btn btn-success float-right">Add New Record</a>
-                        <a href="roles_sistema-index.php" class="btn btn-info float-right mr-2">Reset View</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Back</a>
+                        <h2 class="float-left">Roles del sistema - Detalle</h2>
+                        <a href="roles_sistema-create.php" class="btn btn-success float-right">Agregar registro</a>
+                        <a href="roles_sistema-index.php" class="btn btn-info float-right mr-2">Restablecer vista</a>
+                        <a href="index.php" class="btn btn-secondary float-right mr-2">Regresar</a>
                     </div>
 
                     <div class="form-row">
                         <form action="roles_sistema-index.php" method="get">
                         <div class="col">
-                          <input type="text" class="form-control" placeholder="Search this table" name="search">
+                          <input type="text" class="form-control" placeholder="Buscar en esta tabla" name="search">
                         </div>
                     </div>
                         </form>
@@ -111,7 +111,7 @@
                                $total_pages = ceil(mysqli_num_rows($result_count) / $no_of_records_per_page);
                            }
                             $number_of_results = mysqli_num_rows($result_count);
-                            echo " " . $number_of_results . " results - Page " . $pageno . " of " . $total_pages;
+                            echo " " . $number_of_results . " resultados - Página " . $pageno . " de " . $total_pages;
 
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
@@ -125,7 +125,7 @@
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
 										
-                                        echo "<th>Action</th>";
+                                        echo "<th>Acciones</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -133,9 +133,9 @@
                                     echo "<tr>";
                                     echo "<td>" . $row['idRol'] . "</td>";echo "<td>" . $row['nombreRol'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['descripcionRol'] . "</td>";echo "<td>" . $row['permisos'] . "</td>";echo "<td>" . $row['restricciones'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
-                                            echo "<a href='roles_sistema-read.php?idRol=". $row['idRol'] ."' title='View Record' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                                            echo "<a href='roles_sistema-update.php?idRol=". $row['idRol'] ."' title='Update Record' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                                            echo "<a href='roles_sistema-delete.php?idRol=". $row['idRol'] ."' title='Delete Record' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                                            echo "<a href='roles_sistema-read.php?idRol=". $row['idRol'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
+                                            echo "<a href='roles_sistema-update.php?idRol=". $row['idRol'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                                            echo "<a href='roles_sistema-delete.php?idRol=". $row['idRol'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }
@@ -146,22 +146,22 @@
                                 <?php
                                     $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
                                  ?> 
-                                    <li class="page-item"><a class="page-link" href="<?php echo $new_url .'&pageno=1' ?>">First</a></li>
+                                    <li class="page-item"><a class="page-link" href="<?php echo $new_url .'&pageno=1' ?>">Primera</a></li>
                                     <li class="page-item <?php if($pageno <= 1){ echo 'disabled'; } ?>">
-                                        <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo $new_url ."&pageno=".($pageno - 1); } ?>">Prev</a>
+                                        <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo $new_url ."&pageno=".($pageno - 1); } ?>">Anterior</a>
                                     </li>
                                     <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
-                                        <a class="page-link" href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo $new_url . "&pageno=".($pageno + 1); } ?>">Next</a>
+                                        <a class="page-link" href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo $new_url . "&pageno=".($pageno + 1); } ?>">Siguiente</a>
                                     </li>
                                     <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
-                                        <a class="page-item"><a class="page-link" href="<?php echo $new_url .'&pageno=' . $total_pages; ?>">Last</a>
+                                        <a class="page-item"><a class="page-link" href="<?php echo $new_url .'&pageno=' . $total_pages; ?>">Última</a>
                                     </li>
                                 </ul>
 <?php
                             // Free result set
                             mysqli_free_result($result);
                         } else{
-                            echo "<p class='lead'><em>No records were found.</em></p>";
+                            echo "<p class='lead'><em>No se encontraron registros.</em></p>";
                         }
                     } else{
                         echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);

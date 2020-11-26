@@ -34,10 +34,15 @@
             </ul>
         </div>
 
-        <div class="intro">
-            SENA - CDITI<br />
-            Gestión de encuestas para registro de síntomas y temperatura<br />
-            COVID-19
+        <div class="intro remover-espacios">
+            <div style="height: 100px;">
+                SENA - CDITI<br />
+                Gestión de encuestas para registro de síntomas y temperatura<br />
+                COVID-19
+            </div>
+            <dir style="height: 450px;">
+                <img src="imagenes/logo-sena-naranja.png">
+            </dir>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>

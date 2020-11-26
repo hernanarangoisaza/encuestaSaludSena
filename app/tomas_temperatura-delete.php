@@ -20,7 +20,7 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
             header("location: tomas_temperatura-index.php");
             exit();
         } else{
-            echo "Oops! Something went wrong. Please try again later.";
+            echo "Oops! Algo falló. Por favor intente de nuevo.";
         }
     }
 
@@ -42,7 +42,7 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View Record</title>
+    <title>Ver Registro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
@@ -51,14 +51,14 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
             <div class="row">
                 <div class="col-md-6 mx-auto">
                     <div class="page-header">
-                        <h1>Delete Record</h1>
+                        <h1>Borrar Registro</h1>
                     </div>
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="alert alert-danger fade-in">
                             <input type="hidden" name="idToma" value="<?php echo trim($_GET["idToma"]); ?>"/>
-                            <p>Are you sure you want to delete this record?</p><br>
+                            <p>Está seguro de eliminar este registro?</p><br>
                             <p>
-                                <input type="submit" value="Yes" class="btn btn-danger">
+                                <input type="submit" value="Si" class="btn btn-danger">
                                 <a href="tomas_temperatura-index.php" class="btn btn-secondary">No</a>
                             </p>
                         </div>

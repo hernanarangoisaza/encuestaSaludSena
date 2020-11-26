@@ -36,7 +36,7 @@ if(isset($_GET["idRol"]) && !empty(trim($_GET["idRol"]))){
             }
 
         } else{
-            echo "Oops! Something went wrong. Please try again later.";
+            echo "Oops! Algo falló. Por favor intente de nuevo.";
         }
     }
 
@@ -55,7 +55,7 @@ if(isset($_GET["idRol"]) && !empty(trim($_GET["idRol"]))){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View Record</title>
+    <title>Ver Registro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
@@ -64,7 +64,7 @@ if(isset($_GET["idRol"]) && !empty(trim($_GET["idRol"]))){
             <div class="row">
                 <div class="col-md-8 mx-auto">
                     <div class="page-header">
-                        <h1>View Record</h1>
+                        <h1>Ver Registro</h1>
                     </div>
                         
                      <div class="form-group">
@@ -90,7 +90,7 @@ if(isset($_GET["idRol"]) && !empty(trim($_GET["idRol"]))){
                         <p class="form-control-static"><?php echo $row["auditoria"]; ?></p>
                     </div>                    
                     
-                    <p><a href="roles_sistema-index.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="roles_sistema-index.php" class="btn btn-primary">Regresar</a></p>
                 </div>
             </div>
         </div>
