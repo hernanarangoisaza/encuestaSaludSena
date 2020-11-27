@@ -111,7 +111,7 @@
                                $total_pages = ceil(mysqli_num_rows($result_count) / $no_of_records_per_page);
                            }
                             $number_of_results = mysqli_num_rows($result_count);
-                            echo " " . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages;
+                            echo " " . $number_of_results . " resultados - Página " . $pageno . " de " . $total_pages;
 
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";

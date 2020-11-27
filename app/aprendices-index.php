@@ -5,7 +5,6 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6b773fe9e4.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="css/estilos.css" />
     <style type="text/css">
         .page-header h2{
             margin-top: 0;
@@ -112,9 +111,9 @@
                                $total_pages = ceil(mysqli_num_rows($result_count) / $no_of_records_per_page);
                            }
                             $number_of_results = mysqli_num_rows($result_count);
-                            echo " " . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages;
-echo "<div class='seccion-tabla-scroll-horizontal'>";
-                            echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
+                            echo " " . $number_of_results . " resultados - Página " . $pageno . " de " . $total_pages;
+
+                            echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id Aprendiz</th>";
@@ -135,7 +134,7 @@ echo "<div class='seccion-tabla-scroll-horizontal'>";
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
 										
-                                        echo "<th class='estilo-acciones'>Acciones</th>";
+                                        echo "<th>Acciones</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -143,17 +142,15 @@ echo "<div class='seccion-tabla-scroll-horizontal'>";
                                     echo "<tr>";
                                     echo "<td>" . $row['idAprendiz'] . "</td>";echo "<td>" . $row['idTipoVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['idTipoIdentificacion'] . "</td>";echo "<td>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td>" . $row['telefonoPersonal'] . "</td>";echo "<td>" . $row['telefonoAcudiente'] . "</td>";echo "<td>" . $row['fechaNacimiento'] . "</td>";echo "<td>" . $row['idGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['idCentroFormacion'] . "</td>";echo "<td>" . $row['idFichaFormacion'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
-                                            echo "<a href='aprendices-read.php?idAprendiz=". $row['idAprendiz'] ."data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                                            echo "<a href='aprendices-update.php?idAprendiz=". $row['idAprendiz'] ."data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                                            echo "<a href='aprendices-delete.php?idAprendiz=". $row['idAprendiz'] ."data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                                            echo "<a href='aprendices-read.php?idAprendiz=". $row['idAprendiz'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
+                                            echo "<a href='aprendices-update.php?idAprendiz=". $row['idAprendiz'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                                            echo "<a href='aprendices-delete.php?idAprendiz=". $row['idAprendiz'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";
                             echo "</table>";
-echo "</div>";
 ?>
-
                                 <ul class="pagination" align-right>
                                 <?php
                                     $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
