@@ -10,27 +10,27 @@
             <div class="title">MENÚ</div>
             <ul class="nav">
 
-                <li class=""><a href="encuesta_signos-index.php" class="">Encuesta de signos</a></li>
-                <li class=""><a href="tomas_temperatura-index.php" class="">Tomas de temperatura</a></li>
-                <li class=""><a href="preguntas_encuesta-index.php" class="">Preguntas de la encuesta</a></li>
-                <li class=""><a href="respuestas_encuesta-index.php" class="">Respuestas de la encuesta</a></li>
+                <li class="item-menu-principal"><a href="encuesta_signos-index.php" class="">Encuesta de signos</a></li>
+                <li class="item-menu-principal"><a href="tomas_temperatura-index.php" class="">Tomas de temperatura</a></li>
+                <li class="item-menu-principal"><a href="preguntas_encuesta-index.php" class="">Preguntas de la encuesta</a></li>
+                <li class="item-menu-principal"><a href="respuestas_encuesta-index.php" class="">Respuestas de la encuesta</a></li>
 
-                <li class=""><a href="aprendices-index.php" class="">Aprendices</a></li>
+                <li class="item-menu-principal"><a href="aprendices-index.php" class="">Aprendices</a></li>
 
-                <li class=""><a href="centros_formacion-index.php" class="">Centros de formación</a></li>
-                <li class=""><a href="programas_formacion-index.php" class="">Programas de formación</a></li>
-                <li class=""><a href="fichas_formacion-index.php" class="">Fichas de formación</a></li>
-                <li class=""><a href="horarios-index.php" class="">Horarios</a></li>
+                <li class="item-menu-principal"><a href="centros_formacion-index.php" class="">Centros de formación</a></li>
+                <li class="item-menu-principal"><a href="programas_formacion-index.php" class="">Programas de formación</a></li>
+                <li class="item-menu-principal"><a href="fichas_formacion-index.php" class="">Fichas de formación</a></li>
+                <li class="item-menu-principal"><a href="horarios-index.php" class="">Horarios</a></li>
 
-                <li class=""><a href="departamentos-index.php" class="">Departamentos</a></li>
-                <li class=""><a href="municipios-index.php" class="">Municipios</a></li>
+                <li class="item-menu-principal"><a href="departamentos-index.php" class="">Departamentos</a></li>
+                <li class="item-menu-principal"><a href="municipios-index.php" class="">Municipios</a></li>
 
-                <li class=""><a href="tipos_generos-index.php" class="">Tipos de géneros</a></li>
-                <li class=""><a href="tipos_identificacion-index.php" class="">Tipos de identificación</a></li>
-                <li class=""><a href="vinculaciones_sena-index.php" class="">Tipos de vinculaciones</a></li>
+                <li class="item-menu-principal"><a href="tipos_generos-index.php" class="">Tipos de géneros</a></li>
+                <li class="item-menu-principal"><a href="tipos_identificacion-index.php" class="">Tipos de identificación</a></li>
+                <li class="item-menu-principal"><a href="vinculaciones_sena-index.php" class="">Tipos de vinculaciones</a></li>
 
-                <li class=""><a href="usuarios-index.php" class="">Usuarios del sistema</a></li>
-                <li class=""><a href="roles_sistema-index.php" class="">Roles del sistema</a></li>
+                <li class="item-menu-principal"><a href="usuarios-index.php" class="">Usuarios del sistema</a></li>
+                <li class="item-menu-principal"><a href="roles_sistema-index.php" class="">Roles del sistema</a></li>
             </ul>
         </div>
 
