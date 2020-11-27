@@ -14,7 +14,7 @@ body {
     background-color: white;
     margin: 0;
     font-family: "Muli", sans-serif;
-    font-size: 12px; /* Tamaño de fuente base, definir el resto de fuentes con base en font-size: 1em */
+    font-size: 14px; /* Tamaño de fuente base, definir el resto de fuentes con base en font-size: 1em */
     color: #495057; /* Simulación de negro pero menos intenso */
 }
 
@@ -51,7 +51,7 @@ body {
     transform: rotate(270deg);
     left: 10px;
     font-weight: 300;
-    font-size: 2em;
+    font-size: 1.75em;
 }
 .menu .nav {
     position: absolute;
@@ -79,7 +79,7 @@ body {
 }
 
 .intro {
-    font-size: 2em;
+    font-size: 1.75em;
     font-style: italic;
     text-align: center;
     height: 100vh;
@@ -175,6 +175,14 @@ table.estilo-tabla-index thead a {
 */
 
 /* -------------------------------------------------------------------------------------------------- */
+
+.page-header h2 {
+    margin-top: 0;
+}
+
+table tr td:last-child a {
+    margin-right: 5px;
+}
 
 .remover-espacios {
     margin: 0px;

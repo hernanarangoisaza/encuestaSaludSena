@@ -173,7 +173,7 @@
                             echo "<p class='lead'><em>No se encontraron registros.</em></p>";
                         }
                     } else{
-                        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                        echo "ERROR: No fue posible ejecutar $sql. " . mysqli_error($link);
                     }
 
                     // Close connection
