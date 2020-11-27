@@ -1,103 +1,232 @@
-@import url(https://fonts.googleapis.com/css?family=Muli:400,300italic,300,400italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=Muli:400, 300italic, 300, 400italic, 700, 700italic);
 
 /*
 .contenedor-flex{
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
-	align-items: center;
-	align-content: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
 }
 */
+
+body {
+    background-color: white;
+    margin: 0;
+    font-family: "Muli", sans-serif;
+    font-size: 12px; /* Tamaño de fuente base, definir el resto de fuentes con base en font-size: 1em */
+    color: #495057; /* Simulación de negro pero menos intenso */
+}
 
 /* -------------------------------------------------------------------------------------------------- */
 /* MENÚ LATERAL O SIDEBAR */
 /* -------------------------------------------------------------------------------------------------- */
 
-body {
-		background-color: white;
-  margin: 0;
-  font-family: 'Muli', sans-serif;
-}
-
 .menu {
-  font-weight: 100;
-  background: #efefef;
-  width: 300px;
-  height: 100%;
-  padding-left: 50px;
-  position: fixed;
-  z-index: 100;
-  -webkit-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  right: -280px;
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
-  color: #222;
+    font-weight: 100;
+    background: #efefef;
+    width: 300px;
+    height: 100%;
+    padding-left: 50px;
+    position: fixed;
+    z-index: 100;
+    -webkit-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    right: -280px;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    color: #222;
 }
-.menu:hover, .menu:focus {
-  transform: translate3d(-280px, 0, 0);
-  animation-timing-function: 1s ease-in;
+.menu:hover,
+.menu:focus {
+    transform: translate3d(-280px, 0, 0);
+    animation-timing-function: 1s ease-in;
 }
 .menu .title {
-  top: 50%;
-  position: absolute;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  transform: rotate(270deg);
-  left: 10px;
-  font-weight: 800;
-  font-size: 20px;
+    top: 50%;
+    position: absolute;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    transform: rotate(270deg);
+    left: 10px;
+    font-weight: 300;
+    font-size: 2em;
 }
 .menu .nav {
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  font-weight: 100;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-weight: 100;
 }
 .menu .nav li {
-  padding-bottom: 10px;
-  list-style-type: none;
+    padding-bottom: 10px;
+    list-style-type: none;
+    font-size: 1.25em;
 }
 .menu .nav li a {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
 }
 .menu .nav li a:hover {
-  color: black;
-  font-weight: bold;
+    color: black;
+    font-weight: bold;
 }
 
 .intro {
-  /*position: absolute;
-  top: 30%;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  */
-  font-size: 25px;
-  font-style: italic;
-  text-align: center;
-  height: 100vh;
-  width: 100%;
+    font-size: 2em;
+    font-style: italic;
+    text-align: center;
+    height: 100vh;
+    width: 100%;
 
-
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
 }
+
+ul.nav {
+    padding-left: 25px;
+}
+
 /* -------------------------------------------------------------------------------------------------- */
- .remover-espacios{
+/* TABLAS DE LA SECCIÓN INDEX */
+/* -------------------------------------------------------------------------------------------------- */
+
+table.estilo-tabla-index {
+    border: 1px solid #aaaaaa;
+    background-color: #f2f2f2;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+table.estilo-tabla-index td,
+table.estilo-tabla-index th {
+    border: 1px solid #aaaaaa;
+    padding: 5px 5px;
+}
+table.estilo-tabla-index tbody td {
+    font-size: 1em;
+    color: #333333;
+}
+table.estilo-tabla-index tr:nth-child(even) {
+    background: #ffffff;
+}
+table.estilo-tabla-index thead {
+    background: #ff6719;
+    border-bottom: 0px solid #444444;
+}
+table.estilo-tabla-index thead th {
+    font-size: 1em;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: center;
+    border-left: 0px solid #aaaaaa;
+}
+table.estilo-tabla-index thead th:first-child {
+    border-left: none;
+}
+
+table.estilo-tabla-index tfoot {
+    font-size: 1em;
+    font-weight: normal;
+    color: #ffffff;
+    background: #ff6719;
+    border-top: 0px solid #444444;
+}
+table.estilo-tabla-index tfoot td {
+    font-size: 1em;
+}
+table.estilo-tabla-index tfoot .links {
+    text-align: right;
+}
+table.estilo-tabla-index tfoot .links a {
+    display: inline-block;
+    background: #ffffff;
+    color: #000000;
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
+table.estilo-tabla-index thead a {
+    padding: 2px 8px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+
+/*
+[attribute]         [target]                Selects all elements with a target attribute
+[attribute=value]   [target=_blank]         Selects all elements with target="_blank"
+[attribute~=value]  [title~=flower]         Selects all elements with a title attribute containing the word "flower"
+[attribute|=value]  [lang|=en]              Selects all elements with a lang attribute value starting with "en"
+[attribute^=value]  a[href^="https"]        Selects every <a> element whose href attribute value begins with "https"
+[attribute$=value]  a[href$=".pdf"]         Selects every <a> element whose href attribute value ends with ".pdf"
+[attribute*=value]  a[href*="w3schools"]    Selects every <a> element whose href attribute value contains the substring "w3schools"
+*/
+
+/* -------------------------------------------------------------------------------------------------- */
+
+.remover-espacios {
     margin: 0px;
     padding: 0px;
- }
+}
+
+.seccion-tabla-scroll-horizontal {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.estilo-acciones {
+    color: #000000;
+    text-decoration: none;
+}
+
+input[name="search"]::placeholder {
+    opacity: 1;
+    color: #d9d9d9;
+    font-size: 0.9em;
+}
+
+.btn {
+    font-size: 1em;
+}
+
+.page-item,
+.page-link {
+    font-size: 1em;
+}
+
+h2.float-left {
+    font-size: 1.5em;
+    padding-left: 10px;
+}
+
+form div.col {
+    padding-left: 10px;
+    padding-right: 0px;
+}
+
+.fab,
+.far {
+    font-weight: 400;
+    color: black;
+    font-size: 1.25em;
+}
+
+li.item-menu-principal a::before {
+    padding-left: 0px;
+    padding-right: 10px;
+    content: "\2192";
+}
+
+/* -------------------------------------------------------------------------------------------------- */
