@@ -218,6 +218,10 @@ input.solo-lectura {
     border-color: #AAAAAA;
 }
 
+input[name="search"] {
+    background-color: #FFFFFF;
+}
+
 .btn {
     font-size: 1em;
 }
@@ -284,6 +288,17 @@ a.btn.btn-secondary {
 
 a.btn.btn-secondary.float-right.mr-2 {
     margin-top: 0px;
+}
+
+.combo-box.form-control {
+    background-color: #FFFFEE;
+    border-color: #AAAAAA;
+}
+
+.combo-box.form-control option {
+    background-color: #FFFFFF;
+    font-size: 0.8em;
+    font-style: italic;
 }
 
 

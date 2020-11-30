@@ -67,7 +67,7 @@
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idTipoIdentificacion', 'nombreIdentificacion', 'nombreCorto', 'estado', 'auditoria'); 
+                    $orderBy = array('idTipoIdentificacion', 'nombreLargoIdentificacion', 'nombreCorto', 'estado', 'auditoria'); 
                     $order = 'idTipoIdentificacion';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
@@ -92,12 +92,12 @@
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                         $sql = "SELECT * FROM tipos_identificacion
-                            WHERE CONCAT (idTipoIdentificacion,nombreIdentificacion,nombreCorto,estado,auditoria)
+                            WHERE CONCAT (idTipoIdentificacion,nombreLargoIdentificacion,nombreCorto,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT * FROM tipos_identificacion
-                            WHERE CONCAT (idTipoIdentificacion,nombreIdentificacion,nombreCorto,estado,auditoria)
+                            WHERE CONCAT (idTipoIdentificacion,nombreLargoIdentificacion,nombreCorto,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -117,7 +117,7 @@
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th><a href=?search=$search&sort=&order=idTipoIdentificacion&sort=$sort>Id Tipo Identificación</th>";
-										echo "<th><a href=?search=$search&sort=&order=nombreIdentificacion&sort=$sort>Nombre</th>";
+										echo "<th><a href=?search=$search&sort=&order=nombreLargoIdentificacion&sort=$sort>Nombre</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreCorto&sort=$sort>Nombre corto</th>";
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
@@ -128,7 +128,7 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idTipoIdentificacion'] . "</td>";echo "<td>" . $row['nombreIdentificacion'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idTipoIdentificacion'] . "</td>";echo "<td>" . $row['nombreLargoIdentificacion'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='tipos_identificacion-read.php?idTipoIdentificacion=". $row['idTipoIdentificacion'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                             echo "<a href='tipos_identificacion-update.php?idTipoIdentificacion=". $row['idTipoIdentificacion'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";

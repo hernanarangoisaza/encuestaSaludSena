@@ -3,12 +3,12 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreIdentificacion = "";
+$nombreLargoIdentificacion = "";
 $nombreCorto = "";
 $estado = "";
 $auditoria = "";
 
-$nombreIdentificacion_err = "";
+$nombreLargoIdentificacion_err = "";
 $nombreCorto_err = "";
 $estado_err = "";
 $auditoria_err = "";
@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($name_err) && empty($address_err) && empty($salary_err)){
         // Prepare an insert statement
  */
-        $nombreIdentificacion = trim($_POST["nombreIdentificacion"]);
+        $nombreLargoIdentificacion = trim($_POST["nombreLargoIdentificacion"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -47,9 +47,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO tipos_identificacion (nombreIdentificacion,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO tipos_identificacion (nombreLargoIdentificacion,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
         
-        if($stmt->execute([ $nombreIdentificacion,$nombreCorto,$estado,$auditoria  ])) {
+        if($stmt->execute([ $nombreLargoIdentificacion,$nombreCorto,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: tipos_identificacion-index.php");
             } else{
@@ -79,8 +79,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreIdentificacion" maxlength="50"class="form-control" value="<?php echo $nombreIdentificacion; ?>">
-                            <span class="form-text"><?php echo $nombreIdentificacion_err; ?></span>
+                            <input type="text" name="nombreLargoIdentificacion" maxlength="50"class="form-control" value="<?php echo $nombreLargoIdentificacion; ?>">
+                            <span class="form-text"><?php echo $nombreLargoIdentificacion_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Nombre corto</label>

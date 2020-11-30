@@ -72,7 +72,7 @@ if(isset($_GET["idCentroFormacion"]) && !empty(trim($_GET["idCentroFormacion"]))
                         <p class="form-control-static"><?php echo $row["nombreCorto"]; ?></p>
                     </div><div class="form-group">
                         <label>Nombre del Centro</label>
-                        <p class="form-control-static"><?php echo $row["nombreLargo"]; ?></p>
+                        <p class="form-control-static"><?php echo $row["nombreLargoCentroFormacion"]; ?></p>
                     </div><div class="form-group">
                         <label>Dirección</label>
                         <p class="form-control-static"><?php echo $row["direccion"]; ?></p>

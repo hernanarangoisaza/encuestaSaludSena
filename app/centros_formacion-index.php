@@ -67,7 +67,7 @@
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idCentroFormacion', 'nombreCorto', 'nombreLargo', 'direccion', 'idMunicipio', 'idDepartamento', 'telefono1', 'telefono2', 'emailContacto1', 'emailContacto2', 'estado', 'auditoria'); 
+                    $orderBy = array('idCentroFormacion', 'nombreCorto', 'nombreLargoCentroFormacion', 'direccion', 'idMunicipio', 'idDepartamento', 'telefono1', 'telefono2', 'emailContacto1', 'emailContacto2', 'estado', 'auditoria'); 
                     $order = 'idCentroFormacion';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
@@ -92,12 +92,12 @@
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                         $sql = "SELECT * FROM centros_formacion
-                            WHERE CONCAT (idCentroFormacion,nombreCorto,nombreLargo,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria)
+                            WHERE CONCAT (idCentroFormacion,nombreCorto,nombreLargoCentroFormacion,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT * FROM centros_formacion
-                            WHERE CONCAT (idCentroFormacion,nombreCorto,nombreLargo,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria)
+                            WHERE CONCAT (idCentroFormacion,nombreCorto,nombreLargoCentroFormacion,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -118,7 +118,7 @@
                                     echo "<tr>";
                                         echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Id Centro Formación</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreCorto&sort=$sort>Nombre corto</th>";
-										echo "<th><a href=?search=$search&sort=&order=nombreLargo&sort=$sort>Nombre del Centro</th>";
+										echo "<th><a href=?search=$search&sort=&order=nombreLargoCentroFormacion&sort=$sort>Nombre del Centro</th>";
 										echo "<th><a href=?search=$search&sort=&order=direccion&sort=$sort>Dirección</th>";
 										echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Id Municipio</th>";
 										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Id Departamento</th>";
@@ -135,7 +135,7 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idCentroFormacion'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['nombreLargo'] . "</td>";echo "<td>" . $row['direccion'] . "</td>";echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['telefono1'] . "</td>";echo "<td>" . $row['telefono2'] . "</td>";echo "<td>" . $row['emailContacto1'] . "</td>";echo "<td>" . $row['emailContacto2'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idCentroFormacion'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";echo "<td>" . $row['direccion'] . "</td>";echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['telefono1'] . "</td>";echo "<td>" . $row['telefono2'] . "</td>";echo "<td>" . $row['emailContacto1'] . "</td>";echo "<td>" . $row['emailContacto2'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='centros_formacion-read.php?idCentroFormacion=". $row['idCentroFormacion'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                             echo "<a href='centros_formacion-update.php?idCentroFormacion=". $row['idCentroFormacion'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";

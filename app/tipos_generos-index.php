@@ -67,8 +67,8 @@
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idGenero', 'nombreTipoGenero', 'nombreCorto', 'estado', 'auditoria'); 
-                    $order = 'idGenero';
+                    $orderBy = array('idTipoGenero', 'nombreLargoGenero', 'nombreCorto', 'estado', 'auditoria'); 
+                    $order = 'idTipoGenero';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
                         }
@@ -92,12 +92,12 @@
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                         $sql = "SELECT * FROM tipos_generos
-                            WHERE CONCAT (idGenero,nombreTipoGenero,nombreCorto,estado,auditoria)
+                            WHERE CONCAT (idTipoGenero,nombreLargoGenero,nombreCorto,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT * FROM tipos_generos
-                            WHERE CONCAT (idGenero,nombreTipoGenero,nombreCorto,estado,auditoria)
+                            WHERE CONCAT (idTipoGenero,nombreLargoGenero,nombreCorto,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -116,8 +116,8 @@
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th><a href=?search=$search&sort=&order=idGenero&sort=$sort>Id Genero</th>";
-										echo "<th><a href=?search=$search&sort=&order=nombreTipoGenero&sort=$sort>Nombre</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=idTipoGenero&sort=$sort>Id Genero</th>";
+										echo "<th><a href=?search=$search&sort=&order=nombreLargoGenero&sort=$sort>Nombre</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreCorto&sort=$sort>Nombre corto</th>";
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
@@ -128,11 +128,11 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idGenero'] . "</td>";echo "<td>" . $row['nombreTipoGenero'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idTipoGenero'] . "</td>";echo "<td>" . $row['nombreLargoGenero'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
-                                            echo "<a href='tipos_generos-read.php?idGenero=". $row['idGenero'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                                            echo "<a href='tipos_generos-update.php?idGenero=". $row['idGenero'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                                            echo "<a href='tipos_generos-delete.php?idGenero=". $row['idGenero'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                                            echo "<a href='tipos_generos-read.php?idTipoGenero=". $row['idTipoGenero'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
+                                            echo "<a href='tipos_generos-update.php?idTipoGenero=". $row['idTipoGenero'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                                            echo "<a href='tipos_generos-delete.php?idTipoGenero=". $row['idTipoGenero'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }

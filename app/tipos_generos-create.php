@@ -3,12 +3,12 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreTipoGenero = "";
+$nombreLargoGenero = "";
 $nombreCorto = "";
 $estado = "";
 $auditoria = "";
 
-$nombreTipoGenero_err = "";
+$nombreLargoGenero_err = "";
 $nombreCorto_err = "";
 $estado_err = "";
 $auditoria_err = "";
@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($name_err) && empty($address_err) && empty($salary_err)){
         // Prepare an insert statement
  */
-        $nombreTipoGenero = trim($_POST["nombreTipoGenero"]);
+        $nombreLargoGenero = trim($_POST["nombreLargoGenero"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -47,9 +47,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO tipos_generos (nombreTipoGenero,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO tipos_generos (nombreLargoGenero,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
         
-        if($stmt->execute([ $nombreTipoGenero,$nombreCorto,$estado,$auditoria  ])) {
+        if($stmt->execute([ $nombreLargoGenero,$nombreCorto,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: tipos_generos-index.php");
             } else{
@@ -79,8 +79,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreTipoGenero" maxlength="50"class="form-control" value="<?php echo $nombreTipoGenero; ?>">
-                            <span class="form-text"><?php echo $nombreTipoGenero_err; ?></span>
+                            <input type="text" name="nombreLargoGenero" maxlength="50"class="form-control" value="<?php echo $nombreLargoGenero; ?>">
+                            <span class="form-text"><?php echo $nombreLargoGenero_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Nombre corto</label>

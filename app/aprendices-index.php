@@ -57,7 +57,7 @@
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idAprendiz', 'idTipoVinculacion', 'nombreCompleto', 'idTipoIdentificacion', 'identificacion', 'email', 'telefonoPersonal', 'telefonoAcudiente', 'fechaNacimiento', 'idGenero', 'direccionResidencia', 'idMunicipio', 'idDepartamento', 'idCentroFormacion', 'idFichaFormacion', 'estado', 'auditoria'); 
+                    $orderBy = array('idAprendiz', 'idTipoVinculacion', 'nombreCompleto', 'idTipoIdentificacion', 'identificacion', 'email', 'telefonoPersonal', 'telefonoAcudiente', 'fechaNacimiento', 'idTipoGenero', 'direccionResidencia', 'idMunicipio', 'idDepartamento', 'idCentroFormacion', 'idFichaFormacion', 'estado', 'auditoria'); 
                     $order = 'idAprendiz';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
@@ -76,17 +76,17 @@
 
                     // Attempt select query execution
                     $sql = "SELECT AP.*, 
-                            VS.nombreVinculacion AS 'nombreVinculacion', 
-                            TI.nombreIdentificacion AS 'nombreIdentificacion',
-                            TG.nombreTipoGenero AS 'nombreGenero',
+                            VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+                            TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
+                            TG.nombreLargoGenero AS 'nombreLargoGenero',
                             MN.municipio AS 'nombreMunicipio',
                             DP.departamento AS 'nombreDepartamento',
-                            CF.nombreLargo AS 'nombreCentroFormacion',
+                            CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             FF.codigoFichaFormacion AS 'codigoFichaFormacion'
                             FROM aprendices AP
-                            LEFT JOIN vinculaciones_sena VS ON VS.idVinculacion = AP.idTipoVinculacion
+                            LEFT JOIN tipos_vinculaciones_sena VS ON VS.idTipoVinculacion = AP.idTipoVinculacion
                             LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
-                            LEFT JOIN tipos_generos TG ON TG.idGenero = AP.idGenero
+                            LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
                             LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
                             LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
@@ -97,12 +97,12 @@
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                         $sql = "SELECT * FROM aprendices
-                            WHERE CONCAT (idAprendiz,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria)
+                            WHERE CONCAT (idAprendiz,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT * FROM aprendices
-                            WHERE CONCAT (idAprendiz,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria)
+                            WHERE CONCAT (idAprendiz,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -131,7 +131,7 @@
     										echo "<th><a href=?search=$search&sort=&order=telefonoPersonal&sort=$sort>Teléfono personal</th>";
     										echo "<th><a href=?search=$search&sort=&order=telefonoAcudiente&sort=$sort>Teléfono del acudiente</th>";
     										echo "<th><a href=?search=$search&sort=&order=fechaNacimiento&sort=$sort>Fecha de nacimiento</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idGenero&sort=$sort>Género</th>";
+    										echo "<th><a href=?search=$search&sort=&order=idTipoGenero&sort=$sort>Género</th>";
     										echo "<th><a href=?search=$search&sort=&order=direccionResidencia&sort=$sort>Dirección de la residencia</th>";
     										echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Municipio</th>";
     										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
@@ -149,7 +149,7 @@
                                                 echo "<a href='aprendices-update.php?idAprendiz=". $row['idAprendiz'] ."'data-toggle='tooltip'><i class='far fa-edit'></i></a>";
                                                 echo "<a href='aprendices-delete.php?idAprendiz=". $row['idAprendiz'] ."'data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                                             echo "</td>";
-                                        echo "<td class='centrar-columna ocultar-columna'>" . $row['idAprendiz'] . "</td>";echo "<td>" . $row['nombreVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['nombreIdentificacion'] . "</td>";echo "<td class='centrar-columna'>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td class='centrar-columna'>" . $row['telefonoPersonal'] . "</td>";echo "<td class='centrar-columna'>" . $row['telefonoAcudiente'] . "</td>";echo "<td class='centrar-columna'>" . $row['fechaNacimiento'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreMunicipio'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";echo "<td>" . $row['nombreCentroFormacion'] . "</td>";echo "<td class='centrar-columna'>" . $row['codigoFichaFormacion'] . "</td>";echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
+                                        echo "<td class='centrar-columna ocultar-columna'>" . $row['idAprendiz'] . "</td>";echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['nombreLargoIdentificacion'] . "</td>";echo "<td class='centrar-columna'>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td class='centrar-columna'>" . $row['telefonoPersonal'] . "</td>";echo "<td class='centrar-columna'>" . $row['telefonoAcudiente'] . "</td>";echo "<td class='centrar-columna'>" . $row['fechaNacimiento'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreLargoGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreMunicipio'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";echo "<td class='centrar-columna'>" . $row['codigoFichaFormacion'] . "</td>";echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
                                         echo "</tr>";
                                     }
                                     echo "</tbody>";

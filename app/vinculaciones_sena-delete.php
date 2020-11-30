@@ -1,18 +1,18 @@
 <?php
 // Process delete operation after confirmation
-if(isset($_POST["idVinculacion"]) && !empty($_POST["idVinculacion"])){
+if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
     // Include config file
     require_once "config.php";
 
     // Prepare a delete statement
-    $sql = "DELETE FROM vinculaciones_sena WHERE idVinculacion = ?";
+    $sql = "DELETE FROM tipos_vinculaciones_sena WHERE idTipoVinculacion = ?";
 
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
 
         // Set parameters
-        $param_id = trim($_POST["idVinculacion"]);
+        $param_id = trim($_POST["idTipoVinculacion"]);
 
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -31,7 +31,7 @@ if(isset($_POST["idVinculacion"]) && !empty($_POST["idVinculacion"])){
     mysqli_close($link);
 } else{
     // Check existence of id parameter
-    if(empty(trim($_GET["idVinculacion"]))){
+    if(empty(trim($_GET["idTipoVinculacion"]))){
         // URL doesn't contain id parameter. Redirect to error page
         header("location: error.php");
         exit();
@@ -55,7 +55,7 @@ if(isset($_POST["idVinculacion"]) && !empty($_POST["idVinculacion"])){
                     </div>
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="alert alert-danger fade-in">
-                            <input type="hidden" name="idVinculacion" value="<?php echo trim($_GET["idVinculacion"]); ?>"/>
+                            <input type="hidden" name="idTipoVinculacion" value="<?php echo trim($_GET["idTipoVinculacion"]); ?>"/>
                             <p>Está seguro de eliminar este registro?</p><br>
                             <p>
                                 <input type="submit" value="Si" class="btn btn-danger">

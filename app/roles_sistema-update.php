@@ -3,7 +3,7 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreRol = "";
+$nombreLargoRol = "";
 $nombreCorto = "";
 $descripcionRol = "";
 $permisos = "";
@@ -27,7 +27,7 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
 
         // Prepare an update statement
         
-        $nombreRol = trim($_POST["nombreRol"]);
+        $nombreLargoRol = trim($_POST["nombreLargoRol"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$descripcionRol = trim($_POST["descripcionRol"]);
 		$permisos = trim($_POST["permisos"]);
@@ -48,9 +48,9 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE roles_sistema SET nombreRol=?,nombreCorto=?,descripcionRol=?,permisos=?,restricciones=?,estado=?,auditoria=? WHERE idRol=?");
+        $stmt = $pdo->prepare("UPDATE roles_sistema SET nombreLargoRol=?,nombreCorto=?,descripcionRol=?,permisos=?,restricciones=?,estado=?,auditoria=? WHERE idRol=?");
 
-        if(!$stmt->execute([ $nombreRol,$nombreCorto,$descripcionRol,$permisos,$restricciones,$estado,$auditoria,$idRol  ])) {
+        if(!$stmt->execute([ $nombreLargoRol,$nombreCorto,$descripcionRol,$permisos,$restricciones,$estado,$auditoria,$idRol  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
@@ -83,7 +83,7 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
 
                     // Retrieve individual field value
 
-                    $nombreRol = $row["nombreRol"];
+                    $nombreLargoRol = $row["nombreLargoRol"];
 					$nombreCorto = $row["nombreCorto"];
 					$descripcionRol = $row["descripcionRol"];
 					$permisos = $row["permisos"];
@@ -137,7 +137,7 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreRol" maxlength="50"class="form-control" value="<?php echo $nombreRol; ?>">
+                            <input type="text" name="nombreLargoRol" maxlength="50"class="form-control" value="<?php echo $nombreLargoRol; ?>">
                             <span class="form-text"><?php echo $nombreRol_err; ?></span>
                         </div>
 						<div class="form-group">

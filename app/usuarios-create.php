@@ -10,7 +10,7 @@ $identificacion = "";
 $email = "";
 $telefonoPersonal = "";
 $fechaNacimiento = "";
-$idGenero = "";
+$idTipoGenero = "";
 $direccionResidencia = "";
 $idMunicipio = "";
 $idDepartamento = "";
@@ -27,7 +27,7 @@ $identificacion_err = "";
 $email_err = "";
 $telefonoPersonal_err = "";
 $fechaNacimiento_err = "";
-$idGenero_err = "";
+$idTipoGenero_err = "";
 $direccionResidencia_err = "";
 $idMunicipio_err = "";
 $idDepartamento_err = "";
@@ -60,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$email = trim($_POST["email"]);
 		$telefonoPersonal = trim($_POST["telefonoPersonal"]);
 		$fechaNacimiento = trim($_POST["fechaNacimiento"]);
-		$idGenero = trim($_POST["idGenero"]);
+		$idTipoGenero = trim($_POST["idTipoGenero"]);
 		$direccionResidencia = trim($_POST["direccionResidencia"]);
 		$idMunicipio = trim($_POST["idMunicipio"]);
 		$idDepartamento = trim($_POST["idDepartamento"]);
@@ -83,9 +83,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO usuarios (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO usuarios (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
         
-        if($stmt->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$fechaNacimiento,$idGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idRolSistema,$passwordSistema,$estado,$auditoria  ])) {
+        if($stmt->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idRolSistema,$passwordSistema,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: usuarios-index.php");
             } else{
@@ -150,8 +150,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
 						<div class="form-group">
                             <label>Id Género</label>
-                            <input type="number" name="idGenero" class="form-control" value="<?php echo $idGenero; ?>">
-                            <span class="form-text"><?php echo $idGenero_err; ?></span>
+                            <input type="number" name="idTipoGenero" class="form-control" value="<?php echo $idTipoGenero; ?>">
+                            <span class="form-text"><?php echo $idTipoGenero_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Dirección de la residencia</label>

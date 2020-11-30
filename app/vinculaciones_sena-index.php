@@ -61,14 +61,14 @@
                     //$no_of_records_per_page is set on the index page. Default is 10.
                     $offset = ($pageno-1) * $no_of_records_per_page;
 
-                    $total_pages_sql = "SELECT COUNT(*) FROM vinculaciones_sena";
+                    $total_pages_sql = "SELECT COUNT(*) FROM tipos_vinculaciones_sena";
                     $result = mysqli_query($link,$total_pages_sql);
                     $total_rows = mysqli_fetch_array($result)[0];
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idVinculacion', 'nombreVinculacion', 'nombreCorto', 'estado', 'auditoria'); 
-                    $order = 'idVinculacion';
+                    $orderBy = array('idTipoVinculacion', 'nombreLargoVinculacion', 'nombreCorto', 'estado', 'auditoria'); 
+                    $order = 'idTipoVinculacion';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
                         }
@@ -85,19 +85,19 @@
                     }
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM vinculaciones_sena ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
-                    $count_pages = "SELECT * FROM vinculaciones_sena";
+                    $sql = "SELECT * FROM tipos_vinculaciones_sena ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    $count_pages = "SELECT * FROM tipos_vinculaciones_sena";
 
                     
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
-                        $sql = "SELECT * FROM vinculaciones_sena
-                            WHERE CONCAT (idVinculacion,nombreVinculacion,nombreCorto,estado,auditoria)
+                        $sql = "SELECT * FROM tipos_vinculaciones_sena
+                            WHERE CONCAT (idTipoVinculacion,nombreLargoVinculacion,nombreCorto,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
-                        $count_pages = "SELECT * FROM vinculaciones_sena
-                            WHERE CONCAT (idVinculacion,nombreVinculacion,nombreCorto,estado,auditoria)
+                        $count_pages = "SELECT * FROM tipos_vinculaciones_sena
+                            WHERE CONCAT (idTipoVinculacion,nombreLargoVinculacion,nombreCorto,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -116,8 +116,8 @@
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th><a href=?search=$search&sort=&order=idVinculacion&sort=$sort>Id Tipo Vinculación</th>";
-										echo "<th><a href=?search=$search&sort=&order=nombreVinculacion&sort=$sort>Nombre</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=idTipoVinculacion&sort=$sort>Id Tipo Vinculación</th>";
+										echo "<th><a href=?search=$search&sort=&order=nombreLargoVinculacion&sort=$sort>Nombre</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreCorto&sort=$sort>Nombre corto</th>";
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
@@ -128,11 +128,11 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idVinculacion'] . "</td>";echo "<td>" . $row['nombreVinculacion'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idTipoVinculacion'] . "</td>";echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
-                                            echo "<a href='vinculaciones_sena-read.php?idVinculacion=". $row['idVinculacion'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                                            echo "<a href='vinculaciones_sena-update.php?idVinculacion=". $row['idVinculacion'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                                            echo "<a href='vinculaciones_sena-delete.php?idVinculacion=". $row['idVinculacion'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                                            echo "<a href='vinculaciones_sena-read.php?idTipoVinculacion=". $row['idTipoVinculacion'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
+                                            echo "<a href='vinculaciones_sena-update.php?idTipoVinculacion=". $row['idTipoVinculacion'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                                            echo "<a href='vinculaciones_sena-delete.php?idTipoVinculacion=". $row['idTipoVinculacion'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }

@@ -67,7 +67,7 @@
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idRol', 'nombreRol', 'nombreCorto', 'descripcionRol', 'permisos', 'restricciones', 'estado', 'auditoria'); 
+                    $orderBy = array('idRol', 'nombreLargoRol', 'nombreCorto', 'descripcionRol', 'permisos', 'restricciones', 'estado', 'auditoria'); 
                     $order = 'idRol';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
@@ -92,12 +92,12 @@
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                         $sql = "SELECT * FROM roles_sistema
-                            WHERE CONCAT (idRol,nombreRol,nombreCorto,descripcionRol,permisos,restricciones,estado,auditoria)
+                            WHERE CONCAT (idRol,nombreLargoRol,nombreCorto,descripcionRol,permisos,restricciones,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT * FROM roles_sistema
-                            WHERE CONCAT (idRol,nombreRol,nombreCorto,descripcionRol,permisos,restricciones,estado,auditoria)
+                            WHERE CONCAT (idRol,nombreLargoRol,nombreCorto,descripcionRol,permisos,restricciones,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -117,7 +117,7 @@
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th><a href=?search=$search&sort=&order=idRol&sort=$sort>Id Rol</th>";
-										echo "<th><a href=?search=$search&sort=&order=nombreRol&sort=$sort>Nombre</th>";
+										echo "<th><a href=?search=$search&sort=&order=nombreLargoRol&sort=$sort>Nombre</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreCorto&sort=$sort>Nombre corto</th>";
 										echo "<th><a href=?search=$search&sort=&order=descripcionRol&sort=$sort>Descripción</th>";
 										echo "<th><a href=?search=$search&sort=&order=permisos&sort=$sort>Permisos</th>";
@@ -131,7 +131,7 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idRol'] . "</td>";echo "<td>" . $row['nombreRol'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['descripcionRol'] . "</td>";echo "<td>" . $row['permisos'] . "</td>";echo "<td>" . $row['restricciones'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idRol'] . "</td>";echo "<td>" . $row['nombreLargoRol'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['descripcionRol'] . "</td>";echo "<td>" . $row['permisos'] . "</td>";echo "<td>" . $row['restricciones'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='roles_sistema-read.php?idRol=". $row['idRol'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                             echo "<a href='roles_sistema-update.php?idRol=". $row['idRol'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";

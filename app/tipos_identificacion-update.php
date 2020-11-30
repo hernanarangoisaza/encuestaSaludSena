@@ -3,12 +3,12 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreIdentificacion = "";
+$nombreLargoIdentificacion = "";
 $nombreCorto = "";
 $estado = "";
 $auditoria = "";
 
-$nombreIdentificacion_err = "";
+$nombreLargoIdentificacion_err = "";
 $nombreCorto_err = "";
 $estado_err = "";
 $auditoria_err = "";
@@ -21,7 +21,7 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
 
         // Prepare an update statement
         
-        $nombreIdentificacion = trim($_POST["nombreIdentificacion"]);
+        $nombreLargoIdentificacion = trim($_POST["nombreLargoIdentificacion"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -39,9 +39,9 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE tipos_identificacion SET nombreIdentificacion=?,nombreCorto=?,estado=?,auditoria=? WHERE idTipoIdentificacion=?");
+        $stmt = $pdo->prepare("UPDATE tipos_identificacion SET nombreLargoIdentificacion=?,nombreCorto=?,estado=?,auditoria=? WHERE idTipoIdentificacion=?");
 
-        if(!$stmt->execute([ $nombreIdentificacion,$nombreCorto,$estado,$auditoria,$idTipoIdentificacion  ])) {
+        if(!$stmt->execute([ $nombreLargoIdentificacion,$nombreCorto,$estado,$auditoria,$idTipoIdentificacion  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
@@ -74,7 +74,7 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
 
                     // Retrieve individual field value
 
-                    $nombreIdentificacion = $row["nombreIdentificacion"];
+                    $nombreLargoIdentificacion = $row["nombreLargoIdentificacion"];
 					$nombreCorto = $row["nombreCorto"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
@@ -125,8 +125,8 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreIdentificacion" maxlength="50"class="form-control" value="<?php echo $nombreIdentificacion; ?>">
-                            <span class="form-text"><?php echo $nombreIdentificacion_err; ?></span>
+                            <input type="text" name="nombreLargoIdentificacion" maxlength="50"class="form-control" value="<?php echo $nombreLargoIdentificacion; ?>">
+                            <span class="form-text"><?php echo $nombreLargoIdentificacion_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Nombre corto</label>

@@ -3,7 +3,7 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreProgramaFormacion = "";
+$nombreLargoProgramaFormacion = "";
 $nombreCorto = "";
 $estado = "";
 $auditoria = "";
@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($name_err) && empty($address_err) && empty($salary_err)){
         // Prepare an insert statement
  */
-        $nombreProgramaFormacion = trim($_POST["nombreProgramaFormacion"]);
+        $nombreLargoProgramaFormacion = trim($_POST["nombreLargoProgramaFormacion"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -47,9 +47,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO programas_formacion (nombreProgramaFormacion,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO programas_formacion (nombreLargoProgramaFormacion,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
         
-        if($stmt->execute([ $nombreProgramaFormacion,$nombreCorto,$estado,$auditoria  ])) {
+        if($stmt->execute([ $nombreLargoProgramaFormacion,$nombreCorto,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: programas_formacion-index.php");
             } else{
@@ -79,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreProgramaFormacion" maxlength="50"class="form-control" value="<?php echo $nombreProgramaFormacion; ?>">
+                            <input type="text" name="nombreLargoProgramaFormacion" maxlength="50"class="form-control" value="<?php echo $nombreLargoProgramaFormacion; ?>">
                             <span class="form-text"><?php echo $nombreProgramaFormacion_err; ?></span>
                         </div>
 						<div class="form-group">

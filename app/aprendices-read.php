@@ -6,17 +6,17 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
 
     // Prepare a select statement
     $sql = "SELECT AP.*, 
-                            VS.nombreVinculacion AS 'nombreVinculacion', 
-                            TI.nombreIdentificacion AS 'nombreIdentificacion',
-                            TG.nombreTipoGenero AS 'nombreGenero',
+                            VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+                            TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
+                            TG.nombreLargoGenero AS 'nombreLargoGenero',
                             MN.municipio AS 'nombreMunicipio',
                             DP.departamento AS 'nombreDepartamento',
-                            CF.nombreLargo AS 'nombreCentroFormacion',
+                            CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             FF.codigoFichaFormacion AS 'codigoFichaFormacion'
                             FROM aprendices AP
-                            LEFT JOIN vinculaciones_sena VS ON VS.idVinculacion = AP.idTipoVinculacion
+                            LEFT JOIN tipos_vinculaciones_sena VS ON VS.idTipoVinculacion = AP.idTipoVinculacion
                             LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
-                            LEFT JOIN tipos_generos TG ON TG.idGenero = AP.idGenero
+                            LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
                             LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
                             LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
@@ -86,7 +86,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
 
                         <div class="form-group">
                             <label>Tipo de vinculación</label>
-                            <input type="text" name="idTipoVinculacion" class="form-control" value="<?php echo $row['nombreVinculacion']; ?>" readonly>
+                            <input type="text" name="idTipoVinculacion" class="form-control" value="<?php echo $row['nombreLargoVinculacion']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label>Nombre completo</label>
@@ -94,7 +94,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
                         </div>
                         <div class="form-group">
                             <label>Tipo de identificación</label>
-                            <input type="text" name="idTipoIdentificacion" class="form-control" value="<?php echo $row['nombreIdentificacion']; ?>" readonly>
+                            <input type="text" name="idTipoIdentificacion" class="form-control" value="<?php echo $row['nombreLargoIdentificacion']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label>Identificación</label>
@@ -118,7 +118,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
                         </div>
                         <div class="form-group">
                             <label>Género</label>
-                            <input type="text" name="idGenero" class="form-control" value="<?php echo $row['nombreGenero']; ?>" readonly>
+                            <input type="text" name="idTipoGenero" class="form-control" value="<?php echo $row['nombreLargoGenero']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label>Dirección de la residencia</label>
@@ -134,7 +134,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
                         </div>
                         <div class="form-group">
                             <label>Centro de formación</label>
-                            <input type="text" name="idCentroFormacion" class="form-control" value="<?php echo $row['nombreCentroFormacion']; ?>" readonly>
+                            <input type="text" name="idCentroFormacion" class="form-control" value="<?php echo $row['nombreLargoCentroFormacion']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label>Ficha de formación</label>

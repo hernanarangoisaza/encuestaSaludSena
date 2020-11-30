@@ -1,18 +1,18 @@
 <?php
 // Check existence of id parameter before processing further
-if(isset($_GET["idGenero"]) && !empty(trim($_GET["idGenero"]))){
+if(isset($_GET["idTipoGenero"]) && !empty(trim($_GET["idTipoGenero"]))){
     // Include config file
     require_once "config.php";
 
     // Prepare a select statement
-    $sql = "SELECT * FROM tipos_generos WHERE idGenero = ?";
+    $sql = "SELECT * FROM tipos_generos WHERE idTipoGenero = ?";
 
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
 
         // Set parameters
-        $param_id = trim($_GET["idGenero"]);
+        $param_id = trim($_GET["idTipoGenero"]);
 
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -69,7 +69,7 @@ if(isset($_GET["idGenero"]) && !empty(trim($_GET["idGenero"]))){
                         
                      <div class="form-group">
                         <label>Nombre</label>
-                        <p class="form-control-static"><?php echo $row["nombreTipoGenero"]; ?></p>
+                        <p class="form-control-static"><?php echo $row["nombreLargoGenero"]; ?></p>
                     </div><div class="form-group">
                         <label>Nombre corto</label>
                         <p class="form-control-static"><?php echo $row["nombreCorto"]; ?></p>

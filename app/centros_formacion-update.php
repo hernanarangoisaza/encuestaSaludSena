@@ -4,7 +4,7 @@ require_once "config.php";
 
 // Define variables and initialize with empty values
 $nombreCorto = "";
-$nombreLargo = "";
+$nombreLargoCentroFormacion = "";
 $direccion = "";
 $idMunicipio = "";
 $idDepartamento = "";
@@ -16,7 +16,7 @@ $estado = "";
 $auditoria = "";
 
 $nombreCorto_err = "";
-$nombreLargo_err = "";
+$nombreLargoCentroFormacion_err = "";
 $direccion_err = "";
 $idMunicipio_err = "";
 $idDepartamento_err = "";
@@ -36,7 +36,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
         // Prepare an update statement
         
         $nombreCorto = trim($_POST["nombreCorto"]);
-		$nombreLargo = trim($_POST["nombreLargo"]);
+		$nombreLargoCentroFormacion = trim($_POST["nombreLargoCentroFormacion"]);
 		$direccion = trim($_POST["direccion"]);
 		$idMunicipio = trim($_POST["idMunicipio"]);
 		$idDepartamento = trim($_POST["idDepartamento"]);
@@ -60,9 +60,9 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE centros_formacion SET nombreCorto=?,nombreLargo=?,direccion=?,idMunicipio=?,idDepartamento=?,telefono1=?,telefono2=?,emailContacto1=?,emailContacto2=?,estado=?,auditoria=? WHERE idCentroFormacion=?");
+        $stmt = $pdo->prepare("UPDATE centros_formacion SET nombreCorto=?,nombreLargoCentroFormacion=?,direccion=?,idMunicipio=?,idDepartamento=?,telefono1=?,telefono2=?,emailContacto1=?,emailContacto2=?,estado=?,auditoria=? WHERE idCentroFormacion=?");
 
-        if(!$stmt->execute([ $nombreCorto,$nombreLargo,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria,$idCentroFormacion  ])) {
+        if(!$stmt->execute([ $nombreCorto,$nombreLargoCentroFormacion,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria,$idCentroFormacion  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
@@ -96,7 +96,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
                     // Retrieve individual field value
 
                     $nombreCorto = $row["nombreCorto"];
-					$nombreLargo = $row["nombreLargo"];
+					$nombreLargoCentroFormacion = $row["nombreLargoCentroFormacion"];
 					$direccion = $row["direccion"];
 					$idMunicipio = $row["idMunicipio"];
 					$idDepartamento = $row["idDepartamento"];
@@ -158,8 +158,8 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
                         </div>
 						<div class="form-group">
                             <label>Nombre del Centro</label>
-                            <input type="text" name="nombreLargo" maxlength="50"class="form-control" value="<?php echo $nombreLargo; ?>">
-                            <span class="form-text"><?php echo $nombreLargo_err; ?></span>
+                            <input type="text" name="nombreLargoCentroFormacion" maxlength="50"class="form-control" value="<?php echo $nombreLargoCentroFormacion; ?>">
+                            <span class="form-text"><?php echo $nombreLargoCentroFormacion_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Dirección</label>

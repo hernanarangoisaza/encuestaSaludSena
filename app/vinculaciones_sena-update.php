@@ -3,25 +3,25 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreVinculacion = "";
+$nombreLargoVinculacion = "";
 $nombreCorto = "";
 $estado = "";
 $auditoria = "";
 
-$nombreVinculacion_err = "";
+$nombreLargoVinculacion_err = "";
 $nombreCorto_err = "";
 $estado_err = "";
 $auditoria_err = "";
 
 
 // Processing form data when form is submitted
-if(isset($_POST["idVinculacion"]) && !empty($_POST["idVinculacion"])){
+if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
     // Get hidden input value
-    $idVinculacion = $_POST["idVinculacion"];
+    $idTipoVinculacion = $_POST["idTipoVinculacion"];
 
         // Prepare an update statement
         
-        $nombreVinculacion = trim($_POST["nombreVinculacion"]);
+        $nombreLargoVinculacion = trim($_POST["nombreLargoVinculacion"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -39,29 +39,29 @@ if(isset($_POST["idVinculacion"]) && !empty($_POST["idVinculacion"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE vinculaciones_sena SET nombreVinculacion=?,nombreCorto=?,estado=?,auditoria=? WHERE idVinculacion=?");
+        $stmt = $pdo->prepare("UPDATE tipos_vinculaciones_sena SET nombreLargoVinculacion=?,nombreCorto=?,estado=?,auditoria=? WHERE idTipoVinculacion=?");
 
-        if(!$stmt->execute([ $nombreVinculacion,$nombreCorto,$estado,$auditoria,$idVinculacion  ])) {
+        if(!$stmt->execute([ $nombreLargoVinculacion,$nombreCorto,$estado,$auditoria,$idTipoVinculacion  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
                 $stmt = null;
-                header("location: vinculaciones_sena-read.php?idVinculacion=$idVinculacion");
+                header("location: vinculaciones_sena-read.php?idTipoVinculacion=$idTipoVinculacion");
             }
 } else {
     // Check existence of id parameter before processing further
-    if(isset($_GET["idVinculacion"]) && !empty(trim($_GET["idVinculacion"]))){
+    if(isset($_GET["idTipoVinculacion"]) && !empty(trim($_GET["idTipoVinculacion"]))){
         // Get URL parameter
-        $idVinculacion =  trim($_GET["idVinculacion"]);
+        $idTipoVinculacion =  trim($_GET["idTipoVinculacion"]);
 
         // Prepare a select statement
-        $sql = "SELECT * FROM vinculaciones_sena WHERE idVinculacion = ?";
+        $sql = "SELECT * FROM tipos_vinculaciones_sena WHERE idTipoVinculacion = ?";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
             // Set parameters
-            $param_id = $idVinculacion;
+            $param_id = $idTipoVinculacion;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -74,7 +74,7 @@ if(isset($_POST["idVinculacion"]) && !empty($_POST["idVinculacion"])){
 
                     // Retrieve individual field value
 
-                    $nombreVinculacion = $row["nombreVinculacion"];
+                    $nombreLargoVinculacion = $row["nombreLargoVinculacion"];
 					$nombreCorto = $row["nombreCorto"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
@@ -125,8 +125,8 @@ if(isset($_POST["idVinculacion"]) && !empty($_POST["idVinculacion"])){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreVinculacion" maxlength="50"class="form-control" value="<?php echo $nombreVinculacion; ?>">
-                            <span class="form-text"><?php echo $nombreVinculacion_err; ?></span>
+                            <input type="text" name="nombreLargoVinculacion" maxlength="50"class="form-control" value="<?php echo $nombreLargoVinculacion; ?>">
+                            <span class="form-text"><?php echo $nombreLargoVinculacion_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Nombre corto</label>
@@ -144,7 +144,7 @@ if(isset($_POST["idVinculacion"]) && !empty($_POST["idVinculacion"])){
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
                         </div>
 
-                        <input type="hidden" name="idVinculacion" value="<?php echo $idVinculacion; ?>"/>
+                        <input type="hidden" name="idTipoVinculacion" value="<?php echo $idTipoVinculacion; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Actualizar">
                         <a href="vinculaciones_sena-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>

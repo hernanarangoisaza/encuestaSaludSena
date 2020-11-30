@@ -3,7 +3,7 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreRol = "";
+$nombreLargoRol = "";
 $nombreCorto = "";
 $descripcionRol = "";
 $permisos = "";
@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($name_err) && empty($address_err) && empty($salary_err)){
         // Prepare an insert statement
  */
-        $nombreRol = trim($_POST["nombreRol"]);
+        $nombreLargoRol = trim($_POST["nombreLargoRol"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$descripcionRol = trim($_POST["descripcionRol"]);
 		$permisos = trim($_POST["permisos"]);
@@ -56,9 +56,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO roles_sistema (nombreRol,nombreCorto,descripcionRol,permisos,restricciones,estado,auditoria) VALUES (?,?,?,?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO roles_sistema (nombreLargoRol,nombreCorto,descripcionRol,permisos,restricciones,estado,auditoria) VALUES (?,?,?,?,?,?,?)"); 
         
-        if($stmt->execute([ $nombreRol,$nombreCorto,$descripcionRol,$permisos,$restricciones,$estado,$auditoria  ])) {
+        if($stmt->execute([ $nombreLargoRol,$nombreCorto,$descripcionRol,$permisos,$restricciones,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: roles_sistema-index.php");
             } else{
@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreRol" maxlength="50"class="form-control" value="<?php echo $nombreRol; ?>">
+                            <input type="text" name="nombreLargoRol" maxlength="50"class="form-control" value="<?php echo $nombreLargoRol; ?>">
                             <span class="form-text"><?php echo $nombreRol_err; ?></span>
                         </div>
 						<div class="form-group">

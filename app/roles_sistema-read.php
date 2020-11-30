@@ -69,7 +69,7 @@ if(isset($_GET["idRol"]) && !empty(trim($_GET["idRol"]))){
                         
                      <div class="form-group">
                         <label>Nombre</label>
-                        <p class="form-control-static"><?php echo $row["nombreRol"]; ?></p>
+                        <p class="form-control-static"><?php echo $row["nombreLargoRol"]; ?></p>
                     </div><div class="form-group">
                         <label>Nombre corto</label>
                         <p class="form-control-static"><?php echo $row["nombreCorto"]; ?></p>

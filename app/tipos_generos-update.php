@@ -3,25 +3,25 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreTipoGenero = "";
+$nombreLargoGenero = "";
 $nombreCorto = "";
 $estado = "";
 $auditoria = "";
 
-$nombreTipoGenero_err = "";
+$nombreLargoGenero_err = "";
 $nombreCorto_err = "";
 $estado_err = "";
 $auditoria_err = "";
 
 
 // Processing form data when form is submitted
-if(isset($_POST["idGenero"]) && !empty($_POST["idGenero"])){
+if(isset($_POST["idTipoGenero"]) && !empty($_POST["idTipoGenero"])){
     // Get hidden input value
-    $idGenero = $_POST["idGenero"];
+    $idTipoGenero = $_POST["idTipoGenero"];
 
         // Prepare an update statement
         
-        $nombreTipoGenero = trim($_POST["nombreTipoGenero"]);
+        $nombreLargoGenero = trim($_POST["nombreLargoGenero"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -39,29 +39,29 @@ if(isset($_POST["idGenero"]) && !empty($_POST["idGenero"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE tipos_generos SET nombreTipoGenero=?,nombreCorto=?,estado=?,auditoria=? WHERE idGenero=?");
+        $stmt = $pdo->prepare("UPDATE tipos_generos SET nombreLargoGenero=?,nombreCorto=?,estado=?,auditoria=? WHERE idTipoGenero=?");
 
-        if(!$stmt->execute([ $nombreTipoGenero,$nombreCorto,$estado,$auditoria,$idGenero  ])) {
+        if(!$stmt->execute([ $nombreLargoGenero,$nombreCorto,$estado,$auditoria,$idTipoGenero  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
                 $stmt = null;
-                header("location: tipos_generos-read.php?idGenero=$idGenero");
+                header("location: tipos_generos-read.php?idTipoGenero=$idTipoGenero");
             }
 } else {
     // Check existence of id parameter before processing further
-    if(isset($_GET["idGenero"]) && !empty(trim($_GET["idGenero"]))){
+    if(isset($_GET["idTipoGenero"]) && !empty(trim($_GET["idTipoGenero"]))){
         // Get URL parameter
-        $idGenero =  trim($_GET["idGenero"]);
+        $idTipoGenero =  trim($_GET["idTipoGenero"]);
 
         // Prepare a select statement
-        $sql = "SELECT * FROM tipos_generos WHERE idGenero = ?";
+        $sql = "SELECT * FROM tipos_generos WHERE idTipoGenero = ?";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
             // Set parameters
-            $param_id = $idGenero;
+            $param_id = $idTipoGenero;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -74,7 +74,7 @@ if(isset($_POST["idGenero"]) && !empty($_POST["idGenero"])){
 
                     // Retrieve individual field value
 
-                    $nombreTipoGenero = $row["nombreTipoGenero"];
+                    $nombreLargoGenero = $row["nombreLargoGenero"];
 					$nombreCorto = $row["nombreCorto"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
@@ -125,8 +125,8 @@ if(isset($_POST["idGenero"]) && !empty($_POST["idGenero"])){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreTipoGenero" maxlength="50"class="form-control" value="<?php echo $nombreTipoGenero; ?>">
-                            <span class="form-text"><?php echo $nombreTipoGenero_err; ?></span>
+                            <input type="text" name="nombreLargoGenero" maxlength="50"class="form-control" value="<?php echo $nombreLargoGenero; ?>">
+                            <span class="form-text"><?php echo $nombreLargoGenero_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Nombre corto</label>
@@ -144,7 +144,7 @@ if(isset($_POST["idGenero"]) && !empty($_POST["idGenero"])){
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
                         </div>
 
-                        <input type="hidden" name="idGenero" value="<?php echo $idGenero; ?>"/>
+                        <input type="hidden" name="idTipoGenero" value="<?php echo $idTipoGenero; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Actualizar">
                         <a href="tipos_generos-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>

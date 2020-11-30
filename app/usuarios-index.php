@@ -67,7 +67,7 @@
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idUsuario', 'idTipoVinculacion', 'nombreCompleto', 'idTipoIdentificacion', 'identificacion', 'email', 'telefonoPersonal', 'fechaNacimiento', 'idGenero', 'direccionResidencia', 'idMunicipio', 'idDepartamento', 'idCentroFormacion', 'idRolSistema', 'passwordSistema', 'estado', 'auditoria'); 
+                    $orderBy = array('idUsuario', 'idTipoVinculacion', 'nombreCompleto', 'idTipoIdentificacion', 'identificacion', 'email', 'telefonoPersonal', 'fechaNacimiento', 'idTipoGenero', 'direccionResidencia', 'idMunicipio', 'idDepartamento', 'idCentroFormacion', 'idRolSistema', 'passwordSistema', 'estado', 'auditoria'); 
                     $order = 'idUsuario';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
@@ -92,12 +92,12 @@
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                         $sql = "SELECT * FROM usuarios
-                            WHERE CONCAT (idUsuario,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria)
+                            WHERE CONCAT (idUsuario,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT * FROM usuarios
-                            WHERE CONCAT (idUsuario,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria)
+                            WHERE CONCAT (idUsuario,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -124,7 +124,7 @@
 										echo "<th><a href=?search=$search&sort=&order=email&sort=$sort>Correo electrónico</th>";
 										echo "<th><a href=?search=$search&sort=&order=telefonoPersonal&sort=$sort>Teléfono personal</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaNacimiento&sort=$sort>Fecha de nacimiento</th>";
-										echo "<th><a href=?search=$search&sort=&order=idGenero&sort=$sort>Id Género</th>";
+										echo "<th><a href=?search=$search&sort=&order=idTipoGenero&sort=$sort>Id Género</th>";
 										echo "<th><a href=?search=$search&sort=&order=direccionResidencia&sort=$sort>Dirección de la residencia</th>";
 										echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Id Municipio</th>";
 										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Id Departamento</th>";
@@ -140,7 +140,7 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idUsuario'] . "</td>";echo "<td>" . $row['idTipoVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['idTipoIdentificacion'] . "</td>";echo "<td>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td>" . $row['telefonoPersonal'] . "</td>";echo "<td>" . $row['fechaNacimiento'] . "</td>";echo "<td>" . $row['idGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['idCentroFormacion'] . "</td>";echo "<td>" . $row['idRolSistema'] . "</td>";echo "<td>" . $row['passwordSistema'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idUsuario'] . "</td>";echo "<td>" . $row['idTipoVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['idTipoIdentificacion'] . "</td>";echo "<td>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td>" . $row['telefonoPersonal'] . "</td>";echo "<td>" . $row['fechaNacimiento'] . "</td>";echo "<td>" . $row['idTipoGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['idCentroFormacion'] . "</td>";echo "<td>" . $row['idRolSistema'] . "</td>";echo "<td>" . $row['passwordSistema'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='usuarios-read.php?idUsuario=". $row['idUsuario'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                             echo "<a href='usuarios-update.php?idUsuario=". $row['idUsuario'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";

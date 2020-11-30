@@ -3,7 +3,7 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreProgramaFormacion = "";
+$nombreLargoProgramaFormacion = "";
 $nombreCorto = "";
 $estado = "";
 $auditoria = "";
@@ -21,7 +21,7 @@ if(isset($_POST["idProgramaFormacion"]) && !empty($_POST["idProgramaFormacion"])
 
         // Prepare an update statement
         
-        $nombreProgramaFormacion = trim($_POST["nombreProgramaFormacion"]);
+        $nombreLargoProgramaFormacion = trim($_POST["nombreLargoProgramaFormacion"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -39,9 +39,9 @@ if(isset($_POST["idProgramaFormacion"]) && !empty($_POST["idProgramaFormacion"])
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE programas_formacion SET nombreProgramaFormacion=?,nombreCorto=?,estado=?,auditoria=? WHERE idProgramaFormacion=?");
+        $stmt = $pdo->prepare("UPDATE programas_formacion SET nombreLargoProgramaFormacion=?,nombreCorto=?,estado=?,auditoria=? WHERE idProgramaFormacion=?");
 
-        if(!$stmt->execute([ $nombreProgramaFormacion,$nombreCorto,$estado,$auditoria,$idProgramaFormacion  ])) {
+        if(!$stmt->execute([ $nombreLargoProgramaFormacion,$nombreCorto,$estado,$auditoria,$idProgramaFormacion  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
@@ -74,7 +74,7 @@ if(isset($_POST["idProgramaFormacion"]) && !empty($_POST["idProgramaFormacion"])
 
                     // Retrieve individual field value
 
-                    $nombreProgramaFormacion = $row["nombreProgramaFormacion"];
+                    $nombreLargoProgramaFormacion = $row["nombreLargoProgramaFormacion"];
 					$nombreCorto = $row["nombreCorto"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
@@ -125,7 +125,7 @@ if(isset($_POST["idProgramaFormacion"]) && !empty($_POST["idProgramaFormacion"])
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreProgramaFormacion" maxlength="50"class="form-control" value="<?php echo $nombreProgramaFormacion; ?>">
+                            <input type="text" name="nombreLargoProgramaFormacion" maxlength="50"class="form-control" value="<?php echo $nombreLargoProgramaFormacion; ?>">
                             <span class="form-text"><?php echo $nombreProgramaFormacion_err; ?></span>
                         </div>
 						<div class="form-group">

@@ -69,7 +69,7 @@ if(isset($_GET["idTipoIdentificacion"]) && !empty(trim($_GET["idTipoIdentificaci
                         
                      <div class="form-group">
                         <label>Nombre</label>
-                        <p class="form-control-static"><?php echo $row["nombreIdentificacion"]; ?></p>
+                        <p class="form-control-static"><?php echo $row["nombreLargoIdentificacion"]; ?></p>
                     </div><div class="form-group">
                         <label>Nombre corto</label>
                         <p class="form-control-static"><?php echo $row["nombreCorto"]; ?></p>

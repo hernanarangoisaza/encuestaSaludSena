@@ -4,7 +4,7 @@ require_once "config.php";
 
 // Define variables and initialize with empty values
 $nombreCorto = "";
-$nombreLargo = "";
+$nombreLargoCentroFormacion = "";
 $direccion = "";
 $idMunicipio = "";
 $idDepartamento = "";
@@ -16,7 +16,7 @@ $estado = "";
 $auditoria = "";
 
 $nombreCorto_err = "";
-$nombreLargo_err = "";
+$nombreLargoCentroFormacion_err = "";
 $direccion_err = "";
 $idMunicipio_err = "";
 $idDepartamento_err = "";
@@ -44,7 +44,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare an insert statement
  */
         $nombreCorto = trim($_POST["nombreCorto"]);
-		$nombreLargo = trim($_POST["nombreLargo"]);
+		$nombreLargoCentroFormacion = trim($_POST["nombreLargoCentroFormacion"]);
 		$direccion = trim($_POST["direccion"]);
 		$idMunicipio = trim($_POST["idMunicipio"]);
 		$idDepartamento = trim($_POST["idDepartamento"]);
@@ -68,9 +68,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO centros_formacion (nombreCorto,nombreLargo,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO centros_formacion (nombreCorto,nombreLargoCentroFormacion,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
         
-        if($stmt->execute([ $nombreCorto,$nombreLargo,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria  ])) {
+        if($stmt->execute([ $nombreCorto,$nombreLargoCentroFormacion,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: centros_formacion-index.php");
             } else{
@@ -105,8 +105,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
 						<div class="form-group">
                             <label>Nombre del Centro</label>
-                            <input type="text" name="nombreLargo" maxlength="50"class="form-control" value="<?php echo $nombreLargo; ?>">
-                            <span class="form-text"><?php echo $nombreLargo_err; ?></span>
+                            <input type="text" name="nombreLargoCentroFormacion" maxlength="50"class="form-control" value="<?php echo $nombreLargoCentroFormacion; ?>">
+                            <span class="form-text"><?php echo $nombreLargoCentroFormacion_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Dirección</label>

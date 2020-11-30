@@ -3,12 +3,12 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreVinculacion = "";
+$nombreLargoVinculacion = "";
 $nombreCorto = "";
 $estado = "";
 $auditoria = "";
 
-$nombreVinculacion_err = "";
+$nombreLargoVinculacion_err = "";
 $nombreCorto_err = "";
 $estado_err = "";
 $auditoria_err = "";
@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($name_err) && empty($address_err) && empty($salary_err)){
         // Prepare an insert statement
  */
-        $nombreVinculacion = trim($_POST["nombreVinculacion"]);
+        $nombreLargoVinculacion = trim($_POST["nombreLargoVinculacion"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -47,9 +47,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO vinculaciones_sena (nombreVinculacion,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO tipos_vinculaciones_sena (nombreLargoVinculacion,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
         
-        if($stmt->execute([ $nombreVinculacion,$nombreCorto,$estado,$auditoria  ])) {
+        if($stmt->execute([ $nombreLargoVinculacion,$nombreCorto,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: vinculaciones_sena-index.php");
             } else{
@@ -79,8 +79,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreVinculacion" maxlength="50"class="form-control" value="<?php echo $nombreVinculacion; ?>">
-                            <span class="form-text"><?php echo $nombreVinculacion_err; ?></span>
+                            <input type="text" name="nombreLargoVinculacion" maxlength="50"class="form-control" value="<?php echo $nombreLargoVinculacion; ?>">
+                            <span class="form-text"><?php echo $nombreLargoVinculacion_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Nombre corto</label>

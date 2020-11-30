@@ -90,7 +90,7 @@ if(isset($_GET["idUsuario"]) && !empty(trim($_GET["idUsuario"]))){
                         <p class="form-control-static"><?php echo $row["fechaNacimiento"]; ?></p>
                     </div><div class="form-group">
                         <label>Id Género</label>
-                        <p class="form-control-static"><?php echo $row["idGenero"]; ?></p>
+                        <p class="form-control-static"><?php echo $row["idTipoGenero"]; ?></p>
                     </div><div class="form-group">
                         <label>Dirección de la residencia</label>
                         <p class="form-control-static"><?php echo $row["direccionResidencia"]; ?></p>
