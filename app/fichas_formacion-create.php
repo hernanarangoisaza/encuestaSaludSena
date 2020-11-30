@@ -70,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 mx-auto">
+                <div class="col-md-4 mx-auto">
                     <div class="page-header">
                         <h2>Crear Registro</h2>
                     </div>

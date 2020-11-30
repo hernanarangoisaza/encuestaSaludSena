@@ -50,14 +50,14 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 mx-auto">
+                <div class="col-md-4 mx-auto">
                     <div class="page-header">
                         <h1>Borrar Registro</h1>
                     </div>
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="alert alert-danger fade-in">
                             <input type="hidden" name="idAprendiz" value="<?php echo trim($_GET["idAprendiz"]); ?>"/>
-                            <p>Está seguro de eliminar este registro?</p><br>
+                            <p>Está seguro de eliminar este registro?</p>
                             <p>
                                 <input type="submit" value="Si" class="btn btn-danger">
                                 <a href="aprendices-index.php" class="btn btn-secondary">No</a>

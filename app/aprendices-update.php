@@ -91,7 +91,23 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
         $idAprendiz =  trim($_GET["idAprendiz"]);
 
         // Prepare a select statement
-        $sql = "SELECT * FROM aprendices WHERE idAprendiz = ?";
+        $sql = "SELECT AP.*, 
+                            VS.nombreVinculacion AS 'nombreVinculacion', 
+                            TI.nombreIdentificacion AS 'nombreIdentificacion',
+                            TG.nombreTipoGenero AS 'nombreGenero',
+                            MN.municipio AS 'nombreMunicipio',
+                            DP.departamento AS 'nombreDepartamento',
+                            CF.nombreLargo AS 'nombreCentroFormacion',
+                            FF.codigoFichaFormacion AS 'codigoFichaFormacion'
+                            FROM aprendices AP
+                            LEFT JOIN vinculaciones_sena VS ON VS.idVinculacion = AP.idTipoVinculacion
+                            LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
+                            LEFT JOIN tipos_generos TG ON TG.idGenero = AP.idGenero
+                            LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
+                            LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
+                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
+                            LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
+                            WHERE idAprendiz = ?";;
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
@@ -110,20 +126,20 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
 
                     // Retrieve individual field value
 
-                    $idTipoVinculacion = $row["idTipoVinculacion"];
+                    $idTipoVinculacion = $row["nombreVinculacion"];
 					$nombreCompleto = $row["nombreCompleto"];
-					$idTipoIdentificacion = $row["idTipoIdentificacion"];
+					$idTipoIdentificacion = $row["nombreIdentificacion"];
 					$identificacion = $row["identificacion"];
 					$email = $row["email"];
 					$telefonoPersonal = $row["telefonoPersonal"];
 					$telefonoAcudiente = $row["telefonoAcudiente"];
 					$fechaNacimiento = $row["fechaNacimiento"];
-					$idGenero = $row["idGenero"];
+					$idGenero = $row["nombreGenero"];
 					$direccionResidencia = $row["direccionResidencia"];
-					$idMunicipio = $row["idMunicipio"];
-					$idDepartamento = $row["idDepartamento"];
-					$idCentroFormacion = $row["idCentroFormacion"];
-					$idFichaFormacion = $row["idFichaFormacion"];
+					$idMunicipio = $row["nombreMunicipio"];
+					$idDepartamento = $row["nombreDepartamento"];
+					$idCentroFormacion = $row["nombreCentroFormacion"];
+					$idFichaFormacion = $row["codigoFichaFormacion"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
 					
@@ -157,7 +173,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Actualizar Registro</title>
+    <title>Actualizar Aprendiz</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
 </head>
@@ -165,16 +181,15 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 mx-auto">
+                <div class="col-md-4 mx-auto">
                     <div class="page-header">
-                        <h2>Actualizar Registro</h2>
+                        <h2>Aprendices - Actualizar</h2>
                     </div>
-                    <p>Por favor ingrese nueva información para actualizar el registro.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 
                         <div class="form-group">
-                            <label>Id Tipo de vinculación</label>
-                            <input type="number" name="idTipoVinculacion" class="form-control" value="<?php echo $idTipoVinculacion; ?>">
+                            <label>Tipo de vinculación</label>
+                            <input type="text" name="idTipoVinculacion" class="form-control" value="<?php echo $idTipoVinculacion; ?>">
                             <span class="form-text"><?php echo $idTipoVinculacion_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -183,8 +198,8 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                             <span class="form-text"><?php echo $nombreCompleto_err; ?></span>
                         </div>
 						<div class="form-group">
-                            <label>Id Tipo de identificación</label>
-                            <input type="number" name="idTipoIdentificacion" class="form-control" value="<?php echo $idTipoIdentificacion; ?>">
+                            <label>Tipo de identificación</label>
+                            <input type="text" name="idTipoIdentificacion" class="form-control" value="<?php echo $idTipoIdentificacion; ?>">
                             <span class="form-text"><?php echo $idTipoIdentificacion_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -213,8 +228,8 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                             <span class="form-text"><?php echo $fechaNacimiento_err; ?></span>
                         </div>
 						<div class="form-group">
-                            <label>Id Género</label>
-                            <input type="number" name="idGenero" class="form-control" value="<?php echo $idGenero; ?>">
+                            <label>Género</label>
+                            <input type="text" name="idGenero" class="form-control" value="<?php echo $idGenero; ?>">
                             <span class="form-text"><?php echo $idGenero_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -223,39 +238,41 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                             <span class="form-text"><?php echo $direccionResidencia_err; ?></span>
                         </div>
 						<div class="form-group">
-                            <label>Id Municipio</label>
-                            <input type="number" name="idMunicipio" class="form-control" value="<?php echo $idMunicipio; ?>">
+                            <label>Municipio</label>
+                            <input type="text" name="idMunicipio" class="form-control" value="<?php echo $idMunicipio; ?>">
                             <span class="form-text"><?php echo $idMunicipio_err; ?></span>
                         </div>
 						<div class="form-group">
-                            <label>Id Departamento</label>
-                            <input type="number" name="idDepartamento" class="form-control" value="<?php echo $idDepartamento; ?>">
+                            <label>Departamento</label>
+                            <input type="text" name="idDepartamento" class="form-control" value="<?php echo $idDepartamento; ?>">
                             <span class="form-text"><?php echo $idDepartamento_err; ?></span>
                         </div>
 						<div class="form-group">
-                            <label>Id Centro de formación</label>
-                            <input type="number" name="idCentroFormacion" class="form-control" value="<?php echo $idCentroFormacion; ?>">
+                            <label>Centro de formación</label>
+                            <input type="text" name="idCentroFormacion" class="form-control" value="<?php echo $idCentroFormacion; ?>">
                             <span class="form-text"><?php echo $idCentroFormacion_err; ?></span>
                         </div>
 						<div class="form-group">
-                            <label>Id Ficha de formación</label>
-                            <input type="number" name="idFichaFormacion" class="form-control" value="<?php echo $idFichaFormacion; ?>">
+                            <label>Ficha de formación</label>
+                            <input type="text" name="idFichaFormacion" class="form-control" value="<?php echo $idFichaFormacion; ?>">
                             <span class="form-text"><?php echo $idFichaFormacion_err; ?></span>
                         </div>
-						<div class="form-group">
+						<div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
-                            <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
+                            <input type="text" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
-						<div class="form-group">
+						<div class="form-group ocultar-columna">
                             <label>Fecha/Hora de auditoría</label>
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $auditoria; ?>">
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
                         </div>
 
                         <input type="hidden" name="idAprendiz" value="<?php echo $idAprendiz; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Actualizar">
-                        <a href="aprendices-index.php" class="btn btn-secondary">Cancelar</a>
+                        <p>
+                            <input type="submit" class="btn btn-primary" value="Actualizar">
+                            <a href="aprendices-index.php" class="btn btn-secondary">Cancelar</a>
+                        </p>
                     </form>
                 </div>
             </div>

@@ -128,7 +128,7 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 mx-auto">
+                <div class="col-md-4 mx-auto">
                     <div class="page-header">
                         <h2>Actualizar Registro</h2>
                     </div>

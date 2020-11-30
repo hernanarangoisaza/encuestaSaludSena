@@ -107,6 +107,7 @@ table.estilo-tabla-index {
     width: 100%;
     text-align: left;
     border-collapse: collapse;
+    margin-bottom: 3px;
 }
 table.estilo-tabla-index td,
 table.estilo-tabla-index th {
@@ -192,6 +193,7 @@ table tr td:last-child a {
 .seccion-tabla-scroll-horizontal {
     overflow: auto;
     white-space: nowrap;
+    margin-top: 15px;
 }
 
 .estilo-acciones {
@@ -210,16 +212,11 @@ i.far {
     margin-right: 5px;
 }
 
-input.form-control {
-    background-color: #FFFFEE;
-    border-color: #AAAAAA;
-}
-
+input.form-control, 
 input.solo-lectura {
     background-color: #FFFFEE;
     border-color: #AAAAAA;
 }
-
 
 .btn {
     font-size: 1em;
@@ -260,5 +257,34 @@ li.item-menu-principal a::before {
 .ocultar-columna {
     display: none;
 }
+
+ul.pagination {
+    margin-top: 15px;
+}
+
+div.page-header h1, 
+div.page-header h2 {
+    font-size: 1.5em;
+}
+
+div.form-group {
+    margin-bottom: 5px;
+}
+
+div.form-group label {
+    margin-bottom: 0px;
+}
+
+input.btn.btn-primary,
+input.btn.btn-danger,
+a.btn.btn-primary, 
+a.btn.btn-secondary {
+    margin-top: 20px;
+}
+
+a.btn.btn-secondary.float-right.mr-2 {
+    margin-top: 0px;
+}
+
 
 /* -------------------------------------------------------------------------------------------------- */
