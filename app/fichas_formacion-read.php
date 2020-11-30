@@ -71,12 +71,6 @@ if(isset($_GET["idFichaFormacion"]) && !empty(trim($_GET["idFichaFormacion"]))){
                         <label>Código</label>
                         <p class="form-control-static"><?php echo $row["codigoFichaFormacion"]; ?></p>
                     </div><div class="form-group">
-                        <label>Nombre</label>
-                        <p class="form-control-static"><?php echo $row["nombreFichaFormacion"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Nombre corto</label>
-                        <p class="form-control-static"><?php echo $row["nombreCorto"]; ?></p>
-                    </div><div class="form-group">
                         <label>Id Programa de formación</label>
                         <p class="form-control-static"><?php echo $row["idProgramaFormacion"]; ?></p>
                     </div><div class="form-group">

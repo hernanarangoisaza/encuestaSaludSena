@@ -4,15 +4,11 @@ require_once "config.php";
 
 // Define variables and initialize with empty values
 $codigoFichaFormacion = "";
-$nombreFichaFormacion = "";
-$nombreCorto = "";
 $idProgramaFormacion = "";
 $estado = "";
 $auditoria = "";
 
 $codigoFichaFormacion_err = "";
-$nombreFichaFormacion_err = "";
-$nombreCorto_err = "";
 $idProgramaFormacion_err = "";
 $estado_err = "";
 $auditoria_err = "";
@@ -26,8 +22,6 @@ if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
         // Prepare an update statement
         
         $codigoFichaFormacion = trim($_POST["codigoFichaFormacion"]);
-		$nombreFichaFormacion = trim($_POST["nombreFichaFormacion"]);
-		$nombreCorto = trim($_POST["nombreCorto"]);
 		$idProgramaFormacion = trim($_POST["idProgramaFormacion"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -45,9 +39,9 @@ if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE fichas_formacion SET codigoFichaFormacion=?,nombreFichaFormacion=?,nombreCorto=?,idProgramaFormacion=?,estado=?,auditoria=? WHERE idFichaFormacion=?");
+        $stmt = $pdo->prepare("UPDATE fichas_formacion SET codigoFichaFormacion=?,idProgramaFormacion=?,estado=?,auditoria=? WHERE idFichaFormacion=?");
 
-        if(!$stmt->execute([ $codigoFichaFormacion,$nombreFichaFormacion,$nombreCorto,$idProgramaFormacion,$estado,$auditoria,$idFichaFormacion  ])) {
+        if(!$stmt->execute([ $codigoFichaFormacion,$idProgramaFormacion,$estado,$auditoria,$idFichaFormacion  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
@@ -81,8 +75,6 @@ if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
                     // Retrieve individual field value
 
                     $codigoFichaFormacion = $row["codigoFichaFormacion"];
-					$nombreFichaFormacion = $row["nombreFichaFormacion"];
-					$nombreCorto = $row["nombreCorto"];
 					$idProgramaFormacion = $row["idProgramaFormacion"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
@@ -135,16 +127,6 @@ if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
                             <label>Código</label>
                             <input type="text" name="codigoFichaFormacion" maxlength="50"class="form-control" value="<?php echo $codigoFichaFormacion; ?>">
                             <span class="form-text"><?php echo $codigoFichaFormacion_err; ?></span>
-                        </div>
-						<div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" name="nombreFichaFormacion" maxlength="50"class="form-control" value="<?php echo $nombreFichaFormacion; ?>">
-                            <span class="form-text"><?php echo $nombreFichaFormacion_err; ?></span>
-                        </div>
-						<div class="form-group">
-                            <label>Nombre corto</label>
-                            <input type="text" name="nombreCorto" maxlength="50"class="form-control" value="<?php echo $nombreCorto; ?>">
-                            <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Id Programa de formación</label>

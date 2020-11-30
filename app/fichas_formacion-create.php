@@ -4,15 +4,11 @@ require_once "config.php";
 
 // Define variables and initialize with empty values
 $codigoFichaFormacion = "";
-$nombreFichaFormacion = "";
-$nombreCorto = "";
 $idProgramaFormacion = "";
 $estado = "";
 $auditoria = "";
 
 $codigoFichaFormacion_err = "";
-$nombreFichaFormacion_err = "";
-$nombreCorto_err = "";
 $idProgramaFormacion_err = "";
 $estado_err = "";
 $auditoria_err = "";
@@ -34,8 +30,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare an insert statement
  */
         $codigoFichaFormacion = trim($_POST["codigoFichaFormacion"]);
-		$nombreFichaFormacion = trim($_POST["nombreFichaFormacion"]);
-		$nombreCorto = trim($_POST["nombreCorto"]);
 		$idProgramaFormacion = trim($_POST["idProgramaFormacion"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -53,9 +47,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO fichas_formacion (codigoFichaFormacion,nombreFichaFormacion,nombreCorto,idProgramaFormacion,estado,auditoria) VALUES (?,?,?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO fichas_formacion (codigoFichaFormacion,idProgramaFormacion,estado,auditoria) VALUES (?,?,?,?)"); 
         
-        if($stmt->execute([ $codigoFichaFormacion,$nombreFichaFormacion,$nombreCorto,$idProgramaFormacion,$estado,$auditoria  ])) {
+        if($stmt->execute([ $codigoFichaFormacion,$idProgramaFormacion,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: fichas_formacion-index.php");
             } else{
@@ -87,16 +81,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <label>Código</label>
                             <input type="text" name="codigoFichaFormacion" maxlength="50"class="form-control" value="<?php echo $codigoFichaFormacion; ?>">
                             <span class="form-text"><?php echo $codigoFichaFormacion_err; ?></span>
-                        </div>
-						<div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" name="nombreFichaFormacion" maxlength="50"class="form-control" value="<?php echo $nombreFichaFormacion; ?>">
-                            <span class="form-text"><?php echo $nombreFichaFormacion_err; ?></span>
-                        </div>
-						<div class="form-group">
-                            <label>Nombre corto</label>
-                            <input type="text" name="nombreCorto" maxlength="50"class="form-control" value="<?php echo $nombreCorto; ?>">
-                            <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Id Programa de formación</label>

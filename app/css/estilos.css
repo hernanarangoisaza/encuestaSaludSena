@@ -205,6 +205,22 @@ input[name="search"]::placeholder {
     font-size: 0.9em;
 }
 
+i.far {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+input.form-control {
+    background-color: #FFFFEE;
+    border-color: #AAAAAA;
+}
+
+input.solo-lectura {
+    background-color: #FFFFEE;
+    border-color: #AAAAAA;
+}
+
+
 .btn {
     font-size: 1em;
 }
@@ -235,6 +251,14 @@ li.item-menu-principal a::before {
     padding-left: 0px;
     padding-right: 10px;
     content: "\2192";
+}
+
+.centrar-columna {
+    text-align: center;
+}
+
+.ocultar-columna {
+    display: none;
 }
 
 /* -------------------------------------------------------------------------------------------------- */

@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Gestión de Aprendices</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6b773fe9e4.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="stylesheet" href="css/estilos.css" />
 </head>
 <body>
     <section class="pt-5">
@@ -75,9 +75,24 @@
                     }
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM aprendices ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    $sql = "SELECT AP.*, 
+                            VS.nombreVinculacion AS 'nombreVinculacion', 
+                            TI.nombreIdentificacion AS 'nombreIdentificacion',
+                            TG.nombreTipoGenero AS 'nombreGenero',
+                            MN.municipio AS 'nombreMunicipio',
+                            DP.departamento AS 'nombreDepartamento',
+                            CF.nombreLargo AS 'nombreCentroFormacion',
+                            FF.codigoFichaFormacion AS 'codigoFichaFormacion'
+                            FROM aprendices AP
+                            LEFT JOIN vinculaciones_sena VS ON VS.idVinculacion = AP.idTipoVinculacion
+                            LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
+                            LEFT JOIN tipos_generos TG ON TG.idGenero = AP.idGenero
+                            LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
+                            LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
+                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
+                            LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
+                            ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
                     $count_pages = "SELECT * FROM aprendices";
-
                     
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
@@ -106,35 +121,35 @@
                                 echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                     echo "<thead>";
                                         echo "<tr>";
-                                            echo "<th><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id Aprendiz</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idTipoVinculacion&sort=$sort>Id Tipo de vinculación</th>";
+                                            echo "<th class='estilo-acciones'>Acciones</th>";
+                                            echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id Aprendiz</th>";
+    										echo "<th><a href=?search=$search&sort=&order=idTipoVinculacion&sort=$sort>Tipo de vinculación</th>";
     										echo "<th><a href=?search=$search&sort=&order=nombreCompleto&sort=$sort>Nombre completo</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idTipoIdentificacion&sort=$sort>Id Tipo de identificación</th>";
+    										echo "<th><a href=?search=$search&sort=&order=idTipoIdentificacion&sort=$sort>Tipo de identificación</th>";
     										echo "<th><a href=?search=$search&sort=&order=identificacion&sort=$sort>Identificación</th>";
     										echo "<th><a href=?search=$search&sort=&order=email&sort=$sort>Correo electrónico</th>";
     										echo "<th><a href=?search=$search&sort=&order=telefonoPersonal&sort=$sort>Teléfono personal</th>";
     										echo "<th><a href=?search=$search&sort=&order=telefonoAcudiente&sort=$sort>Teléfono del acudiente</th>";
     										echo "<th><a href=?search=$search&sort=&order=fechaNacimiento&sort=$sort>Fecha de nacimiento</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idGenero&sort=$sort>Id Género</th>";
+    										echo "<th><a href=?search=$search&sort=&order=idGenero&sort=$sort>Género</th>";
     										echo "<th><a href=?search=$search&sort=&order=direccionResidencia&sort=$sort>Dirección de la residencia</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Id Municipio</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Id Departamento</th>";
+    										echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Municipio</th>";
+    										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
     										echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Id Centro de formación</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Id Ficha de formación</th>";
-    										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
+    										echo "<th><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Ficha de formación</th>";
+    										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
     										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
-                                            echo "<th class='estilo-acciones'>Acciones</th>";
                                         echo "</tr>";
                                     echo "</thead>";
                                     echo "<tbody>";
                                     while($row = mysqli_fetch_array($result)){
                                         echo "<tr>";
-                                        echo "<td>" . $row['idAprendiz'] . "</td>";echo "<td>" . $row['idTipoVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['idTipoIdentificacion'] . "</td>";echo "<td>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td>" . $row['telefonoPersonal'] . "</td>";echo "<td>" . $row['telefonoAcudiente'] . "</td>";echo "<td>" . $row['fechaNacimiento'] . "</td>";echo "<td>" . $row['idGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['idCentroFormacion'] . "</td>";echo "<td>" . $row['idFichaFormacion'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
-                                            echo "<td>";
+                                            echo "<td class='centrar-columna'>";
                                                 echo "<a href='aprendices-read.php?idAprendiz=". $row['idAprendiz'] ."'data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                                 echo "<a href='aprendices-update.php?idAprendiz=". $row['idAprendiz'] ."'data-toggle='tooltip'><i class='far fa-edit'></i></a>";
                                                 echo "<a href='aprendices-delete.php?idAprendiz=". $row['idAprendiz'] ."'data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                                             echo "</td>";
+                                        echo "<td class='centrar-columna ocultar-columna'>" . $row['idAprendiz'] . "</td>";echo "<td>" . $row['nombreVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['nombreIdentificacion'] . "</td>";echo "<td class='centrar-columna'>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td class='centrar-columna'>" . $row['telefonoPersonal'] . "</td>";echo "<td class='centrar-columna'>" . $row['telefonoAcudiente'] . "</td>";echo "<td class='centrar-columna'>" . $row['fechaNacimiento'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreMunicipio'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";echo "<td>" . $row['nombreCentroFormacion'] . "</td>";echo "<td class='centrar-columna'>" . $row['codigoFichaFormacion'] . "</td>";echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
                                         echo "</tr>";
                                     }
                                     echo "</tbody>";

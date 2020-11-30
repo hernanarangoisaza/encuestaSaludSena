@@ -67,7 +67,7 @@
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idFichaFormacion', 'codigoFichaFormacion', 'nombreFichaFormacion', 'nombreCorto', 'idProgramaFormacion', 'estado', 'auditoria'); 
+                    $orderBy = array('idFichaFormacion', 'codigoFichaFormacion', 'idProgramaFormacion', 'estado', 'auditoria'); 
                     $order = 'idFichaFormacion';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
@@ -92,12 +92,12 @@
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                         $sql = "SELECT * FROM fichas_formacion
-                            WHERE CONCAT (idFichaFormacion,codigoFichaFormacion,nombreFichaFormacion,nombreCorto,idProgramaFormacion,estado,auditoria)
+                            WHERE CONCAT (idFichaFormacion,codigoFichaFormacion,idProgramaFormacion,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT * FROM fichas_formacion
-                            WHERE CONCAT (idFichaFormacion,codigoFichaFormacion,nombreFichaFormacion,nombreCorto,idProgramaFormacion,estado,auditoria)
+                            WHERE CONCAT (idFichaFormacion,codigoFichaFormacion,idProgramaFormacion,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -118,8 +118,6 @@
                                     echo "<tr>";
                                         echo "<th><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Id Ficha Formación</th>";
 										echo "<th><a href=?search=$search&sort=&order=codigoFichaFormacion&sort=$sort>Código</th>";
-										echo "<th><a href=?search=$search&sort=&order=nombreFichaFormacion&sort=$sort>Nombre</th>";
-										echo "<th><a href=?search=$search&sort=&order=nombreCorto&sort=$sort>Nombre corto</th>";
 										echo "<th><a href=?search=$search&sort=&order=idProgramaFormacion&sort=$sort>Id Programa de formación</th>";
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
@@ -130,7 +128,7 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idFichaFormacion'] . "</td>";echo "<td>" . $row['codigoFichaFormacion'] . "</td>";echo "<td>" . $row['nombreFichaFormacion'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['idProgramaFormacion'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idFichaFormacion'] . "</td>";echo "<td>" . $row['codigoFichaFormacion'] . "</td>";echo "<td>" . $row['idProgramaFormacion'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='fichas_formacion-read.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                             echo "<a href='fichas_formacion-update.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
