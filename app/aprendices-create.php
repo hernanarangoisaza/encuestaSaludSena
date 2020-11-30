@@ -98,7 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Registro</title>
+    <title>Crear Aprendiz</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -109,9 +109,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="row">
                 <div class="col-md-12 mx-auto">
                     <div class="page-header">
-                        <h2>Crear Registro</h2>
+                        <h2>Aprendices - Crear</h2>
                     </div>
-                    <p>Por favor diligencie todo el formulario para adicionar un registro a la Base de Datos</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                        <div class="form-group">

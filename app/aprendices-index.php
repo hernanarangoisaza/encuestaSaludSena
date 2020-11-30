@@ -118,6 +118,7 @@
                            }
                             $number_of_results = mysqli_num_rows($result_count);
                             echo " " . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages;
+                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por ese criterio. Botón [Restablecer vista] para orden original</p>";
                             echo "<div class='seccion-tabla-scroll-horizontal'>";
                                 echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                     echo "<thead>";
