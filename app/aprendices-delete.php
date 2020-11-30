@@ -45,12 +45,14 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
     <title>Ver Registro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
+ 
 </head>
 <body>
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 mx-auto">
+                <div class="col-md-12 mx-auto">
                     <div class="page-header">
                         <h1>Borrar Registro</h1>
                     </div>

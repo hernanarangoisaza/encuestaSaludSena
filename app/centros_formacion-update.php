@@ -144,7 +144,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 mx-auto">
+                <div class="col-md-12 mx-auto">
                     <div class="page-header">
                         <h2>Actualizar Registro</h2>
                     </div>
@@ -158,7 +158,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
                         </div>
 						<div class="form-group">
                             <label>Nombre del Centro</label>
-                            <input type="text" name="nombreLargoCentroFormacion" maxlength="50"class="form-control" value="<?php echo $nombreLargoCentroFormacion; ?>">
+                            <input type="text" name="nombreLargoCentroFormacion" maxlength="75"class="form-control" value="<?php echo $nombreLargoCentroFormacion; ?>">
                             <span class="form-text"><?php echo $nombreLargoCentroFormacion_err; ?></span>
                         </div>
 						<div class="form-group">

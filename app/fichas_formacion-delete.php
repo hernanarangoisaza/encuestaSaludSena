@@ -49,7 +49,7 @@ if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 mx-auto">
+                <div class="col-md-12 mx-auto">
                     <div class="page-header">
                         <h1>Borrar Registro</h1>
                     </div>

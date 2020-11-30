@@ -4,6 +4,7 @@
         <title>Sistema de encuestas para registro de síntomas y temperatura en el SENA - CDITI</title>
         <link rel="stylesheet" href="xhttps://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
         <link rel="stylesheet" href="css/estilos.css" />
+        <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
     </head>
     <body>
         <div class="menu">

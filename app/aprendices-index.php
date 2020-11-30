@@ -6,14 +6,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6b773fe9e4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-5">
-        <div class="container-fluid">
+        <div class="container-fluid index">
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Aprendices - Detalle</h2>
+                        <h2 class="float-left">Aprendices - Listado general</h2>
                         <a href="aprendices-create.php" class="btn btn-success float-right">Agregar registro</a>
                         <a href="aprendices-index.php" class="btn btn-info float-right mr-2">Restablecer vista</a>
                         <a href="index.php" class="btn btn-secondary float-right mr-2">Regresar</a>
