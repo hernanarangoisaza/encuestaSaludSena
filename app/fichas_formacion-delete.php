@@ -39,7 +39,7 @@ if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Ver Registro</title>

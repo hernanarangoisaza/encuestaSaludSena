@@ -52,7 +52,7 @@ if(isset($_GET["idTipoVinculacion"]) && !empty(trim($_GET["idTipoVinculacion"]))
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Ver Registro</title>

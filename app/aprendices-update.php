@@ -153,7 +153,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Actualizar Aprendiz</title>

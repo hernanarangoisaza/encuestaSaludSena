@@ -68,7 +68,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Ver Aprendiz</title>

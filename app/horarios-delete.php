@@ -39,7 +39,7 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Ver Registro</title>

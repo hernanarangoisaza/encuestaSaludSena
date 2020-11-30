@@ -52,7 +52,7 @@ if(isset($_GET["idProgramaFormacion"]) && !empty(trim($_GET["idProgramaFormacion
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Ver Registro</title>

@@ -52,7 +52,7 @@ if(isset($_GET["idPreguntaEncuesta"]) && !empty(trim($_GET["idPreguntaEncuesta"]
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Ver Registro</title>

@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8" />
         <title>Sistema de encuestas para registro de síntomas y temperatura en el SENA - CDITI</title>

@@ -118,7 +118,7 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Actualizar Registro</title>
