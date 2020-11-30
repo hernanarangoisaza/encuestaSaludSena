@@ -239,7 +239,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
 
 						<div class="form-group">
                             <label>Fecha de nacimiento</label>
-                            <input type="text" name="fechaNacimiento" class="form-control" value="<?php echo $fechaNacimiento; ?>">
+                            <input type="date" name="fechaNacimiento" class="form-control" value="<?php echo $fechaNacimiento; ?>">
                             <span class="form-text"><?php echo $fechaNacimiento_err; ?></span>
                         </div>
 
@@ -268,24 +268,6 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                         </div>
 
                         <div class="form-group">
-                            <label>Municipio</label>
-                            <?php
-                                $sql_cb4 = "SELECT idMunicipio, municipio FROM municipios";
-                                $result_cb4 = mysqli_query($link, $sql_cb4);
-                                echo "<select name='idMunicipio' id='cb4' class='combo-box form-control'>";
-                                while($row = mysqli_fetch_array($result_cb4)) {
-                                    if ($idMunicipio != $row['idMunicipio'])
-                                    {
-                                        echo "<option class='item-combo-box' value='" . $row['idMunicipio'] . "'>" . $row['municipio'] . "</option>";
-                                    } else {
-                                        echo "<option class='item-combo-box' selected value='" . $row['idMunicipio'] . "'>" . $row['municipio'] . "</option>";
-                                    }
-                                }
-                                echo "</select>";
-                            ?>
-                        </div>
-
-                        <div class="form-group">
                             <label>Departamento</label>
                             <?php
                                 $sql_cb5 = "SELECT idDepartamento, departamento FROM departamentos";
@@ -297,6 +279,24 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                                         echo "<option class='item-combo-box' value='" . $row['idDepartamento'] . "'>" . $row['departamento'] . "</option>";
                                     } else {
                                         echo "<option class='item-combo-box' selected value='" . $row['idDepartamento'] . "'>" . $row['departamento'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Municipio</label>
+                            <?php
+                                $sql_cb4 = "SELECT idMunicipio, municipio FROM municipios";
+                                $result_cb4 = mysqli_query($link, $sql_cb4);
+                                echo "<select name='idMunicipio' id='cb4' class='combo-box form-control'>";
+                                while($row = mysqli_fetch_array($result_cb4)) {
+                                    if ($idMunicipio != $row['idMunicipio'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idMunicipio'] . "'>" . $row['municipio'] . "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idMunicipio'] . "'>" . $row['municipio'] . "</option>";
                                     }
                                 }
                                 echo "</select>";

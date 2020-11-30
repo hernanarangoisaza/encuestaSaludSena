@@ -126,12 +126,12 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
                             <input type="text" name="direccionResidencia" maxlength="50" class="form-control" value="<?php echo $row['direccionResidencia']; ?>" readonly>
                         </div>
                         <div class="form-group">
-                            <label>Municipio</label>
-                            <input type="text" name="idMunicipio" class="form-control" value="<?php echo $row['nombreMunicipio']; ?>" readonly>
-                        </div>
-                        <div class="form-group">
                             <label>Departamento</label>
                             <input type="text" name="idDepartamento" class="form-control" value="<?php echo $row['nombreDepartamento']; ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Municipio</label>
+                            <input type="text" name="idMunicipio" class="form-control" value="<?php echo $row['nombreMunicipio']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label>Centro de formación</label>
