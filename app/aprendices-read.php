@@ -89,66 +89,82 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
                             <label>Tipo de vinculación</label>
                             <input type="text" name="idTipoVinculacion" class="form-control" value="<?php echo $row['nombreLargoVinculacion']; ?>" readonly>
                         </div>
+                        
                         <div class="form-group">
                             <label>Nombre completo</label>
                             <input type="text" name="nombreCompleto" maxlength="50"class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Tipo de identificación</label>
                             <input type="text" name="idTipoIdentificacion" class="form-control" value="<?php echo $row['nombreLargoIdentificacion']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Identificación</label>
                             <input type="text" name="identificacion" maxlength="50"class="form-control" value="<?php echo $row['identificacion']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Correo electrónico</label>
                             <input type="text" name="email" maxlength="50"class="form-control" value="<?php echo $row['email']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Teléfono personal</label>
                             <input type="text" name="telefonoPersonal" maxlength="50"class="form-control" value="<?php echo $row['telefonoPersonal']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Teléfono del acudiente</label>
                             <input type="text" name="telefonoAcudiente" maxlength="50"class="form-control" value="<?php echo $row['telefonoAcudiente']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Fecha de nacimiento</label>
                             <input type="text" name="fechaNacimiento" class="form-control" value="<?php echo $row['fechaNacimiento']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Género</label>
                             <input type="text" name="idTipoGenero" class="form-control" value="<?php echo $row['nombreLargoGenero']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Dirección de la residencia</label>
                             <input type="text" name="direccionResidencia" maxlength="50" class="form-control" value="<?php echo $row['direccionResidencia']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Departamento</label>
                             <input type="text" name="idDepartamento" class="form-control" value="<?php echo $row['nombreDepartamento']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Municipio</label>
                             <input type="text" name="idMunicipio" class="form-control" value="<?php echo $row['nombreMunicipio']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Centro de formación</label>
                             <input type="text" name="idCentroFormacion" class="form-control" value="<?php echo $row['nombreLargoCentroFormacion']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Ficha de formación</label>
                             <input type="text" name="idFichaFormacion" class="form-control" value="<?php echo $row['codigoFichaFormacion']; ?>" readonly>
                         </div>
+
                         <div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
                             <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
                         </div>
+
                         <div class="form-group">
                             <label>Fecha/Hora de auditoría</label>
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
                         </div>
+
                     <p><a href="aprendices-index.php" class="btn btn-primary">Regresar</a></p>
                 </div>
             </div>
