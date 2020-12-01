@@ -35,12 +35,11 @@
 
                     //Get current URL and parameters for correct pagination
                     $protocol = $_SERVER['SERVER_PROTOCOL'];
-                    $domain     = $_SERVER['HTTP_HOST'];
-                    $script   = $_SERVER['SCRIPT_NAME'];
-                    $parameters   = $_SERVER['QUERY_STRING'];
-                    $protocol=strpos(strtolower($_SERVER['SERVER_PROTOCOL']),'https')
-                                === FALSE ? 'http' : 'https';
-                    $currenturl = $protocol . '://' . $domain. $script . '?' . $parameters;
+                    $domain = $_SERVER['HTTP_HOST'];
+                    $script = $_SERVER['SCRIPT_NAME'];
+                    $parameters = $_SERVER['QUERY_STRING'];
+                    $protocol = strpos(strtolower($_SERVER['SERVER_PROTOCOL']), 'https') === false ? 'http' : 'https';
+                    $currenturl = $protocol . '://' . $domain . $script . '?' . $parameters;
 
                     //Pagination
                     if (isset($_GET['pageno'])) {
@@ -50,29 +49,47 @@
                     }
 
                     //$no_of_records_per_page is set on the index page. Default is 10.
-                    $offset = ($pageno-1) * $no_of_records_per_page;
+                    $offset = ($pageno - 1) * $no_of_records_per_page;
 
                     $total_pages_sql = "SELECT COUNT(*) FROM aprendices";
-                    $result = mysqli_query($link,$total_pages_sql);
+                    $result = mysqli_query($link, $total_pages_sql);
                     $total_rows = mysqli_fetch_array($result)[0];
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
-                    
+
                     //Column sorting on column name
-                    $orderBy = array('idAprendiz', 'idTipoVinculacion', 'nombreCompleto', 'idTipoIdentificacion', 'identificacion', 'email', 'telefonoPersonal', 'telefonoAcudiente', 'fechaNacimiento', 'idTipoGenero', 'direccionResidencia', 'idMunicipio', 'idDepartamento', 'idCentroFormacion', 'idFichaFormacion', 'estado', 'auditoria'); 
+                    $orderBy = [
+                        'idAprendiz',
+                        'idTipoVinculacion',
+                        'nombreCompleto',
+                        'idTipoIdentificacion',
+                        'identificacion',
+                        'email',
+                        'telefonoPersonal',
+                        'telefonoAcudiente',
+                        'fechaNacimiento',
+                        'idTipoGenero',
+                        'direccionResidencia',
+                        'idMunicipio',
+                        'idDepartamento',
+                        'idCentroFormacion',
+                        'idFichaFormacion',
+                        'estado',
+                        'auditoria',
+                    ];
                     $order = 'idAprendiz';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
-                            $order = $_GET['order'];
-                        }
+                        $order = $_GET['order'];
+                    }
 
                     //Column sort order
-                    $sortBy = array('asc', 'desc'); $sort = 'desc';
-                    if (isset($_GET['sort']) && in_array($_GET['sort'], $sortBy)) {                                                                    
-                          if($_GET['sort']=='asc') {                                                                                                                            
-                            $sort='desc';
-                            }                                                                                   
-                    else {
-                        $sort='asc';
-                        }                                                                                                                           
+                    $sortBy = ['asc', 'desc'];
+                    $sort = 'desc';
+                    if (isset($_GET['sort']) && in_array($_GET['sort'], $sortBy)) {
+                        if ($_GET['sort'] == 'asc') {
+                            $sort = 'desc';
+                        } else {
+                            $sort = 'asc';
+                        }
                     }
 
                     // Attempt select query execution
@@ -93,10 +110,11 @@
                         LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
                         LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
                         ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+
                     $count_pages = "SELECT * FROM aprendices";
-                    
-                    if(!empty($_GET['search'])) {
-                        $search = ($_GET['search']);
+
+                    if (!empty($_GET['search'])) {
+                        $search = $_GET['search'];
                         $sql = "SELECT AP.*, 
                             VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
                             TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
@@ -117,6 +135,7 @@
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
+                            
                         $count_pages = "SELECT AP.*, 
                             VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
                             TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
@@ -136,81 +155,108 @@
                             WHERE CONCAT (AP.idAprendiz,VS.nombreLargoVinculacion,AP.nombreCompleto,TI.nombreLargoIdentificacion,AP.identificacion,AP.email,AP.telefonoPersonal,AP.telefonoAcudiente,AP.fechaNacimiento,TG.nombreLargoGenero,AP.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,AP.estado,AP.auditoria)
                              LIKE '%$search%'
                              ORDER BY $order $sort";
-                    }
-                    else {
+                    } else {
                         $search = "";
                     }
 
-                    if($result = mysqli_query($link, $sql)){
-                        if(mysqli_num_rows($result) > 0){
+                    if ($result = mysqli_query($link, $sql)) {
+                        if (mysqli_num_rows($result) > 0) {
+
                             if ($result_count = mysqli_query($link, $count_pages)) {
-                               $total_pages = ceil(mysqli_num_rows($result_count) / $no_of_records_per_page);
-                           }
+                                $total_pages = ceil(mysqli_num_rows($result_count) / $no_of_records_per_page);
+                            }
                             $number_of_results = mysqli_num_rows($result_count);
                             echo " " . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages;
                             echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer vista] para orden original o ver todos los registros</p>";
                             echo "<div class='seccion-tabla-scroll-horizontal'>";
-                                echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
-                                    echo "<thead>";
-                                        echo "<tr>";
-                                            echo "<th class='estilo-acciones'>Acciones</th>";
-                                            echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id Aprendiz</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idTipoVinculacion&sort=$sort>Tipo de vinculación</th>";
-    										echo "<th><a href=?search=$search&sort=&order=nombreCompleto&sort=$sort>Nombre completo</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idTipoIdentificacion&sort=$sort>Tipo de identificación</th>";
-    										echo "<th><a href=?search=$search&sort=&order=identificacion&sort=$sort>Identificación</th>";
-    										echo "<th><a href=?search=$search&sort=&order=email&sort=$sort>Correo electrónico</th>";
-    										echo "<th><a href=?search=$search&sort=&order=telefonoPersonal&sort=$sort>Teléfono personal</th>";
-    										echo "<th><a href=?search=$search&sort=&order=telefonoAcudiente&sort=$sort>Teléfono del acudiente</th>";
-    										echo "<th><a href=?search=$search&sort=&order=fechaNacimiento&sort=$sort>Fecha de nacimiento</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idTipoGenero&sort=$sort>Género</th>";
-    										echo "<th><a href=?search=$search&sort=&order=direccionResidencia&sort=$sort>Dirección de la residencia</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
-                                            echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Municipio</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Id Centro de formación</th>";
-    										echo "<th><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Ficha de formación</th>";
-    										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-    										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
-                                        echo "</tr>";
-                                    echo "</thead>";
-                                    echo "<tbody>";
-                                    while($row = mysqli_fetch_array($result)){
-                                        echo "<tr>";
-                                            echo "<td class='centrar-columna'>";
-                                                echo "<a href='aprendices-read.php?idAprendiz=". $row['idAprendiz'] ."'><i class='far fa-eye'></i></a>";
-                                                echo "<a href='aprendices-update.php?idAprendiz=". $row['idAprendiz'] ."'><i class='far fa-edit'></i></a>";
-                                                echo "<a href='aprendices-delete.php?idAprendiz=". $row['idAprendiz'] ."'><i class='far fa-trash-alt'></i></a>";
-                                            echo "</td>";
-                                        echo "<td class='centrar-columna ocultar-columna'>" . $row['idAprendiz'] . "</td>";echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['nombreLargoIdentificacion'] . "</td>";echo "<td class='centrar-columna'>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td class='centrar-columna'>" . $row['telefonoPersonal'] . "</td>";echo "<td class='centrar-columna'>" . $row['telefonoAcudiente'] . "</td>";echo "<td class='centrar-columna'>" . $row['fechaNacimiento'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreLargoGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreMunicipio'] . "</td>";echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";echo "<td class='centrar-columna'>" . $row['codigoFichaFormacion'] . "</td>";echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
-                                        echo "</tr>";
-                                    }
-                                    echo "</tbody>";
-                                echo "</table>";
+                            echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
+                            echo "<thead>";
+                            echo "<tr>";
+                            echo "<th class='estilo-acciones'>Acciones</th>";
+                            echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id Aprendiz</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idTipoVinculacion&sort=$sort>Tipo de vinculación</th>";
+                            echo "<th><a href=?search=$search&sort=&order=nombreCompleto&sort=$sort>Nombre completo</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idTipoIdentificacion&sort=$sort>Tipo de identificación</th>";
+                            echo "<th><a href=?search=$search&sort=&order=identificacion&sort=$sort>Identificación</th>";
+                            echo "<th><a href=?search=$search&sort=&order=email&sort=$sort>Correo electrónico</th>";
+                            echo "<th><a href=?search=$search&sort=&order=telefonoPersonal&sort=$sort>Teléfono personal</th>";
+                            echo "<th><a href=?search=$search&sort=&order=telefonoAcudiente&sort=$sort>Teléfono del acudiente</th>";
+                            echo "<th><a href=?search=$search&sort=&order=fechaNacimiento&sort=$sort>Fecha de nacimiento</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idTipoGenero&sort=$sort>Género</th>";
+                            echo "<th><a href=?search=$search&sort=&order=direccionResidencia&sort=$sort>Dirección de la residencia</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Municipio</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Id Centro de formación</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Ficha de formación</th>";
+                            echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
+                            echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
+                            echo "</tr>";
+                            echo "</thead>";
+                            echo "<tbody>";
+                            while ($row = mysqli_fetch_array($result)) {
+                                echo "<tr>";
+                                echo "<td class='centrar-columna'>";
+                                echo "<a href='aprendices-read.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-eye'></i></a>";
+                                echo "<a href='aprendices-update.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-edit'></i></a>";
+                                echo "<a href='aprendices-delete.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-trash-alt'></i></a>";
+                                echo "</td>";
+                                echo "<td class='centrar-columna ocultar-columna'>" . $row['idAprendiz'] . "</td>";
+                                echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";
+                                echo "<td>" . $row['nombreCompleto'] . "</td>";
+                                echo "<td>" . $row['nombreLargoIdentificacion'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['identificacion'] . "</td>";
+                                echo "<td>" . $row['email'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['telefonoPersonal'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['telefonoAcudiente'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['fechaNacimiento'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['nombreLargoGenero'] . "</td>";
+                                echo "<td>" . $row['direccionResidencia'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['nombreMunicipio'] . "</td>";
+                                echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['codigoFichaFormacion'] . "</td>";
+                                echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
+                                echo "</tr>";
+                            }
+                            echo "</tbody>";
+                            echo "</table>";
                             echo "</div>";
-                    ?>
+                            ?>
 
                                 <ul class="pagination" align-right>
-                                <?php
-                                    $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
-                                 ?> 
-                                    <li class="page-item"><a class="page-link" href="<?php echo $new_url .'&pageno=1' ?>">Primera</a></li>
-                                    <li class="page-item <?php if($pageno <= 1){ echo 'disabled'; } ?>">
-                                        <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo $new_url ."&pageno=".($pageno - 1); } ?>">Anterior</a>
+                                <?php $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl); ?> 
+                                    <li class="page-item"><a class="page-link" href="<?php echo $new_url . '&pageno=1'; ?>">Primera</a></li>
+                                    <li class="page-item <?php if ($pageno <= 1) {
+                                        echo 'disabled';
+                                    } ?>">
+                                        <a class="page-link" href="<?php if ($pageno <= 1) {
+                                            echo '#';
+                                        } else {
+                                            echo $new_url . "&pageno=" . ($pageno - 1);
+                                        } ?>">Anterior</a>
                                     </li>
-                                    <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
-                                        <a class="page-link" href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo $new_url . "&pageno=".($pageno + 1); } ?>">Siguiente</a>
+                                    <li class="page-item <?php if ($pageno >= $total_pages) {
+                                        echo 'disabled';
+                                    } ?>">
+                                        <a class="page-link" href="<?php if ($pageno >= $total_pages) {
+                                            echo '#';
+                                        } else {
+                                            echo $new_url . "&pageno=" . ($pageno + 1);
+                                        } ?>">Siguiente</a>
                                     </li>
-                                    <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
-                                        <a class="page-item"><a class="page-link" href="<?php echo $new_url .'&pageno=' . $total_pages; ?>">Última</a>
+                                    <li class="page-item <?php if ($pageno >= $total_pages) {
+                                        echo 'disabled';
+                                    } ?>">
+                                        <a class="page-item"><a class="page-link" href="<?php echo $new_url . '&pageno=' . $total_pages; ?>">Última</a>
                                     </li>
                                 </ul>
-                            <?php
-                            // Free result set
+                            <?php // Free result set
                             mysqli_free_result($result);
-                        } else{
+                        } else {
                             echo "<p class='lead'><em>No se encontraron registros.</em></p>";
                         }
-                    } else{
+                    } else {
                         echo "ERROR: No fue posible ejecutar $sql. " . mysqli_error($link);
                     }
 
