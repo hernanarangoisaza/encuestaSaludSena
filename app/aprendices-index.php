@@ -77,6 +77,27 @@
 
                     // Attempt select query execution
                     $sql = "SELECT AP.*, 
+                        VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+                        TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
+                        TG.nombreLargoGenero AS 'nombreLargoGenero',
+                        MN.municipio AS 'nombreMunicipio',
+                        DP.departamento AS 'nombreDepartamento',
+                        CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
+                        FF.codigoFichaFormacion AS 'codigoFichaFormacion'
+                        FROM aprendices AP
+                        LEFT JOIN tipos_vinculaciones_sena VS ON VS.idTipoVinculacion = AP.idTipoVinculacion
+                        LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
+                        LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
+                        LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
+                        LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
+                        LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
+                        LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
+                        ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    $count_pages = "SELECT * FROM aprendices";
+                    
+                    if(!empty($_GET['search'])) {
+                        $search = ($_GET['search']);
+                        $sql = "SELECT AP.*, 
                             VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
                             TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
                             TG.nombreLargoGenero AS 'nombreLargoGenero',
@@ -92,20 +113,29 @@
                             LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
                             LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
-                            ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
-                    $count_pages = "SELECT * FROM aprendices";
-                    
-                    if(!empty($_GET['search'])) {
-                        $search = ($_GET['search']);
-                        $sql = "SELECT * FROM aprendices
-                            WHERE CONCAT (idAprendiz,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria)
+                            WHERE CONCAT (AP.idAprendiz,VS.nombreLargoVinculacion,AP.nombreCompleto,TI.nombreLargoIdentificacion,AP.identificacion,AP.email,AP.telefonoPersonal,AP.telefonoAcudiente,AP.fechaNacimiento,TG.nombreLargoGenero,AP.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,AP.estado,AP.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
-                        $count_pages = "SELECT * FROM aprendices
-                            WHERE CONCAT (idAprendiz,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria)
-                            LIKE '%$search%'
-                            ORDER BY $order $sort";
+                        $count_pages = "SELECT AP.*, 
+                            VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+                            TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
+                            TG.nombreLargoGenero AS 'nombreLargoGenero',
+                            MN.municipio AS 'nombreMunicipio',
+                            DP.departamento AS 'nombreDepartamento',
+                            CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
+                            FF.codigoFichaFormacion AS 'codigoFichaFormacion'
+                            FROM aprendices AP
+                            LEFT JOIN tipos_vinculaciones_sena VS ON VS.idTipoVinculacion = AP.idTipoVinculacion
+                            LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
+                            LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
+                            LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
+                            LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
+                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
+                            LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
+                            WHERE CONCAT (AP.idAprendiz,VS.nombreLargoVinculacion,AP.nombreCompleto,TI.nombreLargoIdentificacion,AP.identificacion,AP.email,AP.telefonoPersonal,AP.telefonoAcudiente,AP.fechaNacimiento,TG.nombreLargoGenero,AP.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,AP.estado,AP.auditoria)
+                             LIKE '%$search%'
+                             ORDER BY $order $sort";
                     }
                     else {
                         $search = "";
@@ -118,7 +148,7 @@
                            }
                             $number_of_results = mysqli_num_rows($result_count);
                             echo " " . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages;
-                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer vista] para orden original</p>";
+                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer vista] para orden original o ver todos los registros</p>";
                             echo "<div class='seccion-tabla-scroll-horizontal'>";
                                 echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                     echo "<thead>";
@@ -147,9 +177,9 @@
                                     while($row = mysqli_fetch_array($result)){
                                         echo "<tr>";
                                             echo "<td class='centrar-columna'>";
-                                                echo "<a href='aprendices-read.php?idAprendiz=". $row['idAprendiz'] ."'data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                                                echo "<a href='aprendices-update.php?idAprendiz=". $row['idAprendiz'] ."'data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                                                echo "<a href='aprendices-delete.php?idAprendiz=". $row['idAprendiz'] ."'data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                                                echo "<a href='aprendices-read.php?idAprendiz=". $row['idAprendiz'] ."'><i class='far fa-eye'></i></a>";
+                                                echo "<a href='aprendices-update.php?idAprendiz=". $row['idAprendiz'] ."'><i class='far fa-edit'></i></a>";
+                                                echo "<a href='aprendices-delete.php?idAprendiz=". $row['idAprendiz'] ."'><i class='far fa-trash-alt'></i></a>";
                                             echo "</td>";
                                         echo "<td class='centrar-columna ocultar-columna'>" . $row['idAprendiz'] . "</td>";echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['nombreLargoIdentificacion'] . "</td>";echo "<td class='centrar-columna'>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td class='centrar-columna'>" . $row['telefonoPersonal'] . "</td>";echo "<td class='centrar-columna'>" . $row['telefonoAcudiente'] . "</td>";echo "<td class='centrar-columna'>" . $row['fechaNacimiento'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreLargoGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";echo "<td class='centrar-columna'>" . $row['nombreMunicipio'] . "</td>";echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";echo "<td class='centrar-columna'>" . $row['codigoFichaFormacion'] . "</td>";echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
                                         echo "</tr>";

@@ -1,8 +1,8 @@
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8" />
         <title>Sistema de encuestas para registro de síntomas y temperatura en el SENA - CDITI</title>
-        <link rel="stylesheet" href="xhttps://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
         <link rel="stylesheet" href="css/estilos.css" />
         <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
     </head>
@@ -10,7 +10,6 @@
         <div class="menu">
             <div class="title">MENÚ</div>
             <ul class="nav">
-
                 <li class="item-menu-principal"><a href="encuesta_signos-index.php">Encuesta de signos</a></li>
                 <li class="item-menu-principal"><a href="tomas_temperatura-index.php">Tomas de temperatura</a></li>
                 <li class="item-menu-principal"><a href="preguntas_encuesta-index.php">Preguntas de la encuesta</a></li>
@@ -42,18 +41,15 @@
                 COVID-19
             </div>
             <dir style="height: 450px;">
-                <img src="imagenes/logo-sena-naranja.png">
+                <img src="imagenes/logo-sena-naranja.png" />
             </dir>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         <script src="js/libreria.js" type="text/javascript"></script>
 
         <script>
             $(document).ready(function () {});
         </script>
-
     </body>
 </html>
