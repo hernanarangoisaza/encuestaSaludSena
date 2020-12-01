@@ -42,8 +42,10 @@ if(isset($_POST["idMunicipio"]) && !empty($_POST["idMunicipio"])){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ver Registro</title>
+    <title>Borrar Municipio</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-5">
@@ -51,12 +53,12 @@ if(isset($_POST["idMunicipio"]) && !empty($_POST["idMunicipio"])){
             <div class="row">
                 <div class="col-md-12 mx-auto">
                     <div class="page-header">
-                        <h1>Borrar Registro</h1>
+                        <h1>Municipio - Borrar</h1>
                     </div>
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                        <div class="alert alert-danger fade-in">
+                        <div class="fade-in">
                             <input type="hidden" name="idMunicipio" value="<?php echo trim($_GET["idMunicipio"]); ?>"/>
-                            <p>Está seguro de eliminar este registro?</p><br>
+                            <p class="mensaje-eliminar">Está seguro de eliminar este registro?</p>
                             <p>
                                 <input type="submit" value="Si" class="btn btn-danger">
                                 <a href="municipios-index.php" class="btn btn-secondary">No</a>

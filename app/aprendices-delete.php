@@ -1,4 +1,5 @@
 <?php
+
 // Process delete operation after confirmation
 if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
 
