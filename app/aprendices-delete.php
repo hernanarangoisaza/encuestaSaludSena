@@ -1,6 +1,7 @@
 <?php
 // Process delete operation after confirmation
 if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
+
     // Include config file
     require_once "config.php";
 
@@ -29,7 +30,9 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
 
     // Close connection
     mysqli_close($link);
+
 } else{
+
     // Check existence of id parameter
     if(empty(trim($_GET["idAprendiz"]))){
         // URL doesn't contain id parameter. Redirect to error page
@@ -38,6 +41,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -46,7 +50,6 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
- 
 </head>
 <body>
     <section class="pt-5">
