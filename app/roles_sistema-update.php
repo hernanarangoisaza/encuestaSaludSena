@@ -3,9 +3,9 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreLargoRol = "";
+$nombreLargoRolSistema = "";
 $nombreCorto = "";
-$descripcionRol = "";
+$descripcionRolSistema = "";
 $permisos = "";
 $restricciones = "";
 $estado = "";
@@ -13,7 +13,7 @@ $auditoria = "";
 
 $nombreRol_err = "";
 $nombreCorto_err = "";
-$descripcionRol_err = "";
+$descripcionRolSistema_err = "";
 $permisos_err = "";
 $restricciones_err = "";
 $estado_err = "";
@@ -27,9 +27,9 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
 
         // Prepare an update statement
         
-        $nombreLargoRol = trim($_POST["nombreLargoRol"]);
+        $nombreLargoRolSistema = trim($_POST["nombreLargoRolSistema"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
-		$descripcionRol = trim($_POST["descripcionRol"]);
+		$descripcionRolSistema = trim($_POST["descripcionRolSistema"]);
 		$permisos = trim($_POST["permisos"]);
 		$restricciones = trim($_POST["restricciones"]);
 		$estado = trim($_POST["estado"]);
@@ -48,9 +48,9 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE roles_sistema SET nombreLargoRol=?,nombreCorto=?,descripcionRol=?,permisos=?,restricciones=?,estado=?,auditoria=? WHERE idRol=?");
+        $stmt = $pdo->prepare("UPDATE roles_sistema SET nombreLargoRolSistema=?,nombreCorto=?,descripcionRolSistema=?,permisos=?,restricciones=?,estado=?,auditoria=? WHERE idRol=?");
 
-        if(!$stmt->execute([ $nombreLargoRol,$nombreCorto,$descripcionRol,$permisos,$restricciones,$estado,$auditoria,$idRol  ])) {
+        if(!$stmt->execute([ $nombreLargoRolSistema,$nombreCorto,$descripcionRolSistema,$permisos,$restricciones,$estado,$auditoria,$idRol  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
@@ -83,9 +83,9 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
 
                     // Retrieve individual field value
 
-                    $nombreLargoRol = $row["nombreLargoRol"];
+                    $nombreLargoRolSistema = $row["nombreLargoRolSistema"];
 					$nombreCorto = $row["nombreCorto"];
-					$descripcionRol = $row["descripcionRol"];
+					$descripcionRolSistema = $row["descripcionRolSistema"];
 					$permisos = $row["permisos"];
 					$restricciones = $row["restricciones"];
 					$estado = $row["estado"];
@@ -137,7 +137,7 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreLargoRol" maxlength="50"class="form-control" value="<?php echo $nombreLargoRol; ?>">
+                            <input type="text" name="nombreLargoRolSistema" maxlength="50"class="form-control" value="<?php echo $nombreLargoRolSistema; ?>">
                             <span class="form-text"><?php echo $nombreRol_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -147,8 +147,8 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
                         </div>
 						<div class="form-group">
                             <label>Descripción</label>
-                            <textarea name="descripcionRol" class="form-control"><?php echo $descripcionRol ; ?></textarea>
-                            <span class="form-text"><?php echo $descripcionRol_err; ?></span>
+                            <textarea name="descripcionRolSistema" class="form-control"><?php echo $descripcionRolSistema ; ?></textarea>
+                            <span class="form-text"><?php echo $descripcionRolSistema_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Permisos</label>

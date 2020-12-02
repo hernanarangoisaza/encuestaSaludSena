@@ -3,9 +3,9 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$nombreLargoRol = "";
+$nombreLargoRolSistema = "";
 $nombreCorto = "";
-$descripcionRol = "";
+$descripcionRolSistema = "";
 $permisos = "";
 $restricciones = "";
 $estado = "";
@@ -13,7 +13,7 @@ $auditoria = "";
 
 $nombreRol_err = "";
 $nombreCorto_err = "";
-$descripcionRol_err = "";
+$descripcionRolSistema_err = "";
 $permisos_err = "";
 $restricciones_err = "";
 $estado_err = "";
@@ -35,9 +35,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($name_err) && empty($address_err) && empty($salary_err)){
         // Prepare an insert statement
  */
-        $nombreLargoRol = trim($_POST["nombreLargoRol"]);
+        $nombreLargoRolSistema = trim($_POST["nombreLargoRolSistema"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
-		$descripcionRol = trim($_POST["descripcionRol"]);
+		$descripcionRolSistema = trim($_POST["descripcionRolSistema"]);
 		$permisos = trim($_POST["permisos"]);
 		$restricciones = trim($_POST["restricciones"]);
 		$estado = trim($_POST["estado"]);
@@ -56,9 +56,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO roles_sistema (nombreLargoRol,nombreCorto,descripcionRol,permisos,restricciones,estado,auditoria) VALUES (?,?,?,?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO roles_sistema (nombreLargoRolSistema,nombreCorto,descripcionRolSistema,permisos,restricciones,estado,auditoria) VALUES (?,?,?,?,?,?,?)"); 
         
-        if($stmt->execute([ $nombreLargoRol,$nombreCorto,$descripcionRol,$permisos,$restricciones,$estado,$auditoria  ])) {
+        if($stmt->execute([ $nombreLargoRolSistema,$nombreCorto,$descripcionRolSistema,$permisos,$restricciones,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: roles_sistema-index.php");
             } else{
@@ -74,6 +74,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Crear Registro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-5">
@@ -88,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreLargoRol" maxlength="50"class="form-control" value="<?php echo $nombreLargoRol; ?>">
+                            <input type="text" name="nombreLargoRolSistema" maxlength="50"class="form-control" value="<?php echo $nombreLargoRolSistema; ?>">
                             <span class="form-text"><?php echo $nombreRol_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -98,8 +100,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
 						<div class="form-group">
                             <label>Descripción</label>
-                            <textarea name="descripcionRol" class="form-control"><?php echo $descripcionRol ; ?></textarea>
-                            <span class="form-text"><?php echo $descripcionRol_err; ?></span>
+                            <textarea name="descripcionRolSistema" class="form-control"><?php echo $descripcionRolSistema ; ?></textarea>
+                            <span class="form-text"><?php echo $descripcionRolSistema_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Permisos</label>

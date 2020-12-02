@@ -85,7 +85,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
                 <div class="col-md-12 mx-auto">
 
                     <div class="page-header">
-                        <h1>Aprendices - Visualizar</h1>
+                        <h1>Aprendiz - Visualizar</h1>
                     </div>
 
                     <div class="form-group">

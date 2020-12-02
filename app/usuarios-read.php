@@ -5,7 +5,23 @@ if(isset($_GET["idUsuario"]) && !empty(trim($_GET["idUsuario"]))){
     require_once "config.php";
 
     // Prepare a select statement
-    $sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
+    $sql = "SELECT US.*, 
+        VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+        TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
+        TG.nombreLargoGenero AS 'nombreLargoGenero',
+        MN.municipio AS 'nombreMunicipio',
+        DP.departamento AS 'nombreDepartamento',
+        CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
+        RS.nombreLargoRolSistema AS 'nombreLargoRolSistema'
+        FROM usuarios US
+        LEFT JOIN tipos_vinculaciones_sena VS ON VS.idTipoVinculacion = US.idTipoVinculacion
+        LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = US.idTipoIdentificacion
+        LEFT JOIN tipos_generos TG ON TG.idTipoGenero = US.idTipoGenero
+        LEFT JOIN municipios MN ON MN.idMunicipio = US.idMunicipio
+        LEFT JOIN departamentos DP ON DP.idDepartamento = US.idDepartamento
+        LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = US.idCentroFormacion
+        LEFT JOIN roles_sistema RS ON RS.idRolSistema = US.idRolSistema
+        WHERE idUsuario = ?";
 
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
@@ -56,69 +72,103 @@ if(isset($_GET["idUsuario"]) && !empty(trim($_GET["idUsuario"]))){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ver Registro</title>
+    <title>Ver Usuario</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
-                        <h1>Ver Registro</h1>
+                        <h1>Usuario - Visualizar</h1>
                     </div>
                         
-                     <div class="form-group">
-                        <label>Id Tipo de vinculación</label>
-                        <p class="form-control-static"><?php echo $row["idTipoVinculacion"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Nombre completo</label>
-                        <p class="form-control-static"><?php echo $row["nombreCompleto"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Id Tipo de identificación</label>
-                        <p class="form-control-static"><?php echo $row["idTipoIdentificacion"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Identificación</label>
-                        <p class="form-control-static"><?php echo $row["identificacion"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Correo electrónico</label>
-                        <p class="form-control-static"><?php echo $row["email"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Teléfono personal</label>
-                        <p class="form-control-static"><?php echo $row["telefonoPersonal"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Fecha de nacimiento</label>
-                        <p class="form-control-static"><?php echo $row["fechaNacimiento"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Id Género</label>
-                        <p class="form-control-static"><?php echo $row["idTipoGenero"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Dirección de la residencia</label>
-                        <p class="form-control-static"><?php echo $row["direccionResidencia"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Id Municipio</label>
-                        <p class="form-control-static"><?php echo $row["idMunicipio"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Id Departamento</label>
-                        <p class="form-control-static"><?php echo $row["idDepartamento"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Id Centro de formación</label>
-                        <p class="form-control-static"><?php echo $row["idCentroFormacion"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Id Rol del sistema</label>
-                        <p class="form-control-static"><?php echo $row["idRolSistema"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Contraseña del sistema</label>
-                        <p class="form-control-static"><?php echo $row["passwordSistema"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Estado del registro</label>
-                        <p class="form-control-static"><?php echo $row["estado"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Fecha/Hora de auditoría</label>
-                        <p class="form-control-static"><?php echo $row["auditoria"]; ?></p>
-                    </div>                    
+                    <div class="form-group">
+                        <label>Tipo de vinculación</label>
+                        <input type="text" name="idTipoVinculacion" class="form-control" value="<?php echo $row['nombreLargoVinculacion']; ?>" readonly>
+                    </div>
                     
+                    <div class="form-group">
+                        <label>Nombre completo</label>
+                        <input type="text" name="nombreCompleto" maxlength="50"class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tipo de identificación</label>
+                        <input type="text" name="idTipoIdentificacion" class="form-control" value="<?php echo $row['nombreLargoIdentificacion']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Identificación</label>
+                        <input type="text" name="identificacion" maxlength="50"class="form-control" value="<?php echo $row['identificacion']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        <input type="text" name="email" maxlength="50"class="form-control" value="<?php echo $row['email']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Teléfono personal</label>
+                        <input type="text" name="telefonoPersonal" maxlength="50"class="form-control" value="<?php echo $row['telefonoPersonal']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha de nacimiento</label>
+                        <input type="date" name="fechaNacimiento" class="form-control" value="<?php echo $row['fechaNacimiento']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Género</label>
+                        <input type="text" name="idTipoGenero" class="form-control" value="<?php echo $row['nombreLargoGenero']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dirección de la residencia</label>
+                        <input type="text" name="direccionResidencia" maxlength="50" class="form-control" value="<?php echo $row['direccionResidencia']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Departamento</label>
+                        <input type="text" name="idDepartamento" class="form-control" value="<?php echo $row['nombreDepartamento']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Municipio</label>
+                        <input type="text" name="idMunicipio" class="form-control" value="<?php echo $row['nombreMunicipio']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Centro de formación</label>
+                        <input type="text" name="idCentroFormacion" class="form-control" value="<?php echo $row['nombreLargoCentroFormacion']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Rol del sistema</label>
+                        <input type="text" name="idRolSistema" class="form-control" value="<?php echo $row['nombreLargoRolSistema']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contraseña del sistema</label>
+                        <input type="password" name="passwordSistema" class="form-control" value="<?php echo $row['passwordSistema']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group ocultar-columna">
+                        <label>Estado del registro</label>
+                        <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha/Hora de auditoría</label>
+                        <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
+                    </div>
+
                     <p><a href="usuarios-index.php" class="btn btn-primary">Regresar</a></p>
+
                 </div>
             </div>
         </div>

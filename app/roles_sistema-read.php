@@ -73,7 +73,7 @@ if(isset($_GET["idRol"]) && !empty(trim($_GET["idRol"]))){
                         
                      <div class="form-group">
                         <label>Nombre</label>
-                        <input type="text" name="nombreLargoRol" class="form-control" value="<?php echo $row['nombreLargoRol']; ?>" readonly>
+                        <input type="text" name="nombreLargoRolSistema" class="form-control" value="<?php echo $row['nombreLargoRolSistema']; ?>" readonly>
                    </div>
 
                     <div class="form-group">
@@ -83,7 +83,7 @@ if(isset($_GET["idRol"]) && !empty(trim($_GET["idRol"]))){
 
                     <div class="form-group">
                         <label>Descripción</label>
-                        <input type="text" name="descripcionRol" class="form-control" value="<?php echo $row['descripcionRol']; ?>" readonly>
+                        <input type="text" name="descripcionRolSistema" class="form-control" value="<?php echo $row['descripcionRolSistema']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
