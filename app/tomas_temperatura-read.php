@@ -51,6 +51,7 @@ if(isset($_GET["idToma"]) && !empty(trim($_GET["idToma"]))){
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

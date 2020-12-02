@@ -125,7 +125,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
 
                     <div class="form-group">
                         <label>Fecha de nacimiento</label>
-                        <input type="text" name="fechaNacimiento" class="form-control" value="<?php echo $row['fechaNacimiento']; ?>" readonly>
+                        <input type="date" name="fechaNacimiento" class="form-control" value="<?php echo $row['fechaNacimiento']; ?>" readonly>
                     </div>
 
                     <div class="form-group">

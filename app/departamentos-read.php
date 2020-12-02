@@ -51,34 +51,43 @@ if(isset($_GET["idDepartamento"]) && !empty(trim($_GET["idDepartamento"]))){
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ver Registro</title>
+    <title>Ver Departamento</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
-                        <h1>Ver Registro</h1>
+                        <h1>Departamento - Visualizar</h1>
                     </div>
                         
-                     <div class="form-group">
+                    <div class="form-group">
                         <label>Nombre</label>
-                        <p class="form-control-static"><?php echo $row["departamento"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="text" name="departamento" class="form-control" value="<?php echo $row['departamento']; ?>" readonly>
+                     </div>
+
+                    <div class="form-group ocultar-columna">
                         <label>Estado del registro</label>
-                        <p class="form-control-static"><?php echo $row["estado"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
                         <label>Fecha/Hora de auditoría</label>
-                        <p class="form-control-static"><?php echo $row["auditoria"]; ?></p>
-                    </div>                    
+                        <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
+                    </div>
                     
                     <p><a href="departamentos-index.php" class="btn btn-primary">Regresar</a></p>
+
                 </div>
             </div>
         </div>

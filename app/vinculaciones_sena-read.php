@@ -51,6 +51,7 @@ if(isset($_GET["idTipoVinculacion"]) && !empty(trim($_GET["idTipoVinculacion"]))
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

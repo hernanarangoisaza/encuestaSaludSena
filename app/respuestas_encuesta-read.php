@@ -5,7 +5,11 @@ if(isset($_GET["idRespuestaEncuesta"]) && !empty(trim($_GET["idRespuestaEncuesta
     require_once "config.php";
 
     // Prepare a select statement
-    $sql = "SELECT * FROM respuestas_encuesta WHERE idRespuestaEncuesta = ?";
+    $sql = "SELECT RE.*, 
+        PE.textoPregunta AS 'textoPregunta' 
+        FROM respuestas_encuesta RE
+        LEFT JOIN preguntas_encuesta PE ON PE.idPreguntaEncuesta = RE.idPreguntaEncuesta
+        WHERE idRespuestaEncuesta = ?";
 
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
@@ -51,40 +55,65 @@ if(isset($_GET["idRespuestaEncuesta"]) && !empty(trim($_GET["idRespuestaEncuesta
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ver Registro</title>
+    <title>Ver Respuesta Encuesta</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
-                        <h1>Ver Registro</h1>
+                        <h1>Respuesta Encuesta - Visualizar</h1>
                     </div>
                         
                      <div class="form-group">
                         <label>Id Encuesta</label>
-                        <p class="form-control-static"><?php echo $row["idEncuesta"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Id Pregunta</label>
-                        <p class="form-control-static"><?php echo $row["idPreguntaEncuesta"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="text" name="idEncuesta" class="form-control" value="<?php echo $row['idEncuesta']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pregunta</label>
+                        <input type="text" name="idPreguntaEncuesta" class="form-control" value="<?php echo $row['textoPregunta']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
                         <label>Respuesta</label>
-                        <p class="form-control-static"><?php echo $row["respuestaSiNo"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="text" name="respuestaSiNo" class="form-control" 
+                            value="<?php
+                                if ($row['respuestaSiNo'] === 0) {
+                                    echo 'No';
+                                }
+                                else if ($row['respuestaSiNo'] === 1) {
+                                    echo 'Si';
+                                }
+                                else if (!isset($row['respuestaSiNo'])) {
+                                    echo 'Sin responder';
+                                }
+                            ?>
+                            " readonly>
+                    </div>
+
+                    <div class="form-group ocultar-columna">
                         <label>Estado del registro</label>
-                        <p class="form-control-static"><?php echo $row["estado"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
                         <label>Fecha/Hora de auditoría</label>
-                        <p class="form-control-static"><?php echo $row["auditoria"]; ?></p>
+                        <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
                     </div>                    
                     
                     <p><a href="respuestas_encuesta-index.php" class="btn btn-primary">Regresar</a></p>
+
                 </div>
             </div>
         </div>

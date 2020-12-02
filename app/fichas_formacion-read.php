@@ -5,7 +5,11 @@ if(isset($_GET["idFichaFormacion"]) && !empty(trim($_GET["idFichaFormacion"]))){
     require_once "config.php";
 
     // Prepare a select statement
-    $sql = "SELECT * FROM fichas_formacion WHERE idFichaFormacion = ?";
+    $sql = "SELECT FF.*, 
+        PF.nombreLargoProgramaFormacion AS 'nombreLargoProgramaFormacion'
+        FROM fichas_formacion FF
+        LEFT JOIN programas_formacion PF ON PF.idProgramaFormacion = FF.idProgramaFormacion
+        WHERE idFichaFormacion = ?";
 
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
@@ -51,37 +55,48 @@ if(isset($_GET["idFichaFormacion"]) && !empty(trim($_GET["idFichaFormacion"]))){
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ver Registro</title>
+    <title>Ver Ficha de Formación</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
-                        <h1>Ver Registro</h1>
+                        <h1>Ficha de Formación - Visualizar</h1>
                     </div>
                         
-                     <div class="form-group">
+                    <div class="form-group">
                         <label>Código</label>
-                        <p class="form-control-static"><?php echo $row["codigoFichaFormacion"]; ?></p>
-                    </div><div class="form-group">
-                        <label>Id Programa de formación</label>
-                        <p class="form-control-static"><?php echo $row["idProgramaFormacion"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="text" name="codigoFichaFormacion" class="form-control" value="<?php echo $row['codigoFichaFormacion']; ?>" readonly>
+                     </div>
+
+                    <div class="form-group">
+                        <label>Programa de formación</label>
+                        <input type="text" name="idProgramaFormacion" class="form-control" value="<?php echo $row['nombreLargoProgramaFormacion']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group ocultar-columna">
                         <label>Estado del registro</label>
-                        <p class="form-control-static"><?php echo $row["estado"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
                         <label>Fecha/Hora de auditoría</label>
-                        <p class="form-control-static"><?php echo $row["auditoria"]; ?></p>
-                    </div>                    
+                        <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
+                    </div>
                     
                     <p><a href="fichas_formacion-index.php" class="btn btn-primary">Regresar</a></p>
+
                 </div>
             </div>
         </div>

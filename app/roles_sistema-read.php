@@ -51,46 +51,63 @@ if(isset($_GET["idRol"]) && !empty(trim($_GET["idRol"]))){
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ver Registro</title>
+    <title>Ver Rol del Sistema</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-5">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
-                        <h1>Ver Registro</h1>
+                        <h1>Rol del Sistema - Visualizar</h1>
                     </div>
                         
                      <div class="form-group">
                         <label>Nombre</label>
-                        <p class="form-control-static"><?php echo $row["nombreLargoRol"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="text" name="nombreLargoRol" class="form-control" value="<?php echo $row['nombreLargoRol']; ?>" readonly>
+                   </div>
+
+                    <div class="form-group">
                         <label>Nombre corto</label>
-                        <p class="form-control-static"><?php echo $row["nombreCorto"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="text" name="nombreCorto" class="form-control" value="<?php echo $row['nombreCorto']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
                         <label>Descripción</label>
-                        <p class="form-control-static"><?php echo $row["descripcionRol"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="text" name="descripcionRol" class="form-control" value="<?php echo $row['descripcionRol']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
                         <label>Permisos</label>
-                        <p class="form-control-static"><?php echo $row["permisos"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="text" name="permisos" class="form-control" value="<?php echo $row['permisos']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
                         <label>Restricciones</label>
-                        <p class="form-control-static"><?php echo $row["restricciones"]; ?></p>
-                    </div><div class="form-group">
+                        <input type="text" name="restricciones" class="form-control" value="<?php echo $row['restricciones']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group ocultar-columna">
                         <label>Estado del registro</label>
-                        <p class="form-control-static"><?php echo $row["estado"]; ?></p>
-                    </div><div class="form-group">
+                         <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
+                   </div>
+
+                    <div class="form-group">
                         <label>Fecha/Hora de auditoría</label>
-                        <p class="form-control-static"><?php echo $row["auditoria"]; ?></p>
+                        <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
                     </div>                    
                     
                     <p><a href="roles_sistema-index.php" class="btn btn-primary">Regresar</a></p>
+
                 </div>
             </div>
         </div>
