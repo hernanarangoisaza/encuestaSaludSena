@@ -196,12 +196,6 @@ table tr td:last-child a {
     padding: 0px;
 }
 
-.seccion-tabla-scroll-horizontal {
-    overflow: auto;
-    white-space: nowrap;
-    margin-top: 5px;
-}
-
 .estilo-acciones {
     color: #000000;
     text-decoration: none;
@@ -359,5 +353,15 @@ textarea[readonly] {
     background-color: #e9ecef !important;
 }
 
+.multilinea {
+    white-space:pre-line;
+    word-break: break-all; 
+}
+
+.seccion-tabla-scroll-horizontal {
+    overflow: auto;
+    white-space: nowrap;
+    margin-top: 5px;
+}
 
 /* -------------------------------------------------------------------------------------------------- */

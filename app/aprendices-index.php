@@ -9,10 +9,11 @@
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
-    <section class="pt-5">
+    <section class="pt-4">
         <div class="container-fluid index">
             <div class="row">
                 <div class="col-md-12">
+
                     <div class="page-header clearfix">
                         <h2 class="float-left">Aprendices - Listado general</h2>
                         <a href="aprendices-create.php" class="btn btn-success float-right">Agregar registro</a>
@@ -186,7 +187,7 @@
                             echo "<th><a href=?search=$search&sort=&order=direccionResidencia&sort=$sort>Dirección de la residencia</th>";
                             echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
                             echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Municipio</th>";
-                            echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Id Centro de formación</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Centro de formación</th>";
                             echo "<th><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Ficha de formación</th>";
                             echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
                             echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";

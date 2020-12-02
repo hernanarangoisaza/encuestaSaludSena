@@ -62,7 +62,7 @@ if(isset($_GET["idRolSistema"]) && !empty(trim($_GET["idRolSistema"]))){
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
-    <section class="pt-5">
+    <section class="pt-4">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">

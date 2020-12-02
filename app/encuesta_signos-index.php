@@ -2,28 +2,20 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Gestión de Encuestas de Signos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6b773fe9e4.js" crossorigin="anonymous"></script>
-    <style type="text/css">
-        .page-header h2{
-            margin-top: 0;
-        }
-        table tr td:last-child a{
-            margin-right: 5px;
-        }
-        body {
-            font-size: 14px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
-    <section class="pt-5">
-        <div class="container-fluid">
+    <section class="pt-4">
+        <div class="container-fluid index">
             <div class="row">
                 <div class="col-md-12">
+
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Encuesta de signos - Detalle</h2>
+                        <h2 class="float-left">Encuesta de Signos - Listado general</h2>
                         <a href="encuesta_signos-create.php" class="btn btn-success float-right">Agregar registro</a>
                         <a href="encuesta_signos-index.php" class="btn btn-info float-right mr-2">Restablecer vista</a>
                         <a href="index.php" class="btn btn-secondary float-right mr-2">Regresar</a>
@@ -85,19 +77,41 @@
                     }
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM encuesta_signos ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
-                    $count_pages = "SELECT * FROM encuesta_signos";
+                    $sql = "SELECT ES.*, 
+                        AP.nombreCompleto AS 'nombreCompleto', 
+                        CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
+                        HO.nombreCorto AS 'nombreCorto'
+                        FROM encuesta_signos ES
+                        LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz
+                        LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
+                        LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
+                        ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
 
+                    $count_pages = "SELECT * FROM encuesta_signos";
                     
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
-                        $sql = "SELECT * FROM encuesta_signos
-                            WHERE CONCAT (idEncuesta,idAprendiz,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria)
+                    $sql = "SELECT ES.*, 
+                            AP.nombreCompleto AS 'nombreCompleto', 
+                            CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
+                            HO.nombreCorto AS 'nombreCorto'
+                            FROM encuesta_signos ES
+                            LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz
+                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
+                            LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
+                            WHERE CONCAT (ES.idEncuesta,AP.nombreCompleto,ES.fechaHoraDiligenciamiento,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
-                        $count_pages = "SELECT * FROM encuesta_signos
-                            WHERE CONCAT (idEncuesta,idAprendiz,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria)
+                        $count_pages = "SELECT ES.*, 
+                            AP.nombreCompleto AS 'nombreCompleto', 
+                            CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
+                            HO.nombreCorto AS 'nombreCorto'
+                            FROM encuesta_signos ES
+                            LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz
+                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
+                            LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
+                            WHERE CONCAT (ES.idEncuesta,AP.nombreCompleto,ES.fechaHoraDiligenciamiento,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -112,40 +126,92 @@
                            }
                             $number_of_results = mysqli_num_rows($result_count);
                             echo " " . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages;
-
-                            echo "<table class='table table-bordered table-striped'>";
+                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer vista] para orden original o ver todos los registros</p>";
+                            echo "<div class='seccion-tabla-scroll-horizontal'>";
+                            echo "<table class='flipped estilo-tabla-index table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id Encuesta</th>";
-										echo "<th><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id Aprendiz</th>";
-										echo "<th><a href=?search=$search&sort=&order=fechaHoraDiligenciamiento&sort=$sort>Fecha/Hora de diligenciamiento</th>";
-										echo "<th><a href=?search=$search&sort=&order=idSedeIngreso&sort=$sort>Id Sede de ingreso</th>";
-										echo "<th><a href=?search=$search&sort=&order=idHorario&sort=$sort>Id Horario</th>";
-										echo "<th><a href=?search=$search&sort=&order=aceptacionConsideraciones&sort=$sort>Aceptación de consideraciones</th>";
-										echo "<th><a href=?search=$search&sort=&order=autorizacionTratamientoDatos&sort=$sort>Autorización de tratamiento de datos</th>";
-										echo "<th><a href=?search=$search&sort=&order=autorizacionIngreso&sort=$sort>Autorización de ingreso</th>";
-										echo "<th><a href=?search=$search&sort=&order=observacionAdicional&sort=$sort>Observaciones adicionales</th>";
-										echo "<th><a href=?search=$search&sort=&order=aceptacionRespuestaPositiva&sort=$sort>Aceptación de respuestas positivas</th>";
-										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
-										
                                         echo "<th>Acciones</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
+										echo "<th><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Aprendiz</th>";
+										echo "<th><a href=?search=$search&sort=&order=fechaHoraDiligenciamiento&sort=$sort>Fecha/Hora<br>de diligenciamiento</th>";
+										echo "<th><a href=?search=$search&sort=&order=idSedeIngreso&sort=$sort>Sede de ingreso</th>";
+										echo "<th><a href=?search=$search&sort=&order=idHorario&sort=$sort>Horario</th>";
+										echo "<th><a href=?search=$search&sort=&order=aceptacionConsideraciones&sort=$sort>Aceptación<br>de consideraciones</th>";
+										echo "<th><a href=?search=$search&sort=&order=autorizacionTratamientoDatos&sort=$sort>Autorización de<br>tratamiento de datos</th>";
+										echo "<th><a href=?search=$search&sort=&order=autorizacionIngreso&sort=$sort>Autorización<br>de ingreso</th>";
+										echo "<th><a href=?search=$search&sort=&order=observacionAdicional&sort=$sort>Observaciones adicionales</th>";
+										echo "<th><a href=?search=$search&sort=&order=aceptacionRespuestaPositiva&sort=$sort>Aceptación de<br>respuestas positivas</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
+										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idEncuesta'] . "</td>";echo "<td>" . $row['idAprendiz'] . "</td>";echo "<td>" . $row['fechaHoraDiligenciamiento'] . "</td>";echo "<td>" . $row['idSedeIngreso'] . "</td>";echo "<td>" . $row['idHorario'] . "</td>";echo "<td>" . $row['aceptacionConsideraciones'] . "</td>";echo "<td>" . $row['autorizacionTratamientoDatos'] . "</td>";echo "<td>" . $row['autorizacionIngreso'] . "</td>";echo "<td>" . $row['observacionAdicional'] . "</td>";echo "<td>" . $row['aceptacionRespuestaPositiva'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
-                                        echo "<td>";
-                                            echo "<a href='encuesta_signos-read.php?idEncuesta=". $row['idEncuesta'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                                            echo "<a href='encuesta_signos-update.php?idEncuesta=". $row['idEncuesta'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                                            echo "<a href='encuesta_signos-delete.php?idEncuesta=". $row['idEncuesta'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
-                                        echo "</td>";
+                                    echo "<td class='centrar-columna'>";
+                                    echo "<a href='encuesta_signos-read.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-eye'></i></a>";
+                                    echo "<a href='encuesta_signos-update.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-edit'></i></a>";
+                                    echo "<a href='encuesta_signos-delete.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-trash-alt'></i></a>";
+                                    echo "</td>";                                    
+                                    echo "<td class='centrar-columna'>" . $row['idEncuesta'] . "</td>";
+                                    echo "<td>" . $row['nombreCompleto'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['fechaHoraDiligenciamiento'] . "</td>";
+                                    echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";
+                                    echo "<td class='centrar-columna'>";
+                                        if ($row['aceptacionConsideraciones'] == 0) {
+                                            echo 'No';
+                                        }
+                                        else if ($row['aceptacionConsideraciones'] == 1) {
+                                            echo 'Si';
+                                        }
+                                        else if ($row['aceptacionConsideraciones'] == -1) {
+                                            echo 'Sin responder';
+                                        }
+                                    echo "</td>";
+                                    echo "<td class='centrar-columna'>";
+                                        if ($row['autorizacionTratamientoDatos'] == 0) {
+                                            echo 'No';
+                                        }
+                                        else if ($row['autorizacionTratamientoDatos'] == 1) {
+                                            echo 'Si';
+                                        }
+                                        else if ($row['autorizacionTratamientoDatos'] == -1) {
+                                            echo 'Sin responder';
+                                        }
+                                    echo "</td>";
+                                    echo "<td class='centrar-columna'>";
+                                        if ($row['autorizacionIngreso'] == 0) {
+                                            echo 'No';
+                                        }
+                                        else if ($row['autorizacionIngreso'] == 1) {
+                                            echo 'Si';
+                                        }
+                                        else if ($row['autorizacionIngreso'] == -1) {
+                                            echo 'Sin responder';
+                                        }
+                                    echo "</td>";
+                                    echo "<td class='centrar-columna'>" . '< En vista individual >' . "</td>";
+                                    echo "<td class='centrar-columna'>";
+                                        if ($row['aceptacionRespuestaPositiva'] == 0) {
+                                            echo 'No';
+                                        }
+                                        else if ($row['aceptacionRespuestaPositiva'] == 1) {
+                                            echo 'Si';
+                                        }
+                                        else if ($row['aceptacionRespuestaPositiva'] == -1) {
+                                            echo 'Sin responder';
+                                        }
+                                    echo "</td>";
+                                    echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";
-                            echo "</table>";
-?>
+                                echo "</table>";
+                                echo "</div>";
+                                ?>
                                 <ul class="pagination" align-right>
                                 <?php
                                     $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
@@ -161,7 +227,7 @@
                                         <a class="page-item"><a class="page-link" href="<?php echo $new_url .'&pageno=' . $total_pages; ?>">Última</a>
                                     </li>
                                 </ul>
-<?php
+                                <?php
                             // Free result set
                             mysqli_free_result($result);
                         } else{
