@@ -67,8 +67,8 @@
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idRol', 'nombreLargoRolSistema', 'nombreCorto', 'descripcionRolSistema', 'permisos', 'restricciones', 'estado', 'auditoria'); 
-                    $order = 'idRol';
+                    $orderBy = array('idRolSistema', 'nombreLargoRolSistema', 'nombreCorto', 'descripcionRolSistema', 'permisos', 'restricciones', 'estado', 'auditoria'); 
+                    $order = 'idRolSistema';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
                         }
@@ -131,11 +131,11 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idRol'] . "</td>";echo "<td>" . $row['nombreLargoRolSistema'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['descripcionRolSistema'] . "</td>";echo "<td>" . $row['permisos'] . "</td>";echo "<td>" . $row['restricciones'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idRolSistema'] . "</td>";echo "<td>" . $row['nombreLargoRolSistema'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['descripcionRolSistema'] . "</td>";echo "<td>" . $row['permisos'] . "</td>";echo "<td>" . $row['restricciones'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
-                                            echo "<a href='roles_sistema-read.php?idRol=". $row['idRol'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                                            echo "<a href='roles_sistema-update.php?idRol=". $row['idRol'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                                            echo "<a href='roles_sistema-delete.php?idRol=". $row['idRol'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                                            echo "<a href='roles_sistema-read.php?idRol=". $row['idRolSistema'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
+                                            echo "<a href='roles_sistema-update.php?idRol=". $row['idRolSistema'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                                            echo "<a href='roles_sistema-delete.php?idRol=". $row['idRolSistema'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }

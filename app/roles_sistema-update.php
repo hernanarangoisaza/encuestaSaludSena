@@ -21,9 +21,9 @@ $auditoria_err = "";
 
 
 // Processing form data when form is submitted
-if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
+if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
     // Get hidden input value
-    $idRol = $_POST["idRol"];
+    $idRol = $_POST["idRolSistema"];
 
         // Prepare an update statement
         
@@ -48,7 +48,7 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE roles_sistema SET nombreLargoRolSistema=?,nombreCorto=?,descripcionRolSistema=?,permisos=?,restricciones=?,estado=?,auditoria=? WHERE idRol=?");
+        $stmt = $pdo->prepare("UPDATE roles_sistema SET nombreLargoRolSistema=?,nombreCorto=?,descripcionRolSistema=?,permisos=?,restricciones=?,estado=?,auditoria=? WHERE idRolSistema=?");
 
         if(!$stmt->execute([ $nombreLargoRolSistema,$nombreCorto,$descripcionRolSistema,$permisos,$restricciones,$estado,$auditoria,$idRol  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
@@ -59,12 +59,12 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
             }
 } else {
     // Check existence of id parameter before processing further
-    if(isset($_GET["idRol"]) && !empty(trim($_GET["idRol"]))){
+    if(isset($_GET["idRolSistema"]) && !empty(trim($_GET["idRolSistema"]))){
         // Get URL parameter
-        $idRol =  trim($_GET["idRol"]);
+        $idRol =  trim($_GET["idRolSistema"]);
 
         // Prepare a select statement
-        $sql = "SELECT * FROM roles_sistema WHERE idRol = ?";
+        $sql = "SELECT * FROM roles_sistema WHERE idRolSistema = ?";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
@@ -137,12 +137,12 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreLargoRolSistema" maxlength="50"class="form-control" value="<?php echo $nombreLargoRolSistema; ?>">
+                            <input type="text" name="nombreLargoRolSistema" maxlength="50" class="form-control" value="<?php echo $nombreLargoRolSistema; ?>">
                             <span class="form-text"><?php echo $nombreRol_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Nombre corto</label>
-                            <input type="text" name="nombreCorto" maxlength="50"class="form-control" value="<?php echo $nombreCorto; ?>">
+                            <input type="text" name="nombreCorto" maxlength="50" class="form-control" value="<?php echo $nombreCorto; ?>">
                             <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -152,12 +152,12 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
                         </div>
 						<div class="form-group">
                             <label>Permisos</label>
-                            <input type="text" name="permisos" maxlength="500"class="form-control" value="<?php echo $permisos; ?>">
+                            <input type="text" name="permisos" maxlength="500" class="form-control" value="<?php echo $permisos; ?>">
                             <span class="form-text"><?php echo $permisos_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Restricciones</label>
-                            <input type="text" name="restricciones" maxlength="500"class="form-control" value="<?php echo $restricciones; ?>">
+                            <input type="text" name="restricciones" maxlength="500" class="form-control" value="<?php echo $restricciones; ?>">
                             <span class="form-text"><?php echo $restricciones_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -171,7 +171,7 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
                         </div>
 
-                        <input type="hidden" name="idRol" value="<?php echo $idRol; ?>"/>
+                        <input type="hidden" name="idRolSistema" value="<?php echo $idRol; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Actualizar">
                         <a href="roles_sistema-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>

@@ -1,18 +1,18 @@
 <?php
 // Check existence of id parameter before processing further
-if(isset($_GET["idRol"]) && !empty(trim($_GET["idRol"]))){
+if(isset($_GET["idRolSistema"]) && !empty(trim($_GET["idRolSistema"]))){
     // Include config file
     require_once "config.php";
 
     // Prepare a select statement
-    $sql = "SELECT * FROM roles_sistema WHERE idRol = ?";
+    $sql = "SELECT * FROM roles_sistema WHERE idRolSistema = ?";
 
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
 
         // Set parameters
-        $param_id = trim($_GET["idRol"]);
+        $param_id = trim($_GET["idRolSistema"]);
 
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){

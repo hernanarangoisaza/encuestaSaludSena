@@ -101,20 +101,32 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
 
                     <div class="form-group">
                         <label>Aceptación de consideraciones</label>
-                        <input type="text" name="aceptacionConsideraciones" class="form-control" value="<?php echo $row['aceptacionConsideraciones']; ?>" readonly>
+                        <input type="text" name="aceptacionConsideraciones" class="form-control" 
+                            value="<?php
+                                if ($row['aceptacionConsideraciones'] == 0) {
+                                    echo 'No';
+                                }
+                                else if ($row['aceptacionConsideraciones'] == 1) {
+                                    echo 'Si';
+                                }
+                                else if ($row['aceptacionConsideraciones'] == -1) {
+                                    echo 'Sin responder';
+                                }
+                            ?>
+                            " readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Autorización de tratamiento de datos</label>
                         <input type="text" name="autorizacionTratamientoDatos" class="form-control" 
                             value="<?php
-                                if ($row['autorizacionTratamientoDatos'] === 0) {
+                                if ($row['autorizacionTratamientoDatos'] == 0) {
                                     echo 'No';
                                 }
-                                else if ($row['autorizacionTratamientoDatos'] === 1) {
+                                else if ($row['autorizacionTratamientoDatos'] == 1) {
                                     echo 'Si';
                                 }
-                                else if (!isset($row['autorizacionTratamientoDatos'])) {
+                                else if ($row['autorizacionTratamientoDatos'] == -1) {
                                     echo 'Sin responder';
                                 }
                             ?>
@@ -125,13 +137,13 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
                         <label>Autorización de ingreso</label>
                         <input type="text" name="autorizacionIngreso" class="form-control" 
                             value="<?php
-                                if ($row['autorizacionIngreso'] === 0) {
+                                if ($row['autorizacionIngreso'] == 0) {
                                     echo 'No';
                                 }
-                                else if ($row['autorizacionIngreso'] === 1) {
+                                else if ($row['autorizacionIngreso'] == 1) {
                                     echo 'Si';
                                 }
-                                else if (!isset($row['autorizacionIngreso'])) {
+                                else if ($row['autorizacionIngreso'] == -1) {
                                     echo 'Sin responder';
                                 }
                             ?>
@@ -147,13 +159,13 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
                         <label>Aceptación de respuestas positivas</label>
                         <input type="text" name="aceptacionRespuestaPositiva" class="form-control" 
                             value="<?php
-                                if ($row['aceptacionRespuestaPositiva'] === 0) {
+                                if ($row['aceptacionRespuestaPositiva'] == 0) {
                                     echo 'No';
                                 }
-                                else if ($row['aceptacionRespuestaPositiva'] === 1) {
+                                else if ($row['aceptacionRespuestaPositiva'] == 1) {
                                     echo 'Si';
                                 }
-                                else if (!isset($row['aceptacionRespuestaPositiva'])) {
+                                else if ($row['aceptacionRespuestaPositiva'] == -1) {
                                     echo 'Sin responder';
                                 }
                             ?>

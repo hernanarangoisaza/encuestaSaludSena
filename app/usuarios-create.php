@@ -68,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$idRolSistema = trim($_POST["idRolSistema"]);
 		$passwordSistema = trim($_POST["passwordSistema"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
@@ -112,7 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="page-header">
                         <h2>Crear Registro</h2>
                     </div>
-                    <p>Por favor diligencie todo el formulario para adicionar un registro a la Base de Datos</p>
+                    
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                         <div class="form-group">
@@ -122,7 +122,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
 						<div class="form-group">
                             <label>Nombre completo</label>
-                            <input type="text" name="nombreCompleto" maxlength="50"class="form-control" value="<?php echo $nombreCompleto; ?>">
+                            <input type="text" name="nombreCompleto" maxlength="50" class="form-control" value="<?php echo $nombreCompleto; ?>">
                             <span class="form-text"><?php echo $nombreCompleto_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -132,17 +132,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
 						<div class="form-group">
                             <label>Identificación</label>
-                            <input type="text" name="identificacion" maxlength="50"class="form-control" value="<?php echo $identificacion; ?>">
+                            <input type="text" name="identificacion" maxlength="50" class="form-control" value="<?php echo $identificacion; ?>">
                             <span class="form-text"><?php echo $identificacion_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Correo electrónico</label>
-                            <input type="text" name="email" maxlength="50"class="form-control" value="<?php echo $email; ?>">
+                            <input type="text" name="email" maxlength="50" class="form-control" value="<?php echo $email; ?>">
                             <span class="form-text"><?php echo $email_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Teléfono personal</label>
-                            <input type="text" name="telefonoPersonal" maxlength="50"class="form-control" value="<?php echo $telefonoPersonal; ?>">
+                            <input type="text" name="telefonoPersonal" maxlength="50" class="form-control" value="<?php echo $telefonoPersonal; ?>">
                             <span class="form-text"><?php echo $telefonoPersonal_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -157,7 +157,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
 						<div class="form-group">
                             <label>Dirección de la residencia</label>
-                            <input type="text" name="direccionResidencia" maxlength="50"class="form-control" value="<?php echo $direccionResidencia; ?>">
+                            <input type="text" name="direccionResidencia" maxlength="50" class="form-control" value="<?php echo $direccionResidencia; ?>">
                             <span class="form-text"><?php echo $direccionResidencia_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -182,7 +182,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
 						<div class="form-group">
                             <label>Contraseña del sistema</label>
-                            <input type="text" name="passwordSistema" maxlength="50"class="form-control" value="<?php echo $passwordSistema; ?>">
+                            <input type="text" name="passwordSistema" maxlength="50" class="form-control" value="<?php echo $passwordSistema; ?>">
                             <span class="form-text"><?php echo $passwordSistema_err; ?></span>
                         </div>
 						<div class="form-group">

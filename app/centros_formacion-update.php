@@ -153,17 +153,17 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
 
                         <div class="form-group">
                             <label>Nombre corto</label>
-                            <input type="text" name="nombreCorto" maxlength="50"class="form-control" value="<?php echo $nombreCorto; ?>">
+                            <input type="text" name="nombreCorto" maxlength="50" class="form-control" value="<?php echo $nombreCorto; ?>">
                             <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Nombre del Centro</label>
-                            <input type="text" name="nombreLargoCentroFormacion" maxlength="75"class="form-control" value="<?php echo $nombreLargoCentroFormacion; ?>">
+                            <input type="text" name="nombreLargoCentroFormacion" maxlength="75" class="form-control" value="<?php echo $nombreLargoCentroFormacion; ?>">
                             <span class="form-text"><?php echo $nombreLargoCentroFormacion_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Dirección</label>
-                            <input type="text" name="direccion" maxlength="50"class="form-control" value="<?php echo $direccion; ?>">
+                            <input type="text" name="direccion" maxlength="50" class="form-control" value="<?php echo $direccion; ?>">
                             <span class="form-text"><?php echo $direccion_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -178,22 +178,22 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
                         </div>
 						<div class="form-group">
                             <label>Teléfono #1</label>
-                            <input type="text" name="telefono1" maxlength="50"class="form-control" value="<?php echo $telefono1; ?>">
+                            <input type="text" name="telefono1" maxlength="50" class="form-control" value="<?php echo $telefono1; ?>">
                             <span class="form-text"><?php echo $telefono1_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Teléfono #2</label>
-                            <input type="text" name="telefono2" maxlength="50"class="form-control" value="<?php echo $telefono2; ?>">
+                            <input type="text" name="telefono2" maxlength="50" class="form-control" value="<?php echo $telefono2; ?>">
                             <span class="form-text"><?php echo $telefono2_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Correo electrónico #1</label>
-                            <input type="text" name="emailContacto1" maxlength="50"class="form-control" value="<?php echo $emailContacto1; ?>">
+                            <input type="text" name="emailContacto1" maxlength="50" class="form-control" value="<?php echo $emailContacto1; ?>">
                             <span class="form-text"><?php echo $emailContacto1_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Correo electrónico #2</label>
-                            <input type="text" name="emailContacto2" maxlength="50"class="form-control" value="<?php echo $emailContacto2; ?>">
+                            <input type="text" name="emailContacto2" maxlength="50" class="form-control" value="<?php echo $emailContacto2; ?>">
                             <span class="form-text"><?php echo $emailContacto2_err; ?></span>
                         </div>
 						<div class="form-group">

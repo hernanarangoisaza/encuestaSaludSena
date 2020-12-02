@@ -352,6 +352,12 @@ div.page-header.clearfix h1 {
 textarea {
     border-color: #AAAAAA !important;
     text-align: justify;
+    background-color: #FFFFEE !important;
 }
+
+textarea[readonly] {
+    background-color: #e9ecef !important;
+}
+
 
 /* -------------------------------------------------------------------------------------------------- */

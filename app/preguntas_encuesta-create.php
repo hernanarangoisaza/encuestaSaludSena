@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  */
         $textoPregunta = trim($_POST["textoPregunta"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
@@ -73,7 +73,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="page-header">
                         <h2>Pregunta Encuesta - Crear</h2>
                     </div>
-                    <p>Por favor diligencie todo el formulario para adicionar un registro a la Base de Datos</p>
+                    
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                         <div class="form-group">

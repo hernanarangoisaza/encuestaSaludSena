@@ -125,12 +125,12 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreLargoIdentificacion" maxlength="50"class="form-control" value="<?php echo $nombreLargoIdentificacion; ?>">
+                            <input type="text" name="nombreLargoIdentificacion" maxlength="50" class="form-control" value="<?php echo $nombreLargoIdentificacion; ?>">
                             <span class="form-text"><?php echo $nombreLargoIdentificacion_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Nombre corto</label>
-                            <input type="text" name="nombreCorto" maxlength="50"class="form-control" value="<?php echo $nombreCorto; ?>">
+                            <input type="text" name="nombreCorto" maxlength="50" class="form-control" value="<?php echo $nombreCorto; ?>">
                             <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
 						<div class="form-group">

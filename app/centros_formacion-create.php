@@ -53,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$emailContacto1 = trim($_POST["emailContacto1"]);
 		$emailContacto2 = trim($_POST["emailContacto2"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
@@ -97,22 +97,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="page-header">
                         <h2>Crear Registro</h2>
                     </div>
-                    <p>Por favor diligencie todo el formulario para adicionar un registro a la Base de Datos</p>
+                    
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                         <div class="form-group">
                             <label>Nombre corto</label>
-                            <input type="text" name="nombreCorto" maxlength="50"class="form-control" value="<?php echo $nombreCorto; ?>">
+                            <input type="text" name="nombreCorto" maxlength="50" class="form-control" value="<?php echo $nombreCorto; ?>">
                             <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Nombre del Centro</label>
-                            <input type="text" name="nombreLargoCentroFormacion" maxlength="75"class="form-control" value="<?php echo $nombreLargoCentroFormacion; ?>">
+                            <input type="text" name="nombreLargoCentroFormacion" maxlength="75" class="form-control" value="<?php echo $nombreLargoCentroFormacion; ?>">
                             <span class="form-text"><?php echo $nombreLargoCentroFormacion_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Dirección</label>
-                            <input type="text" name="direccion" maxlength="50"class="form-control" value="<?php echo $direccion; ?>">
+                            <input type="text" name="direccion" maxlength="50" class="form-control" value="<?php echo $direccion; ?>">
                             <span class="form-text"><?php echo $direccion_err; ?></span>
                         </div>
 						<div class="form-group">
@@ -127,22 +127,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
 						<div class="form-group">
                             <label>Teléfono #1</label>
-                            <input type="text" name="telefono1" maxlength="50"class="form-control" value="<?php echo $telefono1; ?>">
+                            <input type="text" name="telefono1" maxlength="50" class="form-control" value="<?php echo $telefono1; ?>">
                             <span class="form-text"><?php echo $telefono1_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Teléfono #2</label>
-                            <input type="text" name="telefono2" maxlength="50"class="form-control" value="<?php echo $telefono2; ?>">
+                            <input type="text" name="telefono2" maxlength="50" class="form-control" value="<?php echo $telefono2; ?>">
                             <span class="form-text"><?php echo $telefono2_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Correo electrónico #1</label>
-                            <input type="text" name="emailContacto1" maxlength="50"class="form-control" value="<?php echo $emailContacto1; ?>">
+                            <input type="text" name="emailContacto1" maxlength="50" class="form-control" value="<?php echo $emailContacto1; ?>">
                             <span class="form-text"><?php echo $emailContacto1_err; ?></span>
                         </div>
 						<div class="form-group">
                             <label>Correo electrónico #2</label>
-                            <input type="text" name="emailContacto2" maxlength="50"class="form-control" value="<?php echo $emailContacto2; ?>">
+                            <input type="text" name="emailContacto2" maxlength="50" class="form-control" value="<?php echo $emailContacto2; ?>">
                             <span class="form-text"><?php echo $emailContacto2_err; ?></span>
                         </div>
 						<div class="form-group">

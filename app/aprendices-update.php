@@ -166,9 +166,11 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
                         <h2>Aprendices - Actualizar</h2>
                     </div>
+                    
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 
                         <div class="form-group">
@@ -187,11 +189,12 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                                 }
                                 echo "</select>";
                             ?>
+                            <span class="form-text"><?php echo $idTipoVinculacion_err; ?></span>
                         </div>
 
 						<div class="form-group">
                             <label>Nombre completo</label>
-                            <input type="text" name="nombreCompleto" maxlength="50"class="form-control" value="<?php echo $nombreCompleto; ?>">
+                            <input type="text" name="nombreCompleto" maxlength="50" class="form-control" value="<?php echo $nombreCompleto; ?>">
                             <span class="form-text"><?php echo $nombreCompleto_err; ?></span>
                         </div>
 
@@ -211,29 +214,30 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                                 }
                                 echo "</select>";
                             ?>
+                            <span class="form-text"><?php echo $idTipoIdentificacion_err; ?></span>
                         </div>
 
 						<div class="form-group">
                             <label>Identificación</label>
-                            <input type="text" name="identificacion" maxlength="50"class="form-control" value="<?php echo $identificacion; ?>">
+                            <input type="text" name="identificacion" maxlength="50" class="form-control" value="<?php echo $identificacion; ?>">
                             <span class="form-text"><?php echo $identificacion_err; ?></span>
                         </div>
 
 						<div class="form-group">
                             <label>Correo electrónico</label>
-                            <input type="text" name="email" maxlength="50"class="form-control" value="<?php echo $email; ?>">
+                            <input type="text" name="email" maxlength="50" class="form-control" value="<?php echo $email; ?>">
                             <span class="form-text"><?php echo $email_err; ?></span>
                         </div>
 
 						<div class="form-group">
                             <label>Teléfono personal</label>
-                            <input type="text" name="telefonoPersonal" maxlength="50"class="form-control" value="<?php echo $telefonoPersonal; ?>">
+                            <input type="text" name="telefonoPersonal" maxlength="50" class="form-control" value="<?php echo $telefonoPersonal; ?>">
                             <span class="form-text"><?php echo $telefonoPersonal_err; ?></span>
                         </div>
 
 						<div class="form-group">
                             <label>Teléfono del acudiente</label>
-                            <input type="text" name="telefonoAcudiente" maxlength="50"class="form-control" value="<?php echo $telefonoAcudiente; ?>">
+                            <input type="text" name="telefonoAcudiente" maxlength="50" class="form-control" value="<?php echo $telefonoAcudiente; ?>">
                             <span class="form-text"><?php echo $telefonoAcudiente_err; ?></span>
                         </div>
 
@@ -259,11 +263,12 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                                 }
                                 echo "</select>";
                             ?>
+                            <span class="form-text"><?php echo $idTipoGenero_err; ?></span>
                         </div>
 
 						<div class="form-group">
                             <label>Dirección de la residencia</label>
-                            <input type="text" name="direccionResidencia" maxlength="50"class="form-control" value="<?php echo $direccionResidencia; ?>">
+                            <input type="text" name="direccionResidencia" maxlength="50" class="form-control" value="<?php echo $direccionResidencia; ?>">
                             <span class="form-text"><?php echo $direccionResidencia_err; ?></span>
                         </div>
 
@@ -283,6 +288,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                                 }
                                 echo "</select>";
                             ?>
+                            <span class="form-text"><?php echo $idDepartamento_err; ?></span>
                         </div>
 
                         <div class="form-group">
@@ -301,6 +307,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                                 }
                                 echo "</select>";
                             ?>
+                            <span class="form-text"><?php echo $idMunicipio_err; ?></span>
                         </div>
 
                         <div class="form-group">
@@ -319,6 +326,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                                 }
                                 echo "</select>";
                             ?>
+                            <span class="form-text"><?php echo $idCentroFormacion_err; ?></span>
                         </div>
 
                         <div class="form-group">
@@ -337,6 +345,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                                 }
                                 echo "</select>";
                             ?>
+                            <span class="form-text"><?php echo $idFichaFormacion_err; ?></span>
                         </div>
 
 						<div class="form-group ocultar-columna">

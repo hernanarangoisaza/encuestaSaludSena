@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  */
         $departamento = trim($_POST["departamento"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
@@ -73,12 +73,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="page-header">
                         <h2>Crear Registro</h2>
                     </div>
-                    <p>Por favor diligencie todo el formulario para adicionar un registro a la Base de Datos</p>
+                    
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="departamento" maxlength="255"class="form-control" value="<?php echo $departamento; ?>">
+                            <input type="text" name="departamento" maxlength="255" class="form-control" value="<?php echo $departamento; ?>">
                             <span class="form-text"><?php echo $departamento_err; ?></span>
                         </div>
 						<div class="form-group">

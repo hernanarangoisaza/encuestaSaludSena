@@ -89,13 +89,13 @@ if(isset($_GET["idRespuestaEncuesta"]) && !empty(trim($_GET["idRespuestaEncuesta
                         <label>Respuesta</label>
                         <input type="text" name="respuestaSiNo" class="form-control" 
                             value="<?php
-                                if ($row['respuestaSiNo'] === 0) {
+                                if ($row['respuestaSiNo'] == 0) {
                                     echo 'No';
                                 }
-                                else if ($row['respuestaSiNo'] === 1) {
+                                else if ($row['respuestaSiNo'] == 1) {
                                     echo 'Si';
                                 }
-                                else if (!isset($row['respuestaSiNo'])) {
+                                else if ($row['respuestaSiNo'] == -1) {
                                     echo 'Sin responder';
                                 }
                             ?>

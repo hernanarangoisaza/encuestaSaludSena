@@ -95,7 +95,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
                     
                     <div class="form-group">
                         <label>Nombre completo</label>
-                        <input type="text" name="nombreCompleto" maxlength="50"class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
+                        <input type="text" name="nombreCompleto" maxlength="50" class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
@@ -105,22 +105,22 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
 
                     <div class="form-group">
                         <label>Identificación</label>
-                        <input type="text" name="identificacion" maxlength="50"class="form-control" value="<?php echo $row['identificacion']; ?>" readonly>
+                        <input type="text" name="identificacion" maxlength="50" class="form-control" value="<?php echo $row['identificacion']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Correo electrónico</label>
-                        <input type="text" name="email" maxlength="50"class="form-control" value="<?php echo $row['email']; ?>" readonly>
+                        <input type="text" name="email" maxlength="50" class="form-control" value="<?php echo $row['email']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Teléfono personal</label>
-                        <input type="text" name="telefonoPersonal" maxlength="50"class="form-control" value="<?php echo $row['telefonoPersonal']; ?>" readonly>
+                        <input type="text" name="telefonoPersonal" maxlength="50" class="form-control" value="<?php echo $row['telefonoPersonal']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Teléfono del acudiente</label>
-                        <input type="text" name="telefonoAcudiente" maxlength="50"class="form-control" value="<?php echo $row['telefonoAcudiente']; ?>" readonly>
+                        <input type="text" name="telefonoAcudiente" maxlength="50" class="form-control" value="<?php echo $row['telefonoAcudiente']; ?>" readonly>
                     </div>
 
                     <div class="form-group">

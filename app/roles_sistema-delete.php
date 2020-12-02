@@ -1,18 +1,18 @@
 <?php
 // Process delete operation after confirmation
-if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
+if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
     // Include config file
     require_once "config.php";
 
     // Prepare a delete statement
-    $sql = "DELETE FROM roles_sistema WHERE idRol = ?";
+    $sql = "DELETE FROM roles_sistema WHERE idRolSistema = ?";
 
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
 
         // Set parameters
-        $param_id = trim($_POST["idRol"]);
+        $param_id = trim($_POST["idRolSistema"]);
 
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -31,7 +31,7 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
     mysqli_close($link);
 } else{
     // Check existence of id parameter
-    if(empty(trim($_GET["idRol"]))){
+    if(empty(trim($_GET["idRolSistema"]))){
         // URL doesn't contain id parameter. Redirect to error page
         header("location: error.php");
         exit();
@@ -57,7 +57,7 @@ if(isset($_POST["idRol"]) && !empty($_POST["idRol"])){
                     </div>
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="fade-in">
-                            <input type="hidden" name="idRol" value="<?php echo trim($_GET["idRol"]); ?>"/>
+                            <input type="hidden" name="idRolSistema" value="<?php echo trim($_GET["idRolSistema"]); ?>"/>
                             <p class="mensaje-eliminar">Está seguro de eliminar este registro?</p>
                             <p>
                                 <input type="submit" value="Si" class="btn btn-danger">

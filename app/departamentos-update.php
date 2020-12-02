@@ -121,7 +121,7 @@ if(isset($_POST["idDepartamento"]) && !empty($_POST["idDepartamento"])){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="departamento" maxlength="255"class="form-control" value="<?php echo $departamento; ?>">
+                            <input type="text" name="departamento" maxlength="255" class="form-control" value="<?php echo $departamento; ?>">
                             <span class="form-text"><?php echo $departamento_err; ?></span>
                         </div>
 						<div class="form-group">
