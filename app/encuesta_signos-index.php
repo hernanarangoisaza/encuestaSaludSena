@@ -213,9 +213,9 @@
                                 echo "</div>";
                                 ?>
                                 <ul class="pagination" align-right>
-                                <?php
-                                    $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
-                                 ?> 
+                                    <?php
+                                        $new_url = preg_replace('/&?pageno=[^&]*/', '', $currenturl);
+                                    ?> 
                                     <li class="page-item"><a class="page-link" href="<?php echo $new_url .'&pageno=1' ?>">Primera</a></li>
                                     <li class="page-item <?php if($pageno <= 1){ echo 'disabled'; } ?>">
                                         <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo $new_url ."&pageno=".($pageno - 1); } ?>">Anterior</a>

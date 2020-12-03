@@ -175,14 +175,14 @@
                             echo "<tr>";
                             echo "<th class='estilo-acciones'>Acciones</th>";
                             echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id Aprendiz</th>";
-                            echo "<th><a href=?search=$search&sort=&order=idTipoVinculacion&sort=$sort>Tipo de vinculación</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idTipoVinculacion&sort=$sort>Tipo de<br>vinculación</th>";
                             echo "<th><a href=?search=$search&sort=&order=nombreCompleto&sort=$sort>Nombre completo</th>";
-                            echo "<th><a href=?search=$search&sort=&order=idTipoIdentificacion&sort=$sort>Tipo de identificación</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idTipoIdentificacion&sort=$sort>Tipo de<br>identificación</th>";
                             echo "<th><a href=?search=$search&sort=&order=identificacion&sort=$sort>Identificación</th>";
                             echo "<th><a href=?search=$search&sort=&order=email&sort=$sort>Correo electrónico</th>";
-                            echo "<th><a href=?search=$search&sort=&order=telefonoPersonal&sort=$sort>Teléfono personal</th>";
-                            echo "<th><a href=?search=$search&sort=&order=telefonoAcudiente&sort=$sort>Teléfono del acudiente</th>";
-                            echo "<th><a href=?search=$search&sort=&order=fechaNacimiento&sort=$sort>Fecha de nacimiento</th>";
+                            echo "<th><a href=?search=$search&sort=&order=telefonoPersonal&sort=$sort>Teléfono<br>personal</th>";
+                            echo "<th><a href=?search=$search&sort=&order=telefonoAcudiente&sort=$sort>Teléfono<br>del acudiente</th>";
+                            echo "<th><a href=?search=$search&sort=&order=fechaNacimiento&sort=$sort>Fecha<br>de nacimiento</th>";
                             echo "<th><a href=?search=$search&sort=&order=idTipoGenero&sort=$sort>Género</th>";
                             echo "<th><a href=?search=$search&sort=&order=direccionResidencia&sort=$sort>Dirección de la residencia</th>";
                             echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
@@ -190,7 +190,7 @@
                             echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Centro de formación</th>";
                             echo "<th><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Ficha de formación</th>";
                             echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-                            echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
+                            echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                             echo "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
