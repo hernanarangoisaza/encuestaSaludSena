@@ -26,9 +26,8 @@
                         <div class="col">
                           <input type="text" class="form-control" placeholder="Buscar en esta tabla" name="search">
                         </div>
-                    </div>
                         </form>
-                    <br>
+                    </div>
 
                     <?php
                     // Include config file
@@ -167,7 +166,7 @@
                                 $total_pages = ceil(mysqli_num_rows($result_count) / $no_of_records_per_page);
                             }
                             $number_of_results = mysqli_num_rows($result_count);
-                            echo " " . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages;
+                            echo "<div class='cantidad-paginas'>" . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages . "</div>";
                             echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer vista] para orden original o ver todos los registros</p>";
                             echo "<div class='seccion-tabla-scroll-horizontal'>";
                             echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
@@ -255,7 +254,7 @@
                             <?php // Free result set
                             mysqli_free_result($result);
                         } else {
-                            echo "<p class='lead'><em>No se encontraron registros.</em></p>";
+                            echo "<p class='lead sin-registros'><em>No se encontraron coincidencias.</em></p>";
                         }
                     } else {
                         echo "ERROR: No fue posible ejecutar $sql. " . mysqli_error($link);
