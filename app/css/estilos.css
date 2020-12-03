@@ -268,7 +268,7 @@ ul.pagination {
 
 div.page-header h1, 
 div.page-header h2 {
-    font-size: 1.5em;
+    font-size: 1.25em;
 }
 
 div.form-group {
@@ -323,13 +323,15 @@ div.page-header h2,
 div.page-header h1 {
     background-color: #ff6719;
     color: white;
-    /* padding: 10px; */       
+    padding: 10px;       
 }
 
 div.page-header.clearfix h2,
 div.page-header.clearfix h1 {
     background-color: #F9F9F9;
     color: #495057;
+    padding-top: 0px;
+    padding-bottom: 0px;       
 }
 
 .tip-columnas-index {
@@ -369,6 +371,7 @@ textarea[readonly] {
 
 .cantidad-paginas {
     margin-top: 10px;
+    margin-left: 5px;
 }
 
 .sin-registros {
@@ -376,5 +379,10 @@ textarea[readonly] {
     margin-left: 10px;
     margin-top: 10px;
 }
+
+.form-control {
+    font-size: 1em !important;
+}
+
 
 /* -------------------------------------------------------------------------------------------------- */

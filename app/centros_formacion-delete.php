@@ -38,6 +38,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

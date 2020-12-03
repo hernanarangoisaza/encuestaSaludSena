@@ -131,7 +131,7 @@
                             echo "<table class='flipped estilo-tabla-index table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th>Acciones</th>";
+                                        echo "<th class='estilo-acciones'>Acciones</th>";
                                         echo "<th><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
 										echo "<th><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Aprendiz</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraDiligenciamiento&sort=$sort>Fecha/Hora<br>de diligenciamiento</th>";

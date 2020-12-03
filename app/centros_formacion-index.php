@@ -2,28 +2,20 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Gestión de Centros de Formación</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6b773fe9e4.js" crossorigin="anonymous"></script>
-    <style type="text/css">
-        .page-header h2{
-            margin-top: 0;
-        }
-        table tr td:last-child a{
-            margin-right: 5px;
-        }
-        body {
-            font-size: 14px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-4">
-        <div class="container-fluid">
+        <div class="container-fluid index">
             <div class="row">
                 <div class="col-md-12">
+
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Centros de formación - Detalle</h2>
+                        <h2 class="float-left">Centros de formación - Listado General</h2>
                         <a href="centros_formacion-create.php" class="btn btn-success float-right">Agregar registro</a>
                         <a href="centros_formacion-index.php" class="btn btn-info float-right mr-2">Restablecer vista</a>
                         <a href="index.php" class="btn btn-secondary float-right mr-2">Regresar</a>
@@ -31,12 +23,11 @@
 
                     <div class="form-row">
                         <form action="centros_formacion-index.php" method="get">
-                        <div class="col">
-                          <input type="text" class="form-control" placeholder="Buscar en esta tabla" name="search">
-                        </div>
-                    </div>
+                            <div class="col">
+                              <input type="text" class="form-control" placeholder="Buscar en esta tabla" name="search">
+                            </div>
                         </form>
-                    <br>
+                    </div>
 
                     <?php
                     // Include config file
@@ -85,19 +76,26 @@
                     }
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM centros_formacion ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
-                    $count_pages = "SELECT * FROM centros_formacion";
+                    $sql = "SELECT CF.*, 
+                        MN.municipio AS 'nombreMunicipio',
+                        DP.departamento AS 'nombreDepartamento'
+                        FROM centros_formacion CF
+                        LEFT JOIN municipios MN ON MN.idMunicipio = CF.idMunicipio
+                        LEFT JOIN departamentos DP ON DP.idDepartamento = CF.idDepartamento
+                        ORDER BY $order $sort 
+                        LIMIT $offset, $no_of_records_per_page";
 
+                    $count_pages = "SELECT * FROM centros_formacion";
                     
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                         $sql = "SELECT * FROM centros_formacion
-                            WHERE CONCAT (idCentroFormacion,nombreCorto,nombreLargoCentroFormacion,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria)
+                            WHERE CONCAT (CF.idCentroFormacion, CF.nombreCorto, CF.nombreLargoCentroFormacion, CF.direccion, MN.nombreMunicipio, DP.nombreDepartamento, CF.telefono1, CF.telefono2, CF.emailContacto1, CF.emailContacto2, CF.estado, CF.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT * FROM centros_formacion
-                            WHERE CONCAT (idCentroFormacion,nombreCorto,nombreLargoCentroFormacion,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria)
+                            WHERE CONCAT (CF.idCentroFormacion, CF.nombreCorto, CF.nombreLargoCentroFormacion, CF.direccion, MN.nombreMunicipio, DP.nombreDepartamento, CF.telefono1, CF.telefono2, CF.emailContacto1, CF.emailContacto2, CF.estado, CF.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -112,39 +110,51 @@
                            }
                             $number_of_results = mysqli_num_rows($result_count);
                             echo "<div class='cantidad-paginas'>" . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages . "</div>";
-
-                            echo "<table class='table table-bordered table-striped'>";
+                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer vista] para orden original o ver todos los registros</p>";
+                            echo "<div class='seccion-tabla-scroll-horizontal'>";
+                            echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
+                                        echo "<th class='estilo-acciones'>Acciones</th>";
                                         echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Id Centro Formación</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreCorto&sort=$sort>Nombre corto</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreLargoCentroFormacion&sort=$sort>Nombre del Centro</th>";
 										echo "<th><a href=?search=$search&sort=&order=direccion&sort=$sort>Dirección</th>";
-										echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Id Municipio</th>";
-										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Id Departamento</th>";
+										echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Municipio</th>";
+										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
 										echo "<th><a href=?search=$search&sort=&order=telefono1&sort=$sort>Teléfono #1</th>";
 										echo "<th><a href=?search=$search&sort=&order=telefono2&sort=$sort>Teléfono #2</th>";
-										echo "<th><a href=?search=$search&sort=&order=emailContacto1&sort=$sort>Correo electrónico #1</th>";
-										echo "<th><a href=?search=$search&sort=&order=emailContacto2&sort=$sort>Correo electrónico #2</th>";
-										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
-										
-                                        echo "<th>Acciones</th>";
+										echo "<th><a href=?search=$search&sort=&order=emailContacto1&sort=$sort>Correo<br>electrónico #1</th>";
+										echo "<th><a href=?search=$search&sort=&order=emailContacto2&sort=$sort>Correo<br>electrónico #2</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
+										echo "<th class='centrar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idCentroFormacion'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";echo "<td>" . $row['direccion'] . "</td>";echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['telefono1'] . "</td>";echo "<td>" . $row['telefono2'] . "</td>";echo "<td>" . $row['emailContacto1'] . "</td>";echo "<td>" . $row['emailContacto2'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
-                                        echo "<td>";
-                                            echo "<a href='centros_formacion-read.php?idCentroFormacion=". $row['idCentroFormacion'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                                            echo "<a href='centros_formacion-update.php?idCentroFormacion=". $row['idCentroFormacion'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                                            echo "<a href='centros_formacion-delete.php?idCentroFormacion=". $row['idCentroFormacion'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
-                                        echo "</td>";
+                                    echo "<td>";
+                                        echo "<a href='centros_formacion-read.php?idCentroFormacion=". $row['idCentroFormacion'] ."'><i class='far fa-eye'></i></a>";
+                                        echo "<a href='centros_formacion-update.php?idCentroFormacion=". $row['idCentroFormacion'] ."'><i class='far fa-edit'></i></a>";
+                                        echo "<a href='centros_formacion-delete.php?idCentroFormacion=". $row['idCentroFormacion'] ."'><i class='far fa-trash-alt'></i></a>";
+                                    echo "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['idCentroFormacion'] . "</td>";
+                                    echo "<td>" . $row['nombreCorto'] . "</td>";
+                                    echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
+                                    echo "<td>" . $row['direccion'] . "</td>";
+                                    echo "<td>" . $row['nombreMunicipio'] . "</td>";
+                                    echo "<td>" . $row['nombreDepartamento'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['telefono1'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['telefono2'] . "</td>";
+                                    echo "<td>" . $row['emailContacto1'] . "</td>";
+                                    echo "<td>" . $row['emailContacto2'] . "</td>";
+                                    echo "<td class='ocultar-columna centrar-columna'>" . $row['estado'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";
                             echo "</table>";
+                                                    echo "</div>";
 ?>
                                 <ul class="pagination" align-right>
                                 <?php
