@@ -39,7 +39,6 @@ if(isset($_POST["idDepartamento"]) && !empty($_POST["idDepartamento"])){
         }
         $stmt = $pdo->prepare("UPDATE departamentos SET codigodepartamento=?,departamento=?,estado=?,auditoria=? WHERE idDepartamento=?");
         if($stmt->execute([ $codigoDepartamento,$departamento,$estado,$auditoria,$idDepartamento ])) {
-                print_r($stmt->execute([ $codigoDepartamento,$departamento,$estado,$auditoria,$idDepartamento ]));
                 echo "Algo falló. Por favor intente de nuevo.";
                 //header("location: error.php");
             } else{
