@@ -47,7 +47,6 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
 		
-
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [
           PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements

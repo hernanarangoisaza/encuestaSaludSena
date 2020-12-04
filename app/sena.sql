@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-11-2020 a las 20:57:29
+-- Tiempo de generación: 04-12-2020 a las 10:52:55
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.3.17
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -40,7 +41,7 @@ CREATE TABLE `aprendices` (
   `idTipoGenero` int(11) DEFAULT NULL,
   `direccionResidencia` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `idMunicipio` int(4) UNSIGNED DEFAULT NULL,
-  `idDepartamento` int(2) UNSIGNED DEFAULT NULL,
+  `idDepartamento` int(3) UNSIGNED DEFAULT NULL,
   `idCentroFormacion` int(11) DEFAULT NULL,
   `idFichaFormacion` int(11) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT 1,
@@ -52,13 +53,11 @@ CREATE TABLE `aprendices` (
 --
 
 INSERT INTO `aprendices` (`idAprendiz`, `idTipoVinculacion`, `nombreCompleto`, `idTipoIdentificacion`, `identificacion`, `email`, `telefonoPersonal`, `telefonoAcudiente`, `fechaNacimiento`, `idTipoGenero`, `direccionResidencia`, `idMunicipio`, `idDepartamento`, `idCentroFormacion`, `idFichaFormacion`, `estado`, `auditoria`) VALUES
-(3, 5, 'Hernán Arango Isaza', 4, '75068986', 'harango68@misena.edu.co', '3006137257', '3186801552', '1976-02-21', 2, 'Cra 31 #84-20, apto 1483', 657, 66, 2, 1, 1, '2020-11-30 14:46:33'),
 (5, 11, 'Hernán Arango Isaza', 2, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 10, 52, 3, 1, 0, '0000-00-00 00:00:00'),
-(6, 5, 'Hernán Arango Isaza', 2, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 12, 63, 4, 1, 0, '2020-11-30 19:38:31'),
 (7, 3, 'Hernán Arango Isaza', 2, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 18, 68, 2, 1, 0, '2020-11-30 14:08:58'),
 (8, 4, 'Hernán Arango Isaza', 5, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 2, 'Cra 31#84-20', 223, 54, 1, 1, 0, '2020-11-30 14:09:13'),
-(9, 1, 'Hernán Arango Isaza', 1, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 6, 11, 1, 1, 0, '2020-11-30 14:12:13'),
-(10, 8, 'Hernán Arango Isaza', 1, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 2, 'Cra 31#84-20', 304, 27, 3, 1, 0, '2020-11-30 14:09:28');
+(9, 1, 'Hernán Arango Isazas', 1, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 6, 47, 1, 1, 0, '2020-12-03 15:32:52'),
+(10, 8, '10 Hernán Arango Isaza', 1, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 2, 'Cra 31#84-20', 304, 27, 3, 1, 0, '2020-12-02 10:16:11');
 
 -- --------------------------------------------------------
 
@@ -72,7 +71,7 @@ CREATE TABLE `centros_formacion` (
   `nombreCorto` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `direccion` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `idMunicipio` int(4) UNSIGNED DEFAULT NULL,
-  `idDepartamento` int(2) UNSIGNED DEFAULT NULL,
+  `idDepartamento` int(3) UNSIGNED DEFAULT NULL,
   `telefono1` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `telefono2` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `emailContacto1` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -86,10 +85,12 @@ CREATE TABLE `centros_formacion` (
 --
 
 INSERT INTO `centros_formacion` (`idCentroFormacion`, `nombreLargoCentroFormacion`, `nombreCorto`, `direccion`, `idMunicipio`, `idDepartamento`, `telefono1`, `telefono2`, `emailContacto1`, `emailContacto2`, `estado`, `auditoria`) VALUES
-(1, 'Centro Atención al Sector Agropecuario', NULL, NULL, 657, 66, NULL, NULL, NULL, NULL, 1, '2020-11-30 09:18:08'),
-(2, 'Centro de Diseño e Innovación Tecnológica e Industrial', NULL, NULL, 657, 66, NULL, NULL, NULL, NULL, 1, '2020-11-30 11:13:42'),
-(3, 'Centro de Comercio y Servicios', NULL, NULL, 657, 66, NULL, NULL, NULL, NULL, 1, '2020-11-30 09:18:18'),
-(4, 'Sede Tecnoacademia Centro Comercio de Dosquebradas', NULL, NULL, 657, 66, NULL, NULL, NULL, NULL, 1, '2020-11-30 09:18:20');
+(1, 'Centro Atención al Sector Agropecuario', 'AGROPECUARIO', 'ddddddddddd', 640, 25, '111', '222', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-01 21:29:29'),
+(2, 'Centro de Diseño e Innovación Tecnológica e Industrial', 'CDITI', 'fffffffffff', 657, 66, '333', '444', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-01 21:29:32'),
+(3, 'Centro de Comercio y Servicios', 'COMERCIO', 'ghhhhhhhhhhhhhhhh', 657, 66, '555', '666', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-01 21:29:34'),
+(4, 'Sede Tecnoacademia Centro Comercio de Dosquebradas', 'TECNOACADEMIA', 'jjjjjjjjjjjj', 657, 66, '777', '888', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-01 21:29:36'),
+(5, '', '', '', 1, 5, '', '', '', '', 0, '2020-12-03 13:58:47'),
+(6, '', '', '', 1, 50, '', '', '', '', 0, '2020-12-03 14:25:54');
 
 -- --------------------------------------------------------
 
@@ -98,7 +99,8 @@ INSERT INTO `centros_formacion` (`idCentroFormacion`, `nombreLargoCentroFormacio
 --
 
 CREATE TABLE `departamentos` (
-  `idDepartamento` int(2) UNSIGNED NOT NULL,
+  `idDepartamento` int(3) UNSIGNED NOT NULL,
+  `codigoDepartamento` int(3) DEFAULT NULL,
   `departamento` varchar(255) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT 1,
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -108,40 +110,42 @@ CREATE TABLE `departamentos` (
 -- Volcado de datos para la tabla `departamentos`
 --
 
-INSERT INTO `departamentos` (`idDepartamento`, `departamento`, `estado`, `auditoria`) VALUES
-(5, 'ANTIOQUIA', 1, '2020-11-19 16:56:15'),
-(8, 'ATLÁNTICO', 1, '2020-11-19 16:56:15'),
-(11, 'BOGOTÁ, D.C.', 1, '2020-11-19 16:56:15'),
-(13, 'BOLÍVAR', 1, '2020-11-19 16:56:15'),
-(15, 'BOYACÁ', 1, '2020-11-19 16:56:15'),
-(17, 'CALDAS', 1, '2020-11-19 16:56:15'),
-(18, 'CAQUETÁ', 1, '2020-11-19 16:56:15'),
-(19, 'CAUCA', 1, '2020-11-19 16:56:15'),
-(20, 'CESAR', 1, '2020-11-19 16:56:15'),
-(23, 'CÓRDOBA', 1, '2020-11-19 16:56:15'),
-(25, 'CUNDINAMARCA', 1, '2020-11-19 16:56:15'),
-(27, 'CHOCÓ', 1, '2020-11-19 16:56:15'),
-(41, 'HUILA', 1, '2020-11-19 16:56:15'),
-(44, 'LA GUAJIRA', 1, '2020-11-19 16:56:15'),
-(47, 'MAGDALENA', 1, '2020-11-19 16:56:15'),
-(50, 'META', 1, '2020-11-19 16:56:15'),
-(52, 'NARIÑO', 1, '2020-11-19 16:56:15'),
-(54, 'NORTE DE SANTANDER', 1, '2020-11-19 16:56:15'),
-(63, 'QUINDIO', 1, '2020-11-19 16:56:15'),
-(66, 'RISARALDA', 1, '2020-11-19 16:56:15'),
-(68, 'SANTANDER', 1, '2020-11-19 16:56:15'),
-(70, 'SUCRE', 1, '2020-11-19 16:56:15'),
-(73, 'TOLIMA', 1, '2020-11-19 16:56:15'),
-(76, 'VALLE DEL CAUCA', 1, '2020-11-19 16:56:15'),
-(81, 'ARAUCA', 1, '2020-11-19 16:56:15'),
-(85, 'CASANARE', 1, '2020-11-19 16:56:15'),
-(86, 'PUTUMAYO', 1, '2020-11-19 16:56:15'),
-(88, 'ARCHIPIÉLAGO DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA', 1, '2020-11-19 16:56:15'),
-(91, 'AMAZONAS', 1, '2020-11-19 16:56:15'),
-(94, 'GUAINÍA', 1, '2020-11-19 16:56:15'),
-(95, 'GUAVIARE', 1, '2020-11-19 16:56:15'),
-(97, 'VAUPÉS', 1, '2020-11-19 16:56:15'),
-(99, 'VICHADA', 1, '2020-11-19 16:56:15');
+INSERT INTO `departamentos` (`idDepartamento`, `codigoDepartamento`, `departamento`, `estado`, `auditoria`) VALUES
+(5, 5, 'Antioquia', 1, '2020-12-03 15:26:45'),
+(8, 8, 'Atlántico', 1, '2020-12-03 15:26:45'),
+(11, 11, 'Bogotá, D.C.', 1, '2020-12-03 15:26:45'),
+(13, 13, 'Bolívar', 1, '2020-12-03 15:26:45'),
+(15, 15, 'Boyacá', 1, '2020-12-03 15:26:45'),
+(17, 17, 'Caldas', 1, '2020-12-03 15:26:45'),
+(18, 18, 'Caquetá', 1, '2020-12-03 15:26:45'),
+(19, 19, 'Cauca', 1, '2020-12-03 15:26:45'),
+(20, 20, 'Cesar', 1, '2020-12-03 15:26:45'),
+(23, 23, 'Córdoba', 1, '2020-12-03 15:26:45'),
+(25, 25, 'Cundinamarca', 1, '2020-12-03 15:26:45'),
+(27, 27, 'Chocó', 1, '2020-12-03 15:26:45'),
+(41, 41, 'Huila', 1, '2020-12-03 15:26:45'),
+(44, 44, 'La Guajira', 1, '2020-12-03 15:26:45'),
+(47, 47, 'Magdalena', 1, '2020-12-03 15:26:45'),
+(50, 50, 'Meta', 1, '2020-12-03 15:26:45'),
+(52, 52, 'Nariño', 1, '2020-12-03 15:26:45'),
+(54, 54, 'Norte de Santander', 1, '2020-12-03 15:26:45'),
+(63, 63, 'Quindío', 1, '2020-12-03 15:26:45'),
+(66, 66, 'Risaralda', 1, '2020-12-03 15:26:45'),
+(68, 68, 'Santander', 1, '2020-12-03 15:26:45'),
+(70, 70, 'Sucre', 1, '2020-12-03 15:26:45'),
+(73, 73, 'Tolima', 1, '2020-12-03 15:26:45'),
+(76, 76, 'Valle del Cauca', 1, '2020-12-03 15:26:45'),
+(81, 81, 'Arauca', 1, '2020-12-03 15:26:45'),
+(85, 85, 'Casanare', 1, '2020-12-03 15:26:45'),
+(86, 86, 'Putumayo', 1, '2020-12-03 15:26:45'),
+(88, 88, 'Archipiélago de San Andrés, Providencia y Santa Catalina', 1, '2020-12-03 15:26:45'),
+(91, 91, 'Amazonas', 1, '2020-12-03 15:26:45'),
+(94, 94, 'Guainía', 1, '2020-12-03 15:26:45'),
+(95, 95, 'Guaviare', 1, '2020-12-03 15:26:45'),
+(97, 97, 'Vaupés', 1, '2020-12-03 15:26:45'),
+(99, 99, 'Vichada', 1, '2020-12-03 15:26:45'),
+(100, 321, 'yo', 0, '2020-12-03 15:46:03'),
+(101, 989, 'prueba', 0, '2020-12-03 20:16:37');
 
 -- --------------------------------------------------------
 
@@ -155,14 +159,35 @@ CREATE TABLE `encuesta_signos` (
   `fechaHoraDiligenciamiento` datetime NOT NULL DEFAULT current_timestamp(),
   `idSedeIngreso` int(11) DEFAULT NULL,
   `idHorario` int(11) DEFAULT NULL,
-  `aceptacionConsideraciones` datetime DEFAULT NULL,
-  `autorizacionTratamientoDatos` tinyint(1) DEFAULT NULL,
-  `autorizacionIngreso` tinyint(1) DEFAULT NULL,
+  `aceptacionConsideraciones` tinyint(1) NOT NULL DEFAULT -1,
+  `autorizacionTratamientoDatos` tinyint(1) NOT NULL DEFAULT -1,
+  `autorizacionIngreso` tinyint(1) NOT NULL DEFAULT -1,
   `observacionAdicional` text COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `aceptacionRespuestaPositiva` tinyint(4) DEFAULT NULL,
+  `aceptacionRespuestaPositiva` tinyint(1) NOT NULL DEFAULT -1,
   `estado` tinyint(4) NOT NULL DEFAULT 1,
   `auditoria` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `encuesta_signos`
+--
+
+INSERT INTO `encuesta_signos` (`idEncuesta`, `idAprendiz`, `fechaHoraDiligenciamiento`, `idSedeIngreso`, `idHorario`, `aceptacionConsideraciones`, `autorizacionTratamientoDatos`, `autorizacionIngreso`, `observacionAdicional`, `aceptacionRespuestaPositiva`, `estado`, `auditoria`) VALUES
+(1, 7, '2020-12-01 19:39:57', 2, 8, 1, 0, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 1, '2020-12-02 12:53:10'),
+(2, 10, '2020-12-02 09:47:33', 2, 8, -1, 1, 0, 'nota de observaciones', 1, 0, '2020-12-02 12:45:39'),
+(3, 10, '2020-12-02 12:36:31', 4, 5, 0, 1, 0, 'ninguna observacion', -1, 1, '2020-12-03 04:49:59'),
+(5, 5, '2020-12-02 13:04:12', 1, 1, 0, 0, 1, 'aaaaaaaaaaa', 0, 0, '2020-12-02 13:04:37'),
+(6, 5, '2020-12-02 13:06:03', 1, 1, 0, 0, 0, 'qqqqqqqqqqqqqqqqq', 0, 0, '2020-12-02 13:06:16'),
+(7, 5, '2020-12-02 13:07:54', 1, 1, -1, -1, 1, 'qaaaaaaaaaaaassssssssssssssssssss\r\nghfgh\r\ngh\r\nfgh\r\nfgf', 1, 0, '2020-12-02 14:52:46'),
+(8, 5, '2020-12-02 16:27:08', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:08'),
+(9, 5, '2020-12-02 16:27:11', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:11'),
+(10, 5, '2020-12-02 16:27:18', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:18'),
+(11, 5, '2020-12-02 16:27:21', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:21'),
+(12, 5, '2020-12-02 16:27:24', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:24'),
+(13, 5, '2020-12-02 16:29:05', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:29:05'),
+(14, 5, '2020-12-02 16:29:09', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:29:09'),
+(15, 5, '2020-12-02 16:29:18', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:29:18'),
+(16, 5, '2020-12-02 16:31:39', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:31:39');
 
 -- --------------------------------------------------------
 
@@ -183,7 +208,7 @@ CREATE TABLE `fichas_formacion` (
 --
 
 INSERT INTO `fichas_formacion` (`idFichaFormacion`, `codigoFichaFormacion`, `idProgramaFormacion`, `estado`, `auditoria`) VALUES
-(1, '1752586', NULL, 1, '2020-11-25 13:36:59');
+(1, '1752586', 4, 1, '2020-12-01 21:13:12');
 
 -- --------------------------------------------------------
 
@@ -193,8 +218,8 @@ INSERT INTO `fichas_formacion` (`idFichaFormacion`, `codigoFichaFormacion`, `idP
 
 CREATE TABLE `horarios` (
   `idHorario` int(11) NOT NULL,
-  `horaInicial` int(2) DEFAULT NULL,
-  `horaFinal` int(2) DEFAULT NULL,
+  `horaInicial` time DEFAULT NULL,
+  `horaFinal` time DEFAULT NULL,
   `nombreCorto` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `estado` tinyint(4) DEFAULT 1,
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -205,18 +230,18 @@ CREATE TABLE `horarios` (
 --
 
 INSERT INTO `horarios` (`idHorario`, `horaInicial`, `horaFinal`, `nombreCorto`, `estado`, `auditoria`) VALUES
-(1, NULL, NULL, '7 - 9', 1, '2020-11-20 16:31:25'),
-(2, NULL, NULL, '7 - 11', 1, '2020-11-20 16:31:30'),
-(3, NULL, NULL, '8 - 12', 1, '2020-11-20 16:31:40'),
-(4, NULL, NULL, '9 - 12', 1, '2020-11-20 16:31:57'),
-(5, NULL, NULL, '10 - 12', 1, '2020-11-20 16:32:07'),
-(6, NULL, NULL, '11 - 1', 1, '2020-11-20 16:32:20'),
-(7, NULL, NULL, '12 - 4', 1, '2020-11-20 16:32:24'),
-(8, NULL, NULL, '2 - 4', 1, '2020-11-20 16:32:32'),
-(9, NULL, NULL, '3 - 5', 1, '2020-11-20 16:32:40'),
-(10, NULL, NULL, '5 - 7', 1, '2020-11-20 16:32:49'),
-(11, NULL, NULL, '7 - 9', 1, '2020-11-20 16:33:02'),
-(12, NULL, NULL, '8 - 10', 1, '2020-11-20 16:33:35');
+(1, '07:00:00', '09:00:00', '7 - 9', 1, '2020-12-01 20:57:46'),
+(2, '07:00:00', '11:00:00', '7 - 11', 1, '2020-12-01 20:58:07'),
+(3, '08:00:00', '12:00:00', '8 - 12', 1, '2020-12-01 20:58:30'),
+(4, '09:00:00', '12:00:00', '9 - 12', 1, '2020-12-01 20:58:54'),
+(5, '10:00:00', '12:00:00', '10 - 12', 1, '2020-12-01 20:59:22'),
+(6, '11:00:00', '13:00:00', '11 - 1', 1, '2020-12-01 20:59:57'),
+(7, '12:00:00', '16:00:00', '12 - 4', 1, '2020-12-01 21:00:05'),
+(8, '14:00:00', '16:00:00', '2 - 4', 1, '2020-12-01 21:00:28'),
+(9, '15:00:00', '17:00:00', '3 - 5', 1, '2020-12-01 21:01:09'),
+(10, '17:00:00', '19:00:00', '5 - 7', 1, '2020-12-01 21:01:27'),
+(11, '19:00:00', '21:00:00', '7 - 9', 1, '2020-12-01 21:01:43'),
+(12, '20:00:00', '22:00:00', '8 - 10', 1, '2020-12-01 21:02:01');
 
 -- --------------------------------------------------------
 
@@ -227,7 +252,7 @@ INSERT INTO `horarios` (`idHorario`, `horaInicial`, `horaFinal`, `nombreCorto`, 
 CREATE TABLE `municipios` (
   `idMunicipio` int(4) UNSIGNED NOT NULL,
   `municipio` varchar(255) DEFAULT NULL,
-  `idDepartamento` int(2) UNSIGNED NOT NULL,
+  `idDepartamento` int(3) UNSIGNED NOT NULL,
   `estado` tinyint(4) UNSIGNED NOT NULL DEFAULT 1,
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -1403,10 +1428,17 @@ CREATE TABLE `respuestas_encuesta` (
   `idRespuestaEncuesta` int(11) NOT NULL,
   `idEncuesta` int(11) DEFAULT NULL,
   `idPreguntaEncuesta` int(11) DEFAULT NULL,
-  `respuestaSiNo` tinyint(4) DEFAULT NULL,
+  `respuestaSiNo` tinyint(1) NOT NULL DEFAULT -1,
   `estado` tinyint(4) NOT NULL DEFAULT 1,
   `auditoria` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Volcado de datos para la tabla `respuestas_encuesta`
+--
+
+INSERT INTO `respuestas_encuesta` (`idRespuestaEncuesta`, `idEncuesta`, `idPreguntaEncuesta`, `respuestaSiNo`, `estado`, `auditoria`) VALUES
+(1, 1, 6, 1, 1, '2020-12-01 20:25:36');
 
 -- --------------------------------------------------------
 
@@ -1415,15 +1447,23 @@ CREATE TABLE `respuestas_encuesta` (
 --
 
 CREATE TABLE `roles_sistema` (
-  `idRol` int(11) NOT NULL,
-  `nombreLargoRol` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `idRolSistema` int(11) NOT NULL,
+  `nombreLargoRolSistema` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `nombreCorto` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `descripcionRol` text COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `descripcionRolSistema` text COLLATE utf8_spanish2_ci DEFAULT NULL,
   `permisos` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `restricciones` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `estado` tinyint(4) NOT NULL DEFAULT 1,
   `auditoria` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Volcado de datos para la tabla `roles_sistema`
+--
+
+INSERT INTO `roles_sistema` (`idRolSistema`, `nombreLargoRolSistema`, `nombreCorto`, `descripcionRolSistema`, `permisos`, `restricciones`, `estado`, `auditoria`) VALUES
+(1, 'Administrador', 'admin', 'el que manda', '+h', '-r', 1, '2020-12-01 20:01:11'),
+(2, 'fffffffffff', 'sdfsdfsdfsf', 'dfsdfsdgfhggfhgjhghjgj', '34535tr', '24234234242', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1543,13 +1583,20 @@ CREATE TABLE `usuarios` (
   `idTipoGenero` int(11) DEFAULT NULL,
   `direccionResidencia` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `idMunicipio` int(4) UNSIGNED DEFAULT NULL,
-  `idDepartamento` int(2) UNSIGNED DEFAULT NULL,
+  `idDepartamento` int(3) UNSIGNED DEFAULT NULL,
   `idCentroFormacion` int(11) DEFAULT NULL,
   `idRolSistema` int(11) DEFAULT NULL,
   `passwordSistema` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `estado` tinyint(4) DEFAULT 1,
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`idUsuario`, `idTipoVinculacion`, `nombreCompleto`, `idTipoIdentificacion`, `identificacion`, `email`, `telefonoPersonal`, `fechaNacimiento`, `idTipoGenero`, `direccionResidencia`, `idMunicipio`, `idDepartamento`, `idCentroFormacion`, `idRolSistema`, `passwordSistema`, `estado`, `auditoria`) VALUES
+(1, 10, 'pedro perez', 4, '541212', 'yo@gfgg.com', '424242', '2020-12-02', 1, 'rrwr 43423 werwerr', 7, 15, 4, 1, '23edrfty', 1, '2020-12-02 05:25:34');
 
 --
 -- Índices para tablas volcadas
@@ -1562,11 +1609,11 @@ ALTER TABLE `aprendices`
   ADD PRIMARY KEY (`idAprendiz`) USING BTREE,
   ADD KEY `FK_aprendices_tipos_identificacion` (`idTipoIdentificacion`),
   ADD KEY `FK_aprendices_municipios` (`idMunicipio`),
-  ADD KEY `FK_aprendices_departamentos` (`idDepartamento`),
   ADD KEY `FK_aprendices_centros_formacion` (`idCentroFormacion`) USING BTREE,
   ADD KEY `FK_aprendices_vinculaciones_sena` (`idTipoVinculacion`),
   ADD KEY `FK_aprendices_fichas_formacion` (`idFichaFormacion`),
-  ADD KEY `FK_aprendices_tipos_generos` (`idTipoGenero`);
+  ADD KEY `FK_aprendices_tipos_generos` (`idTipoGenero`),
+  ADD KEY `FK_aprendices_departamentos` (`idDepartamento`);
 
 --
 -- Indices de la tabla `centros_formacion`
@@ -1587,9 +1634,9 @@ ALTER TABLE `departamentos`
 --
 ALTER TABLE `encuesta_signos`
   ADD PRIMARY KEY (`idEncuesta`),
-  ADD KEY `FK_encuesta_signos_sedes` (`idSedeIngreso`),
   ADD KEY `FK_encuesta_signos_aprendices` (`idAprendiz`),
-  ADD KEY `FK_encuesta_signos_horarios` (`idHorario`);
+  ADD KEY `FK_encuesta_signos_horarios` (`idHorario`),
+  ADD KEY `FK_encuesta_signos_centros_formacion` (`idSedeIngreso`);
 
 --
 -- Indices de la tabla `fichas_formacion`
@@ -1635,7 +1682,7 @@ ALTER TABLE `respuestas_encuesta`
 -- Indices de la tabla `roles_sistema`
 --
 ALTER TABLE `roles_sistema`
-  ADD PRIMARY KEY (`idRol`) USING BTREE;
+  ADD PRIMARY KEY (`idRolSistema`) USING BTREE;
 
 --
 -- Indices de la tabla `tipos_generos`
@@ -1689,19 +1736,19 @@ ALTER TABLE `aprendices`
 -- AUTO_INCREMENT de la tabla `centros_formacion`
 --
 ALTER TABLE `centros_formacion`
-  MODIFY `idCentroFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idCentroFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `idDepartamento` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `idDepartamento` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT de la tabla `encuesta_signos`
 --
 ALTER TABLE `encuesta_signos`
-  MODIFY `idEncuesta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEncuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `fichas_formacion`
@@ -1737,13 +1784,13 @@ ALTER TABLE `programas_formacion`
 -- AUTO_INCREMENT de la tabla `respuestas_encuesta`
 --
 ALTER TABLE `respuestas_encuesta`
-  MODIFY `idRespuestaEncuesta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idRespuestaEncuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `roles_sistema`
 --
 ALTER TABLE `roles_sistema`
-  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idRolSistema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_generos`
@@ -1773,7 +1820,7 @@ ALTER TABLE `tomas_temperatura`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -1803,14 +1850,20 @@ ALTER TABLE `centros_formacion`
 --
 ALTER TABLE `encuesta_signos`
   ADD CONSTRAINT `FK_encuesta_signos_aprendices` FOREIGN KEY (`idAprendiz`) REFERENCES `aprendices` (`idAprendiz`),
-  ADD CONSTRAINT `FK_encuesta_signos_horarios` FOREIGN KEY (`idHorario`) REFERENCES `horarios` (`idHorario`),
-  ADD CONSTRAINT `FK_encuesta_signos_sedes` FOREIGN KEY (`idSedeIngreso`) REFERENCES `sedes` (`idSede`);
+  ADD CONSTRAINT `FK_encuesta_signos_centros_formacion` FOREIGN KEY (`idSedeIngreso`) REFERENCES `centros_formacion` (`idCentroFormacion`),
+  ADD CONSTRAINT `FK_encuesta_signos_horarios` FOREIGN KEY (`idHorario`) REFERENCES `horarios` (`idHorario`);
 
 --
 -- Filtros para la tabla `fichas_formacion`
 --
 ALTER TABLE `fichas_formacion`
   ADD CONSTRAINT `FK_fichas_formacion_programas_formacion` FOREIGN KEY (`idProgramaFormacion`) REFERENCES `programas_formacion` (`idProgramaFormacion`);
+
+--
+-- Filtros para la tabla `municipios`
+--
+ALTER TABLE `municipios`
+  ADD CONSTRAINT `FK_municipios_departamentos` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`idDepartamento`);
 
 --
 -- Filtros para la tabla `respuestas_encuesta`
@@ -1829,13 +1882,14 @@ ALTER TABLE `tomas_temperatura`
 -- Filtros para la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `FK_usuarios_roles_sistema` FOREIGN KEY (`idRolSistema`) REFERENCES `roles_sistema` (`idRol`),
+  ADD CONSTRAINT `FK_usuarios_departamentos` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`idDepartamento`),
+  ADD CONSTRAINT `FK_usuarios_roles_sistema` FOREIGN KEY (`idRolSistema`) REFERENCES `roles_sistema` (`idRolSistema`),
   ADD CONSTRAINT `FK_usuarios_tipos_generos` FOREIGN KEY (`idTipoGenero`) REFERENCES `tipos_generos` (`idTipoGenero`),
   ADD CONSTRAINT `FK_usuarios_vinculaciones_sena` FOREIGN KEY (`idTipoVinculacion`) REFERENCES `tipos_vinculaciones_sena` (`idTipoVinculacion`),
   ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`idCentroFormacion`) REFERENCES `centros_formacion` (`idCentroFormacion`),
-  ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`idDepartamento`),
   ADD CONSTRAINT `usuarios_ibfk_3` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`),
   ADD CONSTRAINT `usuarios_ibfk_6` FOREIGN KEY (`idTipoIdentificacion`) REFERENCES `tipos_identificacion` (`idTipoIdentificacion`);
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
