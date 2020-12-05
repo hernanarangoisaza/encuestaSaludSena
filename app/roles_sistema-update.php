@@ -172,7 +172,7 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
                         </div>
 
                         <input type="hidden" name="idRolSistema" value="<?php echo $idRol; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Actualizar">
+                        <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="roles_sistema-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>

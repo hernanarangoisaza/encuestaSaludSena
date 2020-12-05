@@ -145,7 +145,7 @@ if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
                         </div>
 
                         <input type="hidden" name="idTipoVinculacion" value="<?php echo $idTipoVinculacion; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Actualizar">
+                        <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="vinculaciones_sena-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>

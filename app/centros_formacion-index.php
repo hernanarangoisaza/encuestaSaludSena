@@ -18,7 +18,7 @@
                         <h2 class="float-left">Centros de formación - Listado General</h2>
                         <a href="centros_formacion-create.php" class="btn btn-success float-right">Agregar registro</a>
                         <a href="centros_formacion-index.php" class="btn btn-info float-right mr-2">Restablecer vista</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Regresar</a>
+                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
                     </div>
 
                     <div class="form-row">

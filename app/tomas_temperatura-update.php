@@ -172,7 +172,7 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
                         </div>
 
                         <input type="hidden" name="idToma" value="<?php echo $idToma; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Actualizar">
+                        <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="tomas_temperatura-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>

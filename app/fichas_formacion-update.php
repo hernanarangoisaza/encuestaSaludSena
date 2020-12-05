@@ -163,7 +163,7 @@ if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
 
                         <input type="hidden" name="idFichaFormacion" value="<?php echo $idFichaFormacion; ?>"/>
                         <p>
-                            <input type="submit" class="btn btn-primary" value="Actualizar">
+                            <input type="submit" class="btn btn-primary" value="Grabar">
                             <a href="fichas_formacion-index.php" class="btn btn-secondary">Cancelar</a>
                         </p>
 

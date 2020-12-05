@@ -343,7 +343,7 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
 
                         <input type="hidden" name="idEncuesta" value="<?php echo $idEncuesta; ?>"/>
                         <p>
-                            <input type="submit" class="btn btn-primary" value="Actualizar">
+                            <input type="submit" class="btn btn-primary" value="Grabar">
                             <a href="encuesta_signos-index.php" class="btn btn-secondary">Cancelar</a>
                         </p>
 

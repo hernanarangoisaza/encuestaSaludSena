@@ -246,7 +246,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
 
                         <input type="hidden" name="idCentroFormacion" value="<?php echo $idCentroFormacion; ?>"/>
                         <p>
-                            <input type="submit" class="btn btn-primary" value="Actualizar">
+                            <input type="submit" class="btn btn-primary" value="Grabar">
                             <a href="centros_formacion-index.php" class="btn btn-secondary">Cancelar</a>
                         </p>
 

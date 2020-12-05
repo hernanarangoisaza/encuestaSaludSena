@@ -253,7 +253,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
                         </div>
 
                         <input type="hidden" name="idUsuario" value="<?php echo $idUsuario; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Actualizar">
+                        <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="usuarios-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>

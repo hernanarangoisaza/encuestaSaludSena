@@ -154,7 +154,7 @@ if(isset($_POST["idRespuestaEncuesta"]) && !empty($_POST["idRespuestaEncuesta"])
                         </div>
 
                         <input type="hidden" name="idRespuestaEncuesta" value="<?php echo $idRespuestaEncuesta; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Actualizar">
+                        <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="respuestas_encuesta-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>

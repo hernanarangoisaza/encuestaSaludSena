@@ -145,7 +145,7 @@ if(isset($_POST["idTipoGenero"]) && !empty($_POST["idTipoGenero"])){
                         </div>
 
                         <input type="hidden" name="idTipoGenero" value="<?php echo $idTipoGenero; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Actualizar">
+                        <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="tipos_generos-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>

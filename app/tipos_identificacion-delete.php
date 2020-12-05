@@ -58,10 +58,10 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="fade-in">
                             <input type="hidden" name="idTipoIdentificacion" value="<?php echo trim($_GET["idTipoIdentificacion"]); ?>"/>
-                            <p class="mensaje-eliminar">Está seguro de eliminar este registro?</p>
+                            <p class="mensaje-eliminar">Está a punto de eliminar el registro seleccionado.</p>
                             <p>
-                                <input type="submit" value="Si" class="btn btn-danger">
-                                <a href="tipos_identificacion-index.php" class="btn btn-secondary">No</a>
+                                <input type="submit" value="Eliminar permanentemente" class="btn btn-danger">
+                                <a href="tipos_identificacion-index.php" class="btn btn-secondary">No borrar</a>
                             </p>
                         </div>
                     </form>

@@ -145,7 +145,7 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
                         </div>
 
                         <input type="hidden" name="idTipoIdentificacion" value="<?php echo $idTipoIdentificacion; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Actualizar">
+                        <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="tipos_identificacion-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>

@@ -154,7 +154,7 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
                         </div>
 
                         <input type="hidden" name="idHorario" value="<?php echo $idHorario; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Actualizar">
+                        <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="horarios-index.php" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>

@@ -58,10 +58,10 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="fade-in">
                             <input type="hidden" name="idHorario" value="<?php echo trim($_GET["idHorario"]); ?>"/>
-                            <p class="mensaje-eliminar">Está seguro de eliminar este registro?</p>
+                            <p class="mensaje-eliminar">Está a punto de eliminar el registro seleccionado.</p>
                             <p>
-                                <input type="submit" value="Si" class="btn btn-danger">
-                                <a href="horarios-index.php" class="btn btn-secondary">No</a>
+                                <input type="submit" value="Eliminar permanentemente" class="btn btn-danger">
+                                <a href="horarios-index.php" class="btn btn-secondary">No borrar</a>
                             </p>
                         </div>
                     </form>

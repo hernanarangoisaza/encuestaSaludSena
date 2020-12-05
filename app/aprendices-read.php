@@ -168,7 +168,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
                         <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
                     </div>
 
-                    <p><a href="aprendices-index.php" class="btn btn-primary">Regresar</a></p>
+                    <p><a href="aprendices-index.php" class="btn btn-primary">Volver al listado</a></p>
 
                 </div>
             </div>

@@ -229,6 +229,7 @@ input[name="search"] {
 .page-item,
 .page-link {
     font-size: 1em;
+    color: #17a2b8;
 }
 
 h2.float-left {
@@ -384,5 +385,8 @@ textarea[readonly] {
     font-size: 1em !important;
 }
 
+.page-link:hover {
+    color: #17a2b8 !important;
+}
 
 /* -------------------------------------------------------------------------------------------------- */

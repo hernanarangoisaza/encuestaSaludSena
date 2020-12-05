@@ -106,7 +106,7 @@ if(isset($_GET["idRolSistema"]) && !empty(trim($_GET["idRolSistema"]))){
                         <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
                     </div>                    
                     
-                    <p><a href="roles_sistema-index.php" class="btn btn-primary">Regresar</a></p>
+                    <p><a href="roles_sistema-index.php" class="btn btn-primary">Volver al listado</a></p>
 
                 </div>
             </div>
