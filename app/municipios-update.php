@@ -3,11 +3,13 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
+$codigoMunicipio = "";
 $municipio = "";
 $idDepartamento = "";
 $estado = "";
 $auditoria = "";
 
+$codigoMunicipio_err = "";
 $municipio_err = "";
 $idDepartamento_err = "";
 $estado_err = "";
@@ -21,7 +23,8 @@ if(isset($_POST["idMunicipio"]) && !empty($_POST["idMunicipio"])){
 
         // Prepare an update statement
         
-        $municipio = trim($_POST["municipio"]);
+        $codigoMunicipio = trim($_POST["codigoMunicipio"]);
+		$municipio = trim($_POST["municipio"]);
 		$idDepartamento = trim($_POST["idDepartamento"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
@@ -39,9 +42,9 @@ if(isset($_POST["idMunicipio"]) && !empty($_POST["idMunicipio"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE municipios SET municipio=?,idDepartamento=?,estado=?,auditoria=? WHERE idMunicipio=?");
+        $stmt = $pdo->prepare("UPDATE municipios SET codigoMunicipio=?,municipio=?,idDepartamento=?,estado=?,auditoria=? WHERE idMunicipio=?");
 
-        if(!$stmt->execute([ $municipio,$idDepartamento,$estado,$auditoria,$idMunicipio  ])) {
+        if(!$stmt->execute([ $codigoMunicipio,$municipio,$idDepartamento,$estado,$auditoria,$idMunicipio  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
@@ -74,7 +77,8 @@ if(isset($_POST["idMunicipio"]) && !empty($_POST["idMunicipio"])){
 
                     // Retrieve individual field value
 
-                    $municipio = $row["municipio"];
+                    $codigoMunicipio = $row["codigoMunicipio"];
+					$municipio = $row["municipio"];
 					$idDepartamento = $row["idDepartamento"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
@@ -124,12 +128,17 @@ if(isset($_POST["idMunicipio"]) && !empty($_POST["idMunicipio"])){
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 
                         <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" name="municipio" maxlength="255" class="form-control" value="<?php echo $municipio; ?>">
+                            <label>Código Municipio</label>
+                            <input type="number" name="codigoMunicipio" class="form-control" value="<?php echo $codigoMunicipio; ?>">
+                            <span class="form-text"><?php echo $codigoMunicipio_err; ?></span>
+                        </div>
+						<div class="form-group">
+                            <label>Municipio</label>
+                            <input type="text" name="municipio" maxlength="255"class="form-control" value="<?php echo $municipio; ?>">
                             <span class="form-text"><?php echo $municipio_err; ?></span>
                         </div>
 						<div class="form-group">
-                            <label>Id Departamento</label>
+                            <label>Departamento</label>
                             <input type="number" name="idDepartamento" class="form-control" value="<?php echo $idDepartamento; ?>">
                             <span class="form-text"><?php echo $idDepartamento_err; ?></span>
                         </div>

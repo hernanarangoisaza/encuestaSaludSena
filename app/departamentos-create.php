@@ -81,7 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Código del Departamento</label>
-                            <input type="text" name="codigoDepartamento" class="form-control" value="<?php echo $codigoDepartamento; ?>">
+                            <input type="number" name="codigoDepartamento" class="form-control" value="<?php echo $codigoDepartamento; ?>">
                             <span class="form-text"><?php echo $codigoDepartamento_err; ?></span>
                         </div>
 
@@ -93,7 +93,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
-                            <input type="text" name="estado" class="form-control" value="<?php echo $estado; ?>">
+                            <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
 

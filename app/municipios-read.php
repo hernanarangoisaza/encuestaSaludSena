@@ -75,12 +75,13 @@ if(isset($_GET["idMunicipio"]) && !empty(trim($_GET["idMunicipio"]))){
                         <h1>Municipio - Visualizar</h1>
                     </div>
                         
-                    <div class="form-group">
-                        <label>Nombre</label>
-                        <input type="text" name="municipio" class="form-control" value="<?php echo $row['municipio']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
+                     <div class="form-group">
+                        <label>Código Municipio</label>
+                        <p class="form-control-static"><?php echo $row["codigoMunicipio"]; ?></p>
+                    </div><div class="form-group">
+                        <label>Municipio</label>
+                        <p class="form-control-static"><?php echo $row["municipio"]; ?></p>
+                    </div><div class="form-group">
                         <label>Departamento</label>
                         <input type="text" name="idDepartamento" class="form-control" value="<?php echo $row['nombreDepartamento']; ?>" readonly>
                     </div>

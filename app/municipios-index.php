@@ -67,7 +67,7 @@
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idMunicipio', 'municipio', 'idDepartamento', 'estado', 'auditoria'); 
+                    $orderBy = array('codigoMunicipio', 'municipio', 'idDepartamento', 'estado', 'auditoria'); 
                     $order = 'idMunicipio';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
@@ -92,12 +92,12 @@
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                         $sql = "SELECT * FROM municipios
-                            WHERE CONCAT (idMunicipio,municipio,idDepartamento,estado,auditoria)
+                            WHERE CONCAT (codigoMunicipio,municipio,idDepartamento,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT * FROM municipios
-                            WHERE CONCAT (idMunicipio,municipio,idDepartamento,estado,auditoria)
+                            WHERE CONCAT (codigoMunicipio,municipio,idDepartamento,estado,auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -116,7 +116,7 @@
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Código Municipio</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=codigoMunicipio&sort=$sort>Código Municipio</th>";
 										echo "<th><a href=?search=$search&sort=&order=municipio&sort=$sort>Nombre</th>";
 										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Id Departamento</th>";
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
@@ -128,7 +128,7 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['municipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['codigoMunicipio'] . "</td>";echo "<td>" . $row['municipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='municipios-read.php?idMunicipio=". $row['idMunicipio'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                             echo "<a href='municipios-update.php?idMunicipio=". $row['idMunicipio'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";

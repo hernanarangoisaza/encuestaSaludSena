@@ -350,7 +350,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
 
 						<div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
-                            <input type="text" name="estado" class="form-control" value="<?php echo $estado; ?>">
+                            <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
 

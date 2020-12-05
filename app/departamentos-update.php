@@ -38,12 +38,13 @@ if(isset($_POST["idDepartamento"]) && !empty($_POST["idDepartamento"])){
           exit('Algo extraño sucedió');
         }
         $stmt = $pdo->prepare("UPDATE departamentos SET codigodepartamento=?,departamento=?,estado=?,auditoria=? WHERE idDepartamento=?");
-        if($stmt->execute([ $codigoDepartamento,$departamento,$estado,$auditoria,$idDepartamento ])) {
+        if(!$stmt->execute([ $codigoDepartamento,$departamento,$estado,$auditoria,$idDepartamento ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
-                //header("location: error.php");
+                header("location: error.php");
             } else{
                 $stmt = null;
-                header("location: departamentos-read.php?idDepartamento=$idDepartamento");
+                //header("location: departamentos-read.php?idDepartamento=$idDepartamento");
+                header("location: departamentos-index.php");
             }
 } else {
     // Check existence of id parameter before processing further
@@ -91,7 +92,7 @@ if(isset($_POST["idDepartamento"]) && !empty($_POST["idDepartamento"])){
         mysqli_stmt_close($stmt);
 
         // Close connection
-        // mysqli_close($link);
+        mysqli_close($link);
 
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
@@ -124,7 +125,7 @@ if(isset($_POST["idDepartamento"]) && !empty($_POST["idDepartamento"])){
 
                         <div class="form-group">
                             <label>Código del Departamento</label>
-                            <input type="text" name="codigoDepartamento" class="form-control" value="<?php echo $codigoDepartamento; ?>">
+                            <input type="number" name="codigoDepartamento" class="form-control" value="<?php echo $codigoDepartamento; ?>">
                             <span class="form-text"><?php echo $codigoDepartamento_err; ?></span>
                         </div>
 
@@ -136,7 +137,7 @@ if(isset($_POST["idDepartamento"]) && !empty($_POST["idDepartamento"])){
 
                         <div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
-                            <input type="text" name="estado" class="form-control" value="<?php echo $estado; ?>">
+                            <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
 

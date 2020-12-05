@@ -73,7 +73,7 @@ if(isset($_GET["idDepartamento"]) && !empty(trim($_GET["idDepartamento"]))){
                         
                     <div class="form-group">
                         <label>Código del Departamento</label>
-                        <input type="text" name="codigoDepartamento" class="form-control" value="<?php echo $row['codigoDepartamento']; ?>" readonly>
+                        <input type="number" name="codigoDepartamento" class="form-control" value="<?php echo $row['codigoDepartamento']; ?>" readonly>
                      </div>
 
                     <div class="form-group">
