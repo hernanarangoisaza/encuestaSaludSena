@@ -105,7 +105,6 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
 					$emailContacto2 = $row["emailContacto2"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
-					
 
                 } else{
                     // URL doesn't contain valid id. Redirect to error page

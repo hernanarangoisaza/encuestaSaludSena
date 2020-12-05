@@ -116,7 +116,7 @@
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th class='estilo-acciones'>Acciones</th>";
-                                        echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Id Centro Formación</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Id Centro Formación</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreCorto&sort=$sort>Nombre corto</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreLargoCentroFormacion&sort=$sort>Nombre del Centro</th>";
 										echo "<th><a href=?search=$search&sort=&order=direccion&sort=$sort>Dirección</th>";
@@ -138,7 +138,7 @@
                                         echo "<a href='centros_formacion-update.php?idCentroFormacion=". $row['idCentroFormacion'] ."'><i class='far fa-edit'></i></a>";
                                         echo "<a href='centros_formacion-delete.php?idCentroFormacion=". $row['idCentroFormacion'] ."'><i class='far fa-trash-alt'></i></a>";
                                     echo "</td>";
-                                    echo "<td class='centrar-columna'>" . $row['idCentroFormacion'] . "</td>";
+                                    echo "<td class='centrar-columna ocultar-columna'>" . $row['idCentroFormacion'] . "</td>";
                                     echo "<td>" . $row['nombreCorto'] . "</td>";
                                     echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
                                     echo "<td>" . $row['direccion'] . "</td>";

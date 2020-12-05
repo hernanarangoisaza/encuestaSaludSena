@@ -27,7 +27,6 @@ $aceptacionRespuestaPositiva_err = "";
 $estado_err = "";
 $auditoria_err = "";
 
-
 // Processing form data when form is submitted
 if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
     // Get hidden input value

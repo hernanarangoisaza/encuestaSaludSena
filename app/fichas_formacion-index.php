@@ -2,28 +2,19 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Gestión de Fichas de Formación</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6b773fe9e4.js" crossorigin="anonymous"></script>
-    <style type="text/css">
-        .page-header h2{
-            margin-top: 0;
-        }
-        table tr td:last-child a{
-            margin-right: 5px;
-        }
-        body {
-            font-size: 14px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-4">
-        <div class="container-fluid">
+        <div class="container-fluid index">
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Fichas de formación - Detalle</h2>
+                        <h2 class="float-left">Fichas de formación - Listado General</h2>
                         <a href="fichas_formacion-create.php" class="btn btn-success float-right">Agregar registro</a>
                         <a href="fichas_formacion-index.php" class="btn btn-info float-right mr-2">Restablecer vista</a>
                         <a href="index.php" class="btn btn-secondary float-right mr-2">Regresar</a>
@@ -34,9 +25,8 @@
                         <div class="col">
                           <input type="text" class="form-control" placeholder="Buscar en esta tabla" name="search">
                         </div>
-                    </div>
                         </form>
-                    <br>
+                    </div>
 
                     <?php
                     // Include config file
@@ -85,19 +75,30 @@
                     }
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM fichas_formacion ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    $sql = "SELECT FF.*,
+                            PF.nombreLargoProgramaFormacion
+                            FROM fichas_formacion FF
+                            LEFT JOIN programas_formacion PF ON PF.idProgramaFormacion = FF.idProgramaFormacion
+                            ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    
                     $count_pages = "SELECT * FROM fichas_formacion";
 
-                    
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
-                        $sql = "SELECT * FROM fichas_formacion
-                            WHERE CONCAT (idFichaFormacion,codigoFichaFormacion,idProgramaFormacion,estado,auditoria)
+                        $sql = "SELECT FF.*,
+                            PF.nombreLargoProgramaFormacion
+                            FROM fichas_formacion FF
+                            LEFT JOIN programas_formacion PF ON PF.idProgramaFormacion = FF.idProgramaFormacion
+                            WHERE CONCAT (FF.idFichaFormacion,FF.codigoFichaFormacion,PF.nombreLargoProgramaFormacion,FF.estado,FF.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
-                        $count_pages = "SELECT * FROM fichas_formacion
-                            WHERE CONCAT (idFichaFormacion,codigoFichaFormacion,idProgramaFormacion,estado,auditoria)
+                        
+                        $count_pages = "SELECT FF.*,
+                            PF.nombreLargoProgramaFormacion
+                            FROM fichas_formacion FF
+                            LEFT JOIN programas_formacion PF ON PF.idProgramaFormacion = FF.idProgramaFormacion
+                            WHERE CONCAT (FF.idFichaFormacion,FF.codigoFichaFormacion,PF.nombreLargoProgramaFormacion,FF.estado,FF.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -112,32 +113,37 @@
                            }
                             $number_of_results = mysqli_num_rows($result_count);
                             echo "<div class='cantidad-paginas'>" . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages . "</div>";
-
-                            echo "<table class='table table-bordered table-striped'>";
+                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer vista] para orden original o ver todos los registros</p>";
+                            echo "<div class='seccion-tabla-scroll-horizontal'>";
+                            echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Id Ficha Formación</th>";
+                                        echo "<th>Acciones</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Id Ficha Formación</th>";
 										echo "<th><a href=?search=$search&sort=&order=codigoFichaFormacion&sort=$sort>Código</th>";
 										echo "<th><a href=?search=$search&sort=&order=idProgramaFormacion&sort=$sort>Id Programa de formación</th>";
-										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
-										
-                                        echo "<th>Acciones</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idFichaFormacion'] . "</td>";echo "<td>" . $row['codigoFichaFormacion'] . "</td>";echo "<td>" . $row['idProgramaFormacion'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
-                                        echo "<td>";
-                                            echo "<a href='fichas_formacion-read.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                                            echo "<a href='fichas_formacion-update.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                                            echo "<a href='fichas_formacion-delete.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
-                                        echo "</td>";
+                                    echo "<td>";
+                                        echo "<a href='fichas_formacion-read.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
+                                        echo "<a href='fichas_formacion-update.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                                        echo "<a href='fichas_formacion-delete.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                                    echo "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['idFichaFormacion'] . "</td>";
+                                    echo "<td>" . $row['codigoFichaFormacion'] . "</td>";
+                                    echo "<td>" . $row['nombreLargoProgramaFormacion'] . "</td>";
+                                    echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";
                             echo "</table>";
+                                                    echo "</div>";
 ?>
                                 <ul class="pagination" align-right>
                                 <?php

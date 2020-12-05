@@ -79,7 +79,7 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
                         <h1>Encuesta de Signos - Visualizar</h1>
                     </div>
                         
-                     <div class="form-group">
+                    <div class="form-group">
                         <label>Aprendiz</label>
                         <input type="text" name="idAprendiz" class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
                     </div>
