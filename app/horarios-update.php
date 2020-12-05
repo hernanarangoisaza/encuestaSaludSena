@@ -6,15 +6,16 @@ require_once "config.php";
 $horaInicial = "";
 $horaFinal = "";
 $nombreCorto = "";
+$jornada = "";
 $estado = "";
 $auditoria = "";
 
 $horaInicial_err = "";
 $horaFinal_err = "";
 $nombreCorto_err = "";
+$jornada_err = "";
 $estado_err = "";
 $auditoria_err = "";
-
 
 // Processing form data when form is submitted
 if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
@@ -26,6 +27,7 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
         $horaInicial = trim($_POST["horaInicial"]);
 		$horaFinal = trim($_POST["horaFinal"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
+        $jornada = trim($_POST["jornada"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = trim($_POST["auditoria"]);
 		
@@ -42,14 +44,15 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE horarios SET horaInicial=?,horaFinal=?,nombreCorto=?,estado=?,auditoria=? WHERE idHorario=?");
+        $stmt = $pdo->prepare("UPDATE horarios SET horaInicial=?,horaFinal=?,nombreCorto=?,jornada=?,estado=?,auditoria=? WHERE idHorario=?");
 
-        if(!$stmt->execute([ $horaInicial,$horaFinal,$nombreCorto,$estado,$auditoria,$idHorario  ])) {
+        if(!$stmt->execute([ $horaInicial,$horaFinal,$nombreCorto,$jornada,$estado,$auditoria,$idHorario ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
                 $stmt = null;
-                header("location: horarios-read.php?idHorario=$idHorario");
+                //header("location: horarios-read.php?idHorario=$idHorario");
+                header("location: horarios-index.php");
             }
 } else {
     // Check existence of id parameter before processing further
@@ -80,10 +83,10 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
                     $horaInicial = $row["horaInicial"];
 					$horaFinal = $row["horaFinal"];
 					$nombreCorto = $row["nombreCorto"];
+                    $jornada = $row["jornada"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
 					
-
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
                     header("location: error.php");
@@ -113,8 +116,10 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Actualizar Registro</title>
+    <title>Actualizar Horario</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-4">
@@ -122,40 +127,136 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
             <div class="row">
                 <div class="col-md-12 mx-auto">
                     <div class="page-header">
-                        <h2>Actualizar Registro</h2>
+                        <h2>Horario - Actualizar</h2>
                     </div>
                     <p>Por favor ingrese nueva información para actualizar el registro.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 
                         <div class="form-group">
                             <label>Hora Inicial</label>
-                            <input type="number" name="horaInicial" class="form-control" value="<?php echo $horaInicial; ?>">
+                            <input type="time" name="horaInicial" class="form-control" value="<?php echo $horaInicial; ?>">
                             <span class="form-text"><?php echo $horaInicial_err; ?></span>
                         </div>
-						<div class="form-group">
+
+                        <div class="form-group">
                             <label>Hora Final</label>
-                            <input type="number" name="horaFinal" class="form-control" value="<?php echo $horaFinal; ?>">
+                            <input type="time" name="horaFinal" class="form-control" value="<?php echo $horaFinal; ?>">
                             <span class="form-text"><?php echo $horaFinal_err; ?></span>
                         </div>
-						<div class="form-group">
+
+                        <div class="form-group">
                             <label>Nombre corto</label>
                             <input type="text" name="nombreCorto" maxlength="50" class="form-control" value="<?php echo $nombreCorto; ?>">
                             <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
-						<div class="form-group">
+
+                        <div class="form-group">
+                            <label>Jornada</label>
+                            <select name="jornada" class="form-control combo-box" id="jornada">
+                            <?php
+                                if ($jornada == -1)
+                                {
+                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
+                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
+                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
+                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
+                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
+                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
+                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
+                                }
+                                else if ($jornada == 1)
+                                {
+                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
+                                    echo "<option class='item-combo-box' value='1' selected>Mañana</option>";
+                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
+                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
+                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
+                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
+                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
+                                }
+                                else if ($jornada == 2)
+                                {
+                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
+                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
+                                    echo "<option class='item-combo-box' value='2' selected>Tarde</option>";
+                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
+                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
+                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
+                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
+                                }
+                                else if ($jornada == 3)
+                                {
+                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
+                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
+                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
+                                    echo "<option class='item-combo-box' value='3' selected>Noche</option>";
+                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
+                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
+                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
+                                }
+                                else if ($jornada == 4)
+                                {
+                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
+                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
+                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
+                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
+                                    echo "<option class='item-combo-box' value='4' selected>Mixta mañana-tarde</option>";
+                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
+                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
+                                }
+                                 else if ($jornada == 5)
+                                {
+                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
+                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
+                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
+                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
+                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
+                                    echo "<option class='item-combo-box' value='5' selected>Mixta tarde-noche</option>";
+                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
+                                }
+                                else if ($jornada == 6)
+                                {
+                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
+                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
+                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
+                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
+                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
+                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
+                                    echo "<option class='item-combo-box' value='6' selected>Completa</option>";
+                                }
+                                else
+                                {
+                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
+                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
+                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
+                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
+                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
+                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
+                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
+                                }
+                             ?>
+                            </select>
+                            <span class="form-text"><?php echo $jornada_err; ?></span>
+                        </div>
+
+                        <div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
                             <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
-						<div class="form-group">
+
+                        <div class="form-group ocultar-columna">
                             <label>Fecha/Hora de auditoría</label>
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $auditoria; ?>">
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
                         </div>
 
                         <input type="hidden" name="idHorario" value="<?php echo $idHorario; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Grabar">
-                        <a href="horarios-index.php" class="btn btn-secondary">Cancelar</a>
+                        <p>
+                            <input type="submit" class="btn btn-primary" value="Grabar">
+                            <a href="horarios-index.php" class="btn btn-secondary">Cancelar</a>
+                        </p>
+
                     </form>
                 </div>
             </div>

@@ -122,7 +122,7 @@
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
 										
-                                        echo "<th>Acciones</th>";
+                                        echo "<th class='estilo-acciones'>Acciones</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";

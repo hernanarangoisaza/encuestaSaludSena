@@ -166,7 +166,7 @@
                                             echo 'Si';
                                         }
                                         else if ($row['aceptacionConsideraciones'] == -1) {
-                                            echo 'Sin responder';
+                                            echo 'Sin asignar';
                                         }
                                     echo "</td>";
                                     echo "<td class='centrar-columna'>";
@@ -177,7 +177,7 @@
                                             echo 'Si';
                                         }
                                         else if ($row['autorizacionTratamientoDatos'] == -1) {
-                                            echo 'Sin responder';
+                                            echo 'Sin asignar';
                                         }
                                     echo "</td>";
                                     echo "<td class='centrar-columna'>";
@@ -188,7 +188,7 @@
                                             echo 'Si';
                                         }
                                         else if ($row['autorizacionIngreso'] == -1) {
-                                            echo 'Sin responder';
+                                            echo 'Sin asignar';
                                         }
                                     echo "</td>";
                                     echo "<td class='centrar-columna'>" . '< En vista individual >' . "</td>";
@@ -200,7 +200,7 @@
                                             echo 'Si';
                                         }
                                         else if ($row['aceptacionRespuestaPositiva'] == -1) {
-                                            echo 'Sin responder';
+                                            echo 'Sin asignar';
                                         }
                                     echo "</td>";
                                     echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";

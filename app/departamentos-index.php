@@ -107,7 +107,7 @@
                             echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th>Acciones</th>";
+                                        echo "<th class='estilo-acciones'>Acciones</th>";
                                         echo "<th><a href=?search=$search&sort=&order=codigoDepartamento&sort=$sort>Código Departamento</th>";
 										echo "<th><a href=?search=$search&sort=&order=departamento&sort=$sort>Nombre</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";

@@ -86,7 +86,36 @@ if(isset($_GET["idHorario"]) && !empty(trim($_GET["idHorario"]))){
                         <input type="text" name="nombreCorto" class="form-control" value="<?php echo $row['nombreCorto']; ?>" readonly>
                     </div>
 
-                    <div class="form-group ocultar-columna">
+                    <div class="form-group">
+                        <label>Jornada</label>
+                        <input type="text" name="jornada" class="form-control" 
+                            value="<?php
+                                if ($row['jornada'] == 1) {
+                                    echo 'Mañana';
+                                }
+                                else if ($row['jornada'] == 2) {
+                                    echo 'Tarde';
+                                }
+                                else if ($row['jornada'] == 3) {
+                                    echo 'Noche';
+                                }
+                                else if ($row['jornada'] == 4) {
+                                    echo 'Mixta mañana-tarde';
+                                }
+                                else if ($row['jornada'] == 5) {
+                                    echo 'Mixta tarde-noche';
+                                }
+                                else if ($row['jornada'] == 6) {
+                                    echo 'Completa';
+                                }
+                                else if ($row['jornada'] == -1) {
+                                    echo 'Sin asignar';
+                                }
+                            ?>
+                            " readonly>
+                    </div>
+ 
+                     <div class="form-group ocultar-columna">
                         <label>Estado del registro</label>
                         <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
                     </div>

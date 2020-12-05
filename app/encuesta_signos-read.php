@@ -110,7 +110,7 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
                                     echo 'Si';
                                 }
                                 else if ($row['aceptacionConsideraciones'] == -1) {
-                                    echo 'Sin responder';
+                                    echo 'Sin asignar';
                                 }
                             ?>
                             " readonly>
@@ -127,7 +127,7 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
                                     echo 'Si';
                                 }
                                 else if ($row['autorizacionTratamientoDatos'] == -1) {
-                                    echo 'Sin responder';
+                                    echo 'Sin asignar';
                                 }
                             ?>
                             " readonly>
@@ -144,7 +144,7 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
                                     echo 'Si';
                                 }
                                 else if ($row['autorizacionIngreso'] == -1) {
-                                    echo 'Sin responder';
+                                    echo 'Sin asignar';
                                 }
                             ?>
                             " readonly>
@@ -166,7 +166,7 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
                                     echo 'Si';
                                 }
                                 else if ($row['aceptacionRespuestaPositiva'] == -1) {
-                                    echo 'Sin responder';
+                                    echo 'Sin asignar';
                                 }
                             ?>
                             " readonly>

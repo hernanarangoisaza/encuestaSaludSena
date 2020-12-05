@@ -147,7 +147,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="form-group">
                             <label>Horario</label>
                             <?php
-                                $sql_cb3 = "SELECT idHorario, nombreCorto FROM horarios";
+                                $sql_cb3 = "SELECT idHorario, nombreCorto FROM horarios ORDER BY horaInicial, horaFinal";
                                 $result_cb3 = mysqli_query($link, $sql_cb3);
                                 echo "<select name='idHorario' id='cb3' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb3)) {
@@ -166,7 +166,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="form-group">
                             <label>Aceptación de consideraciones</label>
                             <select name="aceptacionConsideraciones" class="form-control combo-box" id="aceptacionConsideraciones">
-                                <option value="-1">Sin responder</option>
+                                <option value="-1">Sin asignar</option>
                                 <option value="0">No</option>
                                 <option value="1">Si</option>
                             </select>
@@ -176,7 +176,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="form-group">
                             <label>Autorización de tratamiento de datos</label>
                             <select name="autorizacionTratamientoDatos" class="form-control combo-box" id="autorizacionTratamientoDatos">
-                                <option value="-1">Sin responder</option>
+                                <option value="-1">Sin asignar</option>
     						    <option value="0">No</option>
     						    <option value="1">Si</option>
 						    </select>
@@ -186,7 +186,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="form-group">
                             <label>Autorización de ingreso</label>
                             <select name="autorizacionIngreso" class="form-control combo-box" id="autorizacionIngreso">
-                                <option value="-1">Sin responder</option>
+                                <option value="-1">Sin asignar</option>
     						    <option value="0">No</option>
     						    <option value="1">Si</option>
 						    </select>
@@ -202,7 +202,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="form-group">
                             <label>Aceptación de respuestas positivas</label>
                             <select name="aceptacionRespuestaPositiva" class="form-control combo-box" id="aceptacionRespuestaPositiva">
-                                <option value="-1">Sin responder</option>
+                                <option value="-1">Sin asignar</option>
                                 <option value="0">No</option>
                                 <option value="1">Si</option>
                             </select>

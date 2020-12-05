@@ -96,7 +96,7 @@ if(isset($_GET["idRespuestaEncuesta"]) && !empty(trim($_GET["idRespuestaEncuesta
                                     echo 'Si';
                                 }
                                 else if ($row['respuestaSiNo'] == -1) {
-                                    echo 'Sin responder';
+                                    echo 'Sin asignar';
                                 }
                             ?>
                             " readonly>

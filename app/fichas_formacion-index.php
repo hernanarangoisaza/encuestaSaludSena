@@ -118,12 +118,12 @@
                             echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th>Acciones</th>";
-                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Id Ficha Formación</th>";
+                                        echo "<thclass='estilo-acciones'>Acciones</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Id Ficha de Formación</th>";
 										echo "<th><a href=?search=$search&sort=&order=codigoFichaFormacion&sort=$sort>Código</th>";
-										echo "<th><a href=?search=$search&sort=&order=idProgramaFormacion&sort=$sort>Id Programa de formación</th>";
+										echo "<th><a href=?search=$search&sort=&order=idProgramaFormacion&sort=$sort>Programa de formación</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
+										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
