@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Fichas de formación - Listado General</h2>
+                        <h2 class="float-left">Fichas de Formación - Listado General</h2>
                         <a href="fichas_formacion-create.php" class="btn btn-success float-right">Agregar registro</a>
                         <a href="fichas_formacion-index.php" class="btn btn-info float-right mr-2">Restablecer vista</a>
                         <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
