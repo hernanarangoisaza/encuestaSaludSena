@@ -93,12 +93,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $result_cb5 = mysqli_query($link, $sql_cb5);
                                 echo "<select name='idEncuesta' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
-                                    if ($idEncuesta != $row['idEncuesta'])
-                                    {
-                                        echo "<option class='item-combo-box' value='" . $row['idEncuesta'] . "'>" . $row['idEncuesta'] . ' * ' . $row['fechaHoraDiligenciamiento'] . ' * ' . $row['nombreCompleto'] . "</option>";
-                                    } else {
-                                        echo "<option class='item-combo-box' selected value='" . $row['idEncuesta'] . "'>" . $row['idEncuesta'] . ' - ' . $row['fechaHoraDiligenciamiento'] . ' - ' . $row['nombreCompleto'] . "</option>";
-                                    }
+                                    $selected = ($idEncuesta != $row['idEncuesta']) ? ('') : ('selected');
+                                    echo "<option class='item-combo-box' $selected value='" . $row['idEncuesta'] . "'>" . $row['idEncuesta'] . ' * ' . $row['fechaHoraDiligenciamiento'] . ' * ' . $row['nombreCompleto'] . "</option>";                                
                                 }
                                 echo "</select>";
                             ?>
