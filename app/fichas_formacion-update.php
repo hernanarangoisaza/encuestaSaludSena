@@ -23,7 +23,7 @@ if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
         $codigoFichaFormacion = trim($_POST["codigoFichaFormacion"]);
 		$idProgramaFormacion = trim($_POST["idProgramaFormacion"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [

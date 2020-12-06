@@ -33,7 +33,7 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
 		$permisos = trim($_POST["permisos"]);
 		$restricciones = trim($_POST["restricciones"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";

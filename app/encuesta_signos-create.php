@@ -101,7 +101,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Aprendiz</label>
-                            <span class="form-text"><?php echo $idAprendiz_err; ?></span>
                             <?php
                                 $sql_cb1 = "SELECT idAprendiz, nombreCompleto FROM aprendices";
                                 $result_cb1 = mysqli_query($link, $sql_cb1);

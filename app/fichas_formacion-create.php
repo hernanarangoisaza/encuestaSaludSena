@@ -105,12 +105,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
-                            <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
+                            <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>">
                         </div>
 
                         <div class="form-group ocultar-columna">
                             <label>Fecha/Hora de auditoría</label>
-                            <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
+                            <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>">
                         </div>
 
                         <input type="submit" class="btn btn-primary" value="Grabar">

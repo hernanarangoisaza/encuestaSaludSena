@@ -45,7 +45,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
 		$emailContacto1 = trim($_POST["emailContacto1"]);
 		$emailContacto2 = trim($_POST["emailContacto2"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [

@@ -33,7 +33,7 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
 		$fechaHoraTomaSalida = trim($_POST["fechaHoraTomaSalida"]);
 		$temperaturaSalida = trim($_POST["temperaturaSalida"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";

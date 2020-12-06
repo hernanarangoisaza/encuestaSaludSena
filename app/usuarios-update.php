@@ -60,7 +60,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
 		$idRolSistema = trim($_POST["idRolSistema"]);
 		$passwordSistema = trim($_POST["passwordSistema"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";

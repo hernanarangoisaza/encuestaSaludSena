@@ -23,7 +23,7 @@ if(isset($_POST["idDepartamento"]) && !empty($_POST["idDepartamento"])){
         $codigoDepartamento = trim($_POST["codigoDepartamento"]);
         $departamento = trim($_POST["departamento"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [

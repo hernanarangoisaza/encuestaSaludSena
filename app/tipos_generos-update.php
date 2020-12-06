@@ -24,7 +24,7 @@ if(isset($_POST["idTipoGenero"]) && !empty($_POST["idTipoGenero"])){
         $nombreLargoGenero = trim($_POST["nombreLargoGenero"]);
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";

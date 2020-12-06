@@ -11,7 +11,6 @@ $textoPregunta_err = "";
 $estado_err = "";
 $auditoria_err = "";
 
-
 // Processing form data when form is submitted
 if(isset($_POST["idPreguntaEncuesta"]) && !empty($_POST["idPreguntaEncuesta"])){
     // Get hidden input value
@@ -21,9 +20,8 @@ if(isset($_POST["idPreguntaEncuesta"]) && !empty($_POST["idPreguntaEncuesta"])){
         
         $textoPregunta = trim($_POST["textoPregunta"]);
 		$estado = trim($_POST["estado"]);
-		$auditoria = trim($_POST["auditoria"]);
+		$auditoria = date('Y-m-d H:i:s');
 		
-
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [
           PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
