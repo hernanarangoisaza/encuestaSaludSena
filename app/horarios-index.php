@@ -130,36 +130,21 @@
                                     echo "<td class='centrar-columna'>" . $row['horaFinal'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";
                                     echo "<td class='centrar-columna'>";
-                                        if ($row['jornada'] == 1) {
-                                            echo 'Mañana';
-                                        }
-                                        else if ($row['jornada'] == 2) {
-                                            echo 'Tarde';
-                                        }
-                                        else if ($row['jornada'] == 3) {
-                                            echo 'Noche';
-                                        }
-                                        else if ($row['jornada'] == 4) {
-                                            echo 'Mixta mañana-tarde';
-                                        }
-                                        else if ($row['jornada'] == 5) {
-                                            echo 'Mixta tarde-noche';
-                                        }
-                                        else if ($row['jornada'] == 6) {
-                                            echo 'Completa';
-                                        }
-                                        else if ($row['jornada'] == -1) {
-                                            echo 'Sin asignar';
-                                        }
-                                        else {
-                                            echo 'Sin asignar';
-                                        }                                    echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
+                                        if ($row['jornada'] == 1) { echo 'Mañana'; }
+                                        else if ($row['jornada'] == 2) { echo 'Tarde'; }
+                                        else if ($row['jornada'] == 3) { echo 'Noche'; }
+                                        else if ($row['jornada'] == 4) { echo 'Mixta mañana-tarde'; }
+                                        else if ($row['jornada'] == 5) { echo 'Mixta tarde-noche'; }
+                                        else if ($row['jornada'] == 6) { echo 'Completa'; }
+                                        else if ($row['jornada'] == -1) { echo 'Sin asignar'; }
+                                        else { echo 'Sin asignar'; }                                    
+                                    echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
                                 echo "</tr>";
                                 }
                                 echo "</tbody>";
                             echo "</table>";
-                                                    echo "</div>";
+                            echo "</div>";
 ?>
                                 <ul class="pagination" align-right>
                                 <?php

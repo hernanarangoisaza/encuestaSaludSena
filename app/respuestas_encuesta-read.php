@@ -82,22 +82,17 @@ if(isset($_GET["idRespuestaEncuesta"]) && !empty(trim($_GET["idRespuestaEncuesta
 
                     <div class="form-group">
                         <label>Pregunta</label>
-                        <input type="text" name="idPreguntaEncuesta" class="form-control" value="<?php echo $row['textoPregunta']; ?>" readonly>
+                        <textarea name="textoPregunta" class="form-control" rows="5" readonly><?php echo $row['textoPregunta']; ?>
+                        </textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Respuesta</label>
                         <input type="text" name="respuestaSiNo" class="form-control" 
                             value="<?php
-                                if ($row['respuestaSiNo'] == 0) {
-                                    echo 'No';
-                                }
-                                else if ($row['respuestaSiNo'] == 1) {
-                                    echo 'Si';
-                                }
-                                else if ($row['respuestaSiNo'] == -1) {
-                                    echo 'Sin asignar';
-                                }
+                                if ($row['respuestaSiNo'] == 0) { echo 'No'; }
+                                else if ($row['respuestaSiNo'] == 1) { echo 'Si'; }
+                                else if ($row['respuestaSiNo'] == -1) { echo 'Sin asignar'; }
                             ?>
                             " readonly>
                     </div>

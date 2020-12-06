@@ -159,49 +159,25 @@
                                     echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";
                                     echo "<td class='centrar-columna'>";
-                                        if ($row['aceptacionConsideraciones'] == 0) {
-                                            echo 'No';
-                                        }
-                                        else if ($row['aceptacionConsideraciones'] == 1) {
-                                            echo 'Si';
-                                        }
-                                        else if ($row['aceptacionConsideraciones'] == -1) {
-                                            echo 'Sin asignar';
-                                        }
+                                        if ($row['aceptacionConsideraciones'] == 0) { echo 'No'; }
+                                        else if ($row['aceptacionConsideraciones'] == 1) { echo 'Si'; }
+                                        else if ($row['aceptacionConsideraciones'] == -1) { echo 'Sin asignar'; }
                                     echo "</td>";
                                     echo "<td class='centrar-columna'>";
-                                        if ($row['autorizacionTratamientoDatos'] == 0) {
-                                            echo 'No';
-                                        }
-                                        else if ($row['autorizacionTratamientoDatos'] == 1) {
-                                            echo 'Si';
-                                        }
-                                        else if ($row['autorizacionTratamientoDatos'] == -1) {
-                                            echo 'Sin asignar';
-                                        }
+                                        if ($row['autorizacionTratamientoDatos'] == 0) { echo 'No'; }
+                                        else if ($row['autorizacionTratamientoDatos'] == 1) { echo 'Si'; }
+                                        else if ($row['autorizacionTratamientoDatos'] == -1) { echo 'Sin asignar'; }
                                     echo "</td>";
                                     echo "<td class='centrar-columna'>";
-                                        if ($row['autorizacionIngreso'] == 0) {
-                                            echo 'No';
-                                        }
-                                        else if ($row['autorizacionIngreso'] == 1) {
-                                            echo 'Si';
-                                        }
-                                        else if ($row['autorizacionIngreso'] == -1) {
-                                            echo 'Sin asignar';
-                                        }
+                                        if ($row['autorizacionIngreso'] == 0) { echo 'No'; }
+                                        else if ($row['autorizacionIngreso'] == 1) { echo 'Si'; }
+                                        else if ($row['autorizacionIngreso'] == -1) { echo 'Sin asignar'; }
                                     echo "</td>";
                                     echo "<td class='centrar-columna'>" . '< En vista individual >' . "</td>";
                                     echo "<td class='centrar-columna'>";
-                                        if ($row['aceptacionRespuestaPositiva'] == 0) {
-                                            echo 'No';
-                                        }
-                                        else if ($row['aceptacionRespuestaPositiva'] == 1) {
-                                            echo 'Si';
-                                        }
-                                        else if ($row['aceptacionRespuestaPositiva'] == -1) {
-                                            echo 'Sin asignar';
-                                        }
+                                        if ($row['aceptacionRespuestaPositiva'] == 0) { echo 'No'; }
+                                        else if ($row['aceptacionRespuestaPositiva'] == 1) { echo 'Si'; }
+                                        else if ($row['aceptacionRespuestaPositiva'] == -1) { echo 'Sin asignar'; }
                                     echo "</td>";
                                     echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";

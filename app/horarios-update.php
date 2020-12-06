@@ -154,87 +154,24 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
                             <label>Jornada</label>
                             <select name="jornada" class="form-control combo-box" id="jornada">
                             <?php
-                                if ($jornada == -1)
-                                {
-                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
-                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
-                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
-                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
-                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
-                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
-                                }
-                                else if ($jornada == 1)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='1' selected>Mañana</option>";
-                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
-                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
-                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
-                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
-                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
-                                }
-                                else if ($jornada == 2)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
-                                    echo "<option class='item-combo-box' value='2' selected>Tarde</option>";
-                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
-                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
-                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
-                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
-                                }
-                                else if ($jornada == 3)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
-                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
-                                    echo "<option class='item-combo-box' value='3' selected>Noche</option>";
-                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
-                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
-                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
-                                }
-                                else if ($jornada == 4)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
-                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
-                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
-                                    echo "<option class='item-combo-box' value='4' selected>Mixta mañana-tarde</option>";
-                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
-                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
-                                }
-                                 else if ($jornada == 5)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
-                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
-                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
-                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
-                                    echo "<option class='item-combo-box' value='5' selected>Mixta tarde-noche</option>";
-                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
-                                }
-                                else if ($jornada == 6)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
-                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
-                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
-                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
-                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
-                                    echo "<option class='item-combo-box' value='6' selected>Completa</option>";
-                                }
-                                else
-                                {
-                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='1'>Mañana</option>";
-                                    echo "<option class='item-combo-box' value='2'>Tarde</option>";
-                                    echo "<option class='item-combo-box' value='3'>Noche</option>";
-                                    echo "<option class='item-combo-box' value='4'>Mixta mañana-tarde</option>";
-                                    echo "<option class='item-combo-box' value='5'>Mixta tarde-noche</option>";
-                                    echo "<option class='item-combo-box' value='6'>Completa</option>";
-                                }
-                             ?>
+                                $selected1 = ''; $selected2 = ''; $selected3 = ''; $selected4 = ''; 
+                                $selected5 = ''; $selected6 = ''; $selected7 = '';
+                                if ($jornada == -1) { $selected1 = 'selected'; }
+                                else if ($jornada == 1) { $selected2 = 'selected'; }
+                                else if ($jornada == 2) { $selected3 = 'selected'; }
+                                else if ($jornada == 3) { $selected4 = 'selected'; }
+                                else if ($jornada == 4) { $selected5 = 'selected'; }
+                                else if ($jornada == 5) { $selected6 = 'selected'; }
+                                else if ($jornada == 6) { $selected7 = 'selected'; }
+                                else { $selected1 = 'selected'; }
+                                echo "<option class='item-combo-box' value='-1' $selected1>Sin asignar</option>";
+                                echo "<option class='item-combo-box' value='1'  $selected2>Mañana</option>";
+                                echo "<option class='item-combo-box' value='2'  $selected3>Tarde</option>";
+                                echo "<option class='item-combo-box' value='3'  $selected4>Noche</option>";
+                                echo "<option class='item-combo-box' value='4'  $selected5>Mixta mañana-tarde</option>";
+                                echo "<option class='item-combo-box' value='5'  $selected6>Mixta tarde-noche</option>";
+                                echo "<option class='item-combo-box' value='6'  $selected7>Completa</option>";
+                            ?>
                             </select>
                             <span class="form-text"><?php echo $jornada_err; ?></span>
                         </div>

@@ -113,15 +113,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $result_cb5 = mysqli_query($link, $sql_cb5);
                                 echo "<select name='idPreguntaEncuesta' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
-                                    if ($idPreguntaEncuesta != $row['idPreguntaEncuesta'])
-                                    {
-                                        echo "<option class='item-combo-box' value='" . $row['idPreguntaEncuesta'] . "'>";
-                                        echo (strlen($row['textoPregunta']) >= 100) ? (substr($row['textoPregunta'],0,100) . '...') : (substr($row['textoPregunta'],0,100));
-                                        echo "</option>";
-                                    } else {
-                                        echo "<option class='item-combo-box' selected value='" . $row['idPreguntaEncuesta'] . "'>";
-                                        echo (strlen($row['textoPregunta']) >= 100) ? (substr($row['textoPregunta'],0,100) . '...') : (substr($row['textoPregunta'],0,100));
-                                        echo "</option>";                                    }
+                                    $selected = ($idPreguntaEncuesta != $row['idPreguntaEncuesta']) ? ('') : ('selected');
+                                    $option = (strlen($row['textoPregunta']) >= 100) ? (substr($row['textoPregunta'],0,100)) : ($row['textoPregunta']);
+                                    $muyLargo = (strlen($row['textoPregunta']) >= 100) ? ('...') : ('');
+                                    echo "<option class='item-combo-box' $selected value='" . $row['idPreguntaEncuesta'] . "'>$option $muyLargo</option>";                                    
                                 }
                                 echo "</select>";
                             ?>

@@ -127,15 +127,9 @@
                                     echo "<td class='centrar-columna'>" . $row['idEncuesta'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['idPreguntaEncuesta'] . "</td>";
                                     echo "<td class='centrar-columna'>"; 
-                                        if ($row['respuestaSiNo'] == 0) {
-                                            echo 'No';
-                                        }
-                                        else if ($row['respuestaSiNo'] == 1) {
-                                            echo 'Si';
-                                        }
-                                        else if ($row['respuestaSiNo'] == -1) {
-                                            echo 'Sin asignar';
-                                        }
+                                        if ($row['respuestaSiNo'] == 0) { echo 'No'; }
+                                        else if ($row['respuestaSiNo'] == 1) { echo 'Si'; }
+                                        else if ($row['respuestaSiNo'] == -1) { echo 'Sin asignar'; }
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";

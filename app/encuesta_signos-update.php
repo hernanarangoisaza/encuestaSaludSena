@@ -219,98 +219,50 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
                             <label>Aceptación de consideraciones</label>
                             <select name="aceptacionConsideraciones" class="form-control combo-box" id="aceptacionConsideraciones">
                             <?php
-                                if ($aceptacionConsideraciones == -1)
-                                {
-                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                                else if ($aceptacionConsideraciones == 0)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0' selected>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                                else if ($aceptacionConsideraciones == 1)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1' selected>Si</option>";
-                                }
-                                else
-                                {
-                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                            ?>
-                            </select>
-                            <span class="form-text"><?php echo $aceptacionConsideraciones_err; ?></span>
+                                $selected1 = ''; $selected2 = ''; $selected3 = '';
+                                if ($aceptacionConsideraciones == -1) { $selected1 = 'selected'; }
+                                else if ($aceptacionConsideraciones == 0) { $selected2 = 'selected'; }
+                                else if ($aceptacionConsideraciones == 1) { $selected3 = 'selected'; }
+                                else { $selected1 = 'selected'; }
+                                echo "<option class='item-combo-box' value='-1' $selected1>Sin asignar</option>";
+                                echo "<option class='item-combo-box' value='0'  $selected2>No</option>";
+                                echo "<option class='item-combo-box' value='1'  $selected3>Si</option>";
+                             ?>
+                             </select>
+                             <span class="form-text"><?php echo $aceptacionConsideraciones_err; ?></span>
                         </div>
 
                         <div class="form-group">
                             <label>Autorización de tratamiento de datos</label>
                             <select name="autorizacionTratamientoDatos" class="form-control combo-box" id="autorizacionTratamientoDatos">
                             <?php
-                                if ($autorizacionTratamientoDatos == -1)
-                                {
-                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                                else if ($autorizacionTratamientoDatos == 0)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0' selected>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                                else if ($autorizacionTratamientoDatos == 1)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1' selected>Si</option>";
-                                }
-                                else
-                                {
-                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                            ?>
-                            </select>
-                            <span class="form-text"><?php echo $autorizacionTratamientoDatos_err; ?></span>
+                                $selected1 = ''; $selected2 = ''; $selected3 = '';
+                                if ($autorizacionTratamientoDatos == -1) { $selected1 = 'selected'; }
+                                else if ($autorizacionTratamientoDatos == 0) { $selected2 = 'selected'; }
+                                else if ($autorizacionTratamientoDatos == 1) { $selected3 = 'selected'; }
+                                else { $selected1 = 'selected'; }
+                                echo "<option class='item-combo-box' value='-1' $selected1>Sin asignar</option>";
+                                echo "<option class='item-combo-box' value='0'  $selected2>No</option>";
+                                echo "<option class='item-combo-box' value='1'  $selected3>Si</option>";
+                             ?>
+                             </select>
+                             <span class="form-text"><?php echo $autorizacionTratamientoDatos_err; ?></span>
                         </div>
 
                         <div class="form-group">
                             <label>Autorización de ingreso</label>
                             <select name="autorizacionIngreso" class="form-control combo-box" id="autorizacionIngreso">
                             <?php
-                                if ($autorizacionIngreso == -1)
-                                {
-                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                                else if ($autorizacionIngreso == 0)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0' selected>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                                else if ($autorizacionIngreso == 1)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1' selected>Si</option>";
-                                }
-                                else
-                                {
-                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                            ?>
-                            </select>
+                                $selected1 = ''; $selected2 = ''; $selected3 = '';
+                                if ($autorizacionIngreso == -1) { $selected1 = 'selected'; }
+                                else if ($autorizacionIngreso == 0) { $selected2 = 'selected'; }
+                                else if ($autorizacionIngreso == 1) { $selected3 = 'selected'; }
+                                else { $selected1 = 'selected'; }
+                                echo "<option class='item-combo-box' value='-1' $selected1>Sin asignar</option>";
+                                echo "<option class='item-combo-box' value='0'  $selected2>No</option>";
+                                echo "<option class='item-combo-box' value='1'  $selected3>Si</option>";
+                             ?>
+                             </select>
                            <span class="form-text"><?php echo $autorizacionIngreso_err; ?></span>
                         </div>
 
@@ -324,32 +276,16 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
                             <label>Aceptación de respuestas positivas</label>
                             <select name="aceptacionRespuestaPositiva" class="form-control combo-box" id="aceptacionRespuestaPositiva">
                             <?php
-                                if ($aceptacionRespuestaPositiva == -1)
-                                {
-                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                                else if ($aceptacionRespuestaPositiva == 0)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0' selected>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                                else if ($aceptacionRespuestaPositiva == 1)
-                                {
-                                    echo "<option class='item-combo-box' value='-1'>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1' selected>Si</option>";
-                                }
-                                else
-                                {
-                                    echo "<option class='item-combo-box' value='-1' selected>Sin asignar</option>";
-                                    echo "<option class='item-combo-box' value='0'>No</option>";
-                                    echo "<option class='item-combo-box' value='1'>Si</option>";
-                                }
-                            ?>
-                            </select>
+                                $selected1 = ''; $selected2 = ''; $selected3 = '';
+                                if ($aceptacionRespuestaPositiva == -1) { $selected1 = 'selected'; }
+                                else if ($aceptacionRespuestaPositiva == 0) { $selected2 = 'selected'; }
+                                else if ($aceptacionRespuestaPositiva == 1) { $selected3 = 'selected'; }
+                                else { $selected1 = 'selected'; }
+                                echo "<option class='item-combo-box' value='-1' $selected1>Sin asignar</option>";
+                                echo "<option class='item-combo-box' value='0'  $selected2>No</option>";
+                                echo "<option class='item-combo-box' value='1'  $selected3>Si</option>";
+                             ?>
+                             </select>
                              <span class="form-text"><?php echo $aceptacionRespuestaPositiva_err; ?></span>
                         </div>
 
