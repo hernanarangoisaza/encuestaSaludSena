@@ -132,7 +132,7 @@
 										echo "<th><a href=?search=$search&sort=&order=idRolSistema&sort=$sort>Id Rol del sistema</th>";
 										echo "<th><a href=?search=$search&sort=&order=passwordSistema&sort=$sort>Contraseña del sistema</th>";
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
 										
                                         echo "<th class='estilo-acciones'>Acciones</th>";
                                     echo "</tr>";
@@ -140,7 +140,7 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idUsuario'] . "</td>";echo "<td>" . $row['idTipoVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['idTipoIdentificacion'] . "</td>";echo "<td>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td>" . $row['telefonoPersonal'] . "</td>";echo "<td>" . $row['fechaNacimiento'] . "</td>";echo "<td>" . $row['idTipoGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['idCentroFormacion'] . "</td>";echo "<td>" . $row['idRolSistema'] . "</td>";echo "<td>" . $row['passwordSistema'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idUsuario'] . "</td>";echo "<td>" . $row['idTipoVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['idTipoIdentificacion'] . "</td>";echo "<td>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td>" . $row['telefonoPersonal'] . "</td>";echo "<td>" . $row['fechaNacimiento'] . "</td>";echo "<td>" . $row['idTipoGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['idCentroFormacion'] . "</td>";echo "<td>" . $row['idRolSistema'] . "</td>";echo "<td>" . $row['passwordSistema'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='usuarios-read.php?idUsuario=". $row['idUsuario'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                             echo "<a href='usuarios-update.php?idUsuario=". $row['idUsuario'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";

@@ -123,7 +123,7 @@
 										echo "<th><a href=?search=$search&sort=&order=permisos&sort=$sort>Permisos</th>";
 										echo "<th><a href=?search=$search&sort=&order=restricciones&sort=$sort>Restricciones</th>";
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
 										
                                         echo "<th class='estilo-acciones'>Acciones</th>";
                                     echo "</tr>";
@@ -131,7 +131,7 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idRolSistema'] . "</td>";echo "<td>" . $row['nombreLargoRolSistema'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['descripcionRolSistema'] . "</td>";echo "<td>" . $row['permisos'] . "</td>";echo "<td>" . $row['restricciones'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idRolSistema'] . "</td>";echo "<td>" . $row['nombreLargoRolSistema'] . "</td>";echo "<td>" . $row['nombreCorto'] . "</td>";echo "<td>" . $row['descripcionRolSistema'] . "</td>";echo "<td>" . $row['permisos'] . "</td>";echo "<td>" . $row['restricciones'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='roles_sistema-read.php?idRol=". $row['idRolSistema'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                             echo "<a href='roles_sistema-update.php?idRol=". $row['idRolSistema'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";

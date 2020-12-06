@@ -118,12 +118,12 @@
                             echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<thclass='estilo-acciones'>Acciones</th>";
+                                        echo "<th class='estilo-acciones'>Acciones</th>";
                                         echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Id Ficha de Formación</th>";
 										echo "<th><a href=?search=$search&sort=&order=codigoFichaFormacion&sort=$sort>Código</th>";
 										echo "<th><a href=?search=$search&sort=&order=idProgramaFormacion&sort=$sort>Programa de formación</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -138,7 +138,7 @@
                                     echo "<td>" . $row['codigoFichaFormacion'] . "</td>";
                                     echo "<td>" . $row['nombreLargoProgramaFormacion'] . "</td>";
                                     echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";
-                                    echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";

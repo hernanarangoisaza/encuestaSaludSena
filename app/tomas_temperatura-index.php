@@ -123,7 +123,7 @@
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraTomaSalida&sort=$sort>Fecha/hora toma de salida</th>";
 										echo "<th><a href=?search=$search&sort=&order=temperaturaSalida&sort=$sort>Temperatura a la salida</th>";
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
 										
                                         echo "<th class='estilo-acciones'>Acciones</th>";
                                     echo "</tr>";
@@ -131,7 +131,7 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idToma'] . "</td>";echo "<td>" . $row['idEncuesta'] . "</td>";echo "<td>" . $row['fechaHoraTomaEntrada'] . "</td>";echo "<td>" . $row['temperaturaEntrada'] . "</td>";echo "<td>" . $row['fechaHoraTomaSalida'] . "</td>";echo "<td>" . $row['temperaturaSalida'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td>" . $row['auditoria'] . "</td>";
+                                    echo "<td>" . $row['idToma'] . "</td>";echo "<td>" . $row['idEncuesta'] . "</td>";echo "<td>" . $row['fechaHoraTomaEntrada'] . "</td>";echo "<td>" . $row['temperaturaEntrada'] . "</td>";echo "<td>" . $row['fechaHoraTomaSalida'] . "</td>";echo "<td>" . $row['temperaturaSalida'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='tomas_temperatura-read.php?idToma=". $row['idToma'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                             echo "<a href='tomas_temperatura-update.php?idToma=". $row['idToma'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";

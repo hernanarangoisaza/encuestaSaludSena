@@ -114,7 +114,7 @@
 										echo "<th><a href=?search=$search&sort=&order=nombreCorto&sort=$sort>Nombre corto</th>";
                                         echo "<th><a href=?search=$search&sort=&order=jornada&sort=$sort>Jornada</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th class='centrar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -139,7 +139,7 @@
                                         else if ($row['jornada'] == -1) { echo 'Sin asignar'; }
                                         else { echo 'Sin asignar'; }                                    
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
-                                    echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                 echo "</tr>";
                                 }
                                 echo "</tbody>";

@@ -111,7 +111,7 @@
                                         echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idPreguntaEncuesta&sort=$sort>Id Pregunta</th>";
 										echo "<th><a href=?search=$search&sort=&order=textoPregunta&sort=$sort>Pregunta</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -125,7 +125,7 @@
                                     echo "<td class='ocultar-columna'>" . $row['idPreguntaEncuesta'] . "</td>";
                                     echo "<td>" . $row['textoPregunta'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
-                                    echo "<td class='centrar-columna'>" . $row['auditoria'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";
