@@ -15,7 +15,6 @@ $respuestaSiNo_err = "";
 $estado_err = "";
 $auditoria_err = "";
 
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    
@@ -36,7 +35,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$respuestaSiNo = trim($_POST["respuestaSiNo"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = date('Y-m-d H:i:s');
-		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [
@@ -58,7 +56,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
             }
-
 }
 ?>
 
@@ -66,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Registro</title>
+    <title>Crear Respuesta de la Encuesta</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -76,33 +73,78 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
-                        <h2>Crear Registro</h2>
+                        <h2>Respuesta de la Encuesta - Crear</h2>
                     </div>
                     
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                         <div class="form-group">
-                            <label>Id Encuesta</label>
-                            <input type="number" name="idEncuesta" class="form-control" value="<?php echo $idEncuesta; ?>">
+                            <label>Encuesta</label>
+                            <?php
+                                $sql_cb5 = "SELECT ES.idEncuesta,
+                                                   ES.idAprendiz,
+                                                   ES.fechaHoraDiligenciamiento,
+                                                   AP.nombreCompleto
+                                                   FROM encuesta_signos ES
+                                                   LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz";
+                                $result_cb5 = mysqli_query($link, $sql_cb5);
+                                echo "<select name='idEncuesta' id='cb5' class='combo-box form-control'>";
+                                while($row = mysqli_fetch_array($result_cb5)) {
+                                    if ($idEncuesta != $row['idEncuesta'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idEncuesta'] . "'>" . $row['idEncuesta'] . ' * ' . $row['fechaHoraDiligenciamiento'] . ' * ' . $row['nombreCompleto'] . "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idEncuesta'] . "'>" . $row['idEncuesta'] . ' - ' . $row['fechaHoraDiligenciamiento'] . ' - ' . $row['nombreCompleto'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
                             <span class="form-text"><?php echo $idEncuesta_err; ?></span>
                         </div>
+
 						<div class="form-group">
-                            <label>Id Pregunta</label>
-                            <input type="number" name="idPreguntaEncuesta" class="form-control" value="<?php echo $idPreguntaEncuesta; ?>">
+                            <label>Pregunta</label>
+                           <?php
+                                $sql_cb5 = "SELECT PE.idPreguntaEncuesta,
+                                                   PE.textoPregunta
+                                                   FROM preguntas_encuesta PE";
+                                $result_cb5 = mysqli_query($link, $sql_cb5);
+                                echo "<select name='idPreguntaEncuesta' id='cb5' class='combo-box form-control'>";
+                                while($row = mysqli_fetch_array($result_cb5)) {
+                                    if ($idPreguntaEncuesta != $row['idPreguntaEncuesta'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idPreguntaEncuesta'] . "'>";
+                                        echo (strlen($row['textoPregunta']) >= 100) ? (substr($row['textoPregunta'],0,100) . '...') : (substr($row['textoPregunta'],0,100));
+                                        echo "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idPreguntaEncuesta'] . "'>";
+                                        echo (strlen($row['textoPregunta']) >= 100) ? (substr($row['textoPregunta'],0,100) . '...') : (substr($row['textoPregunta'],0,100));
+                                        echo "</option>";                                    }
+                                }
+                                echo "</select>";
+                            ?>
                             <span class="form-text"><?php echo $idPreguntaEncuesta_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Respuesta</label>
-                            <input type="number" name="respuestaSiNo" class="form-control" value="<?php echo $respuestaSiNo; ?>">
+                            <select name="respuestaSiNo" class="form-control combo-box" id="respuestaSiNo">
+                                <option value="-1">Sin asignar</option>
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
                             <span class="form-text"><?php echo $respuestaSiNo_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
                             <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Fecha/Hora de auditoría</label>
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $auditoria; ?>">
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
@@ -110,11 +152,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="respuestas_encuesta-index.php" class="btn btn-secondary">Cancelar</a>
+
                     </form>
                 </div>
             </div>
         </div>
-    </section>
+    </section> 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>

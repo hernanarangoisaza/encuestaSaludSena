@@ -38,11 +38,12 @@ if(isset($_POST["idRespuestaEncuesta"]) && !empty($_POST["idRespuestaEncuesta"])
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Borrar Respuesta Encuesta</title>
+    <title>Borrar Respuesta de la Encuesta</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -52,9 +53,11 @@ if(isset($_POST["idRespuestaEncuesta"]) && !empty($_POST["idRespuestaEncuesta"])
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
-                        <h1>Respuesta Encuesta - Borrar</h1>
+                        <h1>Respuesta de la Encuesta - Borrar</h1>
                     </div>
+
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="fade-in">
                             <input type="hidden" name="idRespuestaEncuesta" value="<?php echo trim($_GET["idRespuestaEncuesta"]); ?>"/>
@@ -65,6 +68,7 @@ if(isset($_POST["idRespuestaEncuesta"]) && !empty($_POST["idRespuestaEncuesta"])
                             </p>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>
