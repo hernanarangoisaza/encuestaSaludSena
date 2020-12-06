@@ -17,7 +17,7 @@ $idDepartamento = "";
 $idCentroFormacion = "";
 $idRolSistema = "";
 $passwordSistema = "";
-$estado = "";
+$estado = "1";
 $auditoria = "";
 
 $idTipoVinculacion_err = "";
@@ -36,7 +36,6 @@ $idRolSistema_err = "";
 $passwordSistema_err = "";
 $estado_err = "";
 $auditoria_err = "";
-
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -70,7 +69,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$estado = trim($_POST["estado"]);
 		$auditoria = date('Y-m-d H:i:s');
 		
-
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [
           PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
@@ -91,7 +89,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
             }
-
 }
 ?>
 

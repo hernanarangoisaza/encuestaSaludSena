@@ -17,7 +17,7 @@ $idMunicipio = "";
 $idDepartamento = "";
 $idCentroFormacion = "";
 $idFichaFormacion = "";
-$estado = "";
+$estado = "1";
 $auditoria = "";
 
 $idTipoVinculacion_err = "";

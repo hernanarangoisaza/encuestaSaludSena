@@ -12,7 +12,7 @@ $telefono1 = "";
 $telefono2 = "";
 $emailContacto1 = "";
 $emailContacto2 = "";
-$estado = "";
+$estado = "1";
 $auditoria = "";
 
 $nombreCorto_err = "";
@@ -26,7 +26,6 @@ $emailContacto1_err = "";
 $emailContacto2_err = "";
 $estado_err = "";
 $auditoria_err = "";
-
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -75,7 +74,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
             }
-
 }
 ?>
 

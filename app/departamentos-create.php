@@ -5,7 +5,7 @@ require_once "config.php";
 // Define variables and initialize with empty values
 $codigoDepartamento = "";
 $departamento = "";
-$estado = "";
+$estado = "1";
 $auditoria = "";
 
 $codigoDepartamento_err = "";
@@ -54,7 +54,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
             }
-
 }
 ?>
 

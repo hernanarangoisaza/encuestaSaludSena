@@ -6,7 +6,7 @@ require_once "config.php";
 $codigoMunicipio = "";
 $municipio = "";
 $idDepartamento = "";
-$estado = "";
+$estado = "1";
 $auditoria = "";
 
 $codigoMunicipio_err = "";

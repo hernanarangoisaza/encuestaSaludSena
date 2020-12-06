@@ -5,7 +5,7 @@ require_once "config.php";
 // Define variables and initialize with empty values
 $nombreLargoProgramaFormacion = "";
 $nombreCorto = "";
-$estado = "";
+$estado = "1";
 $auditoria = "";
 
 $nombreProgramaFormacion_err = "";

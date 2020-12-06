@@ -12,7 +12,7 @@ $autorizacionTratamientoDatos = "";
 $autorizacionIngreso = "";
 $observacionAdicional = "";
 $aceptacionRespuestaPositiva = "";
-$estado = "";
+$estado = "1";
 $auditoria = "";
 
 $idAprendiz_err = "";
@@ -74,7 +74,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
             }
-
 }
 ?>
 

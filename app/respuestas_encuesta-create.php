@@ -6,7 +6,7 @@ require_once "config.php";
 $idEncuesta = "";
 $idPreguntaEncuesta = "";
 $respuestaSiNo = "";
-$estado = "";
+$estado = "1";
 $auditoria = "";
 
 $idEncuesta_err = "";

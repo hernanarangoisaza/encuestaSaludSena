@@ -4,7 +4,7 @@ require_once "config.php";
 
 // Define variables and initialize with empty values
 $textoPregunta = "";
-$estado = "";
+$estado = "1";
 $auditoria = "";
 
 $textoPregunta_err = "";
