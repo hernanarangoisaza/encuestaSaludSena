@@ -13,6 +13,7 @@
         <div class="container-fluid index">
             <div class="row">
                 <div class="col-md-12">
+
                     <div class="page-header clearfix">
                         <h2 class="float-left">Respuestas de la encuesta - Detalle</h2>
                         <a href="respuestas_encuesta-create.php" class="btn btn-success float-right">Agregar registro</a>
@@ -75,18 +76,30 @@
                     }
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM respuestas_encuesta ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    $sql = "SELECT RE.*,
+                            PE.textoPregunta
+                            FROM respuestas_encuesta RE
+                            LEFT JOIN preguntas_encuesta PE ON PE.idPreguntaEncuesta = RE.idPreguntaEncuesta
+                            ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    
                     $count_pages = "SELECT * FROM respuestas_encuesta";
                     
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
-                        $sql = "SELECT * FROM respuestas_encuesta
-                            WHERE CONCAT (idRespuestaEncuesta,idEncuesta,idPreguntaEncuesta,respuestaSiNo,estado,auditoria)
+                        $sql = "SELECT RE.*,
+                            PE.textoPregunta
+                            FROM respuestas_encuesta RE
+                            LEFT JOIN preguntas_encuesta PE ON PE.idPreguntaEncuesta = RE.idPreguntaEncuesta
+                            WHERE CONCAT (RE.idRespuestaEncuesta,RE.idEncuesta,PE.textoPregunta,RE.respuestaSiNo,RE.estado,RE.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
-                        $count_pages = "SELECT * FROM respuestas_encuesta
-                            WHERE CONCAT (idRespuestaEncuesta,idEncuesta,idPreguntaEncuesta,respuestaSiNo,estado,auditoria)
+                        
+                        $count_pages = "SELECT RE.*,
+                            PE.textoPregunta
+                            FROM respuestas_encuesta RE
+                            LEFT JOIN preguntas_encuesta PE ON PE.idPreguntaEncuesta = RE.idPreguntaEncuesta
+                            WHERE CONCAT (RE.idRespuestaEncuesta,RE.idEncuesta,PE.textoPregunta,RE.respuestaSiNo,RE.estado,RE.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -109,7 +122,7 @@
                                         echo "<th class='estilo-acciones'>Acciones</th>";
                                         echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idRespuestaEncuesta&sort=$sort>Id Respuesta</th>";
 										echo "<th><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id Encuesta</th>";
-										echo "<th><a href=?search=$search&sort=&order=idPreguntaEncuesta&sort=$sort>Id Pregunta</th>";
+										echo "<th><a href=?search=$search&sort=&order=idPreguntaEncuesta&sort=$sort>Pregunta</th>";
 										echo "<th><a href=?search=$search&sort=&order=respuestaSiNo&sort=$sort>Respuesta</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
@@ -125,7 +138,11 @@
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idRespuestaEncuesta'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['idEncuesta'] . "</td>";
-                                    echo "<td class='centrar-columna'>" . $row['idPreguntaEncuesta'] . "</td>";
+                                    echo "<td>";
+                                        $pregunta = (strlen($row['textoPregunta']) >= 175) ? (substr($row['textoPregunta'],0,175)) : ($row['textoPregunta']);
+                                        $muyLargo = (strlen($row['textoPregunta']) >= 175) ? ('...') : ('');
+                                        echo "$pregunta $muyLargo";                                    
+                                    echo "</td>";
                                     echo "<td class='centrar-columna'>"; 
                                         if ($row['respuestaSiNo'] == 0) { echo 'No'; }
                                         else if ($row['respuestaSiNo'] == 1) { echo 'Si'; }
