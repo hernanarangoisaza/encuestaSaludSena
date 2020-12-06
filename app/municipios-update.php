@@ -15,7 +15,6 @@ $idDepartamento_err = "";
 $estado_err = "";
 $auditoria_err = "";
 
-
 // Processing form data when form is submitted
 if(isset($_POST["idMunicipio"]) && !empty($_POST["idMunicipio"])){
     // Get hidden input value
@@ -144,7 +143,7 @@ if(isset($_POST["idMunicipio"]) && !empty($_POST["idMunicipio"])){
                         <div class="form-group">
                             <label>Departamento</label>
                             <?php
-                                $sql_cb5 = "SELECT idDepartamento, departamento FROM departamentos";
+                                $sql_cb5 = "SELECT idDepartamento, departamento FROM departamentos ORDER BY departamento";
                                 $result_cb5 = mysqli_query($link, $sql_cb5);
                                 echo "<select name='idDepartamento' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {

@@ -88,7 +88,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                                    ES.fechaHoraDiligenciamiento,
                                                    AP.nombreCompleto
                                                    FROM encuesta_signos ES
-                                                   LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz";
+                                                   LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz
+                                                   ORDER BY idEncuesta DESC";
                                 $result_cb5 = mysqli_query($link, $sql_cb5);
                                 echo "<select name='idEncuesta' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {

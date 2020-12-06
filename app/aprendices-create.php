@@ -89,7 +89,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
             }
-
 }
 ?>
 
@@ -117,7 +116,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                        <div class="form-group">
                             <label>Tipo de vinculación</label>
                             <?php
-                                $sql_cb1 = "SELECT idTipoVinculacion, nombreLargoVinculacion, nombreCorto FROM tipos_vinculaciones_sena";
+                                $sql_cb1 = "SELECT idTipoVinculacion, nombreLargoVinculacion, nombreCorto FROM tipos_vinculaciones_sena ORDER BY nombreLargoVinculacion";
                                 $result_cb1 = mysqli_query($link, $sql_cb1);
                                 echo "<select name='idTipoVinculacion' id='cb1' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb1)) {
@@ -216,7 +215,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="form-group">
                             <label>Departamento</label>
                             <?php
-                                $sql_cb5 = "SELECT idDepartamento, departamento FROM departamentos";
+                                $sql_cb5 = "SELECT idDepartamento, departamento FROM departamentos ORDER BY departamento";
                                 $result_cb5 = mysqli_query($link, $sql_cb5);
                                 echo "<select name='idDepartamento' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
@@ -235,7 +234,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="form-group">
                             <label>Municipio</label>
                             <?php
-                                $sql_cb4 = "SELECT idMunicipio, municipio FROM municipios";
+                                $sql_cb4 = "SELECT idMunicipio, municipio FROM municipios ORDER BY municipio";
                                 $result_cb4 = mysqli_query($link, $sql_cb4);
                                 echo "<select name='idMunicipio' id='cb4' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb4)) {
@@ -254,7 +253,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="form-group">
                             <label>Centro de formación</label>
                             <?php
-                                $sql_cb6 = "SELECT idCentroFormacion, nombreLargoCentroFormacion, nombreCorto FROM centros_formacion";
+                                $sql_cb6 = "SELECT idCentroFormacion, nombreLargoCentroFormacion, nombreCorto FROM centros_formacion ORDER BY nombreLargoCentroFormacion";
                                 $result_cb6 = mysqli_query($link, $sql_cb6);
                                 echo "<select name='idCentroFormacion' id='cb6' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb6)) {
@@ -273,7 +272,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="form-group">
                             <label>Ficha de formación</label>
                             <?php
-                                $sql_cb7 = "SELECT idFichaFormacion, codigoFichaFormacion FROM fichas_formacion";
+                                $sql_cb7 = "SELECT idFichaFormacion, codigoFichaFormacion FROM fichas_formacion ORDER BY codigoFichaFormacion";
                                 $result_cb7 = mysqli_query($link, $sql_cb7);
                                 echo "<select name='idFichaFormacion' id='cb7' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb7)) {

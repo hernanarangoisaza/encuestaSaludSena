@@ -13,7 +13,6 @@ $idProgramaFormacion_err = "";
 $estado_err = "";
 $auditoria_err = "";
 
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    
@@ -54,7 +53,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
             }
-
 }
 ?>
 
@@ -87,7 +85,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="form-group">
                             <label>Programa de formación</label>
                             <?php
-                                $sql_cb5 = "SELECT idProgramaFormacion, nombreLargoProgramaFormacion FROM programas_formacion";
+                                $sql_cb5 = "SELECT idProgramaFormacion, nombreLargoProgramaFormacion FROM programas_formacion ORDER BY nombreLargoProgramaFormacion";
                                 $result_cb5 = mysqli_query($link, $sql_cb5);
                                 echo "<select name='idProgramaFormacion' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {

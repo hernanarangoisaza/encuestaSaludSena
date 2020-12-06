@@ -133,7 +133,7 @@ if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
                         <div class="form-group">
                             <label>Programa de formación</label>
                             <?php
-                                $sql_cb5 = "SELECT idProgramaFormacion, nombreLargoProgramaFormacion FROM programas_formacion";
+                                $sql_cb5 = "SELECT idProgramaFormacion, nombreLargoProgramaFormacion FROM programas_formacion ORDER BY nombreLargoProgramaFormacion";
                                 $result_cb5 = mysqli_query($link, $sql_cb5);
                                 echo "<select name='idProgramaFormacion' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
