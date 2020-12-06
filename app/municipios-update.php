@@ -173,9 +173,11 @@ if(isset($_POST["idMunicipio"]) && !empty($_POST["idMunicipio"])){
                         </div>
 
                         <input type="hidden" name="idMunicipio" value="<?php echo $idMunicipio; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Grabar">
-                        <a href="municipios-index.php" class="btn btn-secondary">Cancelar</a>
-
+                        <p>
+                            <input type="submit" class="btn btn-primary" value="Grabar">
+                            <a href="municipios-index.php" class="btn btn-secondary">Cancelar</a>
+                        </p>
+                        
                     </form>
                 </div>
             </div>

@@ -11,7 +11,6 @@ $textoPregunta_err = "";
 $estado_err = "";
 $auditoria_err = "";
 
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    
@@ -30,7 +29,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $textoPregunta = trim($_POST["textoPregunta"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = date('Y-m-d H:i:s');
-		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [
@@ -52,7 +50,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
             }
-
 }
 ?>
 
@@ -60,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Pregunta Encuesta</title>
+    <title>Crear Pregunta de la Encuesta</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -71,22 +68,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="row">
                 <div class="col-md-12 mx-auto">
                     <div class="page-header">
-                        <h2>Pregunta Encuesta - Crear</h2>
+                        <h2>Pregunta de la Encuesta - Crear</h2>
                     </div>
                     
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                         <div class="form-group">
                             <label>Pregunta</label>
-                            <textarea name="textoPregunta" class="form-control"><?php echo $textoPregunta ; ?></textarea>
+                            <textarea name="textoPregunta" class="form-control" rows="5"><?php echo $textoPregunta ; ?></textarea>
                             <span class="form-text"><?php echo $textoPregunta_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
                             <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Fecha/Hora de auditoría</label>
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $auditoria; ?>">
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
@@ -94,6 +93,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="preguntas_encuesta-index.php" class="btn btn-secondary">Cancelar</a>
+
                     </form>
                 </div>
             </div>

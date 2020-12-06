@@ -73,7 +73,8 @@ if(isset($_GET["idPreguntaEncuesta"]) && !empty(trim($_GET["idPreguntaEncuesta"]
                         
                     <div class="form-group">
                         <label>Pregunta</label>
-                        <input type="text" name="textoPregunta" class="form-control" value="<?php echo $row['textoPregunta']; ?>" readonly>
+                        <textarea name="textoPregunta" class="form-control" rows="5" readonly><?php echo $row['textoPregunta']; ?>
+                        </textarea>
                     </div>
 
                     <div class="form-group ocultar-columna">
