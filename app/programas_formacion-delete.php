@@ -38,6 +38,7 @@ if(isset($_POST["idProgramaFormacion"]) && !empty($_POST["idProgramaFormacion"])
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -52,9 +53,11 @@ if(isset($_POST["idProgramaFormacion"]) && !empty($_POST["idProgramaFormacion"])
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
                         <h1>Programa de Formación - Borrar</h1>
                     </div>
+
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="fade-in">
                             <input type="hidden" name="idProgramaFormacion" value="<?php echo trim($_GET["idProgramaFormacion"]); ?>"/>
@@ -65,6 +68,7 @@ if(isset($_POST["idProgramaFormacion"]) && !empty($_POST["idProgramaFormacion"])
                             </p>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>
