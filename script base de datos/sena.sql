@@ -21,8 +21,10 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sena`
 --
+/*
 CREATE DATABASE IF NOT EXISTS `sena` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
 USE `sena`;
+*/
 
 -- --------------------------------------------------------
 

@@ -169,7 +169,7 @@
 										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
 										echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Centro de formación</th>";
 										echo "<th><a href=?search=$search&sort=&order=idRolSistema&sort=$sort>Rol del sistema</th>";
-										echo "<th><a href=?search=$search&sort=&order=passwordSistema&sort=$sort>Contraseña del sistema</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=passwordSistema&sort=$sort>Contraseña del sistema</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
@@ -196,7 +196,7 @@
                                     echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";
                                     echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";
-                                    echo "<td class='centrar-columna'>" . $row['passwordSistema'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['passwordSistema'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                 echo "</tr>";
