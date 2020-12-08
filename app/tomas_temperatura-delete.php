@@ -52,9 +52,11 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
                         <h1>Toma de Temperatura - Borrar</h1>
                     </div>
+
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="fade-in">
                             <input type="hidden" name="idToma" value="<?php echo trim($_GET["idToma"]); ?>"/>
@@ -65,6 +67,7 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
                             </p>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

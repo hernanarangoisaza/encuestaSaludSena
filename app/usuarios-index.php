@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Gestión de Usuarios del Sistema</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6b773fe9e4.js" crossorigin="anonymous"></script>
     <style type="text/css">
@@ -23,9 +23,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Usuarios del sistema - Detalle</h2>
-                        <a href="usuarios-create.php" class="btn btn-success float-right">Agregar registro</a>
-                        <a href="usuarios-index.php" class="btn btn-info float-right mr-2">Restablecer vista</a>
+                        <h2 class="float-left">Usuarios del Sistema - Listado General</h2>
+                        <a href="usuarios-create.php" class="btn btn-success float-right">Crear registro</a>
+                        <a href="usuarios-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
                     </div>
 

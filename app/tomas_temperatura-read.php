@@ -73,30 +73,26 @@ if(isset($_GET["idToma"]) && !empty(trim($_GET["idToma"]))){
                         
                     <div class="form-group">
                         <label>Id Encuesta</label>
-                        <p class="form-control-static"><?php echo $row["idEncuesta"]; ?></p>
+                        <input type="text" name="idEncuesta" class="form-control" value="<?php echo $row['idEncuesta']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Fecha/hora toma de entrada</label>
-                        <p class="form-control-static"><?php echo $row["fechaHoraTomaEntrada"]; ?></p>
                         <input type="text" name="fechaHoraTomaEntrada" class="form-control" value="<?php echo $row['fechaHoraTomaEntrada']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Temperatura a la entrada</label>
-                        <p class="form-control-static"><?php echo $row["temperaturaEntrada"]; ?></p>
                         <input type="text" name="temperaturaEntrada" class="form-control" value="<?php echo $row['temperaturaEntrada']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Fecha/hora toma de salida</label>
-                        <p class="form-control-static"><?php echo $row["fechaHoraTomaSalida"]; ?></p>
                         <input type="text" name="fechaHoraTomaSalida" class="form-control" value="<?php echo $row['fechaHoraTomaSalida']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Temperatura a la salida</label>
-                        <p class="form-control-static"><?php echo $row["temperaturaSalida"]; ?></p>
                         <input type="text" name="temperaturaSalida" class="form-control" value="<?php echo $row['temperaturaSalida']; ?>" readonly>
                     </div>
 
@@ -105,7 +101,7 @@ if(isset($_GET["idToma"]) && !empty(trim($_GET["idToma"]))){
                         <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group ocultar-columna">
                         <label>Fecha/Hora de auditoría</label>
                         <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
                     </div>

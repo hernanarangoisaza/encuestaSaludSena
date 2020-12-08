@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Gestión de Tipos de Géneros</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6b773fe9e4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/estilos.css" />
@@ -14,9 +14,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Tipos de géneros - Detalle</h2>
-                        <a href="tipos_generos-create.php" class="btn btn-success float-right">Agregar registro</a>
-                        <a href="tipos_generos-index.php" class="btn btn-info float-right mr-2">Restablecer vista</a>
+                        <h2 class="float-left">Tipos de Géneros - Listado General</h2>
+                        <a href="tipos_generos-create.php" class="btn btn-success float-right">Crear registro</a>
+                        <a href="tipos_generos-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
                     </div>
 
@@ -101,7 +101,7 @@
                            }
                             $number_of_results = mysqli_num_rows($result_count);
                             echo "<div class='cantidad-paginas'>" . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages . "</div>";
-                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer vista] para orden original o ver todos los registros</p>";
+                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer listado] para orden original o ver todos los registros</p>";
                             echo "<div class='seccion-tabla-scroll-horizontal'>";
                             echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                 echo "<thead>";

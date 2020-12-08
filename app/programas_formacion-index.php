@@ -14,9 +14,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Programas de formación - Listado General</h2>
-                        <a href="programas_formacion-create.php" class="btn btn-success float-right">Agregar registro</a>
-                        <a href="programas_formacion-index.php" class="btn btn-info float-right mr-2">Restablecer vista</a>
+                        <h2 class="float-left">Programas de Formación - Listado General</h2>
+                        <a href="programas_formacion-create.php" class="btn btn-success float-right">Crear registro</a>
+                        <a href="programas_formacion-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
                     </div>
 
@@ -101,7 +101,7 @@
                            }
                             $number_of_results = mysqli_num_rows($result_count);
                             echo "<div class='cantidad-paginas'>" . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages . "</div>";
-                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer vista] para orden original o ver todos los registros</p>";
+                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer listado] para orden original o ver todos los registros</p>";
                             echo "<div class='seccion-tabla-scroll-horizontal'>";
                             echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                 echo "<thead>";
