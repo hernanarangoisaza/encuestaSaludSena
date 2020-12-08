@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-12-2020 a las 20:56:15
+-- Tiempo de generación: 08-12-2020 a las 21:39:55
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.3.17
 
@@ -37,7 +37,7 @@ CREATE TABLE `aprendices` (
   `nombreCompleto` varchar(75) DEFAULT NULL,
   `idTipoIdentificacion` int(11) DEFAULT NULL,
   `identificacion` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
+  `email` varchar(75) DEFAULT NULL,
   `telefonoPersonal` varchar(50) DEFAULT NULL,
   `telefonoAcudiente` varchar(50) DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
@@ -81,13 +81,13 @@ CREATE TABLE `centros_formacion` (
   `idCentroFormacion` int(11) NOT NULL,
   `nombreLargoCentroFormacion` varchar(75) DEFAULT NULL,
   `nombreCorto` varchar(50) DEFAULT NULL,
-  `direccion` varchar(50) DEFAULT NULL,
+  `direccion` varchar(75) DEFAULT NULL,
   `idMunicipio` int(4) DEFAULT NULL,
   `idDepartamento` int(3) DEFAULT NULL,
   `telefono1` varchar(50) DEFAULT NULL,
   `telefono2` varchar(50) DEFAULT NULL,
-  `emailContacto1` varchar(50) DEFAULT NULL,
-  `emailContacto2` varchar(50) DEFAULT NULL,
+  `emailContacto1` varchar(75) DEFAULT NULL,
+  `emailContacto2` varchar(75) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT 1,
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1560,7 +1560,7 @@ INSERT INTO `roles_sistema` (`idRolSistema`, `nombreLargoRolSistema`, `nombreCor
 DROP TABLE IF EXISTS `tipos_generos`;
 CREATE TABLE `tipos_generos` (
   `idTipoGenero` int(11) NOT NULL,
-  `nombreLargoGenero` varchar(50) DEFAULT NULL,
+  `nombreLargoGenero` varchar(75) DEFAULT NULL,
   `nombreCorto` varchar(50) DEFAULT NULL,
   `estado` tinyint(4) NOT NULL DEFAULT 1,
   `auditoria` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -1696,11 +1696,11 @@ CREATE TABLE `usuarios` (
   `nombreCompleto` varchar(75) DEFAULT NULL,
   `idTipoIdentificacion` int(11) DEFAULT NULL,
   `identificacion` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
+  `email` varchar(75) DEFAULT NULL,
   `telefonoPersonal` varchar(50) DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
   `idTipoGenero` int(11) DEFAULT NULL,
-  `direccionResidencia` varchar(50) DEFAULT NULL,
+  `direccionResidencia` varchar(75) DEFAULT NULL,
   `idMunicipio` int(4) DEFAULT NULL,
   `idDepartamento` int(3) DEFAULT NULL,
   `idCentroFormacion` int(11) DEFAULT NULL,
@@ -1957,7 +1957,6 @@ ALTER TABLE `usuarios`
 ALTER TABLE `aprendices`
   ADD CONSTRAINT `FK_aprendices_centros_formacion` FOREIGN KEY (`idCentroFormacion`) REFERENCES `centros_formacion` (`idCentroFormacion`),
   ADD CONSTRAINT `FK_aprendices_departamentos` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`idDepartamento`),
-  ADD CONSTRAINT `FK_aprendices_departamentos_2` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`idDepartamento`),
   ADD CONSTRAINT `FK_aprendices_fichas_formacion` FOREIGN KEY (`idFichaFormacion`) REFERENCES `fichas_formacion` (`idFichaFormacion`),
   ADD CONSTRAINT `FK_aprendices_municipios` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`),
   ADD CONSTRAINT `FK_aprendices_tipos_generos` FOREIGN KEY (`idTipoGenero`) REFERENCES `tipos_generos` (`idTipoGenero`),
