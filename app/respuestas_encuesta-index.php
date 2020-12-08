@@ -15,8 +15,8 @@
                 <div class="col-md-12">
 
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Respuestas de la Encuesta - Listado General</h2>
-                        <a href="respuestas_encuesta-create.php" class="btn btn-success float-right">Crear registro</a>
+                        <h2 class="float-left">Respuestas de la Encuesta - Panel General</h2>
+                        <a href="respuestas_encuesta-create.php" class="btn btn-success float-right">Crear</a>
                         <a href="respuestas_encuesta-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
@@ -24,7 +24,7 @@
                     <div class="form-row">
                         <form action="respuestas_encuesta-index.php" method="get">
                         <div class="col">
-                          <input type="text" class="form-control" placeholder="Buscar en esta tabla" name="search">
+                          <input type="text" class="form-control" placeholder="Buscar en este listado" name="search">
                         </div>
                         </form>
                     </div>
