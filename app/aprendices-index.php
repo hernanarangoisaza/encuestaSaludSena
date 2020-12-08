@@ -18,7 +18,7 @@
                         <h2 class="float-left">Aprendices - Listado general</h2>
                         <a href="aprendices-create.php" class="btn btn-success float-right">Crear registro</a>
                         <a href="aprendices-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
+                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">
@@ -94,7 +94,7 @@
 
                     // Attempt select query execution
                     $sql = "SELECT AP.*, 
-                        VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+                        TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
                         TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
                         TG.nombreLargoGenero AS 'nombreLargoGenero',
                         MN.municipio AS 'nombreMunicipio',
@@ -102,7 +102,7 @@
                         CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                         FF.codigoFichaFormacion AS 'codigoFichaFormacion'
                         FROM aprendices AP
-                        LEFT JOIN tipos_vinculaciones_sena VS ON VS.idTipoVinculacion = AP.idTipoVinculacion
+                        LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = AP.idTipoVinculacion
                         LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
                         LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
                         LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
@@ -116,7 +116,7 @@
                     if (!empty($_GET['search'])) {
                         $search = $_GET['search'];
                         $sql = "SELECT AP.*, 
-                            VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+                            TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
                             TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
                             TG.nombreLargoGenero AS 'nombreLargoGenero',
                             MN.municipio AS 'nombreMunicipio',
@@ -124,20 +124,20 @@
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             FF.codigoFichaFormacion AS 'codigoFichaFormacion'
                             FROM aprendices AP
-                            LEFT JOIN tipos_vinculaciones_sena VS ON VS.idTipoVinculacion = AP.idTipoVinculacion
+                            LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = AP.idTipoVinculacion
                             LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
                             LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
                             LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
                             LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
                             LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
-                            WHERE CONCAT (AP.idAprendiz,VS.nombreLargoVinculacion,AP.nombreCompleto,TI.nombreLargoIdentificacion,AP.identificacion,AP.email,AP.telefonoPersonal,AP.telefonoAcudiente,AP.fechaNacimiento,TG.nombreLargoGenero,AP.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,AP.estado,AP.auditoria)
+                            WHERE CONCAT (AP.idAprendiz,TV.nombreLargoVinculacion,AP.nombreCompleto,TI.nombreLargoIdentificacion,AP.identificacion,AP.email,AP.telefonoPersonal,AP.telefonoAcudiente,AP.fechaNacimiento,TG.nombreLargoGenero,AP.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,AP.estado,AP.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                             
                         $count_pages = "SELECT AP.*, 
-                            VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+                            TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
                             TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
                             TG.nombreLargoGenero AS 'nombreLargoGenero',
                             MN.municipio AS 'nombreMunicipio',
@@ -145,14 +145,14 @@
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             FF.codigoFichaFormacion AS 'codigoFichaFormacion'
                             FROM aprendices AP
-                            LEFT JOIN tipos_vinculaciones_sena VS ON VS.idTipoVinculacion = AP.idTipoVinculacion
+                            LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = AP.idTipoVinculacion
                             LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
                             LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
                             LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
                             LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
                             LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
-                            WHERE CONCAT (AP.idAprendiz,VS.nombreLargoVinculacion,AP.nombreCompleto,TI.nombreLargoIdentificacion,AP.identificacion,AP.email,AP.telefonoPersonal,AP.telefonoAcudiente,AP.fechaNacimiento,TG.nombreLargoGenero,AP.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,AP.estado,AP.auditoria)
+                            WHERE CONCAT (AP.idAprendiz,TV.nombreLargoVinculacion,AP.nombreCompleto,TI.nombreLargoIdentificacion,AP.identificacion,AP.email,AP.telefonoPersonal,AP.telefonoAcudiente,AP.fechaNacimiento,TG.nombreLargoGenero,AP.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,AP.estado,AP.auditoria)
                              LIKE '%$search%'
                              ORDER BY $order $sort";
                     } else {
@@ -184,8 +184,8 @@
                             echo "<th><a href=?search=$search&sort=&order=fechaNacimiento&sort=$sort>Fecha<br>de nacimiento</th>";
                             echo "<th><a href=?search=$search&sort=&order=idTipoGenero&sort=$sort>Género</th>";
                             echo "<th><a href=?search=$search&sort=&order=direccionResidencia&sort=$sort>Dirección de la residencia</th>";
-                            echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
                             echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Municipio</th>";
+                            echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
                             echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Centro de formación</th>";
                             echo "<th><a href=?search=$search&sort=&order=idFichaFormacion&sort=$sort>Ficha de formación</th>";
                             echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
@@ -200,7 +200,7 @@
                                 echo "<a href='aprendices-update.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-edit'></i></a>";
                                 echo "<a href='aprendices-delete.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-trash-alt'></i></a>";
                                 echo "</td>";
-                                echo "<td class='centrar-columna ocultar-columna'>" . $row['idAprendiz'] . "</td>";
+                                echo "<td class='ocultar-columna'>" . $row['idAprendiz'] . "</td>";
                                 echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";
                                 echo "<td>" . $row['nombreCompleto'] . "</td>";
                                 echo "<td>" . $row['nombreLargoIdentificacion'] . "</td>";
@@ -211,11 +211,11 @@
                                 echo "<td class='centrar-columna'>" . $row['fechaNacimiento'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['nombreLargoGenero'] . "</td>";
                                 echo "<td>" . $row['direccionResidencia'] . "</td>";
-                                echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['nombreMunicipio'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";
                                 echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['codigoFichaFormacion'] . "</td>";
-                                echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";
+                                echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                 echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                 echo "</tr>";
                             }
@@ -270,10 +270,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
 </body>
 </html>

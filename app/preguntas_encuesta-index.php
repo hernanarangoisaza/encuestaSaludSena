@@ -18,7 +18,7 @@
                         <h2 class="float-left">Preguntas de la Encuesta - Listado General</h2>
                         <a href="preguntas_encuesta-create.php" class="btn btn-success float-right">Crear registro</a>
                         <a href="preguntas_encuesta-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
+                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">

@@ -81,8 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO usuarios (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
-        
+        $stmt = $pdo->prepare("INSERT INTO usuarios (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");        
         if($stmt->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idRolSistema,$passwordSistema,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: usuarios-index.php");
@@ -96,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Registro</title>
+    <title>Crear Usuario del Sistema</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -106,88 +105,195 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
-                        <h2>Crear Registro</h2>
+                        <h2>Usuario del Sistema - Crear</h2>
                     </div>
                     
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-                        <div class="form-group">
-                            <label>Id Tipo de vinculación</label>
-                            <input type="number" name="idTipoVinculacion" class="form-control" value="<?php echo $idTipoVinculacion; ?>">
+                       <div class="form-group">
+                            <label>Tipo de vinculación</label>
+                            <?php
+                                $sql_cb1 = "SELECT idTipoVinculacion, nombreLargoVinculacion, nombreCorto FROM tipos_vinculaciones_sena ORDER BY nombreLargoVinculacion";
+                                $result_cb1 = mysqli_query($link, $sql_cb1);
+                                echo "<select name='idTipoVinculacion' id='cb1' class='combo-box form-control'>";
+                                while($row = mysqli_fetch_array($result_cb1)) {
+                                    if ($idTipoVinculacion != $row['idTipoVinculacion'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idTipoVinculacion'] . "'>" . $row['nombreLargoVinculacion'] . "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idTipoVinculacion'] . "'>" . $row['nombreLargoVinculacion'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
                             <span class="form-text"><?php echo $idTipoVinculacion_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Nombre completo</label>
                             <input type="text" name="nombreCompleto" maxlength="50" class="form-control" value="<?php echo $nombreCompleto; ?>">
                             <span class="form-text"><?php echo $nombreCompleto_err; ?></span>
                         </div>
-						<div class="form-group">
-                            <label>Id Tipo de identificación</label>
-                            <input type="number" name="idTipoIdentificacion" class="form-control" value="<?php echo $idTipoIdentificacion; ?>">
+
+                        <div class="form-group">
+                            <label>Tipo de identificación</label>
+                            <?php
+                                $sql_cb2 = "SELECT idTipoIdentificacion, nombreLargoIdentificacion, nombreCorto FROM tipos_identificacion";
+                                $result_cb2 = mysqli_query($link, $sql_cb2);
+                                echo "<select name='idTipoIdentificacion' id='cb2' class='combo-box form-control'>";
+                                while($row = mysqli_fetch_array($result_cb2)) {
+                                    if ($idTipoIdentificacion != $row['idTipoIdentificacion'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idTipoIdentificacion'] . "'>" . $row['nombreLargoIdentificacion'] . "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idTipoIdentificacion'] . "'>" . $row['nombreLargoIdentificacion'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
                             <span class="form-text"><?php echo $idTipoIdentificacion_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Identificación</label>
                             <input type="text" name="identificacion" maxlength="50" class="form-control" value="<?php echo $identificacion; ?>">
                             <span class="form-text"><?php echo $identificacion_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Correo electrónico</label>
                             <input type="text" name="email" maxlength="50" class="form-control" value="<?php echo $email; ?>">
                             <span class="form-text"><?php echo $email_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Teléfono personal</label>
                             <input type="text" name="telefonoPersonal" maxlength="50" class="form-control" value="<?php echo $telefonoPersonal; ?>">
                             <span class="form-text"><?php echo $telefonoPersonal_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Fecha de nacimiento</label>
-                            <input type="text" name="fechaNacimiento" class="form-control" value="<?php echo $fechaNacimiento; ?>">
+                            <input type="date" name="fechaNacimiento" class="form-control" value="<?php echo $fechaNacimiento; ?>">
                             <span class="form-text"><?php echo $fechaNacimiento_err; ?></span>
                         </div>
-						<div class="form-group">
-                            <label>Id Género</label>
-                            <input type="number" name="idTipoGenero" class="form-control" value="<?php echo $idTipoGenero; ?>">
+
+                        <div class="form-group">
+                            <label>Género</label>
+                            <?php
+                                $sql_cb3 = "SELECT idTipoGenero, nombreLargoGenero, nombreCorto FROM tipos_generos";
+                                $result_cb3 = mysqli_query($link, $sql_cb3);
+                                echo "<select name='idTipoGenero' id='cb3' class='combo-box form-control'>";
+                                while($row = mysqli_fetch_array($result_cb3)) {
+                                    if ($idTipoGenero != $row['idTipoGenero'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idTipoGenero'] . "'>" . $row['nombreLargoGenero'] . "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idTipoGenero'] . "'>" . $row['nombreLargoGenero'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
                             <span class="form-text"><?php echo $idTipoGenero_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Dirección de la residencia</label>
                             <input type="text" name="direccionResidencia" maxlength="50" class="form-control" value="<?php echo $direccionResidencia; ?>">
                             <span class="form-text"><?php echo $direccionResidencia_err; ?></span>
                         </div>
-						<div class="form-group">
-                            <label>Id Municipio</label>
-                            <input type="number" name="idMunicipio" class="form-control" value="<?php echo $idMunicipio; ?>">
-                            <span class="form-text"><?php echo $idMunicipio_err; ?></span>
-                        </div>
-						<div class="form-group">
-                            <label>Id Departamento</label>
-                            <input type="number" name="idDepartamento" class="form-control" value="<?php echo $idDepartamento; ?>">
+
+                        <div class="form-group">
+                            <label>Departamento</label>
+                            <?php
+                                $sql_cb5 = "SELECT idDepartamento, departamento FROM departamentos ORDER BY departamento";
+                                $result_cb5 = mysqli_query($link, $sql_cb5);
+                                echo "<select name='idDepartamento' id='cb5' class='combo-box form-control'>";
+                                while($row = mysqli_fetch_array($result_cb5)) {
+                                    if ($idDepartamento != $row['idDepartamento'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idDepartamento'] . "'>" . $row['departamento'] . "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idDepartamento'] . "'>" . $row['departamento'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
                             <span class="form-text"><?php echo $idDepartamento_err; ?></span>
                         </div>
-						<div class="form-group">
-                            <label>Id Centro de formación</label>
-                            <input type="number" name="idCentroFormacion" class="form-control" value="<?php echo $idCentroFormacion; ?>">
+
+                        <div class="form-group">
+                            <label>Municipio</label>
+                            <?php
+                                $sql_cb4 = "SELECT idMunicipio, municipio FROM municipios ORDER BY municipio";
+                                $result_cb4 = mysqli_query($link, $sql_cb4);
+                                echo "<select name='idMunicipio' id='cb4' class='combo-box form-control'>";
+                                while($row = mysqli_fetch_array($result_cb4)) {
+                                    if ($idMunicipio != $row['idMunicipio'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idMunicipio'] . "'>" . $row['municipio'] . "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idMunicipio'] . "'>" . $row['municipio'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
+                            <span class="form-text"><?php echo $idMunicipio_err; ?></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Centro de formación</label>
+                            <?php
+                                $sql_cb6 = "SELECT idCentroFormacion, nombreLargoCentroFormacion, nombreCorto FROM centros_formacion ORDER BY nombreLargoCentroFormacion";
+                                $result_cb6 = mysqli_query($link, $sql_cb6);
+                                echo "<select name='idCentroFormacion' id='cb6' class='combo-box form-control'>";
+                                while($row = mysqli_fetch_array($result_cb6)) {
+                                    if ($idCentroFormacion != $row['idCentroFormacion'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idCentroFormacion'] . "'>" . $row['nombreLargoCentroFormacion'] . "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idCentroFormacion'] . "'>" . $row['nombreLargoCentroFormacion'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
                             <span class="form-text"><?php echo $idCentroFormacion_err; ?></span>
                         </div>
+
 						<div class="form-group">
-                            <label>Id Rol del sistema</label>
-                            <input type="number" name="idRolSistema" class="form-control" value="<?php echo $idRolSistema; ?>">
+                            <label>Rol del sistema</label>
+                            <?php
+                                $sql_cb6 = "SELECT idRolSistema, nombreLargoRolSistema, nombreCorto FROM roles_sistema ORDER BY nombreLargoRolSistema";
+                                $result_cb6 = mysqli_query($link, $sql_cb6);
+                                echo "<select name='idRolSistema' id='cb6' class='combo-box form-control'>";
+                                while($row = mysqli_fetch_array($result_cb6)) {
+                                    if ($idRolSistema != $row['idRolSistema'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idRolSistema'] . "'>" . $row['nombreLargoRolSistema'] . "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idRolSistema'] . "'>" . $row['nombreLargoRolSistema'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
                             <span class="form-text"><?php echo $idRolSistema_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Contraseña del sistema</label>
-                            <input type="text" name="passwordSistema" maxlength="50" class="form-control" value="<?php echo $passwordSistema; ?>">
+                            <input type="password" name="passwordSistema" maxlength="50" class="form-control" value="<?php echo $passwordSistema; ?>">
                             <span class="form-text"><?php echo $passwordSistema_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
                             <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Fecha/Hora de auditoría</label>
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $auditoria; ?>">
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
@@ -195,6 +301,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="usuarios-index.php" class="btn btn-secondary">Cancelar</a>
+
                     </form>
                 </div>
             </div>

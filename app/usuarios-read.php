@@ -6,7 +6,7 @@ if(isset($_GET["idUsuario"]) && !empty(trim($_GET["idUsuario"]))){
 
     // Prepare a select statement
     $sql = "SELECT US.*, 
-        VS.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+        TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
         TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
         TG.nombreLargoGenero AS 'nombreLargoGenero',
         MN.municipio AS 'nombreMunicipio',
@@ -14,7 +14,7 @@ if(isset($_GET["idUsuario"]) && !empty(trim($_GET["idUsuario"]))){
         CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
         RS.nombreLargoRolSistema AS 'nombreLargoRolSistema'
         FROM usuarios US
-        LEFT JOIN tipos_vinculaciones_sena VS ON VS.idTipoVinculacion = US.idTipoVinculacion
+        LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = US.idTipoVinculacion
         LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = US.idTipoIdentificacion
         LEFT JOIN tipos_generos TG ON TG.idTipoGenero = US.idTipoGenero
         LEFT JOIN municipios MN ON MN.idMunicipio = US.idMunicipio

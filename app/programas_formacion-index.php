@@ -17,7 +17,7 @@
                         <h2 class="float-left">Programas de Formación - Listado General</h2>
                         <a href="programas_formacion-create.php" class="btn btn-success float-right">Crear registro</a>
                         <a href="programas_formacion-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
+                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">

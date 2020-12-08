@@ -18,7 +18,7 @@
                         <h2 class="float-left">Centros de formación - Listado General</h2>
                         <a href="centros_formacion-create.php" class="btn btn-success float-right">Crear registro</a>
                         <a href="centros_formacion-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
+                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">
@@ -138,7 +138,7 @@
                                         echo "<a href='centros_formacion-update.php?idCentroFormacion=". $row['idCentroFormacion'] ."'><i class='far fa-edit'></i></a>";
                                         echo "<a href='centros_formacion-delete.php?idCentroFormacion=". $row['idCentroFormacion'] ."'><i class='far fa-trash-alt'></i></a>";
                                     echo "</td>";
-                                    echo "<td class='centrar-columna ocultar-columna'>" . $row['idCentroFormacion'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['idCentroFormacion'] . "</td>";
                                     echo "<td>" . $row['nombreCorto'] . "</td>";
                                     echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
                                     echo "<td>" . $row['direccion'] . "</td>";

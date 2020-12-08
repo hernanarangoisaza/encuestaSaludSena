@@ -17,7 +17,7 @@
                         <h2 class="float-left">Horarios - Listado General</h2>
                         <a href="horarios-create.php" class="btn btn-success float-right">Crear registro</a>
                         <a href="horarios-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
+                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">

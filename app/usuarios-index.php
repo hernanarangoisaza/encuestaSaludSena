@@ -5,28 +5,20 @@
     <title>Gestión de Usuarios del Sistema</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6b773fe9e4.js" crossorigin="anonymous"></script>
-    <style type="text/css">
-        .page-header h2{
-            margin-top: 0;
-        }
-        table tr td:last-child a{
-            margin-right: 5px;
-        }
-        body {
-            font-size: 14px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-4">
-        <div class="container-fluid">
+        <div class="container-fluid index">
             <div class="row">
                 <div class="col-md-12">
+
                     <div class="page-header clearfix">
                         <h2 class="float-left">Usuarios del Sistema - Listado General</h2>
                         <a href="usuarios-create.php" class="btn btn-success float-right">Crear registro</a>
                         <a href="usuarios-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
+                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">
@@ -34,9 +26,8 @@
                         <div class="col">
                           <input type="text" class="form-control" placeholder="Buscar en esta tabla" name="search">
                         </div>
-                    </div>
                         </form>
-                    <br>
+                    </div>
 
                     <?php
                     // Include config file
@@ -85,19 +76,65 @@
                     }
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM usuarios ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
-                    $count_pages = "SELECT * FROM usuarios";
+                    $sql = "SELECT US.*, 
+                        TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+                        TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
+                        TG.nombreLargoGenero AS 'nombreLargoGenero',
+                        MN.municipio AS 'nombreMunicipio',
+                        DP.departamento AS 'nombreDepartamento',
+                        CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
+                        RS.nombreCorto AS 'nombreCorto'
+                        FROM usuarios US
+                        LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = US.idTipoVinculacion
+                        LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = US.idTipoIdentificacion
+                        LEFT JOIN tipos_generos TG ON TG.idTipoGenero = US.idTipoGenero
+                        LEFT JOIN municipios MN ON MN.idMunicipio = US.idMunicipio
+                        LEFT JOIN departamentos DP ON DP.idDepartamento = US.idDepartamento
+                        LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = US.idCentroFormacion
+                        LEFT JOIN roles_sistema RS ON RS.idRolSistema = US.idRolSistema
+                        ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
 
+                    $count_pages = "SELECT * FROM usuarios";
                     
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
-                        $sql = "SELECT * FROM usuarios
-                            WHERE CONCAT (idUsuario,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria)
+                        $sql = "SELECT US.*, 
+                            TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+                            TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
+                            TG.nombreLargoGenero AS 'nombreLargoGenero',
+                            MN.municipio AS 'nombreMunicipio',
+                            DP.departamento AS 'nombreDepartamento',
+                            CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
+                            RS.nombreCorto AS 'nombreCorto'
+                            FROM usuarios US
+                            LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = US.idTipoVinculacion
+                            LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = US.idTipoIdentificacion
+                            LEFT JOIN tipos_generos TG ON TG.idTipoGenero = US.idTipoGenero
+                            LEFT JOIN municipios MN ON MN.idMunicipio = US.idMunicipio
+                            LEFT JOIN departamentos DP ON DP.idDepartamento = US.idDepartamento
+                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = US.idCentroFormacion
+                            LEFT JOIN roles_sistema RS ON RS.idRolSistema = US.idRolSistema
+                            WHERE CONCAT (US.idUsuario,TV.idTipoVinculacion,US.nombreCompleto,TI.idTipoIdentificacion,US.identificacion,US.email,US.telefonoPersonal,US.fechaNacimiento,TG.idTipoGenero,US.direccionResidencia,MN.idMunicipio,DP.idDepartamento,CF.idCentroFormacion,RS.idRolSistema,US.passwordSistema,US.estado,US.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
-                        $count_pages = "SELECT * FROM usuarios
-                            WHERE CONCAT (idUsuario,idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria)
+                        $count_pages = "SELECT US.*, 
+                            TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
+                            TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
+                            TG.nombreLargoGenero AS 'nombreLargoGenero',
+                            MN.municipio AS 'nombreMunicipio',
+                            DP.departamento AS 'nombreDepartamento',
+                            CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
+                            RS.nombreCorto AS 'nombreCorto'
+                            FROM usuarios US
+                            LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = US.idTipoVinculacion
+                            LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = US.idTipoIdentificacion
+                            LEFT JOIN tipos_generos TG ON TG.idTipoGenero = US.idTipoGenero
+                            LEFT JOIN municipios MN ON MN.idMunicipio = US.idMunicipio
+                            LEFT JOIN departamentos DP ON DP.idDepartamento = US.idDepartamento
+                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = US.idCentroFormacion
+                            LEFT JOIN roles_sistema RS ON RS.idRolSistema = US.idRolSistema
+                            WHERE CONCAT (US.idUsuario,TV.idTipoVinculacion,US.nombreCompleto,TI.idTipoIdentificacion,US.identificacion,US.email,US.telefonoPersonal,US.fechaNacimiento,TG.idTipoGenero,US.direccionResidencia,MN.idMunicipio,DP.idDepartamento,CF.idCentroFormacion,RS.idRolSistema,US.passwordSistema,US.estado,US.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -112,44 +149,61 @@
                            }
                             $number_of_results = mysqli_num_rows($result_count);
                             echo "<div class='cantidad-paginas'>" . $number_of_results . " resultado(s) - Página " . $pageno . " de " . $total_pages . "</div>";
-
-                            echo "<table class='table table-bordered table-striped'>";
+                            echo "<p class='tip-columnas-index'>Clic en encabezados de columna para ordenar por esos criterios. Botón [Restablecer listado] para orden original o ver todos los registros</p>";
+                            echo "<div class='seccion-tabla-scroll-horizontal'>";
+                            echo "<table class='estilo-tabla-index table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th><a href=?search=$search&sort=&order=idUsuario&sort=$sort>Id Usuario</th>";
-										echo "<th><a href=?search=$search&sort=&order=idTipoVinculacion&sort=$sort>Id Tipo de vinculación</th>";
+                                        echo "<th class='estilo-acciones'>Acciones</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idUsuario&sort=$sort>Id Usuario</th>";
+										echo "<th><a href=?search=$search&sort=&order=idTipoVinculacion&sort=$sort>Tipo de<br>vinculación</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreCompleto&sort=$sort>Nombre completo</th>";
-										echo "<th><a href=?search=$search&sort=&order=idTipoIdentificacion&sort=$sort>Id Tipo de identificación</th>";
+										echo "<th><a href=?search=$search&sort=&order=idTipoIdentificacion&sort=$sort>Tipo de<br>identificación</th>";
 										echo "<th><a href=?search=$search&sort=&order=identificacion&sort=$sort>Identificación</th>";
 										echo "<th><a href=?search=$search&sort=&order=email&sort=$sort>Correo electrónico</th>";
-										echo "<th><a href=?search=$search&sort=&order=telefonoPersonal&sort=$sort>Teléfono personal</th>";
-										echo "<th><a href=?search=$search&sort=&order=fechaNacimiento&sort=$sort>Fecha de nacimiento</th>";
-										echo "<th><a href=?search=$search&sort=&order=idTipoGenero&sort=$sort>Id Género</th>";
+										echo "<th><a href=?search=$search&sort=&order=telefonoPersonal&sort=$sort>Teléfono<br>personal</th>";
+										echo "<th><a href=?search=$search&sort=&order=fechaNacimiento&sort=$sort>Fecha<br>de nacimiento</th>";
+										echo "<th><a href=?search=$search&sort=&order=idTipoGenero&sort=$sort>Género</th>";
 										echo "<th><a href=?search=$search&sort=&order=direccionResidencia&sort=$sort>Dirección de la residencia</th>";
-										echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Id Municipio</th>";
-										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Id Departamento</th>";
-										echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Id Centro de formación</th>";
-										echo "<th><a href=?search=$search&sort=&order=idRolSistema&sort=$sort>Id Rol del sistema</th>";
+										echo "<th><a href=?search=$search&sort=&order=idMunicipio&sort=$sort>Municipio</th>";
+										echo "<th><a href=?search=$search&sort=&order=idDepartamento&sort=$sort>Departamento</th>";
+										echo "<th><a href=?search=$search&sort=&order=idCentroFormacion&sort=$sort>Centro de formación</th>";
+										echo "<th><a href=?search=$search&sort=&order=idRolSistema&sort=$sort>Rol del sistema</th>";
 										echo "<th><a href=?search=$search&sort=&order=passwordSistema&sort=$sort>Contraseña del sistema</th>";
-										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
-										
-                                        echo "<th class='estilo-acciones'>Acciones</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    echo "<td>" . $row['idUsuario'] . "</td>";echo "<td>" . $row['idTipoVinculacion'] . "</td>";echo "<td>" . $row['nombreCompleto'] . "</td>";echo "<td>" . $row['idTipoIdentificacion'] . "</td>";echo "<td>" . $row['identificacion'] . "</td>";echo "<td>" . $row['email'] . "</td>";echo "<td>" . $row['telefonoPersonal'] . "</td>";echo "<td>" . $row['fechaNacimiento'] . "</td>";echo "<td>" . $row['idTipoGenero'] . "</td>";echo "<td>" . $row['direccionResidencia'] . "</td>";echo "<td>" . $row['idMunicipio'] . "</td>";echo "<td>" . $row['idDepartamento'] . "</td>";echo "<td>" . $row['idCentroFormacion'] . "</td>";echo "<td>" . $row['idRolSistema'] . "</td>";echo "<td>" . $row['passwordSistema'] . "</td>";echo "<td>" . $row['estado'] . "</td>";echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
-                                        echo "<td>";
-                                            echo "<a href='usuarios-read.php?idUsuario=". $row['idUsuario'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                                            echo "<a href='usuarios-update.php?idUsuario=". $row['idUsuario'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                                            echo "<a href='usuarios-delete.php?idUsuario=". $row['idUsuario'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
-                                        echo "</td>";
-                                    echo "</tr>";
+                                    echo "<td>";
+                                        echo "<a href='usuarios-read.php?idUsuario=". $row['idUsuario'] ."'><i class='far fa-eye'></i></a>";
+                                        echo "<a href='usuarios-update.php?idUsuario=". $row['idUsuario'] ."'><i class='far fa-edit'></i></a>";
+                                        echo "<a href='usuarios-delete.php?idUsuario=". $row['idUsuario'] ."'><i class='far fa-trash-alt'></i></a>";
+                                    echo "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['idUsuario'] . "</td>";
+                                    echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";
+                                    echo "<td>" . $row['nombreCompleto'] . "</td>";
+                                    echo "<td>" . $row['nombreLargoIdentificacion'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['identificacion'] . "</td>";
+                                    echo "<td>" . $row['email'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['telefonoPersonal'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['fechaNacimiento'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreLargoGenero'] . "</td>";
+                                    echo "<td>" . $row['direccionResidencia'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreMunicipio'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";
+                                    echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['passwordSistema'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
+                                echo "</tr>";
                                 }
                                 echo "</tbody>";
                             echo "</table>";
+                            echo "</div>";
 ?>
                                 <ul class="pagination" align-right>
                                 <?php
@@ -186,10 +240,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
 </body>
 </html>

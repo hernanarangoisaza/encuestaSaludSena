@@ -17,7 +17,7 @@
                         <h2 class="float-left">Fichas de Formación - Listado General</h2>
                         <a href="fichas_formacion-create.php" class="btn btn-success float-right">Crear registro</a>
                         <a href="fichas_formacion-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
+                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">
@@ -137,7 +137,7 @@
                                     echo "<td class='ocultar-columna'>" . $row['idFichaFormacion'] . "</td>";
                                     echo "<td>" . $row['codigoFichaFormacion'] . "</td>";
                                     echo "<td>" . $row['nombreLargoProgramaFormacion'] . "</td>";
-                                    echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";
                                 }

@@ -18,7 +18,7 @@
                         <h2 class="float-left">Encuesta de Signos - Listado general</h2>
                         <a href="encuesta_signos-create.php" class="btn btn-success float-right">Crear registro</a>
                         <a href="encuesta_signos-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Inicial</a>
+                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">
@@ -179,7 +179,7 @@
                                         else if ($row['aceptacionRespuestaPositiva'] == 1) { echo 'Si'; }
                                         else if ($row['aceptacionRespuestaPositiva'] == -1) { echo 'Sin asignar'; }
                                     echo "</td>";
-                                    echo "<td class='centrar-columna ocultar-columna'>" . $row['estado'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";
                                 }
