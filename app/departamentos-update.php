@@ -43,7 +43,7 @@ if(isset($_POST["idDepartamento"]) && !empty($_POST["idDepartamento"])){
                 header("location: error.php");
             } else{
                 $stmt = null;
-                //header("location: departamentos-read.php?idDepartamento=$idDepartamento");
+                // header("location: departamentos-read.php?idDepartamento=$idDepartamento");
                 header("location: departamentos-index.php");
             }
 } else {

@@ -56,7 +56,7 @@ if(isset($_GET["idTipoVinculacion"]) && !empty(trim($_GET["idTipoVinculacion"]))
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ver Tipo Vinculación SENA</title>
+    <title>Ver Tipo de Vinculación al SENA</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -68,7 +68,7 @@ if(isset($_GET["idTipoVinculacion"]) && !empty(trim($_GET["idTipoVinculacion"]))
                 <div class="col-md-12 mx-auto">
 
                     <div class="page-header">
-                        <h1>Tipo Vinculación SENA - Visualizar</h1>
+                        <h1>Tipo de Vinculación al SENA - Visualizar</h1>
                     </div>
                         
                     <div class="form-group">

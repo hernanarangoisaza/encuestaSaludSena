@@ -44,7 +44,7 @@ if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
                 header("location: error.php");
             } else{
                 $stmt = null;
-                //header("location: fichas_formacion-read.php?idFichaFormacion=$idFichaFormacion");
+                // header("location: fichas_formacion-read.php?idFichaFormacion=$idFichaFormacion");
                 header("location: fichas_formacion-index.php");
             }
 } else {

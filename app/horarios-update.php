@@ -30,7 +30,6 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
         $jornada = trim($_POST["jornada"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = date('Y-m-d H:i:s');
-		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [
@@ -51,7 +50,7 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
                 header("location: error.php");
             } else{
                 $stmt = null;
-                //header("location: horarios-read.php?idHorario=$idHorario");
+                // header("location: horarios-read.php?idHorario=$idHorario");
                 header("location: horarios-index.php");
             }
 } else {

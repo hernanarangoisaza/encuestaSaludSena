@@ -60,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Vinculación </title>
+    <title>Crear Tipo de Vinculación al SENA </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -70,8 +70,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
-                        <h2>Crear Registro</h2>
+                        <h2>Tipo de Vinculación al SENA - Crear</h2>
                     </div>
                     
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -81,17 +82,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <input type="text" name="nombreLargoVinculacion" maxlength="50" class="form-control" value="<?php echo $nombreLargoVinculacion; ?>">
                             <span class="form-text"><?php echo $nombreLargoVinculacion_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Nombre corto</label>
                             <input type="text" name="nombreCorto" maxlength="50" class="form-control" value="<?php echo $nombreCorto; ?>">
                             <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
                             <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Fecha/Hora de auditoría</label>
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $auditoria; ?>">
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
@@ -99,6 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="vinculaciones_sena-index.php" class="btn btn-secondary">Cancelar</a>
+                        
                     </form>
                 </div>
             </div>

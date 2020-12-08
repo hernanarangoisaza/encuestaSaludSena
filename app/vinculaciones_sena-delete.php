@@ -52,9 +52,11 @@ if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
                         <h1>Tipo de Vinculación al SENA - Borrar</h1>
                     </div>
+
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="fade-in">
                             <input type="hidden" name="idTipoVinculacion" value="<?php echo trim($_GET["idTipoVinculacion"]); ?>"/>
@@ -65,6 +67,7 @@ if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
                             </p>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

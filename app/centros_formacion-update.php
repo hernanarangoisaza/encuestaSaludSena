@@ -66,7 +66,8 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
                 header("location: error.php");
             } else{
                 $stmt = null;
-                header("location: centros_formacion-read.php?idCentroFormacion=$idCentroFormacion");
+                // header("location: centros_formacion-read.php?idCentroFormacion=$idCentroFormacion");
+                header("location: centros_formacion-index.php");
             }
 } else {
     // Check existence of id parameter before processing further

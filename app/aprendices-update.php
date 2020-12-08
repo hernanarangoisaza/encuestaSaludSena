@@ -81,7 +81,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                 header("location: error.php");
             } else{
                 $stmt = null;
-                //header("location: aprendices-read.php?idAprendiz=$idAprendiz");
+                // header("location: aprendices-read.php?idAprendiz=$idAprendiz");
                 header("location: aprendices-index.php");
             }
 } else {

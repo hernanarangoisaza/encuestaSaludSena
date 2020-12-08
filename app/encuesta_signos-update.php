@@ -65,7 +65,7 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
                 header("location: error.php");
             } else{
                 $stmt = null;
-                //header("location: encuesta_signos-read.php?idEncuesta=$idEncuesta");
+                // header("location: encuesta_signos-read.php?idEncuesta=$idEncuesta");
                 header("location: encuesta_signos-index.php");
             }
 } else {
