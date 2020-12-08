@@ -94,7 +94,7 @@ if(isset($_GET["idUsuario"]) && !empty(trim($_GET["idUsuario"]))){
                     
                     <div class="form-group">
                         <label>Nombre completo</label>
-                        <input type="text" name="nombreCompleto" maxlength="50" class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
+                        <input type="text" name="nombreCompleto" class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
@@ -104,17 +104,17 @@ if(isset($_GET["idUsuario"]) && !empty(trim($_GET["idUsuario"]))){
 
                     <div class="form-group">
                         <label>Identificación</label>
-                        <input type="text" name="identificacion" maxlength="50" class="form-control" value="<?php echo $row['identificacion']; ?>" readonly>
+                        <input type="text" name="identificacion" class="form-control" value="<?php echo $row['identificacion']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Correo electrónico</label>
-                        <input type="text" name="email" maxlength="50" class="form-control" value="<?php echo $row['email']; ?>" readonly>
+                        <input type="text" name="email" class="form-control" value="<?php echo $row['email']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Teléfono personal</label>
-                        <input type="text" name="telefonoPersonal" maxlength="50" class="form-control" value="<?php echo $row['telefonoPersonal']; ?>" readonly>
+                        <input type="text" name="telefonoPersonal" class="form-control" value="<?php echo $row['telefonoPersonal']; ?>" readonly>
                     </div>
 
                     <div class="form-group">
@@ -129,7 +129,7 @@ if(isset($_GET["idUsuario"]) && !empty(trim($_GET["idUsuario"]))){
 
                     <div class="form-group">
                         <label>Dirección de la residencia</label>
-                        <input type="text" name="direccionResidencia" maxlength="50" class="form-control" value="<?php echo $row['direccionResidencia']; ?>" readonly>
+                        <input type="text" name="direccionResidencia" class="form-control" value="<?php echo $row['direccionResidencia']; ?>" readonly>
                     </div>
 
                     <div class="form-group">

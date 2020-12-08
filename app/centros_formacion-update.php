@@ -167,7 +167,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
 
 						<div class="form-group">
                             <label>Dirección</label>
-                            <input type="text" name="direccion" maxlength="50" class="form-control" value="<?php echo $direccion; ?>">
+                            <input type="text" name="direccion" maxlength="75" class="form-control" value="<?php echo $direccion; ?>">
                             <span class="form-text"><?php echo $direccion_err; ?></span>
                         </div>
 
@@ -223,13 +223,13 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
 
 						<div class="form-group">
                             <label>Correo electrónico #1</label>
-                            <input type="text" name="emailContacto1" maxlength="50" class="form-control" value="<?php echo $emailContacto1; ?>">
+                            <input type="text" name="emailContacto1" maxlength="75" class="form-control" value="<?php echo $emailContacto1; ?>">
                             <span class="form-text"><?php echo $emailContacto1_err; ?></span>
                         </div>
 
 						<div class="form-group">
                             <label>Correo electrónico #2</label>
-                            <input type="text" name="emailContacto2" maxlength="50" class="form-control" value="<?php echo $emailContacto2; ?>">
+                            <input type="text" name="emailContacto2" maxlength="75" class="form-control" value="<?php echo $emailContacto2; ?>">
                             <span class="form-text"><?php echo $emailContacto2_err; ?></span>
                         </div>
 

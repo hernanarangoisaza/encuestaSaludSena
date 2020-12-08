@@ -134,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Nombre completo</label>
-                            <input type="text" name="nombreCompleto" maxlength="50" class="form-control" value="<?php echo $nombreCompleto; ?>">
+                            <input type="text" name="nombreCompleto" maxlength="75" class="form-control" value="<?php echo $nombreCompleto; ?>">
                             <span class="form-text"><?php echo $nombreCompleto_err; ?></span>
                         </div>
 
@@ -165,7 +165,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Correo electrónico</label>
-                            <input type="text" name="email" maxlength="50" class="form-control" value="<?php echo $email; ?>">
+                            <input type="text" name="email" maxlength="75" class="form-control" value="<?php echo $email; ?>">
                             <span class="form-text"><?php echo $email_err; ?></span>
                         </div>
 
@@ -208,7 +208,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Dirección de la residencia</label>
-                            <input type="text" name="direccionResidencia" maxlength="50" class="form-control" value="<?php echo $direccionResidencia; ?>">
+                            <input type="text" name="direccionResidencia" maxlength="75" class="form-control" value="<?php echo $direccionResidencia; ?>">
                             <span class="form-text"><?php echo $direccionResidencia_err; ?></span>
                         </div>
 

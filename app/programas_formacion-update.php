@@ -126,7 +126,7 @@ if(isset($_POST["idProgramaFormacion"]) && !empty($_POST["idProgramaFormacion"])
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreLargoProgramaFormacion" maxlength="50" class="form-control" value="<?php echo $nombreLargoProgramaFormacion; ?>">
+                            <input type="text" name="nombreLargoProgramaFormacion" maxlength="75" class="form-control" value="<?php echo $nombreLargoProgramaFormacion; ?>">
                             <span class="form-text"><?php echo $nombreProgramaFormacion_err; ?></span>
                         </div>
 

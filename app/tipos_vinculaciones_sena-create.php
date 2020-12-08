@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         if($stmt->execute([ $nombreLargoVinculacion,$nombreCorto,$estado,$auditoria  ])) {
                 $stmt = null;
-                header("location: vinculaciones_sena-index.php");
+                header("location: tipos_vinculaciones_sena-index.php");
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
             }
@@ -79,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreLargoVinculacion" maxlength="50" class="form-control" value="<?php echo $nombreLargoVinculacion; ?>">
+                            <input type="text" name="nombreLargoVinculacion" maxlength="75" class="form-control" value="<?php echo $nombreLargoVinculacion; ?>">
                             <span class="form-text"><?php echo $nombreLargoVinculacion_err; ?></span>
                         </div>
 
@@ -102,7 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
 
                         <input type="submit" class="btn btn-primary" value="Grabar">
-                        <a href="vinculaciones_sena-index.php" class="btn btn-secondary">Cancelar</a>
+                        <a href="tipos_vinculaciones_sena-index.php" class="btn btn-secondary">Cancelar</a>
                         
                     </form>
                 </div>

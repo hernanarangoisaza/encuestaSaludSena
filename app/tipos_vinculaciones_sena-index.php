@@ -15,13 +15,13 @@
                 <div class="col-md-12">
                     <div class="page-header clearfix">
                         <h2 class="float-left">Tipos de Vinculaciones - Panel General</h2>
-                        <a href="vinculaciones_sena-create.php" class="btn btn-success float-right">Crear</a>
-                        <a href="vinculaciones_sena-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
+                        <a href="tipos_vinculaciones_sena-create.php" class="btn btn-success float-right">Crear</a>
+                        <a href="tipos_vinculaciones_sena-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">
-                        <form action="vinculaciones_sena-index.php" method="get">
+                        <form action="tipos_vinculaciones_sena-index.php" method="get">
                         <div class="col">
                           <input type="text" class="form-control" placeholder="Buscar en este listado" name="search">
                         </div>
@@ -118,9 +118,9 @@
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
                                     echo "<td class='centrar-columna'>";
-                                        echo "<a href='vinculaciones_sena-read.php?idTipoVinculacion=". $row['idTipoVinculacion'] ."'><i class='far fa-eye'></i></a>";
-                                        echo "<a href='vinculaciones_sena-update.php?idTipoVinculacion=". $row['idTipoVinculacion'] ."'><i class='far fa-edit'></i></a>";
-                                        echo "<a href='vinculaciones_sena-delete.php?idTipoVinculacion=". $row['idTipoVinculacion'] ."'><i class='far fa-trash-alt'></i></a>";
+                                        echo "<a href='tipos_vinculaciones_sena-read.php?idTipoVinculacion=". $row['idTipoVinculacion'] ."'><i class='far fa-eye'></i></a>";
+                                        echo "<a href='tipos_vinculaciones_sena-update.php?idTipoVinculacion=". $row['idTipoVinculacion'] ."'><i class='far fa-edit'></i></a>";
+                                        echo "<a href='tipos_vinculaciones_sena-delete.php?idTipoVinculacion=". $row['idTipoVinculacion'] ."'><i class='far fa-trash-alt'></i></a>";
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idTipoVinculacion'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['nombreLargoVinculacion'] . "</td>";

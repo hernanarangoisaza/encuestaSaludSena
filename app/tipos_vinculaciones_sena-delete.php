@@ -17,7 +17,7 @@ if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
             // Records deleted successfully. Redirect to landing page
-            header("location: vinculaciones_sena-index.php");
+            header("location: tipos_vinculaciones_sena-index.php");
             exit();
         } else{
             echo "Oops! Algo falló. Por favor intente de nuevo.";
@@ -63,7 +63,7 @@ if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
                             <p class="mensaje-eliminar">Está a punto de eliminar el registro seleccionado.</p>
                             <p>
                                 <input type="submit" value="Eliminar permanentemente" class="btn btn-danger">
-                                <a href="vinculaciones_sena-index.php" class="btn btn-secondary">No borrar</a>
+                                <a href="tipos_vinculaciones_sena-index.php" class="btn btn-secondary">No borrar</a>
                             </p>
                         </div>
                     </form>

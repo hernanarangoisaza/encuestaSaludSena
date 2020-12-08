@@ -137,7 +137,7 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreLargoRolSistema" maxlength="50" class="form-control" value="<?php echo $nombreLargoRolSistema; ?>">
+                            <input type="text" name="nombreLargoRolSistema" maxlength="75" class="form-control" value="<?php echo $nombreLargoRolSistema; ?>">
                             <span class="form-text"><?php echo $nombreRol_err; ?></span>
                         </div>
 

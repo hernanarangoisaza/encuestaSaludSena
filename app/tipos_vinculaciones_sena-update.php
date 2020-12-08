@@ -45,7 +45,7 @@ if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
             } else{
                 $stmt = null;
                 // header("location: vinculaciones_sena-read.php?idTipoVinculacion=$idTipoVinculacion");
-                header("location: vinculaciones_sena-index.php");
+                header("location: tipos_tipos_vinculaciones_sena-index.php");
             }
 } else {
     // Check existence of id parameter before processing further
@@ -127,7 +127,7 @@ if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
 
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="nombreLargoVinculacion" maxlength="50" class="form-control" value="<?php echo $nombreLargoVinculacion; ?>">
+                            <input type="text" name="nombreLargoVinculacion" maxlength="75" class="form-control" value="<?php echo $nombreLargoVinculacion; ?>">
                             <span class="form-text"><?php echo $nombreLargoVinculacion_err; ?></span>
                         </div>
 
@@ -152,7 +152,7 @@ if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
                         <input type="hidden" name="idTipoVinculacion" value="<?php echo $idTipoVinculacion; ?>"/>
                         <p>
                             <input type="submit" class="btn btn-primary" value="Grabar">
-                            <a href="vinculaciones_sena-index.php" class="btn btn-secondary">Cancelar</a>
+                            <a href="tipos_vinculaciones_sena-index.php" class="btn btn-secondary">Cancelar</a>
                         </p>
 
                     </form>

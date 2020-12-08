@@ -27,7 +27,7 @@
 
                 <li class="item-menu-principal"><a href="tipos_generos-index.php">Tipos de géneros</a></li>
                 <li class="item-menu-principal"><a href="tipos_identificacion-index.php">Tipos de identificación</a></li>
-                <li class="item-menu-principal"><a href="vinculaciones_sena-index.php">Tipos de vinculaciones</a></li>
+                <li class="item-menu-principal"><a href="tipos_vinculaciones_sena-index.php">Tipos de vinculaciones</a></li>
 
                 <li class="item-menu-principal"><a href="usuarios-index.php">Usuarios del sistema</a></li>
                 <li class="item-menu-principal"><a href="roles_sistema-index.php">Roles del sistema</a></li>
