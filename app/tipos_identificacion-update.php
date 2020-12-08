@@ -13,7 +13,6 @@ $nombreCorto_err = "";
 $estado_err = "";
 $auditoria_err = "";
 
-
 // Processing form data when form is submitted
 if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"])){
     // Get hidden input value
@@ -25,7 +24,6 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
 		$nombreCorto = trim($_POST["nombreCorto"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = date('Y-m-d H:i:s');
-		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [
@@ -46,7 +44,8 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
                 header("location: error.php");
             } else{
                 $stmt = null;
-                header("location: tipos_identificacion-read.php?idTipoIdentificacion=$idTipoIdentificacion");
+                // header("location: tipos_identificacion-read.php?idTipoIdentificacion=$idTipoIdentificacion");
+                header("location: tipos_identificacion-index.php");
             }
 } else {
     // Check existence of id parameter before processing further
@@ -78,7 +77,6 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
 					$nombreCorto = $row["nombreCorto"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
-					
 
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
@@ -109,18 +107,21 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Actualizar Registro</title>
+    <title>Actualizar Tipo de Identififación</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-4">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
-                        <h2>Actualizar Registro</h2>
+                        <h2>Tipo de Identificación - Actualizar</h2>
                     </div>
-                    <p>Por favor ingrese nueva información para actualizar el registro.</p>
+
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 
                         <div class="form-group">
@@ -128,25 +129,31 @@ if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"
                             <input type="text" name="nombreLargoIdentificacion" maxlength="50" class="form-control" value="<?php echo $nombreLargoIdentificacion; ?>">
                             <span class="form-text"><?php echo $nombreLargoIdentificacion_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Nombre corto</label>
                             <input type="text" name="nombreCorto" maxlength="50" class="form-control" value="<?php echo $nombreCorto; ?>">
                             <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
                             <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Fecha/Hora de auditoría</label>
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $auditoria; ?>">
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
                         </div>
 
                         <input type="hidden" name="idTipoIdentificacion" value="<?php echo $idTipoIdentificacion; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Grabar">
-                        <a href="tipos_identificacion-index.php" class="btn btn-secondary">Cancelar</a>
+                        <p>
+                            <input type="submit" class="btn btn-primary" value="Grabar">
+                            <a href="tipos_identificacion-index.php" class="btn btn-secondary">Cancelar</a>
+                        </p>
+
                     </form>
                 </div>
             </div>

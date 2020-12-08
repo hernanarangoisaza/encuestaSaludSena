@@ -70,6 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
                         <h2>Crear Registro</h2>
                     </div>
@@ -81,17 +82,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <input type="text" name="nombreLargoGenero" maxlength="50" class="form-control" value="<?php echo $nombreLargoGenero; ?>">
                             <span class="form-text"><?php echo $nombreLargoGenero_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Nombre corto</label>
                             <input type="text" name="nombreCorto" maxlength="50" class="form-control" value="<?php echo $nombreCorto; ?>">
                             <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
                             <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
-						<div class="form-group">
+
+						<div class="form-group ocultar-columna">
                             <label>Fecha/Hora de auditoría</label>
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $auditoria; ?>">
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
@@ -99,6 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <input type="submit" class="btn btn-primary" value="Grabar">
                         <a href="tipos_generos-index.php" class="btn btn-secondary">Cancelar</a>
+
                     </form>
                 </div>
             </div>

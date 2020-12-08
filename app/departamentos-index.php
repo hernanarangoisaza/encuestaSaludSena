@@ -111,7 +111,7 @@
                                         echo "<th><a href=?search=$search&sort=&order=codigoDepartamento&sort=$sort>Código Departamento</th>";
 										echo "<th><a href=?search=$search&sort=&order=departamento&sort=$sort>Nombre</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";

@@ -115,7 +115,7 @@
 										echo "<th><a href=?search=$search&sort=&order=permisos&sort=$sort>Permisos</th>";
 										echo "<th><a href=?search=$search&sort=&order=restricciones&sort=$sort>Restricciones</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";

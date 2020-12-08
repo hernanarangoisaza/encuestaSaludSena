@@ -123,7 +123,7 @@
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraTomaSalida&sort=$sort>Fecha/hora toma de salida</th>";
 										echo "<th><a href=?search=$search&sort=&order=temperaturaSalida&sort=$sort>Temperatura a la salida</th>";
 										echo "<th><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora de auditoría</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
 										
                                         echo "<th class='estilo-acciones'>Acciones</th>";
                                     echo "</tr>";
