@@ -19,11 +19,10 @@ $restricciones_err = "";
 $estado_err = "";
 $auditoria_err = "";
 
-
 // Processing form data when form is submitted
 if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
     // Get hidden input value
-    $idRol = $_POST["idRolSistema"];
+    $idRolSistema = $_POST["idRolSistema"];
 
         // Prepare an update statement
         
@@ -34,7 +33,6 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
 		$restricciones = trim($_POST["restricciones"]);
 		$estado = trim($_POST["estado"]);
 		$auditoria = date('Y-m-d H:i:s');
-		
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         $options = [
@@ -50,18 +48,19 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
         }
         $stmt = $pdo->prepare("UPDATE roles_sistema SET nombreLargoRolSistema=?,nombreCorto=?,descripcionRolSistema=?,permisos=?,restricciones=?,estado=?,auditoria=? WHERE idRolSistema=?");
 
-        if(!$stmt->execute([ $nombreLargoRolSistema,$nombreCorto,$descripcionRolSistema,$permisos,$restricciones,$estado,$auditoria,$idRol  ])) {
+        if(!$stmt->execute([ $nombreLargoRolSistema,$nombreCorto,$descripcionRolSistema,$permisos,$restricciones,$estado,$auditoria,$idRolSistema  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
                 $stmt = null;
-                header("location: roles_sistema-read.php?idRol=$idRol");
+                // header("location: roles_sistema-read.php?idRolSistema=$idRolSistema");
+                header("location: roles_sistema-index.php");
             }
 } else {
     // Check existence of id parameter before processing further
     if(isset($_GET["idRolSistema"]) && !empty(trim($_GET["idRolSistema"]))){
         // Get URL parameter
-        $idRol =  trim($_GET["idRolSistema"]);
+        $idRolSistema =  trim($_GET["idRolSistema"]);
 
         // Prepare a select statement
         $sql = "SELECT * FROM roles_sistema WHERE idRolSistema = ?";
@@ -70,7 +69,7 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
             // Set parameters
-            $param_id = $idRol;
+            $param_id = $idRolSistema;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -90,7 +89,6 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
 					$restricciones = $row["restricciones"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
-					
 
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
@@ -121,8 +119,10 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Actualizar Registro</title>
+    <title>Actualizar Rol del Sistema</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
 </head>
 <body>
     <section class="pt-4">
@@ -130,9 +130,9 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
             <div class="row">
                 <div class="col-md-12 mx-auto">
                     <div class="page-header">
-                        <h2>Actualizar Registro</h2>
+                        <h2>Rol del Sistema - Actualizar</h2>
                     </div>
-                    <p>Por favor ingrese nueva información para actualizar el registro.</p>
+
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 
                         <div class="form-group">
@@ -140,40 +140,49 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
                             <input type="text" name="nombreLargoRolSistema" maxlength="50" class="form-control" value="<?php echo $nombreLargoRolSistema; ?>">
                             <span class="form-text"><?php echo $nombreRol_err; ?></span>
                         </div>
+
 						<div class="form-group">
                             <label>Nombre corto</label>
                             <input type="text" name="nombreCorto" maxlength="50" class="form-control" value="<?php echo $nombreCorto; ?>">
                             <span class="form-text"><?php echo $nombreCorto_err; ?></span>
                         </div>
-						<div class="form-group">
+
+                        <div class="form-group">
                             <label>Descripción</label>
-                            <textarea name="descripcionRolSistema" class="form-control"><?php echo $descripcionRolSistema ; ?></textarea>
+                            <textarea name="descripcionRolSistema" class="form-control" rows="5"><?php echo $descripcionRolSistema; ?></textarea>
                             <span class="form-text"><?php echo $descripcionRolSistema_err; ?></span>
                         </div>
-						<div class="form-group">
+
+                        <div class="form-group">
                             <label>Permisos</label>
-                            <input type="text" name="permisos" maxlength="500" class="form-control" value="<?php echo $permisos; ?>">
+                            <textarea name="permisos" class="form-control" rows="5"><?php echo $permisos; ?></textarea>
                             <span class="form-text"><?php echo $permisos_err; ?></span>
                         </div>
-						<div class="form-group">
+
+                        <div class="form-group">
                             <label>Restricciones</label>
-                            <input type="text" name="restricciones" maxlength="500" class="form-control" value="<?php echo $restricciones; ?>">
+                            <textarea name="restricciones" class="form-control" rows="5"><?php echo $restricciones; ?></textarea>
                             <span class="form-text"><?php echo $restricciones_err; ?></span>
                         </div>
-						<div class="form-group">
+
+                        <div class="form-group ocultar-columna">
                             <label>Estado del registro</label>
                             <input type="number" name="estado" class="form-control" value="<?php echo $estado; ?>">
                             <span class="form-text"><?php echo $estado_err; ?></span>
                         </div>
-						<div class="form-group">
+
+                        <div class="form-group ocultar-columna">
                             <label>Fecha/Hora de auditoría</label>
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $auditoria; ?>">
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
                         </div>
 
-                        <input type="hidden" name="idRolSistema" value="<?php echo $idRol; ?>"/>
-                        <input type="submit" class="btn btn-primary" value="Grabar">
-                        <a href="roles_sistema-index.php" class="btn btn-secondary">Cancelar</a>
+                        <input type="hidden" name="idRolSistema" value="<?php echo $idRolSistema; ?>"/>
+                        <p>
+                            <input type="submit" class="btn btn-primary" value="Grabar">
+                            <a href="roles_sistema-index.php" class="btn btn-secondary">Cancelar</a>
+                        </p>
+
                     </form>
                 </div>
             </div>

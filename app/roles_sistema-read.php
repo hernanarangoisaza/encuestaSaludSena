@@ -71,10 +71,10 @@ if(isset($_GET["idRolSistema"]) && !empty(trim($_GET["idRolSistema"]))){
                         <h1>Rol del Sistema - Visualizar</h1>
                     </div>
                         
-                     <div class="form-group">
+                    <div class="form-group">
                         <label>Nombre</label>
                         <input type="text" name="nombreLargoRolSistema" class="form-control" value="<?php echo $row['nombreLargoRolSistema']; ?>" readonly>
-                   </div>
+                    </div>
 
                     <div class="form-group">
                         <label>Nombre corto</label>
@@ -83,23 +83,23 @@ if(isset($_GET["idRolSistema"]) && !empty(trim($_GET["idRolSistema"]))){
 
                     <div class="form-group">
                         <label>Descripción</label>
-                        <input type="text" name="descripcionRolSistema" class="form-control" value="<?php echo $row['descripcionRolSistema']; ?>" readonly>
+                        <textarea name="descripcionRolSistema" class="form-control" rows="5" readonly><?php echo $row['descripcionRolSistema']; ?></textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Permisos</label>
-                        <input type="text" name="permisos" class="form-control" value="<?php echo $row['permisos']; ?>" readonly>
+                        <textarea name="permisos" class="form-control" rows="5" readonly><?php echo $row['permisos']; ?></textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Restricciones</label>
-                        <input type="text" name="restricciones" class="form-control" value="<?php echo $row['restricciones']; ?>" readonly>
+                        <textarea name="restricciones" class="form-control" rows="5" readonly><?php echo $row['restricciones']; ?></textarea>
                     </div>
 
                     <div class="form-group ocultar-columna">
                         <label>Estado del registro</label>
                          <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
-                   </div>
+                    </div>
 
                     <div class="form-group">
                         <label>Fecha/Hora de auditoría</label>

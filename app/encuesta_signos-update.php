@@ -268,7 +268,7 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
 
                         <div class="form-group">
                             <label>Observaciones adicionales</label>
-                            <textarea name="observacionAdicional" class="form-control" rows="5"><?php echo $observacionAdicional ; ?></textarea>
+                            <textarea name="observacionAdicional" class="form-control" rows="5"><?php echo $observacionAdicional; ?></textarea>
                             <span class="form-text"><?php echo $observacionAdicional_err; ?></span>
                         </div>
 

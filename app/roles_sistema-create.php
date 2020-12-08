@@ -100,19 +100,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 						<div class="form-group">
                             <label>Descripción</label>
-                            <textarea name="descripcionRolSistema" class="form-control"><?php echo $descripcionRolSistema ; ?></textarea>
+                            <textarea name="descripcionRolSistema" class="form-control" rows="5"><?php echo $descripcionRolSistema; ?></textarea>
                             <span class="form-text"><?php echo $descripcionRolSistema_err; ?></span>
                         </div>
 
 						<div class="form-group">
                             <label>Permisos</label>
-                            <input type="text" name="permisos" maxlength="500" class="form-control" value="<?php echo $permisos; ?>">
+                            <textarea name="permisos" class="form-control" rows="5"><?php echo $permisos; ?></textarea>
                             <span class="form-text"><?php echo $permisos_err; ?></span>
                         </div>
 
 						<div class="form-group">
                             <label>Restricciones</label>
-                            <input type="text" name="restricciones" maxlength="500" class="form-control" value="<?php echo $restricciones; ?>">
+                            <textarea name="restricciones" class="form-control" rows="5"><?php echo $restricciones; ?></textarea>
                             <span class="form-text"><?php echo $restricciones_err; ?></span>
                         </div>
 

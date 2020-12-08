@@ -123,7 +123,7 @@ if(isset($_POST["idPreguntaEncuesta"]) && !empty($_POST["idPreguntaEncuesta"])){
 
                         <div class="form-group">
                             <label>Pregunta</label>
-                            <textarea name="textoPregunta" class="form-control" rows="5"><?php echo $textoPregunta ; ?></textarea>
+                            <textarea name="textoPregunta" class="form-control" rows="5"><?php echo $textoPregunta; ?></textarea>
                             <span class="form-text"><?php echo $textoPregunta_err; ?></span>
                         </div>
 

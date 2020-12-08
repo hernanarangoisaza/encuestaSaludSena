@@ -37,6 +37,7 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
         exit();
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -52,9 +53,11 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mx-auto">
+
                     <div class="page-header">
                         <h1>Rol del Sistema - Borrar</h1>
                     </div>
+
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="fade-in">
                             <input type="hidden" name="idRolSistema" value="<?php echo trim($_GET["idRolSistema"]); ?>"/>
@@ -65,6 +68,7 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
                             </p>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

@@ -193,7 +193,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 						<div class="form-group">
                             <label>Observaciones adicionales</label>
-                            <textarea name="observacionAdicional" class="form-control" rows="5"><?php echo $observacionAdicional ; ?></textarea>
+                            <textarea name="observacionAdicional" class="form-control" rows="5"><?php echo $observacionAdicional; ?></textarea>
                             <span class="form-text"><?php echo $observacionAdicional_err; ?></span>
                         </div>
 
