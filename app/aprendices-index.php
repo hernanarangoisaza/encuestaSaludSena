@@ -82,8 +82,7 @@
                     }
 
                     //Column sort order
-                    $sortBy = ['asc', 'desc'];
-                    $sort = 'desc';
+                    $sortBy = array('asc', 'desc'); $sort = 'desc';
                     if (isset($_GET['sort']) && in_array($_GET['sort'], $sortBy)) {
                         if ($_GET['sort'] == 'asc') {
                             $sort = 'desc';
