@@ -17,7 +17,7 @@
                         <h2 class="float-left">Tipos de Vinculaciones - Panel General</h2>
                         <a href="tipos_vinculaciones_sena-create.php" class="btn btn-success float-right">Crear</a>
                         <a href="tipos_vinculaciones_sena-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
+                        <a href="menu.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">

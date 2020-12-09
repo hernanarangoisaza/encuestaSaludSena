@@ -18,7 +18,7 @@
                         <h2 class="float-left">Usuarios del Sistema - Panel General</h2>
                         <a href="usuarios-create.php" class="btn btn-success float-right">Crear</a>
                         <a href="usuarios-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
-                        <a href="index.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
+                        <a href="menu.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">
@@ -181,6 +181,7 @@
                                         echo "<a href='usuarios-read.php?idUsuario=". $row['idUsuario'] ."'><i class='far fa-eye'></i></a>";
                                         echo "<a href='usuarios-update.php?idUsuario=". $row['idUsuario'] ."'><i class='far fa-edit'></i></a>";
                                         echo "<a href='usuarios-delete.php?idUsuario=". $row['idUsuario'] ."'><i class='far fa-trash-alt'></i></a>";
+                                        echo "<a href='usuarios-password.php?idUsuario=". $row['idUsuario'] ."'><i class='fas fa-key'></i></a>";
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idUsuario'] . "</td>";
                                     echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";

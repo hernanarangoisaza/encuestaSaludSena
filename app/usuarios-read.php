@@ -152,7 +152,7 @@ if(isset($_GET["idUsuario"]) && !empty(trim($_GET["idUsuario"]))){
                         <input type="text" name="idRolSistema" class="form-control" value="<?php echo $row['nombreLargoRolSistema']; ?>" readonly>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group ocultar-columna">
                         <label>Contraseña del sistema</label>
                         <input type="password" name="passwordSistema" class="form-control" value="<?php echo $row['passwordSistema']; ?>" readonly>
                     </div>

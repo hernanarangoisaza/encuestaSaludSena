@@ -57,7 +57,8 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
 		$idDepartamento = trim($_POST["idDepartamento"]);
 		$idCentroFormacion = trim($_POST["idCentroFormacion"]);
 		$idRolSistema = trim($_POST["idRolSistema"]);
-		$passwordSistema = trim($_POST["passwordSistema"]);
+        // $passwordSistema = trim($_POST["passwordSistema"]);
+        $passwordSistema=password_hash($_POST["passwordSistema"], PASSWORD_DEFAULT);
 		$estado = trim($_POST["estado"]);
 		$auditoria = date('Y-m-d H:i:s');
 
@@ -341,9 +342,9 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
                             <span class="form-text"><?php echo $idRolSistema_err; ?></span>
                         </div>
 
-						<div class="form-group">
+						<div class="form-group ocultar-columna">
                             <label>Contraseña del sistema</label>
-                            <input type="password" name="passwordSistema" maxlength="50" class="form-control" value="<?php echo $passwordSistema; ?>">
+                            <input type="password" name="passwordSistema" maxlength="255" class="form-control" value="<?php echo $passwordSistema; ?>">
                             <span class="form-text"><?php echo $passwordSistema_err; ?></span>
                         </div>
 
