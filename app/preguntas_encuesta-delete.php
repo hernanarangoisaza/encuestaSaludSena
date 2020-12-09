@@ -1,4 +1,22 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: index.php");
+    exit();    
+}
+// foreach ($_SESSION as $key=>$val)
+// echo $key." ".$val."<br/>";
+// echo $_SESSION['permisosRolSistema'];
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: index.php");
+    exit();
+}
+?>
+
+<?php
 // Process delete operation after confirmation
 if(isset($_POST["idPreguntaEncuesta"]) && !empty($_POST["idPreguntaEncuesta"])){
     // Include config file

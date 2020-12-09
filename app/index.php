@@ -50,6 +50,7 @@ if (isset($_POST['login'])) {
                         
                         // Retrieve individual field value
                         $_SESSION['idUsuario'] = $row['idUsuario'];
+                        $_SESSION['emailUsuario'] = $row["email"];   
                         $_SESSION['idRolSistema'] = $row["idRolSistema"];  	
                         $_SESSION['nombreCortoRolSistema'] = $row["nombreCortoRolSistema"];   
                         $_SESSION['nombreCompleto'] = $row["nombreCompleto"];   

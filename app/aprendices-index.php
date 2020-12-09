@@ -1,3 +1,26 @@
+<?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: index.php");
+    exit();    
+}
+// foreach ($_SESSION as $key=>$val)
+// echo $key." ".$val."<br/>";
+// echo $_SESSION['permisosRolSistema'];
+?>
+
+<?php
+if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '') or 
+   (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
+    $isDisabled = "isDisabled";
+    $ariaDisabled = "true";
+}
+else {
+    $isDisabled = "notDisabled";
+    $ariaDisabled = "false";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,7 +39,7 @@
 
                     <div class="page-header clearfix">
                         <h2 class="float-left">Aprendices - Panel General</h2>
-                        <a href="aprendices-create.php" class="btn btn-success float-right">Crear</a>
+                        <?php echo '<span class="' . $isDisabled. '"><a href="aprendices-create.php" class="btn btn-success float-right" aria-disabled="' . $ariaDisabled . '">Crear</a></span>' ?>
                         <a href="aprendices-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="menu.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
@@ -195,9 +218,18 @@
                             while ($row = mysqli_fetch_array($result)) {
                                 echo "<tr>";
                                 echo "<td class='centrar-columna'>";
-                                echo "<a href='aprendices-read.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-eye'></i></a>";
+
+                                echo "<span class='$isDisabled'>" .
+                                     "<a href='aprendices-read.php?idAprendiz=" . 
+                                     $row['idAprendiz'] . 
+                                     "' aria-disabled='$ariaDisabled'>" .
+                                     "<i class='far fa-eye'></i></a></span>";
+
+
+
+                                
                                 echo "<a href='aprendices-update.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-edit'></i></a>";
-                                echo "<a href='aprendices-delete.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-trash-alt'></i></a>";
+                                echo "" . "<a href='aprendices-delete.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-trash-alt'></i></a>";
                                 echo "</td>";
                                 echo "<td class='ocultar-columna'>" . $row['idAprendiz'] . "</td>";
                                 echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";
