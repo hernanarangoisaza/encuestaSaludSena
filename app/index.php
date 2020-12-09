@@ -3,6 +3,7 @@
 include('config.php');
 
 session_start();
+
 // remove all session variables
 session_unset();
 
@@ -62,9 +63,6 @@ if (isset($_POST['login'])) {
 
                         $_SESSION['login'] = false;
                         header("location: menu.php");
-                        
-                        // destroy the session
-                        // session_destroy();
 
 					}
 

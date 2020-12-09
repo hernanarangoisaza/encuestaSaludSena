@@ -120,12 +120,15 @@ body {
 
 .titulo-menu {
     font-weight: 300;
-    font-size: 1.75em;
+    font-size: 1.25em;
     margin-left: 25px;
+    margin-bottom: 10px;
+    color: #ff6719;
 }
 
 ul.nav {
     padding-left: 0px;
+    display: block;
 }
 
 .menu {
@@ -139,7 +142,7 @@ ul.nav {
 }
 
 .menu .nav li {
-    padding-bottom: 10px;
+    padding-bottom: 2px;
     list-style-type: none;
     font-size: 1em;
 }
@@ -293,6 +296,11 @@ li.item-menu-principal a::before {
     padding-left: 0px;
     padding-right: 10px;
     content: "\2192";
+}
+
+li.item-menu-principal a::after {
+    content:"\a";
+    white-space: pre;
 }
 
 .centrar-columna {
