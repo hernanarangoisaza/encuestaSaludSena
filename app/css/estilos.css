@@ -36,15 +36,24 @@ body {
 }
 
 .contenedor-izquierdo {
-    width: 80%;
+    width: 20%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.contenedor-central {
+    width: 60%;
     height: 100%;
     background-color: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .contenedor-derecho {
@@ -543,6 +552,58 @@ a[aria-disabled="true"] {
   text-decoration: none;
   color: black;
   opacity: 0.35;
+}
+
+.titulo-aforo {
+    height: 5%;
+    display: flex;
+    flex-direction: column;
+    background-color: #495057;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    color: white; 
+    width: 95%;  
+    font-size: 1.25em; 
+}
+
+.secciones-aforo {
+    height: 19%;
+    width: 95%;
+    border: 1px solid #AAAAAA;
+    margin-top: 3px;
+    background-color: #F9F9F9;
+    padding:5px;
+    text-align: center;
+}
+
+.titulo-seccion-aforo {
+    display: block;
+    width: 100%;
+    background-color: #495057;
+    font-size: 1em;
+    color: white;
+    line-height: 1.5em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.subtitulo-seccion-aforo {
+    font-size: 0.80em;
+    color: #495057;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.dato-seccion-aforo {
+    font-size: 1.15em;
+    color: #19b0ff;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.seccion-datos {
+    /* margin-top: 7px; */
 }
 
 /*
