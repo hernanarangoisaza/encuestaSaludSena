@@ -555,7 +555,7 @@ a[aria-disabled="true"] {
 }
 
 .titulo-aforo {
-    height: 5%;
+    height: 10%;
     display: flex;
     flex-direction: column;
     background-color: #495057;
@@ -568,7 +568,7 @@ a[aria-disabled="true"] {
 }
 
 .secciones-aforo {
-    height: 19%;
+    height: 15%;
     width: 95%;
     border: 1px solid #AAAAAA;
     margin-top: 3px;
