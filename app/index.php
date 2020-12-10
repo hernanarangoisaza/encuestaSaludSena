@@ -1,6 +1,6 @@
 <?php
  
-include('config.php');
+include('core/config.php');
 
 session_start();
 
@@ -56,14 +56,14 @@ if (isset($_POST['login'])) {
                         $_SESSION['nombreCompleto'] = $row["nombreCompleto"];   
                         $_SESSION['permisosRolSistema'] = $row["permisosRolSistema"];   
                         $_SESSION['restriccionesRolSistema'] = $row["restriccionesRolSistema"];   
-                        header("location: menu.php");
+                        header("location: core/menu.php");
 
 					} else {
 
                         // USUARIO EXISTE PERO CONTRASEÑA NO COINCIDE.
 
                         $_SESSION['login'] = false;
-                        header("location: menu.php");
+                        header("location: core/menu.php");
 
 					}
 
@@ -72,7 +72,7 @@ if (isset($_POST['login'])) {
 					// USUARIO NO EXISTE Y NO ES POSIBLE VALIDAR CONTRASEÑA.
 
                     $_SESSION['login'] = false;
-                    header("location: menu.php");
+                    header("location: core/menu.php");
 
                 }
 
@@ -91,7 +91,7 @@ if (isset($_POST['login'])) {
 
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
-        header("location: error.php");
+        header("location: core/error.php");
         exit();
     }
 
