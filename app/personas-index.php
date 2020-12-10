@@ -25,7 +25,7 @@ else {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Aprendices</title>
+    <title>Gestión de Personas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6b773fe9e4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/estilos.css" />
@@ -38,14 +38,14 @@ else {
                 <div class="col-md-12">
 
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Aprendices - Panel General</h2>
-                        <?php echo '<span class="' . $isDisabled. '"><a href="aprendices-create.php" class="btn btn-success float-right" aria-disabled="' . $ariaDisabled . '">Crear</a></span>' ?>
-                        <a href="aprendices-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
+                        <h2 class="float-left">Personas - Panel General</h2>
+                        <?php echo '<span class="' . $isDisabled. '"><a href="personas-create.php" class="btn btn-success float-right" aria-disabled="' . $ariaDisabled . '">Crear</a></span>' ?>
+                        <a href="personas-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="menu.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">
-                        <form action="aprendices-index.php" method="get">
+                        <form action="personas-index.php" method="get">
                         <div class="col">
                           <input type="text" class="form-control" placeholder="Buscar en este listado" name="search">
                         </div>
@@ -56,7 +56,7 @@ else {
                     // Include config file
                     require_once "config.php";
 
-                    $_SESSION["rutaRegresarA"] = 'aprendices-index.php';
+                    $_SESSION["rutaRegresarA"] = 'personas-index.php';
 
                     //Get current URL and parameters for correct pagination
                     $protocol = $_SERVER['SERVER_PROTOCOL'];
@@ -76,14 +76,14 @@ else {
                     //$no_of_records_per_page is set on the index page. Default is 10.
                     $offset = ($pageno - 1) * $no_of_records_per_page;
 
-                    $total_pages_sql = "SELECT COUNT(*) FROM aprendices";
+                    $total_pages_sql = "SELECT COUNT(*) FROM personas";
                     $result = mysqli_query($link, $total_pages_sql);
                     $total_rows = mysqli_fetch_array($result)[0];
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
 
                     //Column sorting on column name
                     $orderBy = [
-                        'idAprendiz',
+                        'idPersona',
                         'idTipoVinculacion',
                         'nombreCompleto',
                         'idTipoIdentificacion',
@@ -101,7 +101,7 @@ else {
                         'estado',
                         'auditoria',
                     ];
-                    $order = 'idAprendiz';
+                    $order = 'idPersona';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                         $order = $_GET['order'];
                     }
@@ -117,7 +117,7 @@ else {
                     }
 
                     // Attempt select query execution
-                    $sql = "SELECT AP.*, 
+                    $sql = "SELECT PE.*, 
                         TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
                         TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
                         TG.nombreLargoGenero AS 'nombreLargoGenero',
@@ -125,21 +125,21 @@ else {
                         DP.departamento AS 'nombreDepartamento',
                         CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                         FF.codigoFichaFormacion AS 'codigoFichaFormacion'
-                        FROM aprendices AP
-                        LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = AP.idTipoVinculacion
-                        LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
-                        LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
-                        LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
-                        LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
-                        LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
-                        LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
+                        FROM personas PE
+                        LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = PE.idTipoVinculacion
+                        LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = PE.idTipoIdentificacion
+                        LEFT JOIN tipos_generos TG ON TG.idTipoGenero = PE.idTipoGenero
+                        LEFT JOIN municipios MN ON MN.idMunicipio = PE.idMunicipio
+                        LEFT JOIN departamentos DP ON DP.idDepartamento = PE.idDepartamento
+                        LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = PE.idCentroFormacion
+                        LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = PE.idFichaFormacion
                         ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
 
-                    $count_pages = "SELECT * FROM aprendices";
+                    $count_pages = "SELECT * FROM personas";
 
                     if (!empty($_GET['search'])) {
                         $search = $_GET['search'];
-                        $sql = "SELECT AP.*, 
+                        $sql = "SELECT PE.*, 
                             TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
                             TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
                             TG.nombreLargoGenero AS 'nombreLargoGenero',
@@ -147,20 +147,20 @@ else {
                             DP.departamento AS 'nombreDepartamento',
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             FF.codigoFichaFormacion AS 'codigoFichaFormacion'
-                            FROM aprendices AP
-                            LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = AP.idTipoVinculacion
-                            LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
-                            LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
-                            LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
-                            LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
-                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
-                            LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
-                            WHERE CONCAT (AP.idAprendiz,TV.nombreLargoVinculacion,AP.nombreCompleto,TI.nombreLargoIdentificacion,AP.identificacion,AP.email,AP.telefonoPersonal,AP.telefonoAcudiente,AP.fechaNacimiento,TG.nombreLargoGenero,AP.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,AP.estado,AP.auditoria)
+                            FROM personas PE
+                            LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = PE.idTipoVinculacion
+                            LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = PE.idTipoIdentificacion
+                            LEFT JOIN tipos_generos TG ON TG.idTipoGenero = PE.idTipoGenero
+                            LEFT JOIN municipios MN ON MN.idMunicipio = PE.idMunicipio
+                            LEFT JOIN departamentos DP ON DP.idDepartamento = PE.idDepartamento
+                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = PE.idCentroFormacion
+                            LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = PE.idFichaFormacion
+                            WHERE CONCAT (PE.idPersona,TV.nombreLargoVinculacion,PE.nombreCompleto,TI.nombreLargoIdentificacion,PE.identificacion,PE.email,PE.telefonoPersonal,PE.telefonoAcudiente,PE.fechaNacimiento,TG.nombreLargoGenero,PE.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,PE.estado,PE.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                             
-                        $count_pages = "SELECT AP.*, 
+                        $count_pages = "SELECT PE.*, 
                             TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
                             TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
                             TG.nombreLargoGenero AS 'nombreLargoGenero',
@@ -168,15 +168,15 @@ else {
                             DP.departamento AS 'nombreDepartamento',
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             FF.codigoFichaFormacion AS 'codigoFichaFormacion'
-                            FROM aprendices AP
-                            LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = AP.idTipoVinculacion
-                            LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
-                            LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
-                            LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
-                            LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
-                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
-                            LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
-                            WHERE CONCAT (AP.idAprendiz,TV.nombreLargoVinculacion,AP.nombreCompleto,TI.nombreLargoIdentificacion,AP.identificacion,AP.email,AP.telefonoPersonal,AP.telefonoAcudiente,AP.fechaNacimiento,TG.nombreLargoGenero,AP.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,AP.estado,AP.auditoria)
+                            FROM personas PE
+                            LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = PE.idTipoVinculacion
+                            LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = PE.idTipoIdentificacion
+                            LEFT JOIN tipos_generos TG ON TG.idTipoGenero = PE.idTipoGenero
+                            LEFT JOIN municipios MN ON MN.idMunicipio = PE.idMunicipio
+                            LEFT JOIN departamentos DP ON DP.idDepartamento = PE.idDepartamento
+                            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = PE.idCentroFormacion
+                            LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = PE.idFichaFormacion
+                            WHERE CONCAT (PE.idPersona,TV.nombreLargoVinculacion,PE.nombreCompleto,TI.nombreLargoIdentificacion,PE.identificacion,PE.email,PE.telefonoPersonal,PE.telefonoAcudiente,PE.fechaNacimiento,TG.nombreLargoGenero,PE.direccionResidencia,MN.municipio,DP.departamento,CF.nombreLargoCentroFormacion,FF.codigoFichaFormacion,PE.estado,PE.auditoria)
                              LIKE '%$search%'
                              ORDER BY $order $sort";
                     } else {
@@ -197,7 +197,7 @@ else {
                             echo "<thead>";
                             echo "<tr>";
                             echo "<th class='estilo-acciones'>Acciones</th>";
-                            echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id Aprendiz</th>";
+                            echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idPersona&sort=$sort>Id Persona</th>";
                             echo "<th><a href=?search=$search&sort=&order=idTipoVinculacion&sort=$sort>Tipo de<br>vinculación</th>";
                             echo "<th><a href=?search=$search&sort=&order=nombreCompleto&sort=$sort>Nombre completo</th>";
                             echo "<th><a href=?search=$search&sort=&order=idTipoIdentificacion&sort=$sort>Tipo de<br>identificación</th>";
@@ -222,18 +222,18 @@ else {
                                 echo "<td class='centrar-columna'>";
 
                                 echo "<span class='$isDisabled'>" .
-                                     "<a href='aprendices-read.php?idAprendiz=" . 
-                                     $row['idAprendiz'] . 
+                                     "<a href='personas-read.php?idPersona=" . 
+                                     $row['idPersona'] . 
                                      "' aria-disabled='$ariaDisabled'>" .
                                      "<i class='far fa-eye'></i></a></span>";
 
 
 
                                 
-                                echo "<a href='aprendices-update.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-edit'></i></a>";
-                                echo "" . "<a href='aprendices-delete.php?idAprendiz=" . $row['idAprendiz'] . "'><i class='far fa-trash-alt'></i></a>";
+                                echo "<a href='personas-update.php?idPersona=" . $row['idPersona'] . "'><i class='far fa-edit'></i></a>";
+                                echo "" . "<a href='personas-delete.php?idPersona=" . $row['idPersona'] . "'><i class='far fa-trash-alt'></i></a>";
                                 echo "</td>";
-                                echo "<td class='ocultar-columna'>" . $row['idAprendiz'] . "</td>";
+                                echo "<td class='ocultar-columna'>" . $row['idPersona'] . "</td>";
                                 echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";
                                 echo "<td>" . $row['nombreCompleto'] . "</td>";
                                 echo "<td>" . $row['nombreLargoIdentificacion'] . "</td>";

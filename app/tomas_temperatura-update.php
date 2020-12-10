@@ -140,11 +140,11 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
                             <label>Encuesta</label>
                             <?php
                                 $sql_cb5 = "SELECT ES.idEncuesta,
-                                                   ES.idAprendiz,
+                                                   ES.idPersona,
                                                    ES.fechaHoraDiligenciamiento,
-                                                   AP.nombreCompleto
+                                                   PE.nombreCompleto
                                                    FROM encuesta_signos ES
-                                                   LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz
+                                                   LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
                                                    ORDER BY idEncuesta DESC";
                                 $result_cb5 = mysqli_query($link, $sql_cb5);
                                 echo "<select name='idEncuesta' id='cb5' class='combo-box form-control'>";

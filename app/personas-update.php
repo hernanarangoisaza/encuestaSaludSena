@@ -38,10 +38,10 @@ $estado_err = "";
 $auditoria_err = "";
 
 // Processing form data when form is submitted
-if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
+if(isset($_POST["idPersona"]) && !empty($_POST["idPersona"])){
 
     // Get hidden input value
-    $idAprendiz = $_POST["idAprendiz"];
+    $idPersona = $_POST["idPersona"];
 
         // Prepare an update statement
 
@@ -74,30 +74,30 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE aprendices SET idTipoVinculacion=?,nombreCompleto=?,idTipoIdentificacion=?,identificacion=?,email=?,telefonoPersonal=?,telefonoAcudiente=?,fechaNacimiento=?,idTipoGenero=?,direccionResidencia=?,idMunicipio=?,idDepartamento=?,idCentroFormacion=?,idFichaFormacion=?,estado=?,auditoria=? WHERE idAprendiz=?");
+        $stmt = $pdo->prepare("UPDATE personas SET idTipoVinculacion=?,nombreCompleto=?,idTipoIdentificacion=?,identificacion=?,email=?,telefonoPersonal=?,telefonoAcudiente=?,fechaNacimiento=?,idTipoGenero=?,direccionResidencia=?,idMunicipio=?,idDepartamento=?,idCentroFormacion=?,idFichaFormacion=?,estado=?,auditoria=? WHERE idPersona=?");
 
-        if(!$stmt->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$telefonoAcudiente,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idFichaFormacion,$estado,$auditoria,$idAprendiz  ])) {
+        if(!$stmt->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$telefonoAcudiente,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idFichaFormacion,$estado,$auditoria,$idPersona  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: error.php");
             } else{
                 $stmt = null;
-                // header("location: aprendices-read.php?idAprendiz=$idAprendiz");
-                header("location: aprendices-index.php");
+                // header("location: personas-read.php?idPersona=$idPersona");
+                header("location: personas-index.php");
             }
 } else {
     // Check existence of id parameter before processing further
-    if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
+    if(isset($_GET["idPersona"]) && !empty(trim($_GET["idPersona"]))){
         // Get URL parameter
-        $idAprendiz =  trim($_GET["idAprendiz"]);
+        $idPersona =  trim($_GET["idPersona"]);
 
         // Prepare a select statement
-        $sql = "SELECT * FROM aprendices WHERE idAprendiz = ?";
+        $sql = "SELECT * FROM personas WHERE idPersona = ?";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
             // Set parameters
-            $param_id = $idAprendiz;
+            $param_id = $idPersona;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -156,7 +156,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Actualizar Aprendiz</title>
+    <title>Actualizar Persona</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -168,7 +168,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                 <div class="col-md-12 mx-auto">
 
                     <div class="page-header">
-                        <h2>Aprendices - Actualizar</h2>
+                        <h2>Persona - Actualizar</h2>
                     </div>
                     
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
@@ -360,10 +360,10 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
                         </div>
 
-                        <input type="hidden" name="idAprendiz" value="<?php echo $idAprendiz; ?>"/>
+                        <input type="hidden" name="idPersona" value="<?php echo $idPersona; ?>"/>
                         <p>
                             <input type="submit" class="btn btn-primary" value="Grabar">
-                            <a href="aprendices-index.php" class="btn btn-secondary">Cancelar</a>
+                            <a href="personas-index.php" class="btn btn-secondary">Cancelar</a>
                         </p>
 
                     </form>

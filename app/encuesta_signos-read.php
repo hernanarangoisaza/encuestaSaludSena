@@ -6,11 +6,11 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
 
     // Prepare a select statement
     $sql = "SELECT ES.*, 
-        AP.nombreCompleto AS 'nombreCompleto', 
+        PE.nombreCompleto AS 'nombreCompleto', 
         CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
         HO.nombreCorto AS 'nombreCorto'
         FROM encuesta_signos ES
-        LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz
+        LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
         LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
         LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
         WHERE idEncuesta = ?";
@@ -80,8 +80,8 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
                     </div>
                         
                     <div class="form-group">
-                        <label>Aprendiz</label>
-                        <input type="text" name="idAprendiz" class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
+                        <label>Persona</label>
+                        <input type="text" name="idPersona" class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
                     </div>
 
                     <div class="form-group">

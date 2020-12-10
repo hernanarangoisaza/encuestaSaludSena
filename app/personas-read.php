@@ -11,13 +11,13 @@ if (empty($_SESSION["login"])) {
 
 <?php
 // Check existence of id parameter before processing further
-if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
+if(isset($_GET["idPersona"]) && !empty(trim($_GET["idPersona"]))){
 
     // Include config file
     require_once "config.php";
 
     // Prepare a select statement
-    $sql = "SELECT AP.*, 
+    $sql = "SELECT PE.*, 
         TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
         TI.nombreLargoIdentificacion AS 'nombreLargoIdentificacion',
         TG.nombreLargoGenero AS 'nombreLargoGenero',
@@ -25,22 +25,22 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
         DP.departamento AS 'nombreDepartamento',
         CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
         FF.codigoFichaFormacion AS 'codigoFichaFormacion'
-        FROM aprendices AP
-        LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = AP.idTipoVinculacion
-        LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = AP.idTipoIdentificacion
-        LEFT JOIN tipos_generos TG ON TG.idTipoGenero = AP.idTipoGenero
-        LEFT JOIN municipios MN ON MN.idMunicipio = AP.idMunicipio
-        LEFT JOIN departamentos DP ON DP.idDepartamento = AP.idDepartamento
-        LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = AP.idCentroFormacion
-        LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = AP.idFichaFormacion
-        WHERE idAprendiz = ?";
+        FROM personas PE
+        LEFT JOIN tipos_vinculaciones_sena TV ON TV.idTipoVinculacion = PE.idTipoVinculacion
+        LEFT JOIN tipos_identificacion TI ON TI.idTipoIdentificacion = PE.idTipoIdentificacion
+        LEFT JOIN tipos_generos TG ON TG.idTipoGenero = PE.idTipoGenero
+        LEFT JOIN municipios MN ON MN.idMunicipio = PE.idMunicipio
+        LEFT JOIN departamentos DP ON DP.idDepartamento = PE.idDepartamento
+        LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = PE.idCentroFormacion
+        LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = PE.idFichaFormacion
+        WHERE idPersona = ?";
 
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
 
         // Set parameters
-        $param_id = trim($_GET["idAprendiz"]);
+        $param_id = trim($_GET["idPersona"]);
 
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -84,7 +84,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ver Aprendiz</title>
+    <title>Ver Persona</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -96,7 +96,7 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
                 <div class="col-md-12 mx-auto">
 
                     <div class="page-header">
-                        <h1>Aprendiz - Visualizar</h1>
+                        <h1>Persona - Visualizar</h1>
                     </div>
 
                     <div class="form-group">

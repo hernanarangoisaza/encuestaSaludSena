@@ -3,7 +3,7 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$idAprendiz = "";
+$idPersona = "";
 $fechaHoraDiligenciamiento = "";
 $idSedeIngreso = "";
 $idHorario = "";
@@ -15,7 +15,7 @@ $aceptacionRespuestaPositiva = "";
 $estado = "1";
 $auditoria = "";
 
-$idAprendiz_err = "";
+$idPersona_err = "";
 $fechaHoraDiligenciamiento_err = "";
 $idSedeIngreso_err = "";
 $idHorario_err = "";
@@ -42,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($name_err) && empty($address_err) && empty($salary_err)){
         // Prepare an insert statement
  */
-        $idAprendiz = trim($_POST["idAprendiz"]);
+        $idPersona = trim($_POST["idPersona"]);
 		$fechaHoraDiligenciamiento = date('Y-m-d H:i:s');
 		$idSedeIngreso = trim($_POST["idSedeIngreso"]);
 		$idHorario = trim($_POST["idHorario"]);
@@ -66,9 +66,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO encuesta_signos (idAprendiz,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
         
-        if($stmt->execute([ $idAprendiz,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
+        if($stmt->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
                 $stmt = null;
                 header("location: encuesta_signos-index.php");
             } else{
@@ -99,22 +99,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                         <div class="form-group">
-                            <label>Aprendiz</label>
+                            <label>Persona</label>
                             <?php
-                                $sql_cb1 = "SELECT idAprendiz, nombreCompleto FROM aprendices";
+                                $sql_cb1 = "SELECT idPersona, nombreCompleto FROM personas";
                                 $result_cb1 = mysqli_query($link, $sql_cb1);
-                                echo "<select name='idAprendiz' id='cb1' class='combo-box form-control'>";
+                                echo "<select name='idPersona' id='cb1' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb1)) {
-                                    if ($idAprendiz != $row['idAprendiz'])
+                                    if ($idPersona != $row['idPersona'])
                                     {
-                                        echo "<option class='item-combo-box' value='" . $row['idAprendiz'] . "'>" . $row['nombreCompleto'] . "</option>";
+                                        echo "<option class='item-combo-box' value='" . $row['idPersona'] . "'>" . $row['nombreCompleto'] . "</option>";
                                     } else {
-                                        echo "<option class='item-combo-box' selected value='" . $row['idAprendiz'] . "'>" . $row['nombreCompleto'] . "</option>";
+                                        echo "<option class='item-combo-box' selected value='" . $row['idPersona'] . "'>" . $row['nombreCompleto'] . "</option>";
                                     }
                                 }
                                 echo "</select>";
                             ?>
-                            <span class="form-text"><?php echo $idAprendiz_err; ?></span>
+                            <span class="form-text"><?php echo $idPersona_err; ?></span>
                         </div>
 
 						<div class="form-group ocultar-columna">

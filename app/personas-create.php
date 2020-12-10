@@ -81,11 +81,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO aprendices (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
+        $stmt = $pdo->prepare("INSERT INTO personas (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
         
         if($stmt->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$telefonoAcudiente,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idFichaFormacion,$estado,$auditoria  ])) {
                 $stmt = null;
-                header("location: aprendices-index.php");
+                header("location: personas-index.php");
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
             }
@@ -96,7 +96,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Aprendiz</title>
+    <title>Crear Persona</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -108,7 +108,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="col-md-12 mx-auto">
 
                     <div class="page-header">
-                        <h2>Aprendiz - Crear</h2>
+                        <h2>Persona - Crear</h2>
                     </div>
 
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -301,7 +301,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
 
                         <input type="submit" class="btn btn-primary" value="Grabar">
-                        <a href="aprendices-index.php" class="btn btn-secondary">Cancelar</a>
+                        <a href="personas-index.php" class="btn btn-secondary">Cancelar</a>
 
                     </form>
                 </div>

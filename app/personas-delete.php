@@ -19,25 +19,25 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
 <?php
 
 // Process delete operation after confirmation
-if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
+if(isset($_POST["idPersona"]) && !empty($_POST["idPersona"])){
 
     // Include config file
     require_once "config.php";
 
     // Prepare a delete statement
-    $sql = "DELETE FROM aprendices WHERE idAprendiz = ?";
+    $sql = "DELETE FROM personas WHERE idPersona = ?";
 
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
 
         // Set parameters
-        $param_id = trim($_POST["idAprendiz"]);
+        $param_id = trim($_POST["idPersona"]);
 
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
             // Records deleted successfully. Redirect to landing page
-            header("location: aprendices-index.php");
+            header("location: personas-index.php");
             exit();
         } else{
             echo "Oops! Algo falló. Por favor intente de nuevo.";
@@ -53,7 +53,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
 } else{
 
     // Check existence of id parameter
-    if(empty(trim($_GET["idAprendiz"]))){
+    if(empty(trim($_GET["idPersona"]))){
         // URL doesn't contain id parameter. Redirect to error page
         header("location: error.php");
         exit();
@@ -65,7 +65,7 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Borrar Aprendiz</title>
+    <title>Borrar Persona</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -76,15 +76,15 @@ if(isset($_POST["idAprendiz"]) && !empty($_POST["idAprendiz"])){
             <div class="row">
                 <div class="col-md-12 mx-auto">
                     <div class="page-header">
-                        <h1>Aprendiz - Borrar</h1>
+                        <h1>Persona - Borrar</h1>
                     </div>
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="fade-in">
-                            <input type="hidden" name="idAprendiz" value="<?php echo trim($_GET["idAprendiz"]); ?>"/>
+                            <input type="hidden" name="idPersona" value="<?php echo trim($_GET["idPersona"]); ?>"/>
                             <p class="mensaje-eliminar">Está a punto de eliminar el registro seleccionado.</p>
                             <p>
                                 <input type="submit" value="Eliminar permanentemente" class="btn btn-danger">
-                                <a href="aprendices-index.php" class="btn btn-secondary">No borrar</a>
+                                <a href="personas-index.php" class="btn btn-secondary">No borrar</a>
                             </p>
                         </div>
                     </form>

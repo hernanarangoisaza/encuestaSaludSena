@@ -121,7 +121,7 @@ if (empty($_SESSION["login"])) {
                             if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or
                                 (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '') or
                                 (strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '')) {
-                                echo '<li class="item-menu-principal"><a href="aprendices-index.php">Aprendices</a></li>';
+                                echo '<li class="item-menu-principal"><a href="personas-index.php">Personas</a></li>';
                             }
                             ?>
 

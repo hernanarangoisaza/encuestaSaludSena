@@ -70,7 +70,7 @@ if (empty($_SESSION["login"])) {
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idToma', 'idEncuesta', 'idAprendiz', 'fechaHoraTomaEntrada', 'temperaturaEntrada', 'fechaHoraTomaSalida', 'temperaturaSalida', 'estado', 'auditoria'); 
+                    $orderBy = array('idToma', 'idEncuesta', 'idPersona', 'fechaHoraTomaEntrada', 'temperaturaEntrada', 'fechaHoraTomaSalida', 'temperaturaSalida', 'estado', 'auditoria'); 
                     $order = 'idToma';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
@@ -89,7 +89,7 @@ if (empty($_SESSION["login"])) {
 
                     // Attempt select query execution
                     $sql = "SELECT TT.*, 
-                            ES.idAprendiz AS 'idAprendiz' 
+                            ES.idPersona AS 'idPersona' 
                             FROM tomas_temperatura TT
                             LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
                             ORDER BY $order $sort 
@@ -101,19 +101,19 @@ if (empty($_SESSION["login"])) {
                         $search = ($_GET['search']);
 
                         $sql = "SELECT TT.*, 
-                            ES.idAprendiz AS 'idAprendiz' 
+                            ES.idPersona AS 'idPersona' 
                             FROM tomas_temperatura TT
                             LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
-                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idAprendiz,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,TT.estado,TT.auditoria)
+                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idPersona,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,TT.estado,TT.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         
                         $count_pages = "SELECT TT.*, 
-                            ES.idAprendiz AS 'idAprendiz' 
+                            ES.idPersona AS 'idPersona' 
                             FROM tomas_temperatura TT
                             LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
-                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idAprendiz,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,TT.estado,TT.auditoria)
+                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idPersona,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,TT.estado,TT.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -136,7 +136,7 @@ if (empty($_SESSION["login"])) {
                                         echo "<th class='estilo-acciones'>Acciones</th>";
                                         echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idToma&sort=$sort>Id Toma Temperatura</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
-                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id<br>Aprendiz</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idPersona&sort=$sort>Id<br>Persona</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraTomaEntrada&sort=$sort>Fecha/hora<br>toma de entrada</th>";
 										echo "<th><a href=?search=$search&sort=&order=temperaturaEntrada&sort=$sort>Temperatura<br>a la entrada</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraTomaSalida&sort=$sort>Fecha/hora<br>toma de salida</th>";
@@ -153,11 +153,11 @@ if (empty($_SESSION["login"])) {
                                         echo "<a href='tomas_temperatura-update.php?idToma=". $row['idToma'] ."'><i class='far fa-edit'></i></a>";
                                         echo "<a href='tomas_temperatura-delete.php?idToma=". $row['idToma'] ."'><i class='far fa-trash-alt'></i></a>";
                                         echo "<a href='encuesta_signos-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
-                                        echo "<a href='aprendices-read.php?idAprendiz=". $row['idAprendiz'] ."'><i class='far fa-user'></i></a>";
+                                        echo "<a href='personas-read.php?idPersona=". $row['idPersona'] ."'><i class='far fa-user'></i></a>";
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idToma'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idEncuesta'] . "</td>";
-                                    echo "<td class='ocultar-columna'>" . $row['idAprendiz'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['idPersona'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraTomaEntrada'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['temperaturaEntrada'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraTomaSalida'] . "</td>";
