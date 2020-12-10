@@ -33,6 +33,8 @@
                     // Include config file
                     require_once "config.php";
 
+                    $_SESSION["rutaRegresarA"] = 'encuesta_signos-index.php';
+
                     //Get current URL and parameters for correct pagination
                     $protocol = $_SERVER['SERVER_PROTOCOL'];
                     $domain     = $_SERVER['HTTP_HOST'];
@@ -77,11 +79,9 @@
 
                     // Attempt select query execution
                     $sql = "SELECT ES.*, 
-                        AP.nombreCompleto AS 'nombreCompleto', 
                         CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                         HO.nombreCorto AS 'nombreCorto'
                         FROM encuesta_signos ES
-                        LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz
                         LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
                         LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
                         ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
@@ -91,26 +91,22 @@
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                     $sql = "SELECT ES.*, 
-                            AP.nombreCompleto AS 'nombreCompleto', 
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             HO.nombreCorto AS 'nombreCorto'
                             FROM encuesta_signos ES
-                            LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
                             LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
-                            WHERE CONCAT (ES.idEncuesta,AP.nombreCompleto,ES.fechaHoraDiligenciamiento,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
+                            WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT ES.*, 
-                            AP.nombreCompleto AS 'nombreCompleto', 
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             HO.nombreCorto AS 'nombreCorto'
                             FROM encuesta_signos ES
-                            LEFT JOIN aprendices AP ON AP.idAprendiz = ES.idAprendiz
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
                             LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
-                            WHERE CONCAT (ES.idEncuesta,AP.nombreCompleto,ES.fechaHoraDiligenciamiento,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
+                            WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -131,8 +127,8 @@
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th class='estilo-acciones'>Acciones</th>";
-                                        echo "<th><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
-										echo "<th><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Aprendiz</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id<br>Aprendiz</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraDiligenciamiento&sort=$sort>Fecha/Hora<br>de diligenciamiento</th>";
 										echo "<th><a href=?search=$search&sort=&order=idSedeIngreso&sort=$sort>Sede de ingreso</th>";
 										echo "<th><a href=?search=$search&sort=&order=idHorario&sort=$sort>Horario</th>";
@@ -152,9 +148,12 @@
                                     echo "<a href='encuesta_signos-read.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-eye'></i></a>";
                                     echo "<a href='encuesta_signos-update.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-edit'></i></a>";
                                     echo "<a href='encuesta_signos-delete.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-trash-alt'></i></a>";
+                                    echo "<a href='encuesta_signos-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
+                                    echo "<a href='aprendices-read.php?idAprendiz=". $row['idAprendiz'] ."'><i class='far fa-user'></i></a>";
+                                    echo "<a href='tomas_temperatura-index.php?search=". $row['idAprendiz'] ."'><i class='fas fa-thermometer-half'></i></a>";
                                     echo "</td>";                                    
-                                    echo "<td class='centrar-columna'>" . $row['idEncuesta'] . "</td>";
-                                    echo "<td>" . $row['nombreCompleto'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['idEncuesta'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['idAprendiz'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraDiligenciamiento'] . "</td>";
                                     echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";

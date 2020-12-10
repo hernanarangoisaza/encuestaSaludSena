@@ -1,4 +1,15 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: index.php");
+    exit();    
+}
+// foreach ($_SESSION as $key=>$val)
+// echo $key." ".$val."<br/>";
+// echo $_SESSION['permisosRolSistema'];
+?>
+
+<?php
 // Check existence of id parameter before processing further
 if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
 
@@ -168,7 +179,10 @@ if(isset($_GET["idAprendiz"]) && !empty(trim($_GET["idAprendiz"]))){
                         <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
                     </div>
 
-                    <p><a href="aprendices-index.php" class="btn btn-primary">Volver al listado</a></p>
+                    <?php
+                        $rutaRegresarA = $_SESSION["rutaRegresarA"];
+                        echo "<p><a href='$rutaRegresarA' class='btn btn-primary'>Volver al listado</a></p>";
+                    ?>
 
                 </div>
             </div>

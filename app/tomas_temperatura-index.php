@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: index.php");
+    exit();    
+}
+// foreach ($_SESSION as $key=>$val)
+// echo $key." ".$val."<br/>";
+// echo $_SESSION['permisosRolSistema'];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,6 +43,8 @@
                     // Include config file
                     require_once "config.php";
 
+                    $_SESSION["rutaRegresarA"] = 'tomas_temperatura-index.php';
+
                     //Get current URL and parameters for correct pagination
                     $protocol = $_SERVER['SERVER_PROTOCOL'];
                     $domain     = $_SERVER['HTTP_HOST'];
@@ -57,7 +70,7 @@
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idToma', 'idEncuesta', 'fechaHoraTomaEntrada', 'temperaturaEntrada', 'fechaHoraTomaSalida', 'temperaturaSalida', 'estado', 'auditoria'); 
+                    $orderBy = array('idToma', 'idEncuesta', 'idAprendiz', 'fechaHoraTomaEntrada', 'temperaturaEntrada', 'fechaHoraTomaSalida', 'temperaturaSalida', 'estado', 'auditoria'); 
                     $order = 'idToma';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
@@ -75,18 +88,32 @@
                     }
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM tomas_temperatura ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    $sql = "SELECT TT.*, 
+                            ES.idAprendiz AS 'idAprendiz' 
+                            FROM tomas_temperatura TT
+                            LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
+                            ORDER BY $order $sort 
+                            LIMIT $offset, $no_of_records_per_page";
+                    
                     $count_pages = "SELECT * FROM tomas_temperatura";
                     
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
-                        $sql = "SELECT * FROM tomas_temperatura
-                            WHERE CONCAT (idToma,idEncuesta,fechaHoraTomaEntrada,temperaturaEntrada,fechaHoraTomaSalida,temperaturaSalida,estado,auditoria)
+
+                        $sql = "SELECT TT.*, 
+                            ES.idAprendiz AS 'idAprendiz' 
+                            FROM tomas_temperatura TT
+                            LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
+                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idAprendiz,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,TT.estado,TT.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
-                        $count_pages = "SELECT * FROM tomas_temperatura
-                            WHERE CONCAT (idToma,idEncuesta,fechaHoraTomaEntrada,temperaturaEntrada,fechaHoraTomaSalida,temperaturaSalida,estado,auditoria)
+                        
+                        $count_pages = "SELECT TT.*, 
+                            ES.idAprendiz AS 'idAprendiz' 
+                            FROM tomas_temperatura TT
+                            LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
+                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idAprendiz,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,TT.estado,TT.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -108,7 +135,8 @@
                                     echo "<tr>";
                                         echo "<th class='estilo-acciones'>Acciones</th>";
                                         echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idToma&sort=$sort>Id Toma Temperatura</th>";
-										echo "<th><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idAprendiz&sort=$sort>Id<br>Aprendiz</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraTomaEntrada&sort=$sort>Fecha/hora<br>toma de entrada</th>";
 										echo "<th><a href=?search=$search&sort=&order=temperaturaEntrada&sort=$sort>Temperatura<br>a la entrada</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraTomaSalida&sort=$sort>Fecha/hora<br>toma de salida</th>";
@@ -124,9 +152,12 @@
                                         echo "<a href='tomas_temperatura-read.php?idToma=". $row['idToma'] ."'><i class='far fa-eye'></i></a>";
                                         echo "<a href='tomas_temperatura-update.php?idToma=". $row['idToma'] ."'><i class='far fa-edit'></i></a>";
                                         echo "<a href='tomas_temperatura-delete.php?idToma=". $row['idToma'] ."'><i class='far fa-trash-alt'></i></a>";
+                                        echo "<a href='encuesta_signos-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
+                                        echo "<a href='aprendices-read.php?idAprendiz=". $row['idAprendiz'] ."'><i class='far fa-user'></i></a>";
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idToma'] . "</td>";
-                                    echo "<td class='centrar-columna'>" . $row['idEncuesta'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['idEncuesta'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['idAprendiz'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraTomaEntrada'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['temperaturaEntrada'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraTomaSalida'] . "</td>";

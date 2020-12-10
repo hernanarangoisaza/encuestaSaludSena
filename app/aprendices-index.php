@@ -56,6 +56,8 @@ else {
                     // Include config file
                     require_once "config.php";
 
+                    $_SESSION["rutaRegresarA"] = 'aprendices-index.php';
+
                     //Get current URL and parameters for correct pagination
                     $protocol = $_SERVER['SERVER_PROTOCOL'];
                     $domain = $_SERVER['HTTP_HOST'];
