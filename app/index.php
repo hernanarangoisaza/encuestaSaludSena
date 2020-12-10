@@ -1,8 +1,8 @@
 <?php
- 
-include('core/config.php');
-
 session_start();
+
+// Include config file
+require_once "core/config.php";
 
 // remove all session variables
 session_unset();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-12-2020 a las 21:39:55
+-- Tiempo de generación: 10-12-2020 a las 21:39:38
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.3.17
 
@@ -21,56 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sena`
 --
-/*
 CREATE DATABASE IF NOT EXISTS `sena` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
 USE `sena`;
-*/
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `aprendices`
---
-
-DROP TABLE IF EXISTS `aprendices`;
-CREATE TABLE `aprendices` (
-  `idAprendiz` int(11) NOT NULL,
-  `idTipoVinculacion` int(11) DEFAULT NULL,
-  `nombreCompleto` varchar(75) DEFAULT NULL,
-  `idTipoIdentificacion` int(11) DEFAULT NULL,
-  `identificacion` varchar(50) DEFAULT NULL,
-  `email` varchar(75) DEFAULT NULL,
-  `telefonoPersonal` varchar(50) DEFAULT NULL,
-  `telefonoAcudiente` varchar(50) DEFAULT NULL,
-  `fechaNacimiento` date DEFAULT NULL,
-  `idTipoGenero` int(11) DEFAULT NULL,
-  `direccionResidencia` varchar(75) DEFAULT NULL,
-  `idMunicipio` int(4) DEFAULT NULL,
-  `idDepartamento` int(3) DEFAULT NULL,
-  `idCentroFormacion` int(11) DEFAULT NULL,
-  `idFichaFormacion` int(11) DEFAULT NULL,
-  `estado` tinyint(4) DEFAULT 1,
-  `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Truncar tablas antes de insertar `aprendices`
---
-
-TRUNCATE TABLE `aprendices`;
---
--- Volcado de datos para la tabla `aprendices`
---
-
-INSERT INTO `aprendices` (`idAprendiz`, `idTipoVinculacion`, `nombreCompleto`, `idTipoIdentificacion`, `identificacion`, `email`, `telefonoPersonal`, `telefonoAcudiente`, `fechaNacimiento`, `idTipoGenero`, `direccionResidencia`, `idMunicipio`, `idDepartamento`, `idCentroFormacion`, `idFichaFormacion`, `estado`, `auditoria`) VALUES
-(5, 11, 'Hernán Arango Isaza', 2, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 10, 99, 3, 1, 0, '2020-12-05 17:38:26'),
-(7, 3, 'Hernán Arango Isaza', 2, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 18, 99, 2, 1, 0, '2020-12-05 17:38:29'),
-(8, 4, 'Hernán Arango Isaza', 5, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 2, 'Cra 31#84-20', 223, 99, 1, 1, 0, '2020-12-05 17:38:34'),
-(9, 1, 'Hernán Arango Isazas', 1, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 6, 99, 1, 1, 0, '2020-12-05 17:38:37'),
-(10, 8, '10 Hernán Arango Isaza', 1, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 2, 'Cra 31#84-20', 304, 99, 3, 1, 0, '2020-12-05 17:38:42'),
-(11, 8, 'Hernán Arango Isaza', 2, '5466546546546', 'hernanarangoisaza@gmail.com', '', '3186801552', '2020-12-06', 2, 'Cra 31#84-20', 16, 99, 3, 3, 0, '2020-12-06 11:10:35'),
-(12, 6, '', 1, '', '', '', '', '0000-00-00', 1, '', 1097, 91, 5, 1, 0, '2020-12-06 11:39:56'),
-(13, 6, '', 1, '', '', '', '', '0000-00-00', 1, '', 1097, 91, 5, 1, 1, '2020-12-06 11:40:50');
 
 -- --------------------------------------------------------
 
@@ -179,7 +131,7 @@ INSERT INTO `departamentos` (`idDepartamento`, `departamento`, `codigoDepartamen
 DROP TABLE IF EXISTS `encuesta_signos`;
 CREATE TABLE `encuesta_signos` (
   `idEncuesta` int(11) NOT NULL,
-  `idAprendiz` int(11) DEFAULT NULL,
+  `idPersona` int(11) DEFAULT NULL,
   `fechaHoraDiligenciamiento` datetime NOT NULL DEFAULT current_timestamp(),
   `idSedeIngreso` int(11) DEFAULT NULL,
   `idHorario` int(11) DEFAULT NULL,
@@ -201,21 +153,21 @@ TRUNCATE TABLE `encuesta_signos`;
 -- Volcado de datos para la tabla `encuesta_signos`
 --
 
-INSERT INTO `encuesta_signos` (`idEncuesta`, `idAprendiz`, `fechaHoraDiligenciamiento`, `idSedeIngreso`, `idHorario`, `aceptacionConsideraciones`, `autorizacionTratamientoDatos`, `autorizacionIngreso`, `observacionAdicional`, `aceptacionRespuestaPositiva`, `estado`, `auditoria`) VALUES
-(1, 7, '2020-12-01 19:39:57', 2, 1, 1, 0, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 1, '2020-12-05 17:34:43'),
-(2, 10, '2020-12-02 09:47:33', 2, 1, -1, 1, 0, 'nota de observaciones', 1, 0, '2020-12-05 17:34:47'),
-(3, 10, '2020-12-02 12:36:31', 4, 1, 0, 1, 0, 'ninguna observacion', -1, 1, '2020-12-05 17:34:52'),
-(5, 5, '2020-12-02 13:04:12', 1, 1, 0, 0, 1, 'aaaaaaaaaaa', 0, 0, '2020-12-02 13:04:37'),
+INSERT INTO `encuesta_signos` (`idEncuesta`, `idPersona`, `fechaHoraDiligenciamiento`, `idSedeIngreso`, `idHorario`, `aceptacionConsideraciones`, `autorizacionTratamientoDatos`, `autorizacionIngreso`, `observacionAdicional`, `aceptacionRespuestaPositiva`, `estado`, `auditoria`) VALUES
+(1, 7, '2020-12-01 19:39:57', 2, 4, 1, 0, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 1, '2020-12-10 10:54:14'),
+(2, 10, '2020-12-10 09:47:33', 2, 1, -1, 1, 0, 'nota de observaciones', 1, 0, '2020-12-10 11:02:59'),
+(3, 10, '2020-12-02 12:36:31', 4, 10, 0, 1, 0, 'ninguna observacion', -1, 1, '2020-12-10 10:53:49'),
+(5, 5, '2020-12-02 13:04:12', 1, 14, 0, 0, 1, 'aaaaaaaaaaa', 0, 0, '2020-12-10 10:54:09'),
 (6, 5, '2020-12-02 13:06:03', 1, 1, 0, 0, 0, 'qqqqqqqqqqqqqqqqq', 0, 0, '2020-12-02 13:06:16'),
-(7, 5, '2020-12-02 13:07:54', 1, 1, -1, -1, 1, 'qaaaaaaaaaaaassssssssssssssssssss\r\nghfgh\r\ngh\r\nfgh\r\nfgf', 1, 0, '2020-12-02 14:52:46'),
-(8, 5, '2020-12-02 16:27:08', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:08'),
+(7, 5, '2020-12-10 13:07:54', 1, 7, -1, -1, 1, 'qaaaaaaaaaaaassssssssssssssssssss\r\nghfgh\r\ngh\r\nfgh\r\nfgf', 1, 0, '2020-12-10 11:03:19'),
+(8, 5, '2020-12-10 16:27:08', 1, 5, -1, -1, -1, '', -1, 0, '2020-12-10 11:03:06'),
 (9, 5, '2020-12-02 16:27:11', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:11'),
-(10, 5, '2020-12-02 16:27:18', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:18'),
+(10, 5, '2020-12-02 16:27:18', 1, 8, -1, -1, -1, '', -1, 0, '2020-12-10 10:53:52'),
 (11, 5, '2020-12-02 16:27:21', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:21'),
-(12, 5, '2020-12-02 16:27:24', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:24'),
-(13, 5, '2020-12-02 16:29:05', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:29:05'),
+(12, 5, '2020-12-02 16:27:24', 1, 10, -1, -1, -1, '', -1, 0, '2020-12-10 10:54:18'),
+(13, 5, '2020-12-10 16:29:05', 1, 6, -1, -1, -1, '', -1, 0, '2020-12-10 11:03:50'),
 (14, 5, '2020-12-02 16:29:09', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:29:09'),
-(15, 5, '2020-12-02 16:29:18', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:29:18'),
+(15, 5, '2020-12-10 16:29:18', 1, 6, -1, -1, -1, '', -1, 0, '2020-12-10 11:03:12'),
 (16, 5, '2020-12-02 16:31:39', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:31:39'),
 (17, 7, '2020-12-05 07:48:10', 1, 1, 1, 1, 1, 'zzzzzzzzzzz', 1, 0, '2020-12-06 10:39:51');
 
@@ -1423,6 +1375,52 @@ INSERT INTO `municipios` (`idMunicipio`, `municipio`, `codigoMunicipio`, `idDepa
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `personas`
+--
+
+DROP TABLE IF EXISTS `personas`;
+CREATE TABLE `personas` (
+  `idPersona` int(11) NOT NULL,
+  `idTipoVinculacion` int(11) DEFAULT NULL,
+  `nombreCompleto` varchar(75) DEFAULT NULL,
+  `idTipoIdentificacion` int(11) DEFAULT NULL,
+  `identificacion` varchar(50) DEFAULT NULL,
+  `email` varchar(75) DEFAULT NULL,
+  `telefonoPersonal` varchar(50) DEFAULT NULL,
+  `telefonoAcudiente` varchar(50) DEFAULT NULL,
+  `fechaNacimiento` date DEFAULT NULL,
+  `idTipoGenero` int(11) DEFAULT NULL,
+  `direccionResidencia` varchar(75) DEFAULT NULL,
+  `idMunicipio` int(4) DEFAULT NULL,
+  `idDepartamento` int(3) DEFAULT NULL,
+  `idCentroFormacion` int(11) DEFAULT NULL,
+  `idFichaFormacion` int(11) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT 1,
+  `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Truncar tablas antes de insertar `personas`
+--
+
+TRUNCATE TABLE `personas`;
+--
+-- Volcado de datos para la tabla `personas`
+--
+
+INSERT INTO `personas` (`idPersona`, `idTipoVinculacion`, `nombreCompleto`, `idTipoIdentificacion`, `identificacion`, `email`, `telefonoPersonal`, `telefonoAcudiente`, `fechaNacimiento`, `idTipoGenero`, `direccionResidencia`, `idMunicipio`, `idDepartamento`, `idCentroFormacion`, `idFichaFormacion`, `estado`, `auditoria`) VALUES
+(5, 11, 'Hernán Arango Isaza', 2, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 10, 99, 3, 1, 0, '2020-12-05 17:38:26'),
+(7, 3, 'Hernán Arango Isaza', 2, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 18, 99, 2, 1, 0, '2020-12-05 17:38:29'),
+(8, 4, 'Hernán Arango Isaza', 5, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 2, 'Cra 31#84-20', 223, 99, 1, 1, 0, '2020-12-05 17:38:34'),
+(9, 1, 'Hernán Arango Isazas', 1, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 6, 99, 1, 1, 0, '2020-12-05 17:38:37'),
+(10, 8, '10 Hernán Arango Isaza', 1, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 2, 'Cra 31#84-20', 304, 99, 3, 1, 0, '2020-12-05 17:38:42'),
+(11, 8, 'Hernán Arango Isaza', 2, '5466546546546', 'hernanarangoisaza@gmail.com', '', '3186801552', '2020-12-06', 2, 'Cra 31#84-20', 16, 99, 3, 3, 0, '2020-12-06 11:10:35'),
+(12, 6, '', 1, '', '', '', '', '0000-00-00', 1, '', 1097, 91, 5, 1, 0, '2020-12-06 11:39:56'),
+(13, 6, '', 1, '', '', '', '', '0000-00-00', 1, '', 1097, 91, 5, 1, 1, '2020-12-06 11:40:50');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `preguntas_encuesta`
 --
 
@@ -1549,9 +1547,10 @@ TRUNCATE TABLE `roles_sistema`;
 --
 
 INSERT INTO `roles_sistema` (`idRolSistema`, `nombreLargoRolSistema`, `nombreCorto`, `descripcionRolSistema`, `permisos`, `restricciones`, `estado`, `auditoria`) VALUES
-(1, 'Administrador', 'admin', 'el que manda en todo el sistema de covid19', '+h', '-r -g', 1, '2020-12-08 08:34:40'),
-(2, 'fffffffffff', 'sdfsdfsdfsf', 'dfsdfsdgfhggfhgjhghjgj', '34535tr', '24234234242', 0, '0000-00-00 00:00:00'),
-(3, '1', '2', '3', '4', '5', 1, '2020-12-08 08:35:22');
+(1, 'Administrador', 'admin', 'Súper usuario del sistema que tiene acceso a todas las opciones y acciones del sistema sin ninguna restricción.', '[super-admin]', '[n/a]', 1, '2020-12-09 08:44:25'),
+(2, 'Auxiliar - Toma Temperatura', 'auxtemperatura', 'Usuario colaborador del administrador del sistema que sólo puede gestionar las tomas de temperatura.', '[auxiliar-temperatura]', '[n/a]', 1, '2020-12-09 08:44:34'),
+(3, 'Auxiliar - Encuestas', 'auxencuestas', 'Usuario colaborador del administrador del sistema que sólo puede ayudar a gestionar las encuestas de otras personas que no lo pudieron hacer por sus propios medios.', '[auxiliar-encuestas]', '[n/a]', 1, '2020-12-09 08:44:39'),
+(4, 'Auxiliar - Asistente', 'auxasistente', '', '[auxiliar-temperatura],[auxiliar-encuestas]', '[n/a]', 1, '2020-12-09 08:44:44');
 
 -- --------------------------------------------------------
 
@@ -1683,7 +1682,8 @@ TRUNCATE TABLE `tomas_temperatura`;
 --
 
 INSERT INTO `tomas_temperatura` (`idToma`, `idEncuesta`, `fechaHoraTomaEntrada`, `temperaturaEntrada`, `fechaHoraTomaSalida`, `temperaturaSalida`, `estado`, `auditoria`) VALUES
-(2, 7, '2020-12-08 09:24:30', '36.50', '2020-12-08 09:24:40', '38.00', 1, '2020-12-08 10:48:22');
+(2, 6, '2020-12-10 09:24:30', '36.60', NULL, '38.00', 1, '2020-12-10 13:16:06'),
+(3, 5, '2020-12-10 11:58:13', '43.90', '2020-12-10 13:07:39', '43.00', 1, '2020-12-10 13:07:44');
 
 -- --------------------------------------------------------
 
@@ -1707,7 +1707,7 @@ CREATE TABLE `usuarios` (
   `idDepartamento` int(3) DEFAULT NULL,
   `idCentroFormacion` int(11) DEFAULT NULL,
   `idRolSistema` int(11) DEFAULT NULL,
-  `passwordSistema` varchar(50) DEFAULT NULL,
+  `passwordSistema` varchar(255) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT 1,
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
@@ -1723,24 +1723,11 @@ TRUNCATE TABLE `usuarios`;
 
 INSERT INTO `usuarios` (`idUsuario`, `idTipoVinculacion`, `nombreCompleto`, `idTipoIdentificacion`, `identificacion`, `email`, `telefonoPersonal`, `fechaNacimiento`, `idTipoGenero`, `direccionResidencia`, `idMunicipio`, `idDepartamento`, `idCentroFormacion`, `idRolSistema`, `passwordSistema`, `estado`, `auditoria`) VALUES
 (1, 10, 'pedro perez', 4, '541212', 'yo@gfgg.com', '424242', '2020-12-02', 1, 'rrwr 43423 werwerr', 7, 15, 4, 1, '23edrfty', 1, '2020-12-02 05:25:34'),
-(2, 6, '', 1, '', '', '', '0000-00-00', 1, '', 1097, 91, 5, 1, '', 1, '2020-12-08 13:05:40');
+(2, 2, 'Luz Catalina', 1, '30327597', 'hernanarangoisaza@gmail.com', '3006137257', '2020-12-08', 1, 'Cra 31#84-20', 1097, 91, 1, 1, '$2y$10$R7XFfUDkrTCBlS1pstZM3Oc77UMMhdmZp4V4KPkbhvOwlyX1eraZ.', 1, '2020-12-09 17:42:35');
 
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `aprendices`
---
-ALTER TABLE `aprendices`
-  ADD PRIMARY KEY (`idAprendiz`) USING BTREE,
-  ADD KEY `FK_aprendices_tipos_identificacion` (`idTipoIdentificacion`),
-  ADD KEY `FK_aprendices_centros_formacion` (`idCentroFormacion`) USING BTREE,
-  ADD KEY `FK_aprendices_fichas_formacion` (`idFichaFormacion`),
-  ADD KEY `FK_aprendices_tipos_generos` (`idTipoGenero`),
-  ADD KEY `FK_aprendices_departamentos_2` (`idDepartamento`),
-  ADD KEY `FK_aprendices_municipios` (`idMunicipio`),
-  ADD KEY `FK_aprendices_tipos_vinculaciones_sena` (`idTipoVinculacion`);
 
 --
 -- Indices de la tabla `centros_formacion`
@@ -1761,9 +1748,9 @@ ALTER TABLE `departamentos`
 --
 ALTER TABLE `encuesta_signos`
   ADD PRIMARY KEY (`idEncuesta`),
-  ADD KEY `FK_encuesta_signos_aprendices` (`idAprendiz`),
   ADD KEY `FK_encuesta_signos_horarios` (`idHorario`),
-  ADD KEY `FK_encuesta_signos_centros_formacion` (`idSedeIngreso`);
+  ADD KEY `FK_encuesta_signos_centros_formacion` (`idSedeIngreso`),
+  ADD KEY `FK_encuesta_signos_aprendices` (`idPersona`) USING BTREE;
 
 --
 -- Indices de la tabla `fichas_formacion`
@@ -1784,6 +1771,19 @@ ALTER TABLE `horarios`
 ALTER TABLE `municipios`
   ADD PRIMARY KEY (`idMunicipio`) USING BTREE,
   ADD KEY `departamento_id` (`idDepartamento`) USING BTREE;
+
+--
+-- Indices de la tabla `personas`
+--
+ALTER TABLE `personas`
+  ADD PRIMARY KEY (`idPersona`) USING BTREE,
+  ADD KEY `FK_aprendices_tipos_identificacion` (`idTipoIdentificacion`),
+  ADD KEY `FK_aprendices_centros_formacion` (`idCentroFormacion`) USING BTREE,
+  ADD KEY `FK_aprendices_fichas_formacion` (`idFichaFormacion`),
+  ADD KEY `FK_aprendices_tipos_generos` (`idTipoGenero`),
+  ADD KEY `FK_aprendices_departamentos_2` (`idDepartamento`),
+  ADD KEY `FK_aprendices_municipios` (`idMunicipio`),
+  ADD KEY `FK_aprendices_tipos_vinculaciones_sena` (`idTipoVinculacion`);
 
 --
 -- Indices de la tabla `preguntas_encuesta`
@@ -1854,12 +1854,6 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `aprendices`
---
-ALTER TABLE `aprendices`
-  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
 -- AUTO_INCREMENT de la tabla `centros_formacion`
 --
 ALTER TABLE `centros_formacion`
@@ -1896,6 +1890,12 @@ ALTER TABLE `municipios`
   MODIFY `idMunicipio` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1103;
 
 --
+-- AUTO_INCREMENT de la tabla `personas`
+--
+ALTER TABLE `personas`
+  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT de la tabla `preguntas_encuesta`
 --
 ALTER TABLE `preguntas_encuesta`
@@ -1917,7 +1917,7 @@ ALTER TABLE `respuestas_encuesta`
 -- AUTO_INCREMENT de la tabla `roles_sistema`
 --
 ALTER TABLE `roles_sistema`
-  MODIFY `idRolSistema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idRolSistema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_generos`
@@ -1941,7 +1941,7 @@ ALTER TABLE `tipos_vinculaciones_sena`
 -- AUTO_INCREMENT de la tabla `tomas_temperatura`
 --
 ALTER TABLE `tomas_temperatura`
-  MODIFY `idToma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idToma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -1954,18 +1954,6 @@ ALTER TABLE `usuarios`
 --
 
 --
--- Filtros para la tabla `aprendices`
---
-ALTER TABLE `aprendices`
-  ADD CONSTRAINT `FK_aprendices_centros_formacion` FOREIGN KEY (`idCentroFormacion`) REFERENCES `centros_formacion` (`idCentroFormacion`),
-  ADD CONSTRAINT `FK_aprendices_departamentos` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`idDepartamento`),
-  ADD CONSTRAINT `FK_aprendices_fichas_formacion` FOREIGN KEY (`idFichaFormacion`) REFERENCES `fichas_formacion` (`idFichaFormacion`),
-  ADD CONSTRAINT `FK_aprendices_municipios` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`),
-  ADD CONSTRAINT `FK_aprendices_tipos_generos` FOREIGN KEY (`idTipoGenero`) REFERENCES `tipos_generos` (`idTipoGenero`),
-  ADD CONSTRAINT `FK_aprendices_tipos_identificacion` FOREIGN KEY (`idTipoIdentificacion`) REFERENCES `tipos_identificacion` (`idTipoIdentificacion`),
-  ADD CONSTRAINT `FK_aprendices_tipos_vinculaciones_sena` FOREIGN KEY (`idTipoVinculacion`) REFERENCES `tipos_vinculaciones_sena` (`idTipoVinculacion`);
-
---
 -- Filtros para la tabla `centros_formacion`
 --
 ALTER TABLE `centros_formacion`
@@ -1976,9 +1964,9 @@ ALTER TABLE `centros_formacion`
 -- Filtros para la tabla `encuesta_signos`
 --
 ALTER TABLE `encuesta_signos`
-  ADD CONSTRAINT `FK_encuesta_signos_aprendices` FOREIGN KEY (`idAprendiz`) REFERENCES `aprendices` (`idAprendiz`),
   ADD CONSTRAINT `FK_encuesta_signos_centros_formacion` FOREIGN KEY (`idSedeIngreso`) REFERENCES `centros_formacion` (`idCentroFormacion`),
-  ADD CONSTRAINT `FK_encuesta_signos_horarios` FOREIGN KEY (`idHorario`) REFERENCES `horarios` (`idHorario`);
+  ADD CONSTRAINT `FK_encuesta_signos_horarios` FOREIGN KEY (`idHorario`) REFERENCES `horarios` (`idHorario`),
+  ADD CONSTRAINT `FK_encuesta_signos_personas` FOREIGN KEY (`idPersona`) REFERENCES `personas` (`idPersona`);
 
 --
 -- Filtros para la tabla `fichas_formacion`
@@ -1991,6 +1979,18 @@ ALTER TABLE `fichas_formacion`
 --
 ALTER TABLE `municipios`
   ADD CONSTRAINT `FK_municipios_departamentos` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`idDepartamento`);
+
+--
+-- Filtros para la tabla `personas`
+--
+ALTER TABLE `personas`
+  ADD CONSTRAINT `FK_aprendices_centros_formacion` FOREIGN KEY (`idCentroFormacion`) REFERENCES `centros_formacion` (`idCentroFormacion`),
+  ADD CONSTRAINT `FK_aprendices_departamentos` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`idDepartamento`),
+  ADD CONSTRAINT `FK_aprendices_fichas_formacion` FOREIGN KEY (`idFichaFormacion`) REFERENCES `fichas_formacion` (`idFichaFormacion`),
+  ADD CONSTRAINT `FK_aprendices_municipios` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`),
+  ADD CONSTRAINT `FK_aprendices_tipos_generos` FOREIGN KEY (`idTipoGenero`) REFERENCES `tipos_generos` (`idTipoGenero`),
+  ADD CONSTRAINT `FK_aprendices_tipos_identificacion` FOREIGN KEY (`idTipoIdentificacion`) REFERENCES `tipos_identificacion` (`idTipoIdentificacion`),
+  ADD CONSTRAINT `FK_aprendices_tipos_vinculaciones_sena` FOREIGN KEY (`idTipoVinculacion`) REFERENCES `tipos_vinculaciones_sena` (`idTipoVinculacion`);
 
 --
 -- Filtros para la tabla `respuestas_encuesta`
