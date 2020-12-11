@@ -42,7 +42,7 @@ if (empty($_SESSION["login"])) {
 
                 <div class="aviso-aforos">
 
-                    Haga clic sobre los encabezados de sección para consultar los datos de aforo. Presione la tecla F5 para refrescar la página y sus estádisticas.
+                    Haga clic sobre los encabezados de sección de cada jornada para consultar los datos de aforo. Presione la tecla F5 para refrescar la página y sus estádisticas.
 
                 </div>
 

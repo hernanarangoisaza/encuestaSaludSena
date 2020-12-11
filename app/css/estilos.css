@@ -649,3 +649,182 @@ h2.mb-0 {
   outline: none !important;
   box-shadow: none !important;
 }
+
+/* -------------------------------------------------------------------------------------------------- */
+/* ESTILOS MANEJO FORMATO TABS */
+/* -------------------------------------------------------------------------------------------------- */
+
+@-webkit-keyframes fake {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fake {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  -webkit-animation: fake 1s infinite;
+          animation: fake 1s infinite;
+}
+
+.worko-tabs {
+  margin: 20px;
+}
+
+.worko-tabs .state {
+  position: absolute;
+  left: -10000px;
+}
+
+.worko-tabs .flex-tabs {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.worko-tabs .flex-tabs .tab {
+  -webkit-box-flex: 1;
+          flex-grow: 1;
+  max-height: 40px;
+}
+
+.worko-tabs .flex-tabs .panel {
+  background-color: #fff;
+  padding: 20px;
+  min-height: 300px;
+  display: none;
+  width: 100%;
+  flex-basis: auto;
+}
+
+.worko-tabs .tab {
+  display: inline-block;
+  padding: 10px;
+  vertical-align: top;
+  background-color: #eee;
+  cursor: hand;
+  cursor: pointer;
+  border-left: 10px solid #ccc;
+}
+
+.worko-tabs .tab:hover {
+  background-color: #fff;
+}
+
+#tab1:checked ~ .tabs #tab1-label,
+#tab2:checked ~ .tabs #tab2-label,
+#tab3:checked ~ .tabs #tab3-label,
+#tab4:checked ~ .tabs #tab4-label,
+#tab5:checked ~ .tabs #tab5-label,
+#tab6:checked ~ .tabs #tab6-label {
+  background-color: #fff;
+  cursor: default;
+  border-left-color: #ff6719;
+}
+
+#tab1:checked ~ .tabs #tab1-panel,
+#tab2:checked ~ .tabs #tab2-panel,
+#tab3:checked ~ .tabs #tab3-panel,
+#tab4:checked ~ .tabs #tab4-panel,
+#tab5:checked ~ .tabs #tab5-panel,
+#tab6:checked ~ .tabs #tab6-panel {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .flex-tabs {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+  }
+  .flex-tabs .tab {
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+  }
+  .flex-tabs .tab:last-of-type {
+    border-bottom: none;
+  }
+  .flex-tabs #tab1-label {
+    -webkit-box-ordinal-group: 2;
+            order: 1;
+  }
+  .flex-tabs #tab2-label {
+    -webkit-box-ordinal-group: 4;
+            order: 3;
+  }
+  .flex-tabs #tab3-label {
+    -webkit-box-ordinal-group: 6;
+            order: 5;
+  }
+  .flex-tabs #tab4-label {
+    -webkit-box-ordinal-group: 8;
+            order: 7;
+  }
+  .flex-tabs #tab5-label {
+    -webkit-box-ordinal-group: 8;
+            order: 7;
+  }
+  .flex-tabs #tab6-label {
+    -webkit-box-ordinal-group: 8;
+            order: 7;
+  }
+  .flex-tabs #tab1-panel {
+    -webkit-box-ordinal-group: 3;
+            order: 2;
+  }
+  .flex-tabs #tab2-panel {
+    -webkit-box-ordinal-group: 5;
+            order: 4;
+  }
+  .flex-tabs #tab3-panel {
+    -webkit-box-ordinal-group: 7;
+            order: 6;
+  }
+  .flex-tabs #tab4-panel {
+    -webkit-box-ordinal-group: 9;
+            order: 8;
+  }
+  .flex-tabs #tab5-panel {
+    -webkit-box-ordinal-group: 9;
+            order: 8;
+  }
+  .flex-tabs #tab6-panel {
+    -webkit-box-ordinal-group: 9;
+            order: 8;
+  }
+
+  #tab1:checked ~ .tabs #tab1-label,
+  #tab2:checked ~ .tabs #tab2-label,
+  #tab3:checked ~ .tabs #tab3-label,
+  #tab4:checked ~ .tabs #tab4-label,
+  #tab5:checked ~ .tabs #tab5-label,
+  #tab6:checked ~ .tabs #tab6-label {
+    border-bottom: none;
+  }
+
+  #tab1:checked ~ .tabs #tab1-panel,
+  #tab2:checked ~ .tabs #tab2-panel,
+  #tab3:checked ~ .tabs #tab3-panel,
+  #tab4:checked ~ .tabs #tab4-panel,
+  #tab5:checked ~ .tabs #tab5-panel,
+  #tab6:checked ~ .tabs #tab6-panel {
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+label.tab {
+    margin-bottom: 0px;
+}
+
