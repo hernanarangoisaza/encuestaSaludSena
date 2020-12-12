@@ -8,11 +8,6 @@ $nombreCorto = "";
 $estado = "";
 $auditoria = "";
 
-$nombreProgramaFormacion_err = "";
-$nombreCorto_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idProgramaFormacion"]) && !empty($_POST["idProgramaFormacion"])){
     // Get hidden input value

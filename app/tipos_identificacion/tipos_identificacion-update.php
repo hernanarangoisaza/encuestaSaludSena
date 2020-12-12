@@ -8,11 +8,6 @@ $nombreCorto = "";
 $estado = "";
 $auditoria = "";
 
-$nombreLargoIdentificacion_err = "";
-$nombreCorto_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idTipoIdentificacion"]) && !empty($_POST["idTipoIdentificacion"])){
     // Get hidden input value

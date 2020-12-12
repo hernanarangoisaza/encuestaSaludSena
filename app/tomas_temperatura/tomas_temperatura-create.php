@@ -11,14 +11,6 @@ $temperaturaSalida = "";
 $estado = "1";
 $auditoria = "";
 
-$idEncuesta_err = "";
-$fechaHoraTomaEntrada_err = "";
-$temperaturaEntrada_err = "";
-$fechaHoraTomaSalida_err = "";
-$temperaturaSalida_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    

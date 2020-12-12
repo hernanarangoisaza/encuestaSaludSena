@@ -11,14 +11,6 @@ $temperaturaSalida = "";
 $estado = "";
 $auditoria = "";
 
-$idEncuesta_err = "";
-$fechaHoraTomaEntrada_err = "";
-$temperaturaEntrada_err = "";
-$fechaHoraTomaSalida_err = "";
-$temperaturaSalida_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
     // Get hidden input value

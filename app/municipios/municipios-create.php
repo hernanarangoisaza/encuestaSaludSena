@@ -9,12 +9,6 @@ $idDepartamento = "";
 $estado = "1";
 $auditoria = "";
 
-$codigoMunicipio_err = "";
-$municipio_err = "";
-$idDepartamento_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    

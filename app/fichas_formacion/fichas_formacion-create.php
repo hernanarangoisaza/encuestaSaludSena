@@ -8,11 +8,6 @@ $idProgramaFormacion = "";
 $estado = "1";
 $auditoria = "";
 
-$codigoFichaFormacion_err = "";
-$idProgramaFormacion_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    

@@ -10,6 +10,12 @@ if (empty($_SESSION["login"])) {
 ?>
 
 <?php
+if ((strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
+    header("Location: ../core/menu.php");
+}
+?>
+
+<?php
 if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '') or 
    (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
     $isDisabled = "isDisabled";
@@ -220,16 +226,11 @@ else {
                             while ($row = mysqli_fetch_array($result)) {
                                 echo "<tr>";
                                 echo "<td class='centrar-columna'>";
-
                                 echo "<span class='$isDisabled'>" .
                                      "<a href='personas-read.php?idPersona=" . 
                                      $row['idPersona'] . 
                                      "' aria-disabled='$ariaDisabled'>" .
                                      "<i class='far fa-eye'></i></a></span>";
-
-
-
-                                
                                 echo "<a href='personas-update.php?idPersona=" . $row['idPersona'] . "'><i class='far fa-edit'></i></a>";
                                 echo "" . "<a href='personas-delete.php?idPersona=" . $row['idPersona'] . "'><i class='far fa-trash-alt'></i></a>";
                                 echo "</td>";

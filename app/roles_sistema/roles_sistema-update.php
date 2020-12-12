@@ -11,14 +11,6 @@ $restricciones = "";
 $estado = "";
 $auditoria = "";
 
-$nombreRol_err = "";
-$nombreCorto_err = "";
-$descripcionRolSistema_err = "";
-$permisos_err = "";
-$restricciones_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
     // Get hidden input value

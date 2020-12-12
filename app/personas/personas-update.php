@@ -20,23 +20,6 @@ $idFichaFormacion = "";
 $estado = "";
 $auditoria = "";
 
-$idTipoVinculacion_err = "";
-$nombreCompleto_err = "";
-$idTipoIdentificacion_err = "";
-$identificacion_err = "";
-$email_err = "";
-$telefonoPersonal_err = "";
-$telefonoAcudiente_err = "";
-$fechaNacimiento_err = "";
-$idTipoGenero_err = "";
-$direccionResidencia_err = "";
-$idMunicipio_err = "";
-$idDepartamento_err = "";
-$idCentroFormacion_err = "";
-$idFichaFormacion_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idPersona"]) && !empty($_POST["idPersona"])){
 

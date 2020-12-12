@@ -8,11 +8,6 @@ $departamento = "";
 $estado = "";
 $auditoria = "";
 
-$codigoDepartamento_err = "";
-$departamento_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idDepartamento"]) && !empty($_POST["idDepartamento"])){
     // Get hidden input value

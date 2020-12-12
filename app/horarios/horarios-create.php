@@ -10,13 +10,6 @@ $jornada = "";
 $estado = "1";
 $auditoria = "";
 
-$horaInicial_err = "";
-$horaFinal_err = "";
-$nombreCorto_err = "";
-$jornada_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    

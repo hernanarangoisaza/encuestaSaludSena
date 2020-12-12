@@ -15,18 +15,6 @@ $emailContacto2 = "";
 $estado = "1";
 $auditoria = "";
 
-$nombreCorto_err = "";
-$nombreLargoCentroFormacion_err = "";
-$direccion_err = "";
-$idMunicipio_err = "";
-$idDepartamento_err = "";
-$telefono1_err = "";
-$telefono2_err = "";
-$emailContacto1_err = "";
-$emailContacto2_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    

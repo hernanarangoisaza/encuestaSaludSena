@@ -42,7 +42,7 @@ if (empty($_SESSION["login"])) {
 
                 <div class="aviso-aforos">
 
-                    Haga clic sobre los encabezados de sección de cada jornada para consultar los datos de aforo. Presione la tecla F5 para refrescar la página y sus estádisticas.
+                    Haga clic sobre los encabezados de sección de cada jornada para consultar los datos de aforo. Presione la <i><b>tecla F5</b></i> para refrescar la página y sus estádisticas.
 
                 </div>
 
@@ -805,6 +805,13 @@ if (empty($_SESSION["login"])) {
                         <div class="titulo-menu">MENÚ PRINCIPAL</div>
 
                         <ul class="nav">
+
+                            <?php
+                            if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or
+                                (strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
+                                echo '<li class="item-menu-principal"><a href="../formato-encuesta/encuesta.php">Diligenciar encuesta</a></li>';
+                            }
+                            ?>
 
                             <?php
                             if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or

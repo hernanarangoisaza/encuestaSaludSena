@@ -8,11 +8,6 @@ $nombreCorto = "";
 $estado = "1";
 $auditoria = "";
 
-$nombreLargoIdentificacion_err = "";
-$nombreCorto_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    

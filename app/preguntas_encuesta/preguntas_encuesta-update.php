@@ -7,10 +7,6 @@ $textoPregunta = "";
 $estado = "";
 $auditoria = "";
 
-$textoPregunta_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idPreguntaEncuesta"]) && !empty($_POST["idPreguntaEncuesta"])){
     // Get hidden input value

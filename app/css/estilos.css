@@ -147,7 +147,7 @@ body {
 }
 
 /* -------------------------------------------------------------------------------------------------- */
-/* MENÚ LATERAL O SIDEBAR */
+/* MENÚ LATERAL */
 /* -------------------------------------------------------------------------------------------------- */
 
 .titulo-menu {
@@ -538,10 +538,6 @@ section.section-login {
 
 }
 
-.bloquear-boton {
-  /*display: none; */ 
-}
-
 .isDisabled {
   cursor: not-allowed;
 }
@@ -594,18 +590,6 @@ a[aria-disabled="true"] {
     background-color: white;
     text-align: justify;
 }
-
-/*
-[attribute]         [target]                Selects all elements with a target attribute
-[attribute=value]   [target=_blank]         Selects all elements with target="_blank"
-[attribute~=value]  [title~=flower]         Selects all elements with a title attribute containing the word "flower"
-[attribute|=value]  [lang|=en]              Selects all elements with a lang attribute value starting with "en"
-[attribute^=value]  a[href^="https"]        Selects every <a> element whose href attribute value begins with "https"
-[attribute$=value]  a[href$=".pdf"]         Selects every <a> element whose href attribute value ends with ".pdf"
-[attribute*=value]  a[href*="w3schools"]    Selects every <a> element whose href attribute value contains the substring "w3schools"
-*/
-
-/* -------------------------------------------------------------------------------------------------- */
 
 .titulo-tarjeta {
     font-size: 0.5em;
@@ -678,7 +662,10 @@ body {
 }
 
 .worko-tabs {
-  margin: 20px;
+  margin-top: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .worko-tabs .state {
@@ -690,20 +677,20 @@ body {
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
 .worko-tabs .flex-tabs .tab {
-  -webkit-box-flex: 1;
-          flex-grow: 1;
-  max-height: 40px;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    max-height: 40px;
 }
 
 .worko-tabs .flex-tabs .panel {
   background-color: #fff;
   padding: 20px;
-  min-height: 300px;
+  min-height: 60px;
   display: none;
   width: 100%;
   flex-basis: auto;
@@ -727,9 +714,9 @@ body {
 #tab2:checked ~ .tabs #tab2-label,
 #tab3:checked ~ .tabs #tab3-label,
 #tab4:checked ~ .tabs #tab4-label,
-#tab5:checked ~ .tabs #tab5-label,
-#tab6:checked ~ .tabs #tab6-label {
-  background-color: #fff;
+#tab5:checked ~ .tabs #tab5-label {
+  background-color: #495057;
+  color: white;
   cursor: default;
   border-left-color: #ff6719;
 }
@@ -738,9 +725,12 @@ body {
 #tab2:checked ~ .tabs #tab2-panel,
 #tab3:checked ~ .tabs #tab3-panel,
 #tab4:checked ~ .tabs #tab4-panel,
-#tab5:checked ~ .tabs #tab5-panel,
-#tab6:checked ~ .tabs #tab6-panel {
-  display: block;
+#tab5:checked ~ .tabs #tab5-panel {
+    display: block;
+    background-color: white;
+    border-left: 1px solid #ced4da;
+    border-right: 1px solid #ced4da;
+    border-bottom: 1px solid #ced4da;
 }
 
 @media (max-width: 600px) {
@@ -776,10 +766,6 @@ body {
     -webkit-box-ordinal-group: 8;
             order: 7;
   }
-  .flex-tabs #tab6-label {
-    -webkit-box-ordinal-group: 8;
-            order: 7;
-  }
   .flex-tabs #tab1-panel {
     -webkit-box-ordinal-group: 3;
             order: 2;
@@ -800,17 +786,12 @@ body {
     -webkit-box-ordinal-group: 9;
             order: 8;
   }
-  .flex-tabs #tab6-panel {
-    -webkit-box-ordinal-group: 9;
-            order: 8;
-  }
 
   #tab1:checked ~ .tabs #tab1-label,
   #tab2:checked ~ .tabs #tab2-label,
   #tab3:checked ~ .tabs #tab3-label,
   #tab4:checked ~ .tabs #tab4-label,
-  #tab5:checked ~ .tabs #tab5-label,
-  #tab6:checked ~ .tabs #tab6-label {
+  #tab5:checked ~ .tabs #tab5-label {
     border-bottom: none;
   }
 
@@ -818,8 +799,7 @@ body {
   #tab2:checked ~ .tabs #tab2-panel,
   #tab3:checked ~ .tabs #tab3-panel,
   #tab4:checked ~ .tabs #tab4-panel,
-  #tab5:checked ~ .tabs #tab5-panel,
-  #tab6:checked ~ .tabs #tab6-panel {
+  #tab5:checked ~ .tabs #tab5-panel {
     border-bottom: 1px solid #ccc;
   }
 }
@@ -827,4 +807,268 @@ body {
 label.tab {
     margin-bottom: 0px;
 }
+
+.sangria-numeracion {
+    display: block;
+    padding-left: 1.5em;
+    text-indent: -1.2em;
+}
+
+.texto-tab1 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.texto-tab1a {
+    white-space: pre-line;
+    width: 50%;
+    text-align: justify;
+    padding-right: 20px;
+    line-height: 1.5em;
+}
+
+.texto-tab1b {
+    white-space: pre-line;
+    width: 50%;
+    text-align: justify;
+    padding-left: 20px;
+    line-height: 1.5em;
+}
+
+.texto-tab2 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.texto-tab2a {
+    white-space: pre-line;
+    width: 50%;
+    text-align: justify;
+    padding-right: 20px;
+    line-height: 1.5em;
+}
+
+.texto-tab2b {
+    width: 50%;
+    padding-left: 20px;
+    line-height: 1.5em;
+}
+
+.texto-tab3 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.texto-tab3a {
+    width: 50%;
+    padding-right: 20px;
+    line-height: 1.25em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.texto-tab3b {
+    width: 50%;
+    padding-left: 20px;
+    line-height: 1.25em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.texto-tab4 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.texto-tab4a {
+    width: 50%;
+    padding-right: 20px;
+    line-height: 1.25em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;}
+
+.texto-tab4b {
+    width: 50%;
+    padding-left: 20px;
+    line-height: 1.25em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.texto-tab5 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.texto-tab5a {
+    width: 50%;
+    padding-right: 20px;
+    line-height: 1.25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.texto-tab5b {
+    width: 50%;
+    padding-left: 20px;
+    line-height: 1.25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.texto-tab3-col1 {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.texto-tab3-col2 {
+    width: 70%;
+}
+
+.texto-tab4-col1 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.texto-tab4-col2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.label-encuesta {
+    margin-bottom: 10px !important;
+}
+
+.label-encuesta-tabla {
+    height: 23px;
+}
+
+.campo-tabla {
+    margin-bottom: 3px;
+ }
+
+.ajuste-renglon1 {
+    height: 6px;
+}
+
+.campo-tabla:focus, .campo-tabla:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.label-encuesta-preguntas {
+    text-align: justify;
+}
+
+.bloqueSiNo {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.sangria-numeracion-preguntas {
+}
+
+.titulo-encuesta {
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 60px;
+    background-color: #ff6719;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    color: white;
+    font-size: 1.10em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.inicio-preguntas {
+    font-weight: bold;
+}
+
+.aviso-datos-personales {
+    font-weight: normal;
+    margin-top: 20px;
+    padding-left: 0px;
+    padding-right: 5px;
+    text-align: justify;
+}
+
+.aviso-recomendaciones {
+    font-weight: normal;
+    margin-top: 0px;
+    text-align: justify;
+}
+
+.aviso-consideraciones {
+    font-weight: normal;
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.aviso-responsable-covid19 {
+    margin-left: 15px;
+}
+
+.reducido {
+    height: 2em !important;
+}
+
+.observaciones-encuesta {
+    width: 100%;
+} 
+
+.btn-enviar-encuesta {
+    align-self: center;
+}    
+/* -------------------------------------------------------------------------------------------------- */
+
+/*
+[attribute]         [target]                Selects all elements with a target attribute
+[attribute=value]   [target=_blank]         Selects all elements with target="_blank"
+[attribute~=value]  [title~=flower]         Selects all elements with a title attribute containing the word "flower"
+[attribute|=value]  [lang|=en]              Selects all elements with a lang attribute value starting with "en"
+[attribute^=value]  a[href^="https"]        Selects every <a> element whose href attribute value begins with "https"
+[attribute$=value]  a[href$=".pdf"]         Selects every <a> element whose href attribute value ends with ".pdf"
+[attribute*=value]  a[href*="w3schools"]    Selects every <a> element whose href attribute value contains the substring "w3schools"
+*/
+
+/* -------------------------------------------------------------------------------------------------- */
+
 

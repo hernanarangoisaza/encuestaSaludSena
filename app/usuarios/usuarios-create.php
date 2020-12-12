@@ -20,23 +20,6 @@ $passwordSistema = "";
 $estado = "1";
 $auditoria = "";
 
-$idTipoVinculacion_err = "";
-$nombreCompleto_err = "";
-$idTipoIdentificacion_err = "";
-$identificacion_err = "";
-$email_err = "";
-$telefonoPersonal_err = "";
-$fechaNacimiento_err = "";
-$idTipoGenero_err = "";
-$direccionResidencia_err = "";
-$idMunicipio_err = "";
-$idDepartamento_err = "";
-$idCentroFormacion_err = "";
-$idRolSistema_err = "";
-$passwordSistema_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    

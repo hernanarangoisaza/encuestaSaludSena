@@ -8,7 +8,7 @@ require_once "core/config.php";
 session_unset();
 
 if (isset($_POST['login'])) {
-
+ 
     // Check existence of id parameter before processing further
 
     if(isset($_POST["correo"]) && isset($_POST["identificacion"])){
@@ -19,15 +19,18 @@ if (isset($_POST['login'])) {
 		$identificacion = $_POST['identificacion'];
 		
         // Prepare a select statement
-        $sql = "SELECT PE.* 
-            FROM personas PE
-            WHERE email=?
-              AND identificacion=?";
+        $sql = "SELECT US.*, 
+            RS.nombreCorto AS 'nombreCortoRolSistema', 
+            RS.permisos AS 'permisosRolSistema', 
+            RS.restricciones AS 'restriccionesRolSistema' 
+            FROM usuarios US
+            LEFT JOIN roles_sistema RS ON RS.idRolSistema = US.idRolSistema
+            WHERE email=?";
                             
 		if($stmt = mysqli_prepare($link, $sql)){
             
 			// Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $correo, $identificacion);
+            mysqli_stmt_bind_param($stmt, "s", $correo);
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -40,17 +43,19 @@ if (isset($_POST['login'])) {
                     contains only one row, we don't need to use while loop */
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-					if ($identificacion == $row['identificacion']) {
+					if (password_verify($identificacion, $row['passwordSistema'])) {
 
                         // USUARIO HA INGRESADO LAS CREDENCIALES CORRECTAS
                         $_SESSION['login'] = true;
                         
                         // Retrieve individual field value
-                        $_SESSION['idPersona'] = $row['idPersona'];
+                        $_SESSION['idUsuario'] = $row['idUsuario'];
                         $_SESSION['emailUsuario'] = $row["email"];   
+                        $_SESSION['idRolSistema'] = $row["idRolSistema"];  	
+                        $_SESSION['nombreCortoRolSistema'] = $row["nombreCortoRolSistema"];   
                         $_SESSION['nombreCompleto'] = $row["nombreCompleto"];   
-                        $_SESSION['permisosRolSistema'] = "[usuario-encuestas]";   
-                        $_SESSION['restriccionesRolSistema'] = "[n/a]";   
+                        $_SESSION['permisosRolSistema'] = $row["permisosRolSistema"];   
+                        $_SESSION['restriccionesRolSistema'] = $row["restriccionesRolSistema"];   
                         header("location: core/menu.php");
 
 					} else {

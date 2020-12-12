@@ -11,14 +11,6 @@ $restricciones = "";
 $estado = "1";
 $auditoria = "";
 
-$nombreRol_err = "";
-$nombreCorto_err = "";
-$descripcionRolSistema_err = "";
-$permisos_err = "";
-$restricciones_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    

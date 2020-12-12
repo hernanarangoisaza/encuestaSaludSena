@@ -8,11 +8,6 @@ $idProgramaFormacion = "";
 $estado = "";
 $auditoria = "";
 
-$codigoFichaFormacion_err = "";
-$idProgramaFormacion_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idFichaFormacion"]) && !empty($_POST["idFichaFormacion"])){
     // Get hidden input value

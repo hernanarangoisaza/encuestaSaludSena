@@ -10,13 +10,6 @@ $jornada = "";
 $estado = "";
 $auditoria = "";
 
-$horaInicial_err = "";
-$horaFinal_err = "";
-$nombreCorto_err = "";
-$jornada_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
     // Get hidden input value

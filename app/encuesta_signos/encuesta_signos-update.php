@@ -15,18 +15,6 @@ $aceptacionRespuestaPositiva = "";
 $estado = "";
 $auditoria = "";
 
-$idPersona_err = "";
-$fechaHoraDiligenciamiento_err = "";
-$idSedeIngreso_err = "";
-$idHorario_err = "";
-$aceptacionConsideraciones_err = "";
-$autorizacionTratamientoDatos_err = "";
-$autorizacionIngreso_err = "";
-$observacionAdicional_err = "";
-$aceptacionRespuestaPositiva_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
     // Get hidden input value

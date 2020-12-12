@@ -15,18 +15,6 @@ $aceptacionRespuestaPositiva = "";
 $estado = "1";
 $auditoria = "";
 
-$idPersona_err = "";
-$fechaHoraDiligenciamiento_err = "";
-$idSedeIngreso_err = "";
-$idHorario_err = "";
-$aceptacionConsideraciones_err = "";
-$autorizacionTratamientoDatos_err = "";
-$autorizacionIngreso_err = "";
-$observacionAdicional_err = "";
-$aceptacionRespuestaPositiva_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 /*    

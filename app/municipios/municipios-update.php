@@ -9,12 +9,6 @@ $idDepartamento = "";
 $estado = "";
 $auditoria = "";
 
-$codigoMunicipio_err = "";
-$municipio_err = "";
-$idDepartamento_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idMunicipio"]) && !empty($_POST["idMunicipio"])){
     // Get hidden input value

@@ -8,11 +8,6 @@ $nombreCorto = "";
 $estado = "";
 $auditoria = "";
 
-$nombreLargoVinculacion_err = "";
-$nombreCorto_err = "";
-$estado_err = "";
-$auditoria_err = "";
-
 // Processing form data when form is submitted
 if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
     // Get hidden input value
