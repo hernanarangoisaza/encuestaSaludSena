@@ -77,7 +77,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 
     ?>
 
-    <form method="post" action="" id="frmEncuesta">
+    <form method="post" action="procesar-encuesta.php" id="frmEncuesta">
 
         <section class="pt-4">
 
@@ -164,18 +164,18 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                             <br>
                                             <br>
 
-                                            <input type="radio" name="autorizacionDatosSensibles" value="0" required>&nbsp;&nbsp;&nbsp;No autorizo.
+                                            <input type="radio" name="autorizacionTratamientoDatos" value="0">&nbsp;&nbsp;&nbsp;No autorizo.
 
                                             <br>
                                             <br>
 
-                                            <input type="radio" name="autorizacionDatosSensibles" value="1" required>&nbsp;&nbsp;&nbsp;Si autorizo.
+                                            <input type="radio" name="autorizacionTratamientoDatos" value="1">&nbsp;&nbsp;&nbsp;Si autorizo.
 
                                             <br>
                                             <br>
                                             <br>
 
-                                            <input type="checkbox" name="aceptacionConsideraciones" required>&nbsp;&nbsp;&nbsp;Acepto y declaro haber leído y entendido la sección de <b>"Consideraciones previas"</b>.
+                                            <input type="checkbox" name="aceptacionConsideraciones">&nbsp;&nbsp;&nbsp;Acepto y declaro haber leído y entendido la sección de <b>"Consideraciones previas"</b>.
                                             
                                         </div>
 
@@ -274,12 +274,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                                     $result_cb2 = mysqli_query($link, $sql_cb2);
                                                     echo "<select name='idSedeIngreso' id='cb2' class='combo-box form-control campo-tabla'>";
                                                     while($row = mysqli_fetch_array($result_cb2)) {
-                                                        if ($idCentroFormacion != $row['idCentroFormacion'])
-                                                        {
-                                                            echo "<option class='item-combo-box' value='" . $row['idCentroFormacion'] . "'>" . $row['nombreLargoCentroFormacion'] . "</option>";
-                                                        } else {
-                                                            echo "<option class='item-combo-box' selected value='" . $row['idCentroFormacion'] . "'>" . $row['nombreLargoCentroFormacion'] . "</option>";
-                                                        }
+                                                        echo "<option class='item-combo-box' value='" . $row['idCentroFormacion'] . "'>" . $row['nombreLargoCentroFormacion'] . "</option>";
                                                     }
                                                     echo "</select>";
                                                 ?>
@@ -290,11 +285,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                                     echo "<select name='idHorario' id='cb3' class='combo-box form-control campo-tabla'>";
                                                     while($row = mysqli_fetch_array($result_cb3)) {
                                                         if ($idHorario != $row['idHorario'])
-                                                        {
                                                             echo "<option class='item-combo-box' value='" . $row['idHorario'] . "'>" . $row['nombreCorto'] . "</option>";
-                                                        } else {
-                                                            echo "<option class='item-combo-box' selected value='" . $row['idHorario'] . "'>" . $row['nombreCorto'] . "</option>";
-                                                        }
                                                     }
                                                     echo "</select>";
                                                 ?>
@@ -342,7 +333,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                                         $identificadorSi = "idPregunta_" . $i . "_SI";
                                                         $identificadorNo = "idPregunta_" . $i . "_NO";
                                                         echo "<label class='label-encuesta-preguntas sangria-numeracion-preguntas'>$i. $pregunta</label>";
-                                                        $idPregunta = $row2['idPreguntaEncuesta'];
+                                                        $idPregunta = "idPregunta_" . $row2['idPreguntaEncuesta'];
                                                         echo "<div class='bloqueSiNo'>";
                                                         echo "<input type='radio' name='$idPregunta' id='$identificadorNo' value='0'>&nbsp;&nbsp;&nbsp;No";
                                                         echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"; 
@@ -374,7 +365,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                                         $identificadorSi = "idPregunta_" . $i . "_SI";
                                                         $identificadorNo = "idPregunta_" . $i . "_NO";
                                                         echo "<label class='label-encuesta-preguntas sangria-numeracion-preguntas'>$i. $pregunta</label>";
-                                                        $idPregunta = $row2['idPreguntaEncuesta'];
+                                                        $idPregunta = "idPregunta_" . $row2['idPreguntaEncuesta'];
                                                         echo "<div class='bloqueSiNo'>";
                                                         echo "<input type='radio' name='$idPregunta' id='$identificadorNo' value='0'> No";
                                                         echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"; 
@@ -402,25 +393,29 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                         <div class="texto-tab5a">
 
                                            <div class="observaciones-encuesta">
-                                                <textarea name="observacionAdicional" class="form-control" rows="4" placeholder="Registre aquí alguna observación o consideración no tenida en cuenta en la encuesta."></textarea>
+                                                <textarea name="observacionAdicional" class="form-control txt-observaciones" rows="4" placeholder="Registre aquí alguna observación o consideración no tenida en cuenta en la encuesta."></textarea>
                                             </div>
 
                                             <p class="aviso-consideraciones">Su salud y la nuestra dependen de que usted y todas las personas que ingresan a las sedes del SENA tengan en cuenta las consideraciones antes mencionadas al inicio de la encuesta.</p>
 
+                                            <p class="aviso-automatico">Conforme a sus respuestas, esta encuesta le indicará de manera automática su permiso de ingreso a las sedes del SENA. Independiente de si es aprobado o no, en el SENA siempre habrá alguien que le pueda orientar.</p>
+
                                             <br>
 
-                                            <span class="">
-                                                <input type="radio" name="autorizacionIngreso" id ="aptoIngreso" value="0">&nbsp;&nbsp;&nbsp;APTO PARA INGRESO
+                                            <span class="texto-ingreso">
+                                                 <input type="checkbox" name="aptoIngreso" id="aptoIngreso"value="1">&nbsp;&nbsp;&nbsp;APTO PARA INGRESO.
                                             </span>
 
                                             <br>
 
-                                            <span class="">
-                                                <input type="radio" name="autorizacionIngreso" id ="noAptoIngreso" value="1">&nbsp;&nbsp;&nbsp;INGRESO NEGADO
+                                            <span class="texto-ingreso">
+                                                <input type="checkbox" name="noAptoIngreso" id="noAptoIngreso"value="1">&nbsp;&nbsp;&nbsp;INGRESO NO APROBADO.
                                             </span>
 
                                             <br>
                                             <br>
+
+                                            <input type="hidden" name="aceptacionRespuestaPositiva" id="aceptacionRespuestaPositiva" value="1">
 
                                             <button type="submit" name="login" value="login" class="btn btn-info btn-enviar-encuesta submit">ENVIAR ENCUESTA Y REGISTRAR SUS DATOS</button>
 
@@ -483,96 +478,13 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 
     <script src="../js/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="../js/bootstrap.bundle-4.5.3.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    
+    <script src="../js/libreria.js" type="text/javascript"></script>   
+
     <script type="text/javascript">
 
         $(document).ready(function(){
             
-            var namePattern = "^[a-z A-Z]{4,30}$";
-            var emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$";
-             
-            function checkInput(idInput, pattern) {
-              return $(idInput).val().match(pattern) ? true : false;
-            }
-
-            function checkTextarea(idText) {
-              return $(idText).val().length > 12 ? true : false;    
-            }
-            
-            function checkRadioBox(nameRadioBox) {
-              return $(nameRadioBox).is(":checked") ? true : false;
-            }
-
-            function checkSelect(idSelect) {
-              return $(idSelect).is(":checked") ? true : false;
-            }
-
-            function enableSubmit (idForm) {
-              $(idForm + " button.submit").removeAttr("disabled");
-              $(idForm + " button.submit").removeClass("btn-danger");
-              $(idForm + " button.submit").addClass("btn-info");
-              $(idForm + " button.submit").text('ENVIAR ENCUESTA Y REGISTRAR SUS DATOS');
-              if (confirmarRespuestasPositivas()) {
-                $("#aptoIngreso").prop( "checked", true );
-              } else {
-                $("#noAptoIngreso").prop( "checked", true );
-              }
-            }
-             
-            function disableSubmit (idForm) {
-              $(idForm + " button.submit").attr("disabled", "disabled");
-              $(idForm + " button.submit").removeClass("btn-info");
-              $(idForm + " button.submit").addClass("btn-danger"); 
-              $(idForm + " button.submit").text('TIENE CAMPOS SIN LLENAR. AÚN NO PUEDE ENVIAR LA ENCUESTA');
-              $("#aptoIngreso").prop( "checked", false );
-              $("#noAptoIngreso").prop( "checked", false );
-            }
-
-            function revisarRespuestasSintomas () {
-                respuestas = $("[id^='idPregunta_']");
-                cantidad = respuestas.length;
-                conteo = 0;
-                for(var i = 0; i < cantidad; i++)
-                {
-                    if(respuestas[i].checked == true)
-                    {
-                        conteo++;
-                    } 
-                 } 
-                 return (conteo == (cantidad/2)) ? true : false;        
-            }
-
-            function confirmarRespuestasPositivas () {
-                respuestas = $("[id$='_SI']");
-                cantidad = respuestas.length;
-                conteo = 0;
-                for(var i = 0; i < cantidad; i++)
-                {
-                    if(respuestas[i].checked == true)
-                    {
-                        conteo++;
-                    } 
-                 } 
-                 return (conteo == 0) ? true : false;        
-            }
-
-            function validarEncuesta (idForm) {
-              $(idForm + " *").on("change keydown", function() {
-                if (
-                    checkSelect("[name='aceptacionConsideraciones']") && 
-                    checkRadioBox("[name='autorizacionDatosSensibles']") &&
-                    revisarRespuestasSintomas()
-                   )
-                {
-                  enableSubmit(idForm);
-                } 
-                else {
-                  disableSubmit(idForm);
-                }
-              });
-            }
-
-            validarEncuesta("#frmEncuesta");
+             validarEncuesta("#frmEncuesta");
 
         });
 
