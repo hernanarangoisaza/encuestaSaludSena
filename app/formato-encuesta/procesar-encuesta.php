@@ -48,12 +48,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	  error_log($e->getMessage());
 	  exit('Algo extraño sucedió'); //something a user can understand
 	}
-	$stmt1 = $linkPDO1->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+	$stmtPDO1 = $linkPDO1->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
 
-	if($stmt1->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
+	if($stmtPDO1->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
 			// Conservar el idEncuesta para la inserción de respuestas en la otra tabla.
 			$idEncuesta = $linkPDO1->lastInsertId();
-		    $stmt1 = null;
+		    $stmtPDO1 = null;
 	    } else{
 	        // URL doesn't contain valid id parameter. Redirect to error page
 	        header("location: ../core/error.php");
@@ -84,9 +84,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			$idPreguntaEncuesta = substr($clave, 11);
 			$respuestaSiNo = $valor;
 
-		    $stmt2 = $linkPDO2->prepare("INSERT INTO respuestas_encuesta (idEncuesta, idPreguntaEncuesta, respuestaSiNo, estado, auditoria) VALUES (?,?,?,?,?)");
-			if($stmt2->execute([ $idEncuesta, $idPreguntaEncuesta, $respuestaSiNo, $estado, $auditoria ])) {
-		        $stmt2 = null;
+		    $stmtPDO2 = $linkPDO2->prepare("INSERT INTO respuestas_encuesta (idEncuesta, idPreguntaEncuesta, respuestaSiNo, estado, auditoria) VALUES (?,?,?,?,?)");
+			if($stmtPDO2->execute([ $idEncuesta, $idPreguntaEncuesta, $respuestaSiNo, $estado, $auditoria ])) {
+		        $stmtPDO2 = null;
 		    } else{
 		        // URL doesn't contain valid id parameter. Redirect to error page
 		        header("location: ../core/error.php");
