@@ -19,7 +19,7 @@ function checkSelect(idSelect) {
 
 function enableSubmit (idForm) {
   $(idForm + " button.submit").removeAttr("disabled");
-  $(idForm + " button.submit").removeClass("btn-danger");
+  $(idForm + " button.submit").removeClass("btn-secondary");
   $(idForm + " button.submit").addClass("btn-info");
   $(idForm + " button.submit").text('ENVIAR ENCUESTA Y REGISTRAR SUS DATOS');
 }
@@ -27,7 +27,7 @@ function enableSubmit (idForm) {
 function disableSubmit (idForm) {
   $(idForm + " button.submit").attr("disabled", "disabled");
   $(idForm + " button.submit").removeClass("btn-info");
-  $(idForm + " button.submit").addClass("btn-danger"); 
+  $(idForm + " button.submit").addClass("btn-secondary"); 
   $(idForm + " button.submit").text('AÚN NO TERMINA DE DILIGENCIAR SU ENCUESTA');
 }
 
@@ -51,10 +51,14 @@ function confirmarRespuestasPositivas () {
       $("#aptoIngreso").prop("checked", false);
       $("#noAptoIngreso").prop("checked", true);
       $("#aceptacionRespuestaPositiva").val("1");
-   } else {
+      $(".textoNoAptoIngreso").removeClass("ocultar-elemento");
+      $(".textoAptoIngreso").addClass("ocultar-elemento");
+    } else {
       $("#noAptoIngreso").prop("checked", false);
       $("#aptoIngreso").prop("checked", true);
       $("#aceptacionRespuestaPositiva").val("0");
+      $(".textoNoAptoIngreso").addClass("ocultar-elemento");
+      $(".textoAptoIngreso").removeClass("ocultar-elemento");
    }
    return true;        
 }
@@ -76,6 +80,17 @@ function validarEncuesta (idForm) {
   });
 }
 
+
+$(function () {
+
+    $("#btn-cerrar-modal-envio-encuesta").on("click", function() {
+
+        // window.location.replace("../core/cerrar-encuesta.php");
+
+    })
+
+});
+
 $(function () {
 
     var frm = $('#frmEncuesta');
@@ -94,8 +109,8 @@ $(function () {
               * Esta función se ejecuta durante el envío de la petición al servidor. * 
               */
 
-              alert("beforeSend");
-              
+              // alert("beforeSend");
+
           },
           success: function(data){
 
@@ -127,7 +142,10 @@ $(function () {
               
               // ELIMINAR VARIABLES DE ENTORNO Y/O DEL FORMULARIO. REGRESAR A MENÚ Y DEJAR LIBRE ALLÍ AL USUARIO.
 
+
               // alert("complete");
+
+              $("#btn-modal-enviar-encuesta").click();
 
           }
 

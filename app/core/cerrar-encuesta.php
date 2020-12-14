@@ -9,6 +9,6 @@ session_unset();
 session_destroy();
 
 // Habilitar la página inicial
-header("Location: ../index.php");
+header("Location: https://www.google.com/");
 
 ?>

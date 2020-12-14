@@ -8,6 +8,7 @@ if (empty($_SESSION["login"])) {
 // foreach ($_SESSION as $key=>$val)
 // echo $key." ".$val."<br/>";
 // echo $_SESSION['permisosRolSistema'];
+// print_r($_POST);
 ?>
 
 <?php
@@ -398,18 +399,18 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 
                                             <p class="aviso-consideraciones">Su salud y la nuestra dependen de que usted y todas las personas que ingresan a las sedes del SENA tengan en cuenta las consideraciones antes mencionadas al inicio de la encuesta.</p>
 
-                                            <p class="aviso-automatico">Conforme a sus respuestas, esta encuesta le indicará de manera automática su permiso de ingreso a las sedes del SENA. Independiente de si es aprobado o no, en el SENA siempre habrá alguien que le pueda orientar.</p>
+                                            <p class="aviso-automatico">Conforme a sus respuestas, esta encuesta le indicará de manera automática su permiso de ingreso a las sedes del SENA. Independiente de si es aprobado o no, en el SENA siempre habrá alguien que le pueda brindar información. Envíe siempre esta encuesta y así lo podremos orientar en caso de algún síntoma de alarma.</p>
 
                                             <br>
 
-                                            <span class="texto-ingreso">
-                                                 <input type="checkbox" name="aptoIngreso" id="aptoIngreso"value="1">&nbsp;&nbsp;&nbsp;APTO PARA INGRESO.
+                                            <span class="texto-ingreso centrar-elemento">
+                                                 <input type="checkbox" name="aptoIngreso" id="aptoIngreso" class="ocultar-elemento" value="1"><span class="textoAptoIngreso ocultar-elemento">APTO PARA INGRESO</span>
                                             </span>
 
                                             <br>
 
-                                            <span class="texto-ingreso">
-                                                <input type="checkbox" name="noAptoIngreso" id="noAptoIngreso"value="1">&nbsp;&nbsp;&nbsp;INGRESO NO APROBADO.
+                                            <span class="texto-ingreso centrar-elemento">
+                                                <input type="checkbox" name="noAptoIngreso" id="noAptoIngreso"  class="ocultar-elemento" value="1"><span class="textoNoAptoIngreso ocultar-elemento">INGRESO NO APROBADO</span>
                                             </span>
 
                                             <br>
@@ -417,7 +418,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 
                                             <input type="hidden" name="aceptacionRespuestaPositiva" id="aceptacionRespuestaPositiva" value="0">
 
-                                            <button type="submit" name="login" value="login" id="btn-enviar-encuesta" class="btn btn-info  submit">ENVIAR ENCUESTA Y REGISTRAR SUS DATOS</button>
+                                            <button type="submit" name="login" value="login" id="btn-enviar-encuesta" class="btn btn-info centrar-elemento submit">ENVIAR ENCUESTA Y REGISTRAR SUS DATOS</button>
 
                                         </div>
 
@@ -464,6 +465,34 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
         </section>
 
     </form>   
+
+    <!-- Button to Open the Modal -->
+    <button type="button" id="btn-modal-enviar-encuesta" class="btn btn-primary ocultar-elemento" data-toggle="modal" data-target="#modalEnvioEncuesta" data-backdrop='static' data-keyboard='false'></button>
+
+    <!-- The Modal -->
+    <div class="modal" id="modalEnvioEncuesta">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Encuesta enviada exitosamente</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body texto-modal">
+            Muchas gracias por su información. A la entrada de la sede le será validada la información de la encuesta y se le tomará la temperatura tanto a la entrada como a la salida. No olvide seguir los protocolos de Bioseguridad recomendados en esta encuesta.
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" id="btn-cerrar-modal-envio-encuesta" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
     <?php
 

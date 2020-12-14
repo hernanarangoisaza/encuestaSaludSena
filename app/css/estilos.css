@@ -1003,6 +1003,7 @@ label.tab {
     width: 100%;
     margin-bottom: 10px;
     margin-left: 20px;
+    font-size: 1.25em;
 }
 
 .sangria-numeracion-preguntas {
@@ -1027,6 +1028,10 @@ label.tab {
 
 .inicio-preguntas {
     font-weight: bold;
+}
+
+.texto-modal {
+    text-align: justify;
 }
 
 .aviso-datos-personales {
@@ -1073,6 +1078,30 @@ label.tab {
     font-size: 1em;
     color: black;
     font-style: italic;
+}
+
+.ocultar-elemento {
+    display: none;
+}
+
+.centrar-elemento {
+    align-self: center;
+}
+
+.textoNoAptoIngreso {
+    background-color: white ;
+    color: #dc3545;
+    padding: 15px;
+}
+
+.textoAptoIngreso {
+    background-color: white ;
+    color: #28a745;
+    padding: 15px;
+}
+
+.modal {
+    background-color: rgba(0,0,0,0.55) !important;
 }
 
 /* -------------------------------------------------------------------------------------------------- */

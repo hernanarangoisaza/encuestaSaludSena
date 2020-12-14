@@ -1,0 +1,14 @@
+*** config.php
+- Revisar datos de la enfermera.
+- Ajustar datos de conexión de la base de datos.
+
+
+
+*** libreria.js
+
+- Remover el comentario que cierra sesión al enviar la encuesta.
+
+$("#btn-cerrar-modal-envio-encuesta").on("click", function() {
+   // window.location.replace("../core/cerrar-encuesta.php");
+})
+
