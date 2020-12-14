@@ -73,37 +73,59 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
 	];
 	try {
-	  $pdo = new PDO($dsn, $db_user, $db_password, $options);
+	  $pdo1 = new PDO($dsn, $db_user, $db_password, $options);
 	} catch (Exception $e) {
 	  error_log($e->getMessage());
 	  exit('Algo extraño sucedió'); //something a user can understand
 	}
-	$stmt = $pdo->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+	$stmt1 = $pdo1->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
 
-	if($stmt->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
-	        $stmt = null;
+	if($stmt1->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
+			// Conservar el idEncuesta para la inserción de respuestas en la otra tabla.
+			$idEncuesta = $pdo1->lastInsertId();
+		    $stmt1 = null;
 	    } else{
 	        // URL doesn't contain valid id parameter. Redirect to error page
 	        header("location: ../core/error.php");
 	        exit();
 	    }
 
-    $sql1 = "SELECT LAST_INSERT_ID() 
-		 FROM encuesta_signos
-		WHERE estado = 1
-		  AND idPersona = $idPersona
-		LIMIT 1";
+	try {
+	  $pdo2 = new PDO($dsn, $db_user, $db_password, $options);
+	} catch (Exception $e) {
+	  error_log($e->getMessage());
+	  exit('Algo extraño sucedió'); //something a user can understand
+	}
 
-        $result1 = mysqli_query($link, $sql1);
+	$estado = 1;
+	$auditoria = date('Y-m-d H:i:s');
 
-        if (mysqli_num_rows($result1) > 0) {
+	foreach ($_POST as $clave=>$valor) {
 
-            $row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);
+		// [idPregunta_9] => 0
+		// 11 es la posición del simbolo _
+		// $clave = idPregunta_1
+		// $valor = 0
+		// $idPreguntaEncuesta = 9
 
-        }
+		if ((strstr($clave, "idPregunta_") != ''))
+		{
 
+			$idPreguntaEncuesta = substr($clave, 11);
+			$respuestaSiNo = $valor;
 
+		    $stmt2 = $pdo2->prepare("INSERT INTO respuestas_encuesta (idEncuesta, idPreguntaEncuesta, respuestaSiNo, estado, auditoria) VALUES (?,?,?,?,?)");
+			if($stmt2->execute([ $idEncuesta, $idPreguntaEncuesta, $respuestaSiNo, $estado, $auditoria ])) {
+		        $stmt2 = null;
+		    } else{
+		        // URL doesn't contain valid id parameter. Redirect to error page
+		        header("location: ../core/error.php");
+		        exit();
+		    }
 
+		}
+
+	}
 
 }
 

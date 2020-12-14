@@ -415,7 +415,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                             <br>
                                             <br>
 
-                                            <input type="hidden" name="aceptacionRespuestaPositiva" id="aceptacionRespuestaPositiva" value="1">
+                                            <input type="hidden" name="aceptacionRespuestaPositiva" id="aceptacionRespuestaPositiva" value="0">
 
                                             <button type="submit" name="login" value="login" class="btn btn-info btn-enviar-encuesta submit">ENVIAR ENCUESTA Y REGISTRAR SUS DATOS</button>
 
