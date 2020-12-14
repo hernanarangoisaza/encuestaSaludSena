@@ -129,14 +129,14 @@
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($resultMSQLI)){
                                     echo "<tr>";
-                                    echo "<td>";
+                                    echo "<td class='centrar-columna'>";
                                         echo "<a href='fichas_formacion-read.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Ver Registro' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
                                         echo "<a href='fichas_formacion-update.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Actualizar Registro' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
                                         echo "<a href='fichas_formacion-delete.php?idFichaFormacion=". $row['idFichaFormacion'] ."' title='Borrar Registro' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idFichaFormacion'] . "</td>";
-                                    echo "<td>" . $row['codigoFichaFormacion'] . "</td>";
-                                    echo "<td>" . $row['nombreLargoProgramaFormacion'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['codigoFichaFormacion'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreLargoProgramaFormacion'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";

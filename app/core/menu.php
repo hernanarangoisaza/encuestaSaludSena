@@ -871,7 +871,7 @@ if (empty($_SESSION["login"])) {
 
                             <?php
                             if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../fichas_formacionfichas_formacion-index.php">Fichas de formación</a></li>';
+                                echo '<li class="item-menu-principal"><a href="../fichas_formacion/fichas_formacion-index.php">Fichas de formación</a></li>';
                             }
                             ?>
 
@@ -889,7 +889,7 @@ if (empty($_SESSION["login"])) {
                             
                             <?php
                             if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../tipos_vinculaciones/tipos_vinculaciones_sena-index.php">Tipos de vinculaciones</a></li>';
+                                echo '<li class="item-menu-principal"><a href="../tipos_vinculaciones_sena/tipos_vinculaciones_sena-index.php">Tipos de vinculaciones</a></li>';
                             }
                             ?>
 

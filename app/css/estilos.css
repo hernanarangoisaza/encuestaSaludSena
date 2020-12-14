@@ -357,7 +357,8 @@ div.form-group {
 }
 
 div.form-group label {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 
 input.btn.btn-primary,

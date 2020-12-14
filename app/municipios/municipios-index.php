@@ -136,8 +136,8 @@
                                         echo "<a href='municipios-delete.php?idMunicipio=". $row['idMunicipio'] ."'><i class='far fa-trash-alt'></i></a>";
                                     echo "</td>";                                    
                                     echo "<td class='centrar-columna'>" . $row['codigoMunicipio'] . "</td>";
-                                    echo "<td>" . $row['municipio'] . "</td>";
-                                    echo "<td>" . $row['departamento'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['municipio'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['departamento'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";

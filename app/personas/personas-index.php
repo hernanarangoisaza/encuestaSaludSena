@@ -226,28 +226,24 @@ else {
                             while ($row = mysqli_fetch_array($resultMSQLI)) {
                                 echo "<tr>";
                                 echo "<td class='centrar-columna'>";
-                                echo "<span class='$isDisabled'>" .
-                                     "<a href='personas-read.php?idPersona=" . 
-                                     $row['idPersona'] . 
-                                     "' aria-disabled='$ariaDisabled'>" .
-                                     "<i class='far fa-eye'></i></a></span>";
+                                echo "<span class='$isDisabled'>" . "<a href='personas-read.php?idPersona=" . $row['idPersona'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-eye'></i></a></span>";
                                 echo "<a href='personas-update.php?idPersona=" . $row['idPersona'] . "'><i class='far fa-edit'></i></a>";
                                 echo "" . "<a href='personas-delete.php?idPersona=" . $row['idPersona'] . "'><i class='far fa-trash-alt'></i></a>";
                                 echo "</td>";
                                 echo "<td class='ocultar-columna'>" . $row['idPersona'] . "</td>";
-                                echo "<td>" . $row['nombreLargoVinculacion'] . "</td>";
-                                echo "<td>" . $row['nombreCompleto'] . "</td>";
-                                echo "<td>" . $row['nombreLargoIdentificacion'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['nombreLargoVinculacion'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['nombreCompleto'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['nombreLargoIdentificacion'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['identificacion'] . "</td>";
-                                echo "<td>" . $row['email'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['email'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['telefonoPersonal'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['telefonoAcudiente'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['fechaNacimiento'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['nombreLargoGenero'] . "</td>";
-                                echo "<td>" . $row['direccionResidencia'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['direccionResidencia'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['nombreMunicipio'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['nombreDepartamento'] . "</td>";
-                                echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
+                                echo "<td class='centrar-columna'>" . $row['nombreLargoCentroFormacion'] . "</td>";
                                 echo "<td class='centrar-columna'>" . $row['codigoFichaFormacion'] . "</td>";
                                 echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                 echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";

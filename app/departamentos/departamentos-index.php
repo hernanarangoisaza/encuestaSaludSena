@@ -123,7 +123,7 @@
                                             echo "<a href='departamentos-delete.php?idDepartamento=". $row['idDepartamento'] ."'><i class='far fa-trash-alt'></i></a>";
                                         echo "</td>";
                                     echo "<td class='centrar-columna'>" . $row['codigoDepartamento'] . "</td>";
-                                    echo "<td>" . $row['departamento'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['departamento'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";

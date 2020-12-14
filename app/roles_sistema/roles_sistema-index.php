@@ -112,8 +112,8 @@
 										echo "<th><a href=?search=$search&sort=&order=nombreLargoRolSistema&sort=$sort>Nombre</th>";
 										echo "<th><a href=?search=$search&sort=&order=nombreCorto&sort=$sort>Nombre corto</th>";
 										echo "<th><a href=?search=$search&sort=&order=descripcionRolSistema&sort=$sort>Descripción</th>";
-										echo "<th><a href=?search=$search&sort=&order=permisos&sort=$sort>Permisos</th>";
-										echo "<th><a href=?search=$search&sort=&order=restricciones&sort=$sort>Restricciones</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=permisos&sort=$sort>Permisos</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=restricciones&sort=$sort>Restricciones</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
@@ -127,11 +127,11 @@
                                         echo "<a href='roles_sistema-delete.php?idRolSistema=". $row['idRolSistema'] ."'><i class='far fa-trash-alt'></i></a>";
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idRolSistema'] . "</td>";
-                                    echo "<td>" . $row['nombreLargoRolSistema'] . "</td>";
-                                    echo "<td>" . $row['nombreCorto'] . "</td>";
-                                    echo "<td>" . $row['descripcionRolSistema'] . "</td>";
-                                    echo "<td>" . $row['permisos'] . "</td>";
-                                    echo "<td>" . $row['restricciones'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreLargoRolSistema'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['descripcionRolSistema'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['permisos'] . "</td>";
+                                    echo "<td class='ocultar-columna'>" . $row['restricciones'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";

@@ -123,8 +123,8 @@
                                         echo "<a href='programas_formacion-delete.php?idProgramaFormacion=". $row['idProgramaFormacion'] ."'><i class='far fa-trash-alt'></i></a>";
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idProgramaFormacion'] . "</td>";
-                                    echo "<td>" . $row['nombreLargoProgramaFormacion'] . "</td>";
-                                    echo "<td>" . $row['nombreCorto'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreLargoProgramaFormacion'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";
