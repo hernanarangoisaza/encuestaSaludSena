@@ -41,12 +41,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
         ];
         try {
-          $pdo = new PDO($dsn, $db_user, $db_password, $options);
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO tomas_temperatura (idEncuesta,fechaHoraTomaEntrada,temperaturaEntrada,fechaHoraTomaSalida,temperaturaSalida,estado,auditoria) VALUES (?,?,?,?,?,?,?)"); 
+        $stmt = $linkPDO->prepare("INSERT INTO tomas_temperatura (idEncuesta,fechaHoraTomaEntrada,temperaturaEntrada,fechaHoraTomaSalida,temperaturaSalida,estado,auditoria) VALUES (?,?,?,?,?,?,?)"); 
         
         if($stmt->execute([ $idEncuesta,$fechaHoraTomaEntrada,$temperaturaEntrada,$fechaHoraTomaSalida,$temperaturaSalida,$estado,$auditoria  ])) {
                 $stmt = null;
@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                                    FROM encuesta_signos ES
                                                    LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
                                                    ORDER BY idEncuesta DESC";
-                                $result_cb5 = mysqli_query($link, $sql_cb5);
+                                $result_cb5 = mysqli_query($linkMYSQLI, $sql_cb5);
                                 echo "<select name='idEncuesta' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
                                     $selected = ($idEncuesta != $row['idEncuesta']) ? ('') : ('selected');

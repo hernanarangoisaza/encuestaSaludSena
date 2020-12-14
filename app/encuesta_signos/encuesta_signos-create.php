@@ -49,12 +49,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
         ];
         try {
-          $pdo = new PDO($dsn, $db_user, $db_password, $options);
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+        $stmt = $linkPDO->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
         
         if($stmt->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
                 $stmt = null;
@@ -90,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <label>Persona</label>
                             <?php
                                 $sql_cb1 = "SELECT idPersona, nombreCompleto FROM personas";
-                                $result_cb1 = mysqli_query($link, $sql_cb1);
+                                $result_cb1 = mysqli_query($linkMYSQLI, $sql_cb1);
                                 echo "<select name='idPersona' id='cb1' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb1)) {
                                     if ($idPersona != $row['idPersona'])
@@ -115,7 +115,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <label>Sede de ingreso</label>
                             <?php
                                 $sql_cb2 = "SELECT idCentroFormacion, nombreLargoCentroFormacion, nombreCorto FROM centros_formacion";
-                                $result_cb2 = mysqli_query($link, $sql_cb2);
+                                $result_cb2 = mysqli_query($linkMYSQLI, $sql_cb2);
                                 echo "<select name='idSedeIngreso' id='cb2' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb2)) {
                                     if ($idCentroFormacion != $row['idCentroFormacion'])
@@ -134,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <label>Horario</label>
                             <?php
                                 $sql_cb3 = "SELECT idHorario, nombreCorto FROM horarios ORDER BY horaInicial, horaFinal";
-                                $result_cb3 = mysqli_query($link, $sql_cb3);
+                                $result_cb3 = mysqli_query($linkMYSQLI, $sql_cb3);
                                 echo "<select name='idHorario' id='cb3' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb3)) {
                                     if ($idHorario != $row['idHorario'])

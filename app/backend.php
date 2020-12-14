@@ -27,7 +27,7 @@ if (isset($_POST['login'])) {
             LEFT JOIN roles_sistema RS ON RS.idRolSistema = US.idRolSistema
             WHERE email=?";
                             
-		if($stmt = mysqli_prepare($link, $sql)){
+		if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
             
 			// Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $correo);
@@ -87,7 +87,7 @@ if (isset($_POST['login'])) {
         mysqli_stmt_close($stmt);
 
         // Close connection
-        mysqli_close($link);
+        mysqli_close($linkMYSQLI);
 
     }  else{
         // URL doesn't contain id parameter. Redirect to error page

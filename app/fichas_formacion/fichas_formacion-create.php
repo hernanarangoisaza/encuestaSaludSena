@@ -35,12 +35,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
         ];
         try {
-          $pdo = new PDO($dsn, $db_user, $db_password, $options);
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO fichas_formacion (codigoFichaFormacion,idProgramaFormacion,estado,auditoria) VALUES (?,?,?,?)"); 
+        $stmt = $linkPDO->prepare("INSERT INTO fichas_formacion (codigoFichaFormacion,idProgramaFormacion,estado,auditoria) VALUES (?,?,?,?)"); 
         
         if($stmt->execute([ $codigoFichaFormacion,$idProgramaFormacion,$estado,$auditoria  ])) {
                 $stmt = null;
@@ -81,7 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <label>Programa de formación</label>
                             <?php
                                 $sql_cb5 = "SELECT idProgramaFormacion, nombreLargoProgramaFormacion FROM programas_formacion ORDER BY nombreLargoProgramaFormacion";
-                                $result_cb5 = mysqli_query($link, $sql_cb5);
+                                $result_cb5 = mysqli_query($linkMYSQLI, $sql_cb5);
                                 echo "<select name='idProgramaFormacion' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
                                     if ($idProgramaFormacion != $row['idProgramaFormacion'])

@@ -52,7 +52,7 @@
                     $offset = ($pageno-1) * $no_of_records_per_page;
 
                     $total_pages_sql = "SELECT COUNT(*) FROM tipos_vinculaciones_sena";
-                    $result = mysqli_query($link,$total_pages_sql);
+                    $result = mysqli_query($linkMYSQLI,$total_pages_sql);
                     $total_rows = mysqli_fetch_array($result)[0];
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
@@ -94,9 +94,9 @@
                         $search = "";
                     }
 
-                    if($result = mysqli_query($link, $sql)){
+                    if($result = mysqli_query($linkMYSQLI, $sql)){
                         if(mysqli_num_rows($result) > 0){
-                            if ($result_count = mysqli_query($link, $count_pages)) {
+                            if ($result_count = mysqli_query($linkMYSQLI, $count_pages)) {
                                $total_pages = ceil(mysqli_num_rows($result_count) / $no_of_records_per_page);
                            }
                             $number_of_results = mysqli_num_rows($result_count);
@@ -155,11 +155,11 @@
                             echo "<p class='lead sin-registros'><em>No se encontraron coincidencias.</em></p>";
                         }
                     } else{
-                        echo "ERROR: No fue posible ejecutar $sql. " . mysqli_error($link);
+                        echo "ERROR: No fue posible ejecutar $sql. " . mysqli_error($linkMYSQLI);
                     }
 
                     // Close connection
-                    mysqli_close($link);
+                    mysqli_close($linkMYSQLI);
                     ?>
                 </div>
             </div>

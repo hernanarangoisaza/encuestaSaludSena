@@ -41,12 +41,12 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
         ];
         try {
-          $pdo = new PDO($dsn, $db_user, $db_password, $options);
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE centros_formacion SET nombreCorto=?,nombreLargoCentroFormacion=?,direccion=?,idMunicipio=?,idDepartamento=?,telefono1=?,telefono2=?,emailContacto1=?,emailContacto2=?,estado=?,auditoria=? WHERE idCentroFormacion=?");
+        $stmt = $linkPDO->prepare("UPDATE centros_formacion SET nombreCorto=?,nombreLargoCentroFormacion=?,direccion=?,idMunicipio=?,idDepartamento=?,telefono1=?,telefono2=?,emailContacto1=?,emailContacto2=?,estado=?,auditoria=? WHERE idCentroFormacion=?");
 
         if(!$stmt->execute([ $nombreCorto,$nombreLargoCentroFormacion,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria,$idCentroFormacion  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
@@ -64,7 +64,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
 
         // Prepare a select statement
         $sql = "SELECT * FROM centros_formacion WHERE idCentroFormacion = ?";
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
@@ -109,7 +109,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
         mysqli_stmt_close($stmt);
 
         // Close connection
-        // mysqli_close($link);
+        // mysqli_close($linkMYSQLI);
 
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
@@ -162,7 +162,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
                             <label>Departamento</label>
                             <?php
                                 $sql_cb5 = "SELECT idDepartamento, departamento FROM departamentos ORDER BY departamento";
-                                $result_cb5 = mysqli_query($link, $sql_cb5);
+                                $result_cb5 = mysqli_query($linkMYSQLI, $sql_cb5);
                                 echo "<select name='idDepartamento' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
                                     if ($idDepartamento != $row['idDepartamento'])
@@ -181,7 +181,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
                             <label>Municipio</label>
                             <?php
                                 $sql_cb4 = "SELECT idMunicipio, municipio FROM municipios ORDER BY municipio";
-                                $result_cb4 = mysqli_query($link, $sql_cb4);
+                                $result_cb4 = mysqli_query($linkMYSQLI, $sql_cb4);
                                 echo "<select name='idMunicipio' id='cb4' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb4)) {
                                     if ($idMunicipio != $row['idMunicipio'])

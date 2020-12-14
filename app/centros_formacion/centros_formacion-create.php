@@ -49,12 +49,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
         ];
         try {
-          $pdo = new PDO($dsn, $db_user, $db_password, $options);
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO centros_formacion (nombreCorto,nombreLargoCentroFormacion,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+        $stmt = $linkPDO->prepare("INSERT INTO centros_formacion (nombreCorto,nombreLargoCentroFormacion,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
         
         if($stmt->execute([ $nombreCorto,$nombreLargoCentroFormacion,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria  ])) {
                 $stmt = null;
@@ -108,7 +108,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <label>Departamento</label>
                             <?php
                                 $sql_cb5 = "SELECT idDepartamento, departamento FROM departamentos ORDER BY departamento";
-                                $result_cb5 = mysqli_query($link, $sql_cb5);
+                                $result_cb5 = mysqli_query($linkMYSQLI, $sql_cb5);
                                 echo "<select name='idDepartamento' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
                                     if ($idDepartamento != $row['idDepartamento'])
@@ -127,7 +127,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <label>Municipio</label>
                             <?php
                                 $sql_cb4 = "SELECT idMunicipio, municipio FROM municipios ORDER BY municipio";
-                                $result_cb4 = mysqli_query($link, $sql_cb4);
+                                $result_cb4 = mysqli_query($linkMYSQLI, $sql_cb4);
                                 echo "<select name='idMunicipio' id='cb4' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb4)) {
                                     if ($idMunicipio != $row['idMunicipio'])

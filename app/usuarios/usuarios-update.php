@@ -52,12 +52,12 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
         ];
         try {
-          $pdo = new PDO($dsn, $db_user, $db_password, $options);
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE usuarios SET idTipoVinculacion=?,nombreCompleto=?,idTipoIdentificacion=?,identificacion=?,email=?,telefonoPersonal=?,fechaNacimiento=?,idTipoGenero=?,direccionResidencia=?,idMunicipio=?,idDepartamento=?,idCentroFormacion=?,idRolSistema=?,passwordSistema=?,estado=?,auditoria=? WHERE idUsuario=?");
+        $stmt = $linkPDO->prepare("UPDATE usuarios SET idTipoVinculacion=?,nombreCompleto=?,idTipoIdentificacion=?,identificacion=?,email=?,telefonoPersonal=?,fechaNacimiento=?,idTipoGenero=?,direccionResidencia=?,idMunicipio=?,idDepartamento=?,idCentroFormacion=?,idRolSistema=?,passwordSistema=?,estado=?,auditoria=? WHERE idUsuario=?");
 
         if(!$stmt->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idRolSistema,$passwordSistema,$estado,$auditoria,$idUsuario  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
@@ -75,7 +75,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
 
         // Prepare a select statement
         $sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
@@ -125,7 +125,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
         mysqli_stmt_close($stmt);
 
         // Close connection
-        // mysqli_close($link);
+        // mysqli_close($linkMYSQLI);
 
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
@@ -160,7 +160,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
                             <label>Tipo de vinculación</label>
                             <?php
                                 $sql_cb1 = "SELECT idTipoVinculacion, nombreLargoVinculacion, nombreCorto FROM tipos_vinculaciones_sena ORDER BY nombreLargoVinculacion";
-                                $result_cb1 = mysqli_query($link, $sql_cb1);
+                                $result_cb1 = mysqli_query($linkMYSQLI, $sql_cb1);
                                 echo "<select name='idTipoVinculacion' id='cb1' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb1)) {
                                     if ($idTipoVinculacion != $row['idTipoVinculacion'])
@@ -185,7 +185,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
                             <label>Tipo de identificación</label>
                             <?php
                                 $sql_cb2 = "SELECT idTipoIdentificacion, nombreLargoIdentificacion, nombreCorto FROM tipos_identificacion";
-                                $result_cb2 = mysqli_query($link, $sql_cb2);
+                                $result_cb2 = mysqli_query($linkMYSQLI, $sql_cb2);
                                 echo "<select name='idTipoIdentificacion' id='cb2' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb2)) {
                                     if ($idTipoIdentificacion != $row['idTipoIdentificacion'])
@@ -228,7 +228,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
                             <label>Género</label>
                             <?php
                                 $sql_cb3 = "SELECT idTipoGenero, nombreLargoGenero, nombreCorto FROM tipos_generos";
-                                $result_cb3 = mysqli_query($link, $sql_cb3);
+                                $result_cb3 = mysqli_query($linkMYSQLI, $sql_cb3);
                                 echo "<select name='idTipoGenero' id='cb3' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb3)) {
                                     if ($idTipoGenero != $row['idTipoGenero'])
@@ -253,7 +253,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
                             <label>Departamento</label>
                             <?php
                                 $sql_cb5 = "SELECT idDepartamento, departamento FROM departamentos ORDER BY departamento";
-                                $result_cb5 = mysqli_query($link, $sql_cb5);
+                                $result_cb5 = mysqli_query($linkMYSQLI, $sql_cb5);
                                 echo "<select name='idDepartamento' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
                                     if ($idDepartamento != $row['idDepartamento'])
@@ -272,7 +272,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
                             <label>Municipio</label>
                             <?php
                                 $sql_cb4 = "SELECT idMunicipio, municipio FROM municipios ORDER BY municipio";
-                                $result_cb4 = mysqli_query($link, $sql_cb4);
+                                $result_cb4 = mysqli_query($linkMYSQLI, $sql_cb4);
                                 echo "<select name='idMunicipio' id='cb4' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb4)) {
                                     if ($idMunicipio != $row['idMunicipio'])
@@ -291,7 +291,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
                             <label>Centro de formación</label>
                             <?php
                                 $sql_cb6 = "SELECT idCentroFormacion, nombreLargoCentroFormacion, nombreCorto FROM centros_formacion ORDER BY nombreLargoCentroFormacion";
-                                $result_cb6 = mysqli_query($link, $sql_cb6);
+                                $result_cb6 = mysqli_query($linkMYSQLI, $sql_cb6);
                                 echo "<select name='idCentroFormacion' id='cb6' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb6)) {
                                     if ($idCentroFormacion != $row['idCentroFormacion'])
@@ -310,7 +310,7 @@ if(isset($_POST["idUsuario"]) && !empty($_POST["idUsuario"])){
                             <label>Rol del sistema</label>
                             <?php
                                 $sql_cb6 = "SELECT idRolSistema, nombreLargoRolSistema, nombreCorto FROM roles_sistema ORDER BY nombreLargoRolSistema";
-                                $result_cb6 = mysqli_query($link, $sql_cb6);
+                                $result_cb6 = mysqli_query($linkMYSQLI, $sql_cb6);
                                 echo "<select name='idRolSistema' id='cb6' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb6)) {
                                     if ($idRolSistema != $row['idRolSistema'])

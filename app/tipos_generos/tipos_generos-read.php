@@ -7,7 +7,7 @@ if(isset($_GET["idTipoGenero"]) && !empty(trim($_GET["idTipoGenero"]))){
     // Prepare a select statement
     $sql = "SELECT * FROM tipos_generos WHERE idTipoGenero = ?";
 
-    if($stmt = mysqli_prepare($link, $sql)){
+    if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
 
@@ -44,7 +44,7 @@ if(isset($_GET["idTipoGenero"]) && !empty(trim($_GET["idTipoGenero"]))){
     mysqli_stmt_close($stmt);
 
     // Close connection
-    mysqli_close($link);
+    mysqli_close($linkMYSQLI);
 } else{
     // URL doesn't contain id parameter. Redirect to error page
     header("location: ../core/error.php");

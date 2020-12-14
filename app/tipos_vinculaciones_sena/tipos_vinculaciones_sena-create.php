@@ -35,12 +35,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
         ];
         try {
-          $pdo = new PDO($dsn, $db_user, $db_password, $options);
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $pdo->prepare("INSERT INTO tipos_vinculaciones_sena (nombreLargoVinculacion,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
+        $stmt = $linkPDO->prepare("INSERT INTO tipos_vinculaciones_sena (nombreLargoVinculacion,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
         
         if($stmt->execute([ $nombreLargoVinculacion,$nombreCorto,$estado,$auditoria  ])) {
                 $stmt = null;

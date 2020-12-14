@@ -25,7 +25,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
     // Prepare a delete statement
     $sql = "DELETE FROM centros_formacion WHERE idCentroFormacion = ?";
 
-    if($stmt = mysqli_prepare($link, $sql)){
+    if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
 
@@ -46,7 +46,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
     mysqli_stmt_close($stmt);
 
     // Close connection
-    mysqli_close($link);
+    mysqli_close($linkMYSQLI);
 } else{
     // Check existence of id parameter
     if(empty(trim($_GET["idCentroFormacion"]))){

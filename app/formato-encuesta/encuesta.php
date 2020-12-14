@@ -52,7 +52,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
             LEFT JOIN fichas_formacion FF ON FF.idFichaFormacion = PE.idFichaFormacion
             WHERE idPersona = $idPersona";
 
-            $result1 = mysqli_query($link, $sql1);
+            $result1 = mysqli_query($linkMYSQLI, $sql1);
 
             if (mysqli_num_rows($result1) > 0) {
 
@@ -65,7 +65,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
             WHERE estado = 1
             ORDER BY orden";
 
-            $result2 = mysqli_query($link, $sql2);
+            $result2 = mysqli_query($linkMYSQLI, $sql2);
 
             if (mysqli_num_rows($result2) > 0) {
 
@@ -271,7 +271,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                             
                                                 <?php
                                                     $sql_cb2 = "SELECT idCentroFormacion, nombreLargoCentroFormacion, nombreCorto FROM centros_formacion";
-                                                    $result_cb2 = mysqli_query($link, $sql_cb2);
+                                                    $result_cb2 = mysqli_query($linkMYSQLI, $sql_cb2);
                                                     echo "<select name='idSedeIngreso' id='cb2' class='combo-box form-control campo-tabla'>";
                                                     while($row = mysqli_fetch_array($result_cb2)) {
                                                         echo "<option class='item-combo-box' value='" . $row['idCentroFormacion'] . "'>" . $row['nombreLargoCentroFormacion'] . "</option>";
@@ -281,7 +281,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 
                                                 <?php
                                                     $sql_cb3 = "SELECT idHorario, nombreCorto FROM horarios ORDER BY horaInicial, horaFinal";
-                                                    $result_cb3 = mysqli_query($link, $sql_cb3);
+                                                    $result_cb3 = mysqli_query($linkMYSQLI, $sql_cb3);
                                                     echo "<select name='idHorario' id='cb3' class='combo-box form-control campo-tabla'>";
                                                     while($row = mysqli_fetch_array($result_cb3)) {
                                                         if ($idHorario != $row['idHorario'])
@@ -472,7 +472,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
         mysqli_free_result($result2);
 
         /* cerrar la conexión */
-        mysqli_close($link);
+        mysqli_close($linkMYSQLI);
 
     ?>
 

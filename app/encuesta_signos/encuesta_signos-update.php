@@ -41,12 +41,12 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
         ];
         try {
-          $pdo = new PDO($dsn, $db_user, $db_password, $options);
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE encuesta_signos SET idPersona=?,fechaHoraDiligenciamiento=?,idSedeIngreso=?,idHorario=?,aceptacionConsideraciones=?,autorizacionTratamientoDatos=?,autorizacionIngreso=?,observacionAdicional=?,aceptacionRespuestaPositiva=?,estado=?,auditoria=? WHERE idEncuesta=?");
+        $stmt = $linkPDO->prepare("UPDATE encuesta_signos SET idPersona=?,fechaHoraDiligenciamiento=?,idSedeIngreso=?,idHorario=?,aceptacionConsideraciones=?,autorizacionTratamientoDatos=?,autorizacionIngreso=?,observacionAdicional=?,aceptacionRespuestaPositiva=?,estado=?,auditoria=? WHERE idEncuesta=?");
 
         if(!$stmt->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria,$idEncuesta  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
@@ -64,7 +64,7 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
 
         // Prepare a select statement
         $sql = "SELECT * FROM encuesta_signos WHERE idEncuesta = ?";
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
@@ -109,7 +109,7 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
         mysqli_stmt_close($stmt);
 
         // Close connection
-        // mysqli_close($link);
+        // mysqli_close($linkMYSQLI);
 
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
@@ -144,7 +144,7 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
                             <label>Persona</label>
                             <?php
                                 $sql_cb1 = "SELECT idPersona, nombreCompleto FROM personas";
-                                $result_cb1 = mysqli_query($link, $sql_cb1);
+                                $result_cb1 = mysqli_query($linkMYSQLI, $sql_cb1);
                                 echo "<select name='idPersona' id='cb1' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb1)) {
                                     if ($idPersona != $row['idPersona'])
@@ -169,7 +169,7 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
                             <label>Sede de ingreso</label>
                             <?php
                                 $sql_cb2 = "SELECT idCentroFormacion, nombreLargoCentroFormacion, nombreCorto FROM centros_formacion";
-                                $result_cb2 = mysqli_query($link, $sql_cb2);
+                                $result_cb2 = mysqli_query($linkMYSQLI, $sql_cb2);
                                 echo "<select name='idSedeIngreso' id='cb2' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb2)) {
                                     if ($idSedeIngreso != $row['idCentroFormacion'])
@@ -188,7 +188,7 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
                             <label>Horario</label>
                             <?php
                                 $sql_cb3 = "SELECT idHorario, nombreCorto FROM horarios ORDER BY horaInicial, horaFinal";
-                                $result_cb3 = mysqli_query($link, $sql_cb3);
+                                $result_cb3 = mysqli_query($linkMYSQLI, $sql_cb3);
                                 echo "<select name='idHorario' id='cb3' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb3)) {
                                     if ($idHorario != $row['idHorario'])

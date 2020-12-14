@@ -29,12 +29,12 @@ if(isset($_POST["idRespuestaEncuesta"]) && !empty($_POST["idRespuestaEncuesta"])
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
         ];
         try {
-          $pdo = new PDO($dsn, $db_user, $db_password, $options);
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE respuestas_encuesta SET idEncuesta=?,idPreguntaEncuesta=?,respuestaSiNo=?,estado=?,auditoria=? WHERE idRespuestaEncuesta=?");
+        $stmt = $linkPDO->prepare("UPDATE respuestas_encuesta SET idEncuesta=?,idPreguntaEncuesta=?,respuestaSiNo=?,estado=?,auditoria=? WHERE idRespuestaEncuesta=?");
 
         if(!$stmt->execute([ $idEncuesta,$idPreguntaEncuesta,$respuestaSiNo,$estado,$auditoria,$idRespuestaEncuesta  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
@@ -52,7 +52,7 @@ if(isset($_POST["idRespuestaEncuesta"]) && !empty($_POST["idRespuestaEncuesta"])
 
         // Prepare a select statement
         $sql = "SELECT * FROM respuestas_encuesta WHERE idRespuestaEncuesta = ?";
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
@@ -91,7 +91,7 @@ if(isset($_POST["idRespuestaEncuesta"]) && !empty($_POST["idRespuestaEncuesta"])
         mysqli_stmt_close($stmt);
 
         // Close connection
-        // mysqli_close($link);
+        // mysqli_close($linkMYSQLI);
 
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
@@ -132,7 +132,7 @@ if(isset($_POST["idRespuestaEncuesta"]) && !empty($_POST["idRespuestaEncuesta"])
                                                    FROM encuesta_signos ES
                                                    LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
                                                    ORDER BY idEncuesta DESC";
-                                $result_cb5 = mysqli_query($link, $sql_cb5);
+                                $result_cb5 = mysqli_query($linkMYSQLI, $sql_cb5);
                                 echo "<select name='idEncuesta' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
                                     $selected = ($idEncuesta != $row['idEncuesta']) ? ('') : ('selected');
@@ -148,7 +148,7 @@ if(isset($_POST["idRespuestaEncuesta"]) && !empty($_POST["idRespuestaEncuesta"])
                                 $sql_cb5 = "SELECT PE.idPreguntaEncuesta,
                                                    PE.textoPregunta
                                                    FROM preguntas_encuesta PE";
-                                $result_cb5 = mysqli_query($link, $sql_cb5);
+                                $result_cb5 = mysqli_query($linkMYSQLI, $sql_cb5);
                                 echo "<select name='idPreguntaEncuesta' id='cb5' class='combo-box form-control'>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
                                     $selected = ($idPreguntaEncuesta != $row['idPreguntaEncuesta']) ? ('') : ('selected');

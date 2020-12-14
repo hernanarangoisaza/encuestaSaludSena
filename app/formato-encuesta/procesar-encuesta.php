@@ -73,16 +73,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
 	];
 	try {
-	  $pdo1 = new PDO($dsn, $db_user, $db_password, $options);
+	  $linkPDO1 = new PDO($dsn, $db_user, $db_password, $options);
 	} catch (Exception $e) {
 	  error_log($e->getMessage());
 	  exit('Algo extraño sucedió'); //something a user can understand
 	}
-	$stmt1 = $pdo1->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+	$stmt1 = $linkPDO1->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
 
 	if($stmt1->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
 			// Conservar el idEncuesta para la inserción de respuestas en la otra tabla.
-			$idEncuesta = $pdo1->lastInsertId();
+			$idEncuesta = $linkPDO1->lastInsertId();
 		    $stmt1 = null;
 	    } else{
 	        // URL doesn't contain valid id parameter. Redirect to error page
@@ -91,7 +91,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	    }
 
 	try {
-	  $pdo2 = new PDO($dsn, $db_user, $db_password, $options);
+	  $linkPDO2 = new PDO($dsn, $db_user, $db_password, $options);
 	} catch (Exception $e) {
 	  error_log($e->getMessage());
 	  exit('Algo extraño sucedió'); //something a user can understand
@@ -114,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			$idPreguntaEncuesta = substr($clave, 11);
 			$respuestaSiNo = $valor;
 
-		    $stmt2 = $pdo2->prepare("INSERT INTO respuestas_encuesta (idEncuesta, idPreguntaEncuesta, respuestaSiNo, estado, auditoria) VALUES (?,?,?,?,?)");
+		    $stmt2 = $linkPDO2->prepare("INSERT INTO respuestas_encuesta (idEncuesta, idPreguntaEncuesta, respuestaSiNo, estado, auditoria) VALUES (?,?,?,?,?)");
 			if($stmt2->execute([ $idEncuesta, $idPreguntaEncuesta, $respuestaSiNo, $estado, $auditoria ])) {
 		        $stmt2 = null;
 		    } else{

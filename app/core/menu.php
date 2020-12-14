@@ -85,7 +85,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraDiligenciamiento) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt1 = mysqli_query($link, $sql_dt1);
+                                        $result_dt1 = mysqli_query($linkMYSQLI, $sql_dt1);
                                         $row = mysqli_fetch_array($result_dt1);
                                         echo ($row['registradosJornada1'] == '') ? (0) : ($row['registradosJornada1']);
                                     ?>
@@ -107,7 +107,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaEntrada) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt2 = mysqli_query($link, $sql_dt2);
+                                        $result_dt2 = mysqli_query($linkMYSQLI, $sql_dt2);
                                         $row = mysqli_fetch_array($result_dt2);
                                         echo ($row['ingresaronJornada1'] == '') ? (0) : ($row['ingresaronJornada1']);
                                     ?>
@@ -127,7 +127,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaSalida) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt3 = mysqli_query($link, $sql_dt3);
+                                        $result_dt3 = mysqli_query($linkMYSQLI, $sql_dt3);
                                         $row = mysqli_fetch_array($result_dt3);
                                         echo ($row['salieronJornada1'] == '') ? (0) : ($row['salieronJornada1']);
                                     ?>
@@ -150,7 +150,7 @@ if (empty($_SESSION["login"])) {
                                                       AND fechaHoraTomaSalida IS NULL
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt4 = mysqli_query($link, $sql_dt4);
+                                        $result_dt4 = mysqli_query($linkMYSQLI, $sql_dt4);
                                         $row = mysqli_fetch_array($result_dt4);
                                         echo ($row['permanecenJornada1'] == '') ? (0) : ($row['permanecenJornada1']);
                                     ?>
@@ -201,7 +201,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraDiligenciamiento) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt1 = mysqli_query($link, $sql_dt1);
+                                        $result_dt1 = mysqli_query($linkMYSQLI, $sql_dt1);
                                         $row = mysqli_fetch_array($result_dt1);
                                         echo ($row['registradosJornada2'] == '') ? (0) : ($row['registradosJornada2']);
                                     ?>
@@ -223,7 +223,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaEntrada) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt2 = mysqli_query($link, $sql_dt2);
+                                        $result_dt2 = mysqli_query($linkMYSQLI, $sql_dt2);
                                         $row = mysqli_fetch_array($result_dt2);
                                         echo ($row['ingresaronJornada2'] == '') ? (0) : ($row['ingresaronJornada2']);
                                     ?>
@@ -243,7 +243,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaSalida) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt3 = mysqli_query($link, $sql_dt3);
+                                        $result_dt3 = mysqli_query($linkMYSQLI, $sql_dt3);
                                         $row = mysqli_fetch_array($result_dt3);
                                         echo ($row['salieronJornada2'] == '') ? (0) : ($row['salieronJornada2']);
                                     ?>
@@ -266,7 +266,7 @@ if (empty($_SESSION["login"])) {
                                                       AND fechaHoraTomaSalida IS NULL
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt4 = mysqli_query($link, $sql_dt4);
+                                        $result_dt4 = mysqli_query($linkMYSQLI, $sql_dt4);
                                         $row = mysqli_fetch_array($result_dt4);
                                         echo ($row['permanecenJornada2'] == '') ? (0) : ($row['permanecenJornada2']);
                                     ?>
@@ -317,7 +317,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraDiligenciamiento) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt1 = mysqli_query($link, $sql_dt1);
+                                        $result_dt1 = mysqli_query($linkMYSQLI, $sql_dt1);
                                         $row = mysqli_fetch_array($result_dt1);
                                         echo ($row['registradosJornada3'] == '') ? (0) : ($row['registradosJornada3']);
                                     ?>
@@ -339,7 +339,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaEntrada) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt2 = mysqli_query($link, $sql_dt2);
+                                        $result_dt2 = mysqli_query($linkMYSQLI, $sql_dt2);
                                         $row = mysqli_fetch_array($result_dt2);
                                         echo ($row['ingresaronJornada3'] == '') ? (0) : ($row['ingresaronJornada3']);
                                     ?>
@@ -359,7 +359,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaSalida) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt3 = mysqli_query($link, $sql_dt3);
+                                        $result_dt3 = mysqli_query($linkMYSQLI, $sql_dt3);
                                         $row = mysqli_fetch_array($result_dt3);
                                         echo ($row['salieronJornada3'] == '') ? (0) : ($row['salieronJornada3']);
                                     ?>
@@ -382,7 +382,7 @@ if (empty($_SESSION["login"])) {
                                                       AND fechaHoraTomaSalida IS NULL
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt4 = mysqli_query($link, $sql_dt4);
+                                        $result_dt4 = mysqli_query($linkMYSQLI, $sql_dt4);
                                         $row = mysqli_fetch_array($result_dt4);
                                         echo ($row['permanecenJornada3'] == '') ? (0) : ($row['permanecenJornada3']);
                                     ?>
@@ -434,7 +434,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraDiligenciamiento) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt1 = mysqli_query($link, $sql_dt1);
+                                        $result_dt1 = mysqli_query($linkMYSQLI, $sql_dt1);
                                         $row = mysqli_fetch_array($result_dt1);
                                         echo ($row['registradosJornada4'] == '') ? (0) : ($row['registradosJornada4']);
                                     ?>
@@ -456,7 +456,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaEntrada) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt2 = mysqli_query($link, $sql_dt2);
+                                        $result_dt2 = mysqli_query($linkMYSQLI, $sql_dt2);
                                         $row = mysqli_fetch_array($result_dt2);
                                         echo ($row['ingresaronJornada4'] == '') ? (0) : ($row['ingresaronJornada4']);
                                     ?>
@@ -476,7 +476,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaSalida) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt3 = mysqli_query($link, $sql_dt3);
+                                        $result_dt3 = mysqli_query($linkMYSQLI, $sql_dt3);
                                         $row = mysqli_fetch_array($result_dt3);
                                         echo ($row['salieronJornada4'] == '') ? (0) : ($row['salieronJornada4']);
                                     ?>
@@ -499,7 +499,7 @@ if (empty($_SESSION["login"])) {
                                                       AND fechaHoraTomaSalida IS NULL
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt4 = mysqli_query($link, $sql_dt4);
+                                        $result_dt4 = mysqli_query($linkMYSQLI, $sql_dt4);
                                         $row = mysqli_fetch_array($result_dt4);
                                         echo ($row['permanecenJornada4'] == '') ? (0) : ($row['permanecenJornada4']);
                                     ?>
@@ -551,7 +551,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraDiligenciamiento) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt1 = mysqli_query($link, $sql_dt1);
+                                        $result_dt1 = mysqli_query($linkMYSQLI, $sql_dt1);
                                         $row = mysqli_fetch_array($result_dt1);
                                         echo ($row['registradosJornada5'] == '') ? (0) : ($row['registradosJornada5']);
                                     ?>
@@ -573,7 +573,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaEntrada) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt2 = mysqli_query($link, $sql_dt2);
+                                        $result_dt2 = mysqli_query($linkMYSQLI, $sql_dt2);
                                         $row = mysqli_fetch_array($result_dt2);
                                         echo ($row['ingresaronJornada5'] == '') ? (0) : ($row['ingresaronJornada5']);
                                     ?>
@@ -593,7 +593,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaSalida) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt3 = mysqli_query($link, $sql_dt3);
+                                        $result_dt3 = mysqli_query($linkMYSQLI, $sql_dt3);
                                         $row = mysqli_fetch_array($result_dt3);
                                         echo ($row['salieronJornada5'] == '') ? (0) : ($row['salieronJornada5']);
                                     ?>
@@ -616,7 +616,7 @@ if (empty($_SESSION["login"])) {
                                                       AND fechaHoraTomaSalida IS NULL
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt4 = mysqli_query($link, $sql_dt4);
+                                        $result_dt4 = mysqli_query($linkMYSQLI, $sql_dt4);
                                         $row = mysqli_fetch_array($result_dt4);
                                         echo ($row['permanecenJornada5'] == '') ? (0) : ($row['permanecenJornada5']);
                                     ?>
@@ -668,7 +668,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraDiligenciamiento) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt1 = mysqli_query($link, $sql_dt1);
+                                        $result_dt1 = mysqli_query($linkMYSQLI, $sql_dt1);
                                         $row = mysqli_fetch_array($result_dt1);
                                         echo ($row['registradosJornada6'] == '') ? (0) : ($row['registradosJornada6']);
                                     ?>
@@ -690,7 +690,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaEntrada) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt2 = mysqli_query($link, $sql_dt2);
+                                        $result_dt2 = mysqli_query($linkMYSQLI, $sql_dt2);
                                         $row = mysqli_fetch_array($result_dt2);
                                         echo ($row['ingresaronJornada6'] == '') ? (0) : ($row['ingresaronJornada6']);
                                     ?>
@@ -710,7 +710,7 @@ if (empty($_SESSION["login"])) {
                                                     WHERE DATE(fechaHoraTomaSalida) = DATE(NOW()) 
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt3 = mysqli_query($link, $sql_dt3);
+                                        $result_dt3 = mysqli_query($linkMYSQLI, $sql_dt3);
                                         $row = mysqli_fetch_array($result_dt3);
                                         echo ($row['salieronJornada6'] == '') ? (0) : ($row['salieronJornada6']);
                                     ?>
@@ -733,7 +733,7 @@ if (empty($_SESSION["login"])) {
                                                       AND fechaHoraTomaSalida IS NULL
                                                       AND jornada = $nroJornada
                                                     GROUP BY jornada";
-                                        $result_dt4 = mysqli_query($link, $sql_dt4);
+                                        $result_dt4 = mysqli_query($linkMYSQLI, $sql_dt4);
                                         $row = mysqli_fetch_array($result_dt4);
                                         echo ($row['permanecenJornada6'] == '') ? (0) : ($row['permanecenJornada6']);
                                     ?>

@@ -27,12 +27,12 @@ if(isset($_POST["idTipoGenero"]) && !empty($_POST["idTipoGenero"])){
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
         ];
         try {
-          $pdo = new PDO($dsn, $db_user, $db_password, $options);
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
         } catch (Exception $e) {
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $pdo->prepare("UPDATE tipos_generos SET nombreLargoGenero=?,nombreCorto=?,estado=?,auditoria=? WHERE idTipoGenero=?");
+        $stmt = $linkPDO->prepare("UPDATE tipos_generos SET nombreLargoGenero=?,nombreCorto=?,estado=?,auditoria=? WHERE idTipoGenero=?");
 
         if(!$stmt->execute([ $nombreLargoGenero,$nombreCorto,$estado,$auditoria,$idTipoGenero  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
@@ -50,7 +50,7 @@ if(isset($_POST["idTipoGenero"]) && !empty($_POST["idTipoGenero"])){
 
         // Prepare a select statement
         $sql = "SELECT * FROM tipos_generos WHERE idTipoGenero = ?";
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
 
@@ -88,7 +88,7 @@ if(isset($_POST["idTipoGenero"]) && !empty($_POST["idTipoGenero"])){
         mysqli_stmt_close($stmt);
 
         // Close connection
-        mysqli_close($link);
+        mysqli_close($linkMYSQLI);
 
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
