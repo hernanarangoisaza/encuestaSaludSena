@@ -62,7 +62,7 @@ else {
                     // Include config file
                     require_once "../core/config.php";
 
-                    $_SESSION["rutaRegresarA"] = 'personas-index.php';
+                    $_SESSION["rutaRegresarA"] = '../personas/personas-index.php';
 
                     //Get current URL and parameters for correct pagination
                     $protocol = $_SERVER['SERVER_PROTOCOL'];

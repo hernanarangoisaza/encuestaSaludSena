@@ -640,6 +640,12 @@ h2.mb-0 {
   box-shadow: none !important;
 }
 
+
+.campo-login:focus, .campo-login:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 /* -------------------------------------------------------------------------------------------------- */
 /* ESTILOS MANEJO FORMATO TABS */
 /* -------------------------------------------------------------------------------------------------- */

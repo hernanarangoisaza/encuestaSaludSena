@@ -808,7 +808,13 @@ if (empty($_SESSION["login"])) {
 
                             <?php
                             if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or
-                                (strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
+                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '')) {
+                                echo '<li class="item-menu-principal"><a href="../formato_toma_temperatura/toma-temperatura.php">Toma de Temperatura</a></li>';
+                            }
+                            ?>
+
+                            <?php
+                            if (strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                 echo '<li class="item-menu-principal"><a href="../formato_encuesta/encuesta.php">Diligenciar encuesta</a></li>';
                             }
                             ?>

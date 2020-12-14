@@ -162,12 +162,12 @@ if (isset($_POST['login'])) {
 
                                     <div class="form-group">
                                         <label>Correo Institucional</label>
-                                        <input type="email" name="correo" class="form-control" autocomplete="off" required />
+                                        <input type="email" name="correo" class="form-control campo-login" autocomplete="off" required />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Número de Identificación</label>
-                                        <input type="password" name="identificacion" class="form-control" autocomplete="off" required />
+                                        <input type="password" name="identificacion" class="form-control campo-login" autocomplete="off" required />
                                     </div>
 
                                     <button type="submit" name="login" value="login" class="btn btn-secondary btn-login">Validar</button>

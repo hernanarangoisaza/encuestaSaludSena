@@ -44,7 +44,7 @@ if (empty($_SESSION["login"])) {
                     // Include config file
                     require_once "../core/config.php";
 
-                    $_SESSION["rutaRegresarA"] = 'encuesta_signos-index.php';
+                    $_SESSION["rutaRegresarA"] = '../encuesta_signos/encuesta_signos-index.php';
 
                     //Get current URL and parameters for correct pagination
                     $protocol = $_SERVER['SERVER_PROTOCOL'];
@@ -146,7 +146,7 @@ if (empty($_SESSION["login"])) {
 										echo "<th><a href=?search=$search&sort=&order=aceptacionConsideraciones&sort=$sort>Aceptación<br>de consideraciones</th>";
 										echo "<th><a href=?search=$search&sort=&order=autorizacionTratamientoDatos&sort=$sort>Autorización de<br>tratamiento de datos</th>";
 										echo "<th><a href=?search=$search&sort=&order=autorizacionIngreso&sort=$sort>Autorización<br>de ingreso</th>";
-										echo "<th><a href=?search=$search&sort=&order=observacionAdicional&sort=$sort>Observaciones<br>adicionales</th>";
+										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=observacionAdicional&sort=$sort>Observaciones<br>adicionales</th>";
 										echo "<th><a href=?search=$search&sort=&order=aceptacionRespuestaPositiva&sort=$sort>Aceptación de<br>respuestas positivas</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
@@ -166,7 +166,7 @@ if (empty($_SESSION["login"])) {
                                     echo "<td class='ocultar-columna'>" . $row['idEncuesta'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idPersona'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraDiligenciamiento'] . "</td>";
-                                    echo "<td>" . $row['nombreLargoCentroFormacion'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreLargoCentroFormacion'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";
                                     echo "<td class='centrar-columna'>";
                                         if ($row['aceptacionConsideraciones'] == 0) { echo 'No'; }
@@ -183,7 +183,7 @@ if (empty($_SESSION["login"])) {
                                         else if ($row['autorizacionIngreso'] == 1) { echo 'Si'; }
                                         else if ($row['autorizacionIngreso'] == -1) { echo 'Sin asignar'; }
                                     echo "</td>";
-                                    echo "<td class='centrar-columna'>" . '< En vista individual >' . "</td>";
+                                    echo "<td class='ocultar-columna'>" . '< En vista individual >' . "</td>";
                                     echo "<td class='centrar-columna'>";
                                         if ($row['aceptacionRespuestaPositiva'] == 0) { echo 'No'; }
                                         else if ($row['aceptacionRespuestaPositiva'] == 1) { echo 'Si'; }
