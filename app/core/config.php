@@ -7,8 +7,10 @@ $db_name = 'sena'; // ticcom_senabd
 $linkMYSQLI = mysqli_connect($db_server, $db_user, $db_password, $db_name);
 
 $linkMYSQLI -> set_charset("utf8");
-$no_of_records_per_page = 15;
 date_default_timezone_set("America/Bogota");
+
+$no_of_records_per_page = 15;
+
 $aforoJornada = 500;
 $regionalSedes = "Risaralda";
 
