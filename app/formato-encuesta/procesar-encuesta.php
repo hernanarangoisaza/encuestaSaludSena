@@ -18,37 +18,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 
 <?php
 
-// print_r($_POST);
-
-/*
-
-[idSedeIngreso] => 4 
-[idHorario] => 7 
-[aceptacionConsideraciones] => on 
-[autorizacionTratamientoDatos] => 0 
-[autorizacionIngreso] => 1 
-[observacionAdicional] => mensaje 
-[aceptacionRespuestapositiva] => 1 
-
-[idPregunta_1] => 0 
-[idPregunta_2] => 0 
-[idPregunta_3] => 0 
-[idPregunta_4] => 0 
-[idPregunta_5] => 0 
-[idPregunta_6] => 0 
-[idPregunta_7] => 0 
-[idPregunta_8] => 1 
-[idPregunta_9] => 0 
-[idPregunta_10] => 0 
-[idPregunta_11] => 0 
-[idPregunta_12] => 1 
-[idPregunta_13] => 1 
-
-*/
-
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-
-	// print_r($_POST);
 
 	$idPersona = trim($_SESSION["idPersona"]);
 	$fechaHoraDiligenciamiento = date('Y-m-d H:i:s');
