@@ -809,7 +809,7 @@ if (empty($_SESSION["login"])) {
                             <?php
                             if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or
                                 (strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
-                                echo '<li class="item-menu-principal"><a href="../formato-encuesta/encuesta.php">Diligenciar encuesta</a></li>';
+                                echo '<li class="item-menu-principal"><a href="../formato_encuesta/encuesta.php">Diligenciar encuesta</a></li>';
                             }
                             ?>
 
@@ -928,7 +928,7 @@ if (empty($_SESSION["login"])) {
             </div>
 
         </div>
-        <script src="../js/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="../js/jquery-3.5.1.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
         <script src="../js/bootstrap.bundle-4.5.3.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         <script src="../js/libreria.js" type="text/javascript"></script>
 

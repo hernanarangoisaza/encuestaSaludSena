@@ -76,62 +76,63 @@ function validarEncuesta (idForm) {
   });
 }
 
-$("#frmEncuesta").bind("submit",function(){
+$(function () {
 
-    // Capturamnos el boton de envío
-    var btnEnviar = $(".btn-enviar-encuesta");
+    var frm = $('#frmEncuesta');
 
-    $.ajax({
-        type: $(this).attr("method"),
-        url: $(this).attr("action"),
-        data:$(this).serialize(),
-        beforeSend: function(){
+    frm.submit(function (ev) {
 
-            /*
-            * Esta función se ejecuta durante el envío de la petición al servidor. * 
-            */
+        ev.preventDefault();
 
-            $(".btn-enviar-encuesta").text('ENVIANDO ENCUESTA...');
-            $(".btn-enviar-encuesta").removeClass("btn-info");
-            $(".btn-enviar-encuesta").addClass("btn-success");
-            $(".btn-enviar-encuesta").prop( "disabled", true );
+        $.ajax({
+          type: frm.attr('method'),
+          url:  frm.attr('action'),
+          data: frm.serialize(),
+          beforeSend: function(){
 
-        },
-        success: function(data){
+              /*
+              * Esta función se ejecuta durante el envío de la petición al servidor. * 
+              */
 
-            /*
-            * Se ejecuta cuando termina la petición y esta ha sido correcta * 
-            */
-            
-            // ENVIAR A PÁGINA DE AGRADECIMIENTO E INFORMANDO QUE DEBE CUMPLIR: SEDE, HORARIO, TOMA TEMPERATURA, LLEGAR CON TIEMPO.
+              alert("beforeSend");
+              
+          },
+          success: function(data){
 
-        },
-        error: function(data){
+              /*
+              * Se ejecuta cuando termina la petición y esta ha sido correcta * 
+              */
+              
+              // ENVIAR A PÁGINA DE AGRADECIMIENTO E INFORMANDO QUE DEBE CUMPLIR: SEDE, HORARIO, TOMA TEMPERATURA, LLEGAR CON TIEMPO.
 
-            /*
-            * Se ejecuta si la peticón ha sido erronea * 
-            */
-            
-            // NO PERMITIR BORRAR LA INFORMACIÓN DEL FORMULARIO E INFORMAR QUE LA TRANSMISIÓN FALLÓ.
+              // alert("success");
 
-            $(".btn-enviar-encuesta").text('ENVIAR ENCUESTA Y REGISTRAR SUS DATOS');
-            $(".btn-enviar-encuesta").removeClass("btn-success");
-            $(".btn-enviar-encuesta").addClass("btn-info");
-            $(".btn-enviar-encuesta").prop( "disabled", false );
+          },
+          error: function(data){
 
-        },
-        complete:function(data){
+              /*
+              * Se ejecuta si la peticón ha sido erronea * 
+              */
+              
+              // NO PERMITIR BORRAR LA INFORMACIÓN DEL FORMULARIO E INFORMAR QUE LA TRANSMISIÓN FALLÓ.
 
-            /*
-            * Se ejecuta al termino de la petición * 
-            */
-            
-            // ELIMINAR VARIABLES DE ENTORNO Y/O DEL FORMULARIO. REGRESAR A MENÚ Y DEJAR LIBRE ALLÍ AL USUARIO.
+              // alert("error");
 
-        }
+          },
+          complete:function(data){
+
+              /*
+              * Se ejecuta al termino de la petición * 
+              */
+              
+              // ELIMINAR VARIABLES DE ENTORNO Y/O DEL FORMULARIO. REGRESAR A MENÚ Y DEJAR LIBRE ALLÍ AL USUARIO.
+
+              // alert("complete");
+
+          }
+
+       });
+
     });
-
-    // Nos permite cancelar el envio del formulario
-    return false;
 
 });

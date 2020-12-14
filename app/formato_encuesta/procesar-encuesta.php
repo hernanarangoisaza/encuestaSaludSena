@@ -37,34 +37,45 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	}	
 
 	$dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+
 	$options = [
 	  PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
 	  PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
 	  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
 	];
+
 	try {
 	  $linkPDO1 = new PDO($dsn, $db_user, $db_password, $options);
 	} catch (Exception $e) {
 	  error_log($e->getMessage());
 	  exit('Algo extraño sucedió'); //something a user can understand
 	}
+
 	$stmtPDO1 = $linkPDO1->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
 
 	if($stmtPDO1->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
+
 			// Conservar el idEncuesta para la inserción de respuestas en la otra tabla.
 			$idEncuesta = $linkPDO1->lastInsertId();
 		    $stmtPDO1 = null;
+
 	    } else{
+
 	        // URL doesn't contain valid id parameter. Redirect to error page
 	        header("location: ../core/error.php");
 	        exit();
+
 	    }
 
 	try {
+
 	  $linkPDO2 = new PDO($dsn, $db_user, $db_password, $options);
+
 	} catch (Exception $e) {
+
 	  error_log($e->getMessage());
 	  exit('Algo extraño sucedió'); //something a user can understand
+
 	}
 
 	$estado = 1;
@@ -85,12 +96,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			$respuestaSiNo = $valor;
 
 		    $stmtPDO2 = $linkPDO2->prepare("INSERT INTO respuestas_encuesta (idEncuesta, idPreguntaEncuesta, respuestaSiNo, estado, auditoria) VALUES (?,?,?,?,?)");
+		    
 			if($stmtPDO2->execute([ $idEncuesta, $idPreguntaEncuesta, $respuestaSiNo, $estado, $auditoria ])) {
+
 		        $stmtPDO2 = null;
+
 		    } else{
+
 		        // URL doesn't contain valid id parameter. Redirect to error page
 		        header("location: ../core/error.php");
 		        exit();
+
 		    }
 
 		}
