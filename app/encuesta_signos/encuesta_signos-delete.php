@@ -25,15 +25,15 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
     // Prepare a delete statement
     $sql = "DELETE FROM encuesta_signos WHERE idEncuesta = ?";
 
-    if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
+    if($stmtPDO = mysqli_prepare($linkMYSQLI, $sql)){
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "i", $param_id);
+        mysqli_stmt_bind_param($stmtPDO, "i", $param_id);
 
         // Set parameters
         $param_id = trim($_POST["idEncuesta"]);
 
         // Attempt to execute the prepared statement
-        if(mysqli_stmt_execute($stmt)){
+        if(mysqli_stmt_execute($stmtPDO)){
             // Records deleted successfully. Redirect to landing page
             header("location: encuesta_signos-index.php");
             exit();
@@ -43,7 +43,7 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
     }
 
     // Close statement
-    mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmtPDO);
 
     // Close connection
     mysqli_close($linkMYSQLI);

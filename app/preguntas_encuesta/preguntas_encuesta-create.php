@@ -38,10 +38,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $linkPDO->prepare("INSERT INTO preguntas_encuesta (textoPregunta,estado,auditoria) VALUES (?,?,?)"); 
+       $stmtPDO = $linkPDO->prepare("INSERT INTO preguntas_encuesta (textoPregunta,estado,auditoria) VALUES (?,?,?)"); 
         
-        if($stmt->execute([ $textoPregunta,$estado,$auditoria  ])) {
-                $stmt = null;
+        if($stmtPDO->execute([ $textoPregunta,$estado,$auditoria  ])) {
+               $stmtPDO = null;
                 header("location: preguntas_encuesta-index.php");
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";

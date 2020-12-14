@@ -46,13 +46,13 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $linkPDO->prepare("UPDATE centros_formacion SET nombreCorto=?,nombreLargoCentroFormacion=?,direccion=?,idMunicipio=?,idDepartamento=?,telefono1=?,telefono2=?,emailContacto1=?,emailContacto2=?,estado=?,auditoria=? WHERE idCentroFormacion=?");
+       $stmtPDO = $linkPDO->prepare("UPDATE centros_formacion SET nombreCorto=?,nombreLargoCentroFormacion=?,direccion=?,idMunicipio=?,idDepartamento=?,telefono1=?,telefono2=?,emailContacto1=?,emailContacto2=?,estado=?,auditoria=? WHERE idCentroFormacion=?");
 
-        if(!$stmt->execute([ $nombreCorto,$nombreLargoCentroFormacion,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria,$idCentroFormacion  ])) {
+        if(!$stmtPDO->execute([ $nombreCorto,$nombreLargoCentroFormacion,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria,$idCentroFormacion  ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: ../core/error.php");
             } else{
-                $stmt = null;
+               $stmtPDO = null;
                 // header("location: centros_formacion-read.php?idCentroFormacion=$idCentroFormacion");
                 header("location: centros_formacion-index.php");
             }
@@ -64,21 +64,21 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
 
         // Prepare a select statement
         $sql = "SELECT * FROM centros_formacion WHERE idCentroFormacion = ?";
-        if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
+        if($stmtPDO = mysqli_prepare($linkMYSQLI, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "i", $param_id);
+            mysqli_stmt_bind_param($stmtPDO, "i", $param_id);
 
             // Set parameters
             $param_id = $idCentroFormacion;
 
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                $result = mysqli_stmt_get_result($stmt);
+            if(mysqli_stmt_execute($stmtPDO)){
+                $resultPDO = mysqli_stmt_get_result($stmtPDO);
 
-                if(mysqli_num_rows($result) == 1){
+                if(mysqli_num_rows($resultPDO) == 1){
                     /* Fetch result row as an associative array. Since the result set
                     contains only one row, we don't need to use while loop */
-                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $row = mysqli_fetch_array($resultPDO, MYSQLI_ASSOC);
 
                     // Retrieve individual field value
 
@@ -106,7 +106,7 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
         }
 
         // Close statement
-        mysqli_stmt_close($stmt);
+        mysqli_stmt_close($stmtPDO);
 
         // Close connection
         // mysqli_close($linkMYSQLI);

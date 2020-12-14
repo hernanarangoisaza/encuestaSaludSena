@@ -46,10 +46,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $linkPDO->prepare("INSERT INTO roles_sistema (nombreLargoRolSistema,nombreCorto,descripcionRolSistema,permisos,restricciones,estado,auditoria) VALUES (?,?,?,?,?,?,?)"); 
+       $stmtPDO = $linkPDO->prepare("INSERT INTO roles_sistema (nombreLargoRolSistema,nombreCorto,descripcionRolSistema,permisos,restricciones,estado,auditoria) VALUES (?,?,?,?,?,?,?)"); 
         
-        if($stmt->execute([ $nombreLargoRolSistema,$nombreCorto,$descripcionRolSistema,$permisos,$restricciones,$estado,$auditoria  ])) {
-                $stmt = null;
+        if($stmtPDO->execute([ $nombreLargoRolSistema,$nombreCorto,$descripcionRolSistema,$permisos,$restricciones,$estado,$auditoria  ])) {
+               $stmtPDO = null;
                 header("location: roles_sistema-index.php");
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";

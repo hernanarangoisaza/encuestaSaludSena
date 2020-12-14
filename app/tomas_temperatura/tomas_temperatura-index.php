@@ -65,8 +65,8 @@ if (empty($_SESSION["login"])) {
                     $offset = ($pageno-1) * $no_of_records_per_page;
 
                     $total_pages_sql = "SELECT COUNT(*) FROM tomas_temperatura";
-                    $result = mysqli_query($linkMYSQLI,$total_pages_sql);
-                    $total_rows = mysqli_fetch_array($result)[0];
+                    $resultMSQLI = mysqli_query($linkMYSQLI,$total_pages_sql);
+                    $total_rows = mysqli_fetch_array($resultMSQLI)[0];
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
@@ -121,8 +121,8 @@ if (empty($_SESSION["login"])) {
                         $search = "";
                     }
 
-                    if($result = mysqli_query($linkMYSQLI, $sql)){
-                        if(mysqli_num_rows($result) > 0){
+                    if($resultMSQLI = mysqli_query($linkMYSQLI, $sql)){
+                        if(mysqli_num_rows($resultMSQLI) > 0){
                             if ($result_count = mysqli_query($linkMYSQLI, $count_pages)) {
                                $total_pages = ceil(mysqli_num_rows($result_count) / $no_of_records_per_page);
                            }
@@ -146,7 +146,7 @@ if (empty($_SESSION["login"])) {
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
-                                while($row = mysqli_fetch_array($result)){
+                                while($row = mysqli_fetch_array($resultMSQLI)){
                                     echo "<tr>";
                                     echo "<td class='centrar-columna'>";
                                         echo "<a href='tomas_temperatura-read.php?idToma=". $row['idToma'] ."'><i class='far fa-eye'></i></a>";
@@ -187,7 +187,7 @@ if (empty($_SESSION["login"])) {
                                 </ul>
 <?php
                             // Free result set
-                            mysqli_free_result($result);
+                            mysqli_free_result($resultMSQLI);
                         } else{
                             echo "<p class='lead sin-registros'><em>No se encontraron coincidencias.</em></p>";
                         }

@@ -54,10 +54,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $linkPDO->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+       $stmtPDO = $linkPDO->prepare("INSERT INTO encuesta_signos (idPersona,fechaHoraDiligenciamiento,idSedeIngreso,idHorario,aceptacionConsideraciones,autorizacionTratamientoDatos,autorizacionIngreso,observacionAdicional,aceptacionRespuestaPositiva,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
         
-        if($stmt->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
-                $stmt = null;
+        if($stmtPDO->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria  ])) {
+               $stmtPDO = null;
                 header("location: encuesta_signos-index.php");
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";

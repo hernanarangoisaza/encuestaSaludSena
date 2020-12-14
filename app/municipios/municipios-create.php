@@ -42,10 +42,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Something weird happened'); //something a user can understand
         }
-        $stmt = $linkPDO->prepare("INSERT INTO municipios (codigoMunicipio,municipio,idDepartamento,estado,auditoria) VALUES (?,?,?,?,?)"); 
+       $stmtPDO = $linkPDO->prepare("INSERT INTO municipios (codigoMunicipio,municipio,idDepartamento,estado,auditoria) VALUES (?,?,?,?,?)"); 
         
-        if($stmt->execute([ $codigoMunicipio,$municipio,$idDepartamento,$estado,$auditoria  ])) {
-                $stmt = null;
+        if($stmtPDO->execute([ $codigoMunicipio,$municipio,$idDepartamento,$estado,$auditoria  ])) {
+               $stmtPDO = null;
                 header("location: municipios-index.php");
             } else{
                 echo "Something went wrong. Please try again later.";

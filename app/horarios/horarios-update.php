@@ -36,13 +36,13 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
           error_log($e->getMessage());
           exit('Algo extraño sucedió');
         }
-        $stmt = $linkPDO->prepare("UPDATE horarios SET horaInicial=?,horaFinal=?,nombreCorto=?,jornada=?,estado=?,auditoria=? WHERE idHorario=?");
+       $stmtPDO = $linkPDO->prepare("UPDATE horarios SET horaInicial=?,horaFinal=?,nombreCorto=?,jornada=?,estado=?,auditoria=? WHERE idHorario=?");
 
-        if(!$stmt->execute([ $horaInicial,$horaFinal,$nombreCorto,$jornada,$estado,$auditoria,$idHorario ])) {
+        if(!$stmtPDO->execute([ $horaInicial,$horaFinal,$nombreCorto,$jornada,$estado,$auditoria,$idHorario ])) {
                 echo "Algo falló. Por favor intente de nuevo.";
                 header("location: ../core/error.php");
             } else{
-                $stmt = null;
+               $stmtPDO = null;
                 // header("location: horarios-read.php?idHorario=$idHorario");
                 header("location: horarios-index.php");
             }
@@ -54,21 +54,21 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
 
         // Prepare a select statement
         $sql = "SELECT * FROM horarios WHERE idHorario = ?";
-        if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
+        if($stmtPDO = mysqli_prepare($linkMYSQLI, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "i", $param_id);
+            mysqli_stmt_bind_param($stmtPDO, "i", $param_id);
 
             // Set parameters
             $param_id = $idHorario;
 
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                $result = mysqli_stmt_get_result($stmt);
+            if(mysqli_stmt_execute($stmtPDO)){
+                $resultPDO = mysqli_stmt_get_result($stmtPDO);
 
-                if(mysqli_num_rows($result) == 1){
+                if(mysqli_num_rows($resultPDO) == 1){
                     /* Fetch result row as an associative array. Since the result set
                     contains only one row, we don't need to use while loop */
-                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $row = mysqli_fetch_array($resultPDO, MYSQLI_ASSOC);
 
                     // Retrieve individual field value
 
@@ -91,7 +91,7 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
         }
 
         // Close statement
-        mysqli_stmt_close($stmt);
+        mysqli_stmt_close($stmtPDO);
 
         // Close connection
         mysqli_close($linkMYSQLI);

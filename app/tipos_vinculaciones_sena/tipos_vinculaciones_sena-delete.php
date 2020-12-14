@@ -25,15 +25,15 @@ if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
     // Prepare a delete statement
     $sql = "DELETE FROM tipos_vinculaciones_sena WHERE idTipoVinculacion = ?";
 
-    if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
+    if($stmtPDO = mysqli_prepare($linkMYSQLI, $sql)){
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "i", $param_id);
+        mysqli_stmt_bind_param($stmtPDO, "i", $param_id);
 
         // Set parameters
         $param_id = trim($_POST["idTipoVinculacion"]);
 
         // Attempt to execute the prepared statement
-        if(mysqli_stmt_execute($stmt)){
+        if(mysqli_stmt_execute($stmtPDO)){
             // Records deleted successfully. Redirect to landing page
             header("location: tipos_vinculaciones_sena-index.php");
             exit();
@@ -43,7 +43,7 @@ if(isset($_POST["idTipoVinculacion"]) && !empty($_POST["idTipoVinculacion"])){
     }
 
     // Close statement
-    mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmtPDO);
 
     // Close connection
     mysqli_close($linkMYSQLI);

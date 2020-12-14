@@ -27,21 +27,21 @@ if (isset($_POST['login'])) {
             LEFT JOIN roles_sistema RS ON RS.idRolSistema = US.idRolSistema
             WHERE email=?";
                             
-		if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
+		if($stmtPDO = mysqli_prepare($linkMYSQLI, $sql)){
             
 			// Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $correo);
+            mysqli_stmt_bind_param($stmtPDO, "s", $correo);
 
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
+            if(mysqli_stmt_execute($stmtPDO)){
 				
-                $result = mysqli_stmt_get_result($stmt);
+                $resultPDO = mysqli_stmt_get_result($stmtPDO);
 
-                if(mysqli_num_rows($result) == 1){
+                if(mysqli_num_rows($resultPDO) == 1){
 					
                     /* Fetch result row as an associative array. Since the result set
                     contains only one row, we don't need to use while loop */
-                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $row = mysqli_fetch_array($resultPDO, MYSQLI_ASSOC);
 
 					if (password_verify($identificacion, $row['passwordSistema'])) {
 
@@ -84,7 +84,7 @@ if (isset($_POST['login'])) {
         }
 
         // Close statement
-        mysqli_stmt_close($stmt);
+        mysqli_stmt_close($stmtPDO);
 
         // Close connection
         mysqli_close($linkMYSQLI);

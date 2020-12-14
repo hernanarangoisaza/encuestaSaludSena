@@ -54,10 +54,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $linkPDO->prepare("INSERT INTO centros_formacion (nombreCorto,nombreLargoCentroFormacion,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+       $stmtPDO = $linkPDO->prepare("INSERT INTO centros_formacion (nombreCorto,nombreLargoCentroFormacion,direccion,idMunicipio,idDepartamento,telefono1,telefono2,emailContacto1,emailContacto2,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
         
-        if($stmt->execute([ $nombreCorto,$nombreLargoCentroFormacion,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria  ])) {
-                $stmt = null;
+        if($stmtPDO->execute([ $nombreCorto,$nombreLargoCentroFormacion,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria  ])) {
+               $stmtPDO = null;
                 header("location: centros_formacion-index.php");
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";

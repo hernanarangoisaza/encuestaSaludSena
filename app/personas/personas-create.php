@@ -64,10 +64,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $linkPDO->prepare("INSERT INTO personas (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
+       $stmtPDO = $linkPDO->prepare("INSERT INTO personas (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
         
-        if($stmt->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$telefonoAcudiente,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idFichaFormacion,$estado,$auditoria  ])) {
-                $stmt = null;
+        if($stmtPDO->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$telefonoAcudiente,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idFichaFormacion,$estado,$auditoria  ])) {
+               $stmtPDO = null;
                 header("location: personas-index.php");
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";

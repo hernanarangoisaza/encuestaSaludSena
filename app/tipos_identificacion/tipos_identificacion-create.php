@@ -40,10 +40,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $linkPDO->prepare("INSERT INTO tipos_identificacion (nombreLargoIdentificacion,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
+       $stmtPDO = $linkPDO->prepare("INSERT INTO tipos_identificacion (nombreLargoIdentificacion,nombreCorto,estado,auditoria) VALUES (?,?,?,?)"); 
         
-        if($stmt->execute([ $nombreLargoIdentificacion,$nombreCorto,$estado,$auditoria  ])) {
-                $stmt = null;
+        if($stmtPDO->execute([ $nombreLargoIdentificacion,$nombreCorto,$estado,$auditoria  ])) {
+               $stmtPDO = null;
                 header("location: tipos_identificacion-index.php");
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";

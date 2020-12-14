@@ -15,21 +15,21 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
         LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
         WHERE idEncuesta = ?";
 
-    if($stmt = mysqli_prepare($linkMYSQLI, $sql)){
+    if($stmtPDO = mysqli_prepare($linkMYSQLI, $sql)){
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "i", $param_id);
+        mysqli_stmt_bind_param($stmtPDO, "i", $param_id);
 
         // Set parameters
         $param_id = trim($_GET["idEncuesta"]);
 
         // Attempt to execute the prepared statement
-        if(mysqli_stmt_execute($stmt)){
-            $result = mysqli_stmt_get_result($stmt);
+        if(mysqli_stmt_execute($stmtPDO)){
+            $resultPDO = mysqli_stmt_get_result($stmtPDO);
 
-            if(mysqli_num_rows($result) == 1){
+            if(mysqli_num_rows($resultPDO) == 1){
                 /* Fetch result row as an associative array. Since the result set
                 contains only one row, we don't need to use while loop */
-                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                $row = mysqli_fetch_array($resultPDO, MYSQLI_ASSOC);
 
                 /* Retrieve individual field value
                 {INDIVIDUAL_FIELDS}
@@ -49,7 +49,7 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
     }
 
     // Close statement
-    mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmtPDO);
 
     // Close connection
     mysqli_close($linkMYSQLI);

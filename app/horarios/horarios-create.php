@@ -44,10 +44,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
-        $stmt = $linkPDO->prepare("INSERT INTO horarios (horaInicial,horaFinal,nombreCorto,jornada,estado,auditoria) VALUES (?,?,?,?,?,?)"); 
+       $stmtPDO = $linkPDO->prepare("INSERT INTO horarios (horaInicial,horaFinal,nombreCorto,jornada,estado,auditoria) VALUES (?,?,?,?,?,?)"); 
         
-        if($stmt->execute([ $horaInicial,$horaFinal,$nombreCorto,$jornada,$estado,$auditoria  ])) {
-                $stmt = null;
+        if($stmtPDO->execute([ $horaInicial,$horaFinal,$nombreCorto,$jornada,$estado,$auditoria  ])) {
+               $stmtPDO = null;
                 header("location: horarios-index.php");
             } else{
                 echo "Algo falló. Por favor intente de nuevo.";
