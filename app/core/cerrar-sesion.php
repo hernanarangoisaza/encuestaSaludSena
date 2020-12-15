@@ -2,6 +2,12 @@
 
 session_start();
 
+if ($_SESSION['modoLogin'] == "normal") {
+	$urlLogin = "../index.php";
+} elseif ($_SESSION['modoLogin'] == "backend") {
+	$urlLogin = "../backend.php";
+}
+
 // remove all session variables
 session_unset();
 
@@ -9,6 +15,6 @@ session_unset();
 session_destroy();
 
 // Habilitar la página inicial
-header("Location: ../index.php");
+header("Location: $urlLogin");
 
 ?>

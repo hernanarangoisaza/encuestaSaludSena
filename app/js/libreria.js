@@ -85,10 +85,9 @@ $(function () {
     $("#btn-cerrar-modal-envio-encuesta").on("click", function() {
 
         // window.location.replace("../core/cerrar-encuesta.php");
+        $("#frmEncuesta")[0].reset();
 
     })
-
-    $(".solo-lectura").unbind("click");
 
 });
 

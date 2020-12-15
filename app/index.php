@@ -50,7 +50,8 @@ if (isset($_POST['login'])) {
                         $_SESSION['emailUsuario'] = $row["email"];   
                         $_SESSION['nombreCompleto'] = $row["nombreCompleto"];   
                         $_SESSION['permisosRolSistema'] = "[usuario-encuestas]";   
-                        $_SESSION['restriccionesRolSistema'] = "[n/a]";   
+                        $_SESSION['restriccionesRolSistema'] = "[n/a]";
+                        $_SESSION['modoLogin'] = "normal";     
                         header("location: core/menu.php");
 
 					} else {
@@ -58,7 +59,7 @@ if (isset($_POST['login'])) {
                         // USUARIO EXISTE PERO CONTRASEÑA NO COINCIDE.
 
                         $_SESSION['login'] = false;
-                        header("location: core/menu.php");
+                        header("location: index.php");
 
 					}
 
@@ -67,7 +68,7 @@ if (isset($_POST['login'])) {
 					// USUARIO NO EXISTE Y NO ES POSIBLE VALIDAR CONTRASEÑA.
 
                     $_SESSION['login'] = false;
-                    header("location: core/menu.php");
+                    header("location: index.php");
 
                 }
 

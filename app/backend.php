@@ -55,7 +55,8 @@ if (isset($_POST['login'])) {
                         $_SESSION['nombreCortoRolSistema'] = $row["nombreCortoRolSistema"];   
                         $_SESSION['nombreCompleto'] = $row["nombreCompleto"];   
                         $_SESSION['permisosRolSistema'] = $row["permisosRolSistema"];   
-                        $_SESSION['restriccionesRolSistema'] = $row["restriccionesRolSistema"];   
+                        $_SESSION['restriccionesRolSistema'] = $row["restriccionesRolSistema"];
+                        $_SESSION['modoLogin'] = "backend";    
                         header("location: core/menu.php");
 
 					} else {
@@ -63,7 +64,7 @@ if (isset($_POST['login'])) {
                         // USUARIO EXISTE PERO CONTRASEÑA NO COINCIDE.
 
                         $_SESSION['login'] = false;
-                        header("location: core/menu.php");
+                        header("location: backend.php");
 
 					}
 
@@ -72,7 +73,7 @@ if (isset($_POST['login'])) {
 					// USUARIO NO EXISTE Y NO ES POSIBLE VALIDAR CONTRASEÑA.
 
                     $_SESSION['login'] = false;
-                    header("location: core/menu.php");
+                    header("location: backend.php");
 
                 }
 
