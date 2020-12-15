@@ -43,7 +43,7 @@ if (empty($_SESSION["login"])) {
                     // Include config file
                     require_once "../core/config.php";
 
-                    $_SESSION["rutaRegresarA"] = 'tomas_temperatura-index.php';
+                    $_SESSION["rutaRegresarA"] = '../tomas_temperatura/tomas_temperatura-index.php';
 
                     //Get current URL and parameters for correct pagination
                     $protocol = $_SERVER['SERVER_PROTOCOL'];
@@ -70,7 +70,7 @@ if (empty($_SESSION["login"])) {
                     $total_pages = ceil($total_rows / $no_of_records_per_page);
                     
                     //Column sorting on column name
-                    $orderBy = array('idToma', 'idEncuesta', 'idPersona', 'fechaHoraTomaEntrada', 'temperaturaEntrada', 'fechaHoraTomaSalida', 'temperaturaSalida', 'estado', 'auditoria'); 
+                    $orderBy = array('idToma', 'idEncuesta', 'idPersona', 'fechaHoraTomaEntrada', 'temperaturaEntrada', 'fechaHoraTomaSalida', 'temperaturaSalida', 'idUsuario', 'estado', 'auditoria'); 
                     $order = 'idToma';
                     if (isset($_GET['order']) && in_array($_GET['order'], $orderBy)) {
                             $order = $_GET['order'];
@@ -89,9 +89,11 @@ if (empty($_SESSION["login"])) {
 
                     // Attempt select query execution
                     $sql = "SELECT TT.*, 
-                            ES.idPersona AS 'idPersona' 
+                            ES.idPersona AS 'idPersona',
+                            US.nombreCompleto AS 'nombreCompleto' 
                             FROM tomas_temperatura TT
                             LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
+                            LEFT JOIN usuarios US ON US.idUsuario = TT.idUsuario
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                     
@@ -101,19 +103,23 @@ if (empty($_SESSION["login"])) {
                         $search = ($_GET['search']);
 
                         $sql = "SELECT TT.*, 
-                            ES.idPersona AS 'idPersona' 
+                            ES.idPersona AS 'idPersona',
+                            US.nombreCompleto AS 'nombreCompleto' 
                             FROM tomas_temperatura TT
                             LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
-                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idPersona,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,TT.estado,TT.auditoria)
+                            LEFT JOIN usuarios US ON US.idUsuario = TT.idUsuario
+                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idPersona,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,US.nombreCompleto,TT.estado,TT.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         
                         $count_pages = "SELECT TT.*, 
-                            ES.idPersona AS 'idPersona' 
+                            ES.idPersona AS 'idPersona',
+                            US.nombreCompleto AS 'nombreCompleto' 
                             FROM tomas_temperatura TT
                             LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
-                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idPersona,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,TT.estado,TT.auditoria)
+                            LEFT JOIN usuarios US ON US.idUsuario = TT.idUsuario
+                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idPersona,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,US.nombreCompleto,TT.estado,TT.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -141,7 +147,8 @@ if (empty($_SESSION["login"])) {
 										echo "<th><a href=?search=$search&sort=&order=temperaturaEntrada&sort=$sort>Temperatura<br>a la entrada</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraTomaSalida&sort=$sort>Fecha/hora<br>toma de salida</th>";
 										echo "<th><a href=?search=$search&sort=&order=temperaturaSalida&sort=$sort>Temperatura<br>a la salida</th>";
-										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
+                                        echo "<th class='centrar-columna'><a href=?search=$search&sort=&order=idUsuario&sort=$sort>Usuario que registró</th>";
+ 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
 										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
                                 echo "</thead>";
@@ -162,6 +169,7 @@ if (empty($_SESSION["login"])) {
                                     echo "<td class='centrar-columna'>" . $row['temperaturaEntrada'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraTomaSalida'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['temperaturaSalida'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreCompleto'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";

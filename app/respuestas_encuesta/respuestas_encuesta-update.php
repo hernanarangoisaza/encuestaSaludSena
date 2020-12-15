@@ -14,36 +14,36 @@ if(isset($_POST["idRespuestaEncuesta"]) && !empty($_POST["idRespuestaEncuesta"])
     // Get hidden input value
     $idRespuestaEncuesta = $_POST["idRespuestaEncuesta"];
 
-        // Prepare an update statement
-        
-        $idEncuesta = trim($_POST["idEncuesta"]);
-		$idPreguntaEncuesta = trim($_POST["idPreguntaEncuesta"]);
-		$respuestaSiNo = trim($_POST["respuestaSiNo"]);
-		$estado = trim($_POST["estado"]);
-		$auditoria = date('Y-m-d H:i:s');
+    // Prepare an update statement
+    
+    $idEncuesta = trim($_POST["idEncuesta"]);
+	$idPreguntaEncuesta = trim($_POST["idPreguntaEncuesta"]);
+	$respuestaSiNo = trim($_POST["respuestaSiNo"]);
+	$estado = trim($_POST["estado"]);
+	$auditoria = date('Y-m-d H:i:s');
 
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió');
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió');
+    }
+   $stmtPDO = $linkPDO->prepare("UPDATE respuestas_encuesta SET idEncuesta=?,idPreguntaEncuesta=?,respuestaSiNo=?,estado=?,auditoria=? WHERE idRespuestaEncuesta=?");
+
+    if(!$stmtPDO->execute([ $idEncuesta,$idPreguntaEncuesta,$respuestaSiNo,$estado,$auditoria,$idRespuestaEncuesta  ])) {
+            echo "Algo falló. Por favor intente de nuevo.";
+            header("location: ../core/error.php");
+        } else{
+           $stmtPDO = null;
+            // header("location: respuestas_encuesta-read.php?idRespuestaEncuesta=$idRespuestaEncuesta");
+            header("location: respuestas_encuesta-index.php");
         }
-       $stmtPDO = $linkPDO->prepare("UPDATE respuestas_encuesta SET idEncuesta=?,idPreguntaEncuesta=?,respuestaSiNo=?,estado=?,auditoria=? WHERE idRespuestaEncuesta=?");
-
-        if(!$stmtPDO->execute([ $idEncuesta,$idPreguntaEncuesta,$respuestaSiNo,$estado,$auditoria,$idRespuestaEncuesta  ])) {
-                echo "Algo falló. Por favor intente de nuevo.";
-                header("location: ../core/error.php");
-            } else{
-               $stmtPDO = null;
-                // header("location: respuestas_encuesta-read.php?idRespuestaEncuesta=$idRespuestaEncuesta");
-                header("location: respuestas_encuesta-index.php");
-            }
 } else {
     // Check existence of id parameter before processing further
     if(isset($_GET["idRespuestaEncuesta"]) && !empty(trim($_GET["idRespuestaEncuesta"]))){

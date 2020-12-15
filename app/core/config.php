@@ -61,6 +61,7 @@ $idSedeIngreso_err = "";
 $idTipoGenero_err = "";
 $idTipoIdentificacion_err = "";
 $idTipoVinculacion_err = "";
+$idUsuario_err = "";
 $jornada_err = "";
 $municipio_err = "";
 $nombreCompleto_err = "";

@@ -13,7 +13,7 @@ if (empty($_SESSION["login"])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Encuestas de Signos</title>
+    <title>Toma y registro de temperatura para control de ingreso a sedes del SENA <?php echo $regionalSedes ?></title>
     <link rel="stylesheet" href="../css/bootstrap-4.5.3.min.css" rel="stylesheet" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="../js/kit-fontawesome-6b773fe9e4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/estilos.css" />
@@ -26,14 +26,14 @@ if (empty($_SESSION["login"])) {
                 <div class="col-md-12">
 
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Encuesta de Signos - Panel General</h2>
-                        <a href="encuesta_signos-create.php" class="btn btn-success float-right">Crear</a>
-                        <a href="encuesta_signos-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
+                        <h2 class="float-left">Encuestas - Toma y Registro de Temperatura</h2>
+                        <a href="../tomas_temperatura/tomas_temperatura-index.php" class="btn btn-dark float-right mr-2">Tomas de Temperatura</a>
+                        <a href="registrar-temperatura.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="../core/menu.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
 
                     <div class="form-row">
-                        <form action="encuesta_signos-index.php" method="get">
+                        <form action="registrar-temperatura.php" method="get">
                         <div class="col">
                           <input type="text" class="form-control" placeholder="Buscar en este listado" name="search">
                         </div>
@@ -44,7 +44,7 @@ if (empty($_SESSION["login"])) {
                     // Include config file
                     require_once "../core/config.php";
 
-                    $_SESSION["rutaRegresarA"] = '../encuesta_signos/encuesta_signos-index.php';
+                    $_SESSION["rutaRegresarA"] = '../formato_toma_temperatura/registrar-temperatura.php';
 
                     //Get current URL and parameters for correct pagination
                     $protocol = $_SERVER['SERVER_PROTOCOL'];
@@ -139,29 +139,26 @@ if (empty($_SESSION["login"])) {
                                     echo "<tr>";
                                         echo "<th class='estilo-acciones'>Acciones</th>";
                                         echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
-										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idPersona&sort=$sort>Id<br>Persona</th>";
-										echo "<th><a href=?search=$search&sort=&order=fechaHoraDiligenciamiento&sort=$sort>Fecha/Hora<br>de diligenciamiento</th>";
-										echo "<th><a href=?search=$search&sort=&order=idSedeIngreso&sort=$sort>Sede de ingreso</th>";
-										echo "<th><a href=?search=$search&sort=&order=idHorario&sort=$sort>Horario</th>";
-										echo "<th><a href=?search=$search&sort=&order=aceptacionConsideraciones&sort=$sort>Aceptación<br>de consideraciones</th>";
-										echo "<th><a href=?search=$search&sort=&order=autorizacionTratamientoDatos&sort=$sort>Autorización de<br>tratamiento de datos</th>";
-										echo "<th><a href=?search=$search&sort=&order=autorizacionIngreso&sort=$sort>Autorización<br>de ingreso</th>";
-										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=observacionAdicional&sort=$sort>Observaciones<br>adicionales</th>";
-										echo "<th><a href=?search=$search&sort=&order=aceptacionRespuestaPositiva&sort=$sort>Alerta de<br>síntomas presentes</th>";
-										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
-										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idPersona&sort=$sort>Id<br>Persona</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=fechaHoraDiligenciamiento&sort=$sort>Fecha/Hora<br>de diligenciamiento</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=idSedeIngreso&sort=$sort>Sede de ingreso</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=idHorario&sort=$sort>Horario</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=aceptacionConsideraciones&sort=$sort>Aceptación<br>de consideraciones</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=autorizacionTratamientoDatos&sort=$sort>Autorización de<br>tratamiento de datos</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=autorizacionIngreso&sort=$sort>Autorización<br>de ingreso</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=observacionAdicional&sort=$sort>Observaciones<br>adicionales</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=aceptacionRespuestaPositiva&sort=$sort>Alerta de<br>síntomas presentes</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=estado&sort=$sort>Estado del registro</th>";
+                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=auditoria&sort=$sort>Fecha/Hora<br>de auditoría</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($resultMSQLI)){
                                     echo "<tr>";
                                     echo "<td class='centrar-columna'>";
-                                    echo "<a href='encuesta_signos-read.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-eye'></i></a>";
-                                    echo "<a href='encuesta_signos-update.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-edit'></i></a>";
-                                    echo "<a href='encuesta_signos-delete.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-trash-alt'></i></a>";
                                     echo "<a href='encuesta_signos-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
                                     echo "<a href='../personas/personas-read.php?idPersona=". $row['idPersona'] ."'><i class='far fa-user'></i></a>";
-                                    echo "<a href='../tomas_temperatura/tomas_temperatura-index.php?search=". $row['idPersona'] ."'><i class='fas fa-thermometer-half'></i></a>";
+                                    echo "<a href='../tomas_temperatura/tomas_temperatura-create.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-thermometer-half'></i></a>";
                                     echo "</td>";                                    
                                     echo "<td class='ocultar-columna'>" . $row['idEncuesta'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idPersona'] . "</td>";
@@ -189,7 +186,7 @@ if (empty($_SESSION["login"])) {
                                         if ($row['aceptacionRespuestaPositiva'] == 0) { echo 'No'; }
                                         else if ($row['aceptacionRespuestaPositiva'] == 1) { echo 'Si'; }
                                         else if ($row['aceptacionRespuestaPositiva'] == -1) { echo 'Sin asignar'; }
-                                    echo "</td>";
+                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['estado'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['auditoria'] . "</td>";
                                     echo "</tr>";
@@ -232,10 +229,11 @@ if (empty($_SESSION["login"])) {
     </section>
 <script src="../js/jquery-3.5.1.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
 <script src="../js/bootstrap.bundle-4.5.3.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
+<script src="../js/libreria.js" type="text/javascript"></script>   
+<script type="text/javascript">
+    $(document).ready(function(){
 
-        });
-    </script>
+    });
+</script>
 </body>
 </html>

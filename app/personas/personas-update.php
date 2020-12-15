@@ -26,47 +26,47 @@ if(isset($_POST["idPersona"]) && !empty($_POST["idPersona"])){
     // Get hidden input value
     $idPersona = $_POST["idPersona"];
 
-        // Prepare an update statement
+    // Prepare an update statement
 
-        $idTipoVinculacion = $_POST["idTipoVinculacion"];
-		$nombreCompleto = trim($_POST["nombreCompleto"]);
-		$idTipoIdentificacion = $_POST["idTipoIdentificacion"];
-		$identificacion = trim($_POST["identificacion"]);
-		$email = trim($_POST["email"]);
-		$telefonoPersonal = trim($_POST["telefonoPersonal"]);
-		$telefonoAcudiente = trim($_POST["telefonoAcudiente"]);
-		$fechaNacimiento = trim($_POST["fechaNacimiento"]);
-		$idTipoGenero = $_POST["idTipoGenero"];
-		$direccionResidencia = trim($_POST["direccionResidencia"]);
-		$idMunicipio = $_POST["idMunicipio"];
-		$idDepartamento = $_POST["idDepartamento"];
-		$idCentroFormacion = $_POST["idCentroFormacion"];
-		$idFichaFormacion = $_POST["idFichaFormacion"];
-		$estado = trim($_POST["estado"]);
-		$auditoria = date('Y-m-d H:i:s');
+    $idTipoVinculacion = $_POST["idTipoVinculacion"];
+	$nombreCompleto = trim($_POST["nombreCompleto"]);
+	$idTipoIdentificacion = $_POST["idTipoIdentificacion"];
+	$identificacion = trim($_POST["identificacion"]);
+	$email = trim($_POST["email"]);
+	$telefonoPersonal = trim($_POST["telefonoPersonal"]);
+	$telefonoAcudiente = trim($_POST["telefonoAcudiente"]);
+	$fechaNacimiento = trim($_POST["fechaNacimiento"]);
+	$idTipoGenero = $_POST["idTipoGenero"];
+	$direccionResidencia = trim($_POST["direccionResidencia"]);
+	$idMunicipio = $_POST["idMunicipio"];
+	$idDepartamento = $_POST["idDepartamento"];
+	$idCentroFormacion = $_POST["idCentroFormacion"];
+	$idFichaFormacion = $_POST["idFichaFormacion"];
+	$estado = trim($_POST["estado"]);
+	$auditoria = date('Y-m-d H:i:s');
 
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió');
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió');
+    }
+   $stmtPDO = $linkPDO->prepare("UPDATE personas SET idTipoVinculacion=?,nombreCompleto=?,idTipoIdentificacion=?,identificacion=?,email=?,telefonoPersonal=?,telefonoAcudiente=?,fechaNacimiento=?,idTipoGenero=?,direccionResidencia=?,idMunicipio=?,idDepartamento=?,idCentroFormacion=?,idFichaFormacion=?,estado=?,auditoria=? WHERE idPersona=?");
+
+    if(!$stmtPDO->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$telefonoAcudiente,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idFichaFormacion,$estado,$auditoria,$idPersona  ])) {
+            echo "Algo falló. Por favor intente de nuevo.";
+            header("location: ../core/error.php");
+        } else{
+           $stmtPDO = null;
+            // header("location: personas-read.php?idPersona=$idPersona");
+            header("location: personas-index.php");
         }
-       $stmtPDO = $linkPDO->prepare("UPDATE personas SET idTipoVinculacion=?,nombreCompleto=?,idTipoIdentificacion=?,identificacion=?,email=?,telefonoPersonal=?,telefonoAcudiente=?,fechaNacimiento=?,idTipoGenero=?,direccionResidencia=?,idMunicipio=?,idDepartamento=?,idCentroFormacion=?,idFichaFormacion=?,estado=?,auditoria=? WHERE idPersona=?");
-
-        if(!$stmtPDO->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$telefonoAcudiente,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idFichaFormacion,$estado,$auditoria,$idPersona  ])) {
-                echo "Algo falló. Por favor intente de nuevo.";
-                header("location: ../core/error.php");
-            } else{
-               $stmtPDO = null;
-                // header("location: personas-read.php?idPersona=$idPersona");
-                header("location: personas-index.php");
-            }
 } else {
     // Check existence of id parameter before processing further
     if(isset($_GET["idPersona"]) && !empty(trim($_GET["idPersona"]))){

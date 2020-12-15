@@ -5,7 +5,9 @@ if(isset($_GET["idToma"]) && !empty(trim($_GET["idToma"]))){
     require_once "../core/config.php";
 
     // Prepare a select statement
-    $sql = "SELECT * FROM tomas_temperatura WHERE idToma = ?";
+    $sql = "SELECT TT.*
+        FROM tomas_temperatura TT
+        WHERE idToma = ?";
 
     if($stmtPDO = mysqli_prepare($linkMYSQLI, $sql)){
         // Bind variables to the prepared statement as parameters
@@ -44,7 +46,7 @@ if(isset($_GET["idToma"]) && !empty(trim($_GET["idToma"]))){
     mysqli_stmt_close($stmtPDO);
 
     // Close connection
-    mysqli_close($linkMYSQLI);
+    // mysqli_close($linkMYSQLI);
 } else{
     // URL doesn't contain id parameter. Redirect to error page
     header("location: ../core/error.php");
@@ -94,6 +96,25 @@ if(isset($_GET["idToma"]) && !empty(trim($_GET["idToma"]))){
                     <div class="form-group">
                         <label>Temperatura a la salida</label>
                         <input type="text" name="temperaturaSalida" class="form-control" value="<?php echo $row['temperaturaSalida']; ?>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Usuario que registró</label>
+                        <?php
+                            $idUsuarioTT = $row['idUsuario'];
+                            $sql_cb1 = "SELECT idUsuario, nombreCompleto FROM usuarios WHERE idUsuario=$idUsuarioTT";
+                            $result_cb1 = mysqli_query($linkMYSQLI, $sql_cb1);
+                            echo "<select name='idUsuario' id='cb1' class='combo-box form-control solo-lectura' disabled>";
+                            while($row = mysqli_fetch_array($result_cb1)) {
+                                if ($idUsuario != $row['idUsuario'])
+                                {
+                                    echo "<option class='item-combo-box' value='" . $row['idUsuario'] . "'>" . $row['nombreCompleto'] . "</option>";
+                                } else {
+                                    echo "<option class='item-combo-box' selected value='" . $row['idUsuario'] . "'>" . $row['nombreCompleto'] . "</option>";
+                                }
+                            }
+                            echo "</select>";
+                        ?>
                     </div>
 
                     <div class="form-group ocultar-columna">

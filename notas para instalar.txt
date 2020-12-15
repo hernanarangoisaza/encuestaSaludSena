@@ -1,4 +1,10 @@
+*** MySQL
+
+- Siempre generar el script de exportación con todo y evitando validar llaves foráneas.
+- Eliminar todo lo anterior en prueba.
+
 *** config.php
+
 - Revisar datos de la enfermera.
 - Ajustar datos de conexión de la base de datos.
 

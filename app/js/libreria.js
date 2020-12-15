@@ -80,7 +80,6 @@ function validarEncuesta (idForm) {
   });
 }
 
-
 $(function () {
 
     $("#btn-cerrar-modal-envio-encuesta").on("click", function() {
@@ -88,6 +87,8 @@ $(function () {
         // window.location.replace("../core/cerrar-encuesta.php");
 
     })
+
+    $(".solo-lectura").unbind("click");
 
 });
 

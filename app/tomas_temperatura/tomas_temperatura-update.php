@@ -1,4 +1,15 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../index.php");
+    exit();    
+}
+// foreach ($_SESSION as $key=>$val)
+// echo $key." ".$val."<br/>";
+// echo $_SESSION['permisosRolSistema'];
+?>
+
+<?php
 // Include config file
 require_once "../core/config.php";
 
@@ -8,46 +19,62 @@ $fechaHoraTomaEntrada = "";
 $temperaturaEntrada = "";
 $fechaHoraTomaSalida = "";
 $temperaturaSalida = "";
-$estado = "";
+$idUsuario = "";
+$estado = "1";
 $auditoria = "";
+
+if (isset($_GET['idEncuesta'])) {
+    $idEncuesta = isset($_GET['idEncuesta']) ? $_GET['idEncuesta'] : '';
+    $disabled = "xdisabled";
+    $readonly1 = "solo-lectura";
+} else {
+    $idEncuesta = isset($_POST['idEncuesta']) ? $_POST['idEncuesta'] : '';
+    $disabled = "";
+    $readonly1 = "";
+}
 
 // Processing form data when form is submitted
 if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
+
     // Get hidden input value
     $idToma = $_POST["idToma"];
 
-        // Prepare an update statement
-        
-        $idEncuesta = trim($_POST["idEncuesta"]);
-		$fechaHoraTomaEntrada = trim($_POST["fechaHoraTomaEntrada"]);
-		$temperaturaEntrada = trim($_POST["temperaturaEntrada"]);
-		$fechaHoraTomaSalida = trim($_POST["fechaHoraTomaSalida"]);
-		$temperaturaSalida = trim($_POST["temperaturaSalida"]);
-		$estado = trim($_POST["estado"]);
-		$auditoria = date('Y-m-d H:i:s');
-		
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió');
-        }
-       $stmtPDO = $linkPDO->prepare("UPDATE tomas_temperatura SET idEncuesta=?,fechaHoraTomaEntrada=?,temperaturaEntrada=?,fechaHoraTomaSalida=?,temperaturaSalida=?,estado=?,auditoria=? WHERE idToma=?");
+    // Prepare an update statement
+    
+    $idEncuesta = trim($_POST["idEncuesta"]);
+	$fechaHoraTomaEntrada = trim($_POST["fechaHoraTomaEntrada"]);
+	$temperaturaEntrada = trim($_POST["temperaturaEntrada"]);
+	$fechaHoraTomaSalida = trim($_POST["fechaHoraTomaSalida"]);
+	$temperaturaSalida = trim($_POST["temperaturaSalida"]);
+    $idUsuario = trim($_POST["idUsuario"]);
+	$estado = trim($_POST["estado"]);
+	$auditoria = date('Y-m-d H:i:s');
+	
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
 
-        if(!$stmtPDO->execute([ $idEncuesta,$fechaHoraTomaEntrada,$temperaturaEntrada,$fechaHoraTomaSalida,$temperaturaSalida,$estado,$auditoria,$idToma  ])) {
-                echo "Algo falló. Por favor intente de nuevo.";
-                header("location: ../core/error.php");
-            } else{
-               $stmtPDO = null;
-                // header("location: tomas_temperatura-read.php?idToma=$idToma");
-                header("location: tomas_temperatura-index.php");
-            }
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió');
+    }
+
+    $stmtPDO = $linkPDO->prepare("UPDATE tomas_temperatura SET idEncuesta=?,fechaHoraTomaEntrada=?,temperaturaEntrada=?,fechaHoraTomaSalida=?,temperaturaSalida=?,estado=?,idUsuario=?,auditoria=? WHERE idToma=?");
+
+    if(!$stmtPDO->execute([ $idEncuesta,$fechaHoraTomaEntrada,$temperaturaEntrada,$fechaHoraTomaSalida,$temperaturaSalida,$idUsuario,$estado,$auditoria,$idToma  ])) {
+            echo "Algo falló. Por favor intente de nuevo.";
+            header("location: ../core/error.php");
+        } else{
+           $stmtPDO = null;
+            // header("location: tomas_temperatura-read.php?idToma=$idToma");
+            header("location: tomas_temperatura-index.php");
+        }
 } else {
     // Check existence of id parameter before processing further
     if(isset($_GET["idToma"]) && !empty(trim($_GET["idToma"]))){
@@ -79,6 +106,7 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
 					$temperaturaEntrada = $row["temperaturaEntrada"];
 					$fechaHoraTomaSalida = $row["fechaHoraTomaSalida"];
 					$temperaturaSalida = $row["temperaturaSalida"];
+                    $idUsuario = $row["idUsuario"];
 					$estado = $row["estado"];
 					$auditoria = $row["auditoria"];
 
@@ -131,15 +159,22 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
                         <div class="form-group">
                             <label>Encuesta</label>
                             <?php
+                                if(isset($_GET["idEncuesta"]) && !empty($_GET["idEncuesta"])){
+                                    $where = "ES.idEncuesta = $idEncuesta";
+                                }
+                                else {
+                                    $where = "TRUE";
+                                }
                                 $sql_cb5 = "SELECT ES.idEncuesta,
                                                    ES.idPersona,
                                                    ES.fechaHoraDiligenciamiento,
                                                    PE.nombreCompleto
                                                    FROM encuesta_signos ES
                                                    LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
+                                                   WHERE $where
                                                    ORDER BY idEncuesta DESC";
                                 $result_cb5 = mysqli_query($linkMYSQLI, $sql_cb5);
-                                echo "<select name='idEncuesta' id='cb5' class='combo-box form-control'>";
+                                echo "<select name='idEncuesta' id='cb5' class='combo-box form-control $readonly1' $disabled>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
                                     $selected = ($idEncuesta != $row['idEncuesta']) ? ('') : ('selected');
                                     echo "<option class='item-combo-box' $selected value='" . $row['idEncuesta'] . "'>" . $row['idEncuesta'] . ' * ' . $row['fechaHoraDiligenciamiento'] . ' * ' . $row['nombreCompleto'] . "</option>";                                
@@ -171,6 +206,33 @@ if(isset($_POST["idToma"]) && !empty($_POST["idToma"])){
                             <label>Temperatura a la salida</label>
                             <input type="text" name="temperaturaSalida" class="form-control" value="<?php echo $temperaturaSalida; ?>">
                             <span class="form-text"><?php echo $temperaturaSalida_err; ?></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Usuario que registra</label>
+                            <?php
+                                if(!empty($_POST["idUsuario"])) {
+                                    $where = "idUsuario = " . $_POST['idUsuario'];
+                                    $readonly2 = "solo-lectura";    
+                                }
+                                else {
+                                    $where = "TRUE";
+                                    $readonly2 = ""; 
+                                }
+                                $sql_cb1 = "SELECT idUsuario, nombreCompleto FROM usuarios WHERE $where";
+                                $result_cb1 = mysqli_query($linkMYSQLI, $sql_cb1);
+                                echo "<select name='idUsuario' id='cb1' class='combo-box form-control $readonly2'>";
+                                while($row = mysqli_fetch_array($result_cb1)) {
+                                    if ($idUsuario != $row['idUsuario'])
+                                    {
+                                        echo "<option class='item-combo-box' value='" . $row['idUsuario'] . "'>" . $row['nombreCompleto'] . "</option>";
+                                    } else {
+                                        echo "<option class='item-combo-box' selected value='" . $row['idUsuario'] . "'>" . $row['nombreCompleto'] . "</option>";
+                                    }
+                                }
+                                echo "</select>";
+                            ?>
+                            <span class="form-text"><?php echo $idUsuario_err; ?></span>
                         </div>
 
 						<div class="form-group ocultar-columna">

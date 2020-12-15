@@ -35,43 +35,43 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($name_err) && empty($address_err) && empty($salary_err)){
         // Prepare an insert statement
  */
-        $idTipoVinculacion = trim($_POST["idTipoVinculacion"]);
-		$nombreCompleto = trim($_POST["nombreCompleto"]);
-		$idTipoIdentificacion = trim($_POST["idTipoIdentificacion"]);
-		$identificacion = trim($_POST["identificacion"]);
-		$email = trim($_POST["email"]);
-		$telefonoPersonal = trim($_POST["telefonoPersonal"]);
-		$telefonoAcudiente = trim($_POST["telefonoAcudiente"]);
-		$fechaNacimiento = trim($_POST["fechaNacimiento"]);
-		$idTipoGenero = trim($_POST["idTipoGenero"]);
-		$direccionResidencia = trim($_POST["direccionResidencia"]);
-		$idMunicipio = trim($_POST["idMunicipio"]);
-		$idDepartamento = trim($_POST["idDepartamento"]);
-		$idCentroFormacion = trim($_POST["idCentroFormacion"]);
-		$idFichaFormacion = trim($_POST["idFichaFormacion"]);
-		$estado = trim($_POST["estado"]);
-        $auditoria = date('Y-m-d H:i:s');
+    $idTipoVinculacion = trim($_POST["idTipoVinculacion"]);
+	$nombreCompleto = trim($_POST["nombreCompleto"]);
+	$idTipoIdentificacion = trim($_POST["idTipoIdentificacion"]);
+	$identificacion = trim($_POST["identificacion"]);
+	$email = trim($_POST["email"]);
+	$telefonoPersonal = trim($_POST["telefonoPersonal"]);
+	$telefonoAcudiente = trim($_POST["telefonoAcudiente"]);
+	$fechaNacimiento = trim($_POST["fechaNacimiento"]);
+	$idTipoGenero = trim($_POST["idTipoGenero"]);
+	$direccionResidencia = trim($_POST["direccionResidencia"]);
+	$idMunicipio = trim($_POST["idMunicipio"]);
+	$idDepartamento = trim($_POST["idDepartamento"]);
+	$idCentroFormacion = trim($_POST["idCentroFormacion"]);
+	$idFichaFormacion = trim($_POST["idFichaFormacion"]);
+	$estado = trim($_POST["estado"]);
+    $auditoria = date('Y-m-d H:i:s');
 
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió'); //something a user can understand
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió'); //something a user can understand
+    }
+   $stmtPDO = $linkPDO->prepare("INSERT INTO personas (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
+    
+    if($stmtPDO->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$telefonoAcudiente,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idFichaFormacion,$estado,$auditoria  ])) {
+           $stmtPDO = null;
+            header("location: personas-index.php");
+        } else{
+            echo "Algo falló. Por favor intente de nuevo.";
         }
-       $stmtPDO = $linkPDO->prepare("INSERT INTO personas (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,telefonoAcudiente,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idFichaFormacion,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
-        
-        if($stmtPDO->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$telefonoAcudiente,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idFichaFormacion,$estado,$auditoria  ])) {
-               $stmtPDO = null;
-                header("location: personas-index.php");
-            } else{
-                echo "Algo falló. Por favor intente de nuevo.";
-            }
 }
 ?>
 

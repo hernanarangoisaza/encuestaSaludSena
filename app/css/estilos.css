@@ -1110,6 +1110,15 @@ label.tab {
     background-color: rgba(0,0,0,0.55) !important;
 }
 
+.solo-lectura {
+  background-color: #e9ecef !important;
+}
+
+.alerta-positivo {
+    background-color: #ffd4e8;
+    color: black !important;
+}
+
 /* -------------------------------------------------------------------------------------------------- */
 
 /*
