@@ -826,7 +826,11 @@ if (empty($_SESSION["login"])) {
                             }
                             ?>
 
-                            <li class="item-menu-principal"><a href="../tomas_temperatura/tomas_temperatura-index.php">Gestión de Tomas de temperatura</a></li>
+                            <?php
+                            if (!strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '') {
+                                echo '<li class="item-menu-principal"><a href="../tomas_temperatura/tomas_temperatura-index.php">Gestión de Tomas de temperatura</a></li>';
+                            }
+                            ?>
 
                             <?php
                             if (strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '') {
@@ -859,7 +863,11 @@ if (empty($_SESSION["login"])) {
                             }
                             ?>
 
-                            <li class="item-menu-principal"><a href="../personas/personas-index.php">Maestro de Personas</a></li>
+                            <?php
+                            if (!strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '') {
+                                echo '<li class="item-menu-principal"><a href="../personas/personas-index.php">Maestro de Personas</a></li>';
+                            }
+                            ?>
                             
                             <?php
                             if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {

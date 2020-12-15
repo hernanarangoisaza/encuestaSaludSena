@@ -32,7 +32,7 @@ if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
                 <div class="col-md-12">
 
                     <div class="page-header clearfix">
-                        <h2 class="float-left">Encuestas - Toma y Registro de Temperatura</h2>
+                        <h2 class="float-left">Toma y Registro de Temperatura</h2>
                         <a href="../tomas_temperatura/tomas_temperatura-index.php" class="btn btn-dark float-right mr-2">Tomas de Temperatura</a>
                         <a href="registrar-temperatura.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="../core/menu.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
