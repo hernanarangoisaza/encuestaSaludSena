@@ -91,10 +91,12 @@ if (empty($_SESSION["login"])) {
                     // Attempt select query execution
                     $sql = "SELECT ES.*, 
                         CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
-                        HO.nombreCorto AS 'nombreCorto'
+                        HO.nombreCorto AS 'nombreCorto',
+                        PE.nombreCompleto AS 'nombreCompleto'
                         FROM encuesta_signos ES
                         LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
                         LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
+                        LEFT JOIN personas PE USING(idPersona)
                         ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
 
                     $count_pages = "SELECT * FROM encuesta_signos";
@@ -103,21 +105,25 @@ if (empty($_SESSION["login"])) {
                         $search = ($_GET['search']);
                     $sql = "SELECT ES.*, 
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
-                            HO.nombreCorto AS 'nombreCorto'
+                            HO.nombreCorto AS 'nombreCorto',
+                            PE.nombreCompleto AS 'nombreCompleto'
                             FROM encuesta_signos ES
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
                             LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
-                            WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
+                            LEFT JOIN personas PE USING(idPersona)
+                            WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,PE.nombreCompleto,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT ES.*, 
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
-                            HO.nombreCorto AS 'nombreCorto'
+                            HO.nombreCorto AS 'nombreCorto',
+                            PE.nombreCompleto AS 'nombreCompleto'
                             FROM encuesta_signos ES
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
                             LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
-                            WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
+                            LEFT JOIN personas PE USING(idPersona)
+                            WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,PE.nombreCompleto,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -141,6 +147,7 @@ if (empty($_SESSION["login"])) {
                                         echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
                                         echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idPersona&sort=$sort>Id<br>Persona</th>";
                                         echo "<th><a href=?search=$search&sort=&order=fechaHoraDiligenciamiento&sort=$sort>Fecha/Hora<br>de diligenciamiento</th>";
+                                        echo "<th><a href=?search=$search&sort=&order=idPersona&sort=$sort>Persona</th>";
                                         echo "<th><a href=?search=$search&sort=&order=idSedeIngreso&sort=$sort>Sede de ingreso</th>";
                                         echo "<th><a href=?search=$search&sort=&order=idHorario&sort=$sort>Horario</th>";
                                         echo "<th><a href=?search=$search&sort=&order=aceptacionConsideraciones&sort=$sort>Aceptación<br>de consideraciones</th>";
@@ -163,6 +170,7 @@ if (empty($_SESSION["login"])) {
                                     echo "<td class='ocultar-columna'>" . $row['idEncuesta'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idPersona'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraDiligenciamiento'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreCompleto'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['nombreLargoCentroFormacion'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";
                                     echo "<td class='centrar-columna'>";
