@@ -14,6 +14,19 @@ if (empty($_SESSION["login"])) {
 // echo $_SESSION['permisosRolSistema'];
 ?>
 
+<?php
+
+    $_SESSION["rutaRegresarA"] = '../core/menu.php';
+
+    if ($_SESSION['modoLogin'] == "normal") {
+
+        $visibilidadContenedorIzquierdo = "ocultar-contenedor-izquierdo";
+        $ajusteContenedorCentral = "ajuste-contenedor-central";
+        $ajusteContenedorDerecho = "ajuste-contenedor-derecho";
+    } 
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="es">
@@ -32,7 +45,7 @@ if (empty($_SESSION["login"])) {
 
         <div class="contenedor-principal">
 
-            <div class="contenedor-izquierdo">
+            <div class="contenedor-izquierdo <?php echo $visibilidadContenedorIzquierdo ?>">
 
                 <div class="titulo-aforo">
 
@@ -752,7 +765,7 @@ if (empty($_SESSION["login"])) {
 
             </div>
 
-            <div class="contenedor-central">
+            <div class="contenedor-central <?php echo $ajusteContenedorCentral ?>">
 
                 <div class="contenedor-superior">
 
@@ -786,7 +799,7 @@ if (empty($_SESSION["login"])) {
 
             </div>
 
-            <div class="contenedor-derecho">
+            <div class="contenedor-derecho <?php echo $ajusteContenedorDerecho ?>">
 
                 <div class="contenedor-usuario">
 
@@ -813,6 +826,8 @@ if (empty($_SESSION["login"])) {
                             }
                             ?>
 
+                            <li class="item-menu-principal"><a href="../tomas_temperatura/tomas_temperatura-index.php">Gestión de Tomas de temperatura</a></li>
+
                             <?php
                             if (strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '') {
                                 echo '<li class="item-menu-principal"><a href="../formato_encuesta/encuesta.php">Registrar Encuesta</a></li>';
@@ -821,105 +836,96 @@ if (empty($_SESSION["login"])) {
 
                             <?php
                             if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or
-                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '') or
-                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '')) {
-                                echo '<li class="item-menu-principal"><a href="../encuesta_signos/encuesta_signos-index.php">Encuesta de signos</a></li>';
+                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
+                                echo '<li class="item-menu-principal"><a href="../encuesta_signos/encuesta_signos-index.php">Gestión de Encuestas de signos</a></li>';
                             }
                             ?>
 
                             <?php
-                            if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or
-                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '') or
-                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '')) {
-                                echo '<li class="item-menu-principal"><a href="../tomas_temperatura/tomas_temperatura-index.php">Tomas de temperatura</a></li>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../preguntas_encuesta/preguntas_encuesta-index.php">Preguntas de la encuesta</a></li>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../horarios/horarios-index.php">Horarios</a></li>';
-                            }
-                            ?>
-
-                            <?php
-                            if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or
-                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '') or
-                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '')) {
-                                echo '<li class="item-menu-principal"><a href="../respuestas_encuesta/respuestas_encuesta-index.php">Respuestas de la encuesta</a></li>';
-                            }
-                            ?>
-
-                            <?php
-                            if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or
-                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '') or
-                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '')) {
-                                echo '<li class="item-menu-principal"><a href="../personas/personas-index.php">Personas</a></li>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../centros_formacion/centros_formacion-index.php">Centros de formación</a></li>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../programas_formacion/programas_formacion-index.php">Programas de formación</a></li>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../fichas_formacion/fichas_formacion-index.php">Fichas de formación</a></li>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../tipos_generos/tipos_generos-index.php">Tipos de géneros</a></li>';
+                            if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '')) {
+                                echo '<li class="item-menu-principal"><a href="../respuestas_encuesta/respuestas_encuesta-index.php">Gestión de Respuestas de la encuesta</a></li>';
                             }
                             ?>
                             
                             <?php
                             if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../tipos_identificacion/tipos_identificacion-index.php">Tipos de identificación</a></li>';
+                                echo '<li class="item-menu-principal"><a href="../preguntas_encuesta/preguntas_encuesta-index.php">Maestro de Preguntas de la encuesta</a></li>';
+                            }
+                            ?>
+
+                            <?php
+                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+                                echo '<li class="item-menu-principal"><a href="../horarios/horarios-index.php">Maestro de Horarios</a></li>';
+                            }
+                            ?>
+
+                            <li class="item-menu-principal"><a href="../personas/personas-index.php">Maestro de Personas</a></li>
+                            
+                            <?php
+                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+                                echo '<li class="item-menu-principal"><a href="../centros_formacion/centros_formacion-index.php">Maestro de Centros de formación</a></li>';
+                            }
+                            ?>
+
+                            <?php
+                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+                                echo '<li class="item-menu-principal"><a href="../programas_formacion/programas_formacion-index.php">Maestro de Programas de formación</a></li>';
+                            }
+                            ?>
+
+                            <?php
+                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+                                echo '<li class="item-menu-principal"><a href="../fichas_formacion/fichas_formacion-index.php">Maestro de Fichas de formación</a></li>';
+                            }
+                            ?>
+
+                            <?php
+                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+                                echo '<li class="item-menu-principal"><a href="../tipos_generos/tipos_generos-index.php">Maestro de Tipos de géneros</a></li>';
                             }
                             ?>
                             
                             <?php
                             if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../tipos_vinculaciones_sena/tipos_vinculaciones_sena-index.php">Tipos de vinculaciones</a></li>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../roles_sistema/roles_sistema-index.php">Roles del sistema</a></li>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../usuarios/usuarios-index.php">Usuarios del sistema</a></li>';
+                                echo '<li class="item-menu-principal"><a href="../tipos_identificacion/tipos_identificacion-index.php">Maestro de Tipos de identificación</a></li>';
                             }
                             ?>
                             
                             <?php
                             if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../departamentos/departamentos-index.php">Departamentos</a></li>';
+                                echo '<li class="item-menu-principal"><a href="../tipos_vinculaciones_sena/tipos_vinculaciones_sena-index.php">Maestro de Tipos de vinculaciones</a></li>';
                             }
                             ?>
 
                             <?php
                             if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<li class="item-menu-principal"><a href="../municipios/municipios-index.php">Municipios</a></li>';
+                                echo '<li class="item-menu-principal"><a href="../roles_sistema/roles_sistema-index.php">Maestro de Roles del sistema</a></li>';
+                            }
+                            ?>
+
+                            <?php
+                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+                                echo '<li class="item-menu-principal"><a href="../usuarios/usuarios-index.php">Maestro de Usuarios del sistema</a></li>';
+                            }
+                            ?>
+                            
+                            <?php
+                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+                                echo '<li class="item-menu-principal"><a href="../departamentos/departamentos-index.php">Maestro de Departamentos</a></li>';
+                            }
+                            ?>
+
+                            <?php
+                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+                                echo '<li class="item-menu-principal"><a href="../municipios/municipios-index.php">Maestro de Municipios</a></li>';
+                            }
+                            ?>
+
+                            <?php
+                            if ($_SESSION['modoLogin'] == "normal") {
+                                echo '<li class="item-menu-principal"><a href="../personas/personas-read.php?idPersona=' . $_SESSION['idPersona'] . '">Información Personal</a></li>';
+                            } if ($_SESSION['modoLogin'] == "backend") {
+                                echo '<li class="item-menu-principal"><a href="../usuarios/usuarios-read.php?idUsuario=' . $_SESSION['idUsuario'] . '">Información Personal</a></li>';
                             }
                             ?>
 

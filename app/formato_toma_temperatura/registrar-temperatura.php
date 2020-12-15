@@ -9,6 +9,12 @@ if (empty($_SESSION["login"])) {
 // echo $_SESSION['permisosRolSistema'];
 ?>
 
+<?php
+if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
+    header("Location: ../core/menu.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

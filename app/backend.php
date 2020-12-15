@@ -106,7 +106,7 @@ if (isset($_POST['login'])) {
 
     <head>
         <meta charset="UTF-8" />
-        <title>Sistema de encuestas para registro de síntomas y temperatura en el SENA - CDITI</title>
+        <title>Sistema de encuestas para registro de síntomas y temperatura en el SENA - CDITI - <?php echo $regionalSedes ?></title>
         <link rel="stylesheet" href="css/bootstrap-4.5.3.min.css" rel="stylesheet" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <link rel="stylesheet" href="css/estilos.css" />
         <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
@@ -161,7 +161,7 @@ if (isset($_POST['login'])) {
                             <div class="col-md-12 mx-auto">
 
                                 <div class="page-header titulo-login">
-                                    <h1>CREDENCIALES</h1>
+                                    <h1>CREDENCIALES - SISTEMA</h1>
                                 </div>
 
                                 <form method="post" action="" name="signin-form">

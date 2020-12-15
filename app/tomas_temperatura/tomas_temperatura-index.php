@@ -9,6 +9,24 @@ if (empty($_SESSION["login"])) {
 // echo $_SESSION['permisosRolSistema'];
 ?>
 
+<?php
+if ((strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
+    header("Location: ../core/menu.php");
+}
+?>
+
+<?php
+if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '') or 
+   (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
+    $isDisabled = "isDisabled";
+    $ariaDisabled = "true";
+}
+else {
+    $isDisabled = "notDisabled";
+    $ariaDisabled = "false";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,7 +44,7 @@ if (empty($_SESSION["login"])) {
                 <div class="col-md-12">
                     <div class="page-header clearfix">
                         <h2 class="float-left">Tomas de Temperatura - Panel General</h2>
-                        <a href="tomas_temperatura-create.php" class="btn btn-success float-right">Crear</a>
+                        <?php echo '<span class="' . $isDisabled. '"><a href="tomas_temperatura-create.php" class="btn btn-success float-right" aria-disabled="' . $ariaDisabled . '">Crear</a></span>' ?>
                         <a href="tomas_temperatura-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="../core/menu.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
@@ -156,9 +174,9 @@ if (empty($_SESSION["login"])) {
                                 while($row = mysqli_fetch_array($resultMSQLI)){
                                     echo "<tr>";
                                     echo "<td class='centrar-columna'>";
-                                        echo "<a href='tomas_temperatura-read.php?idToma=". $row['idToma'] ."'><i class='far fa-eye'></i></a>";
-                                        echo "<a href='tomas_temperatura-update.php?idToma=". $row['idToma'] ."'><i class='far fa-edit'></i></a>";
-                                        echo "<a href='tomas_temperatura-delete.php?idToma=". $row['idToma'] ."'><i class='far fa-trash-alt'></i></a>";
+                                        echo "<span class='$isDisabled'>" . "<a href='tomas_temperatura-read.php?idToma=" . $row['idToma'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-eye'></i></a></span>";
+                                        echo "<span class='$isDisabled'>" . "<a href='tomas_temperatura-update.php?idToma=" . $row['idToma'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-edit'></i></a></span>";
+                                        echo "<span class='$isDisabled'>" . "<a href='tomas_temperatura-delete.php?idToma=" . $row['idToma'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-trash-alt'></i></a></span>";                                        
                                         echo "<a href='../encuesta_signos/encuesta_signos-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
                                         echo "<a href='../personas/personas-read.php?idPersona=". $row['idPersona'] ."'><i class='far fa-user'></i></a>";
                                     echo "</td>";
