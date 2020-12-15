@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2020 a las 21:39:38
+-- Tiempo de generación: 15-12-2020 a las 13:21:25
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.3.17
 
@@ -47,21 +47,14 @@ CREATE TABLE `centros_formacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Truncar tablas antes de insertar `centros_formacion`
---
-
-TRUNCATE TABLE `centros_formacion`;
---
 -- Volcado de datos para la tabla `centros_formacion`
 --
 
 INSERT INTO `centros_formacion` (`idCentroFormacion`, `nombreLargoCentroFormacion`, `nombreCorto`, `direccion`, `idMunicipio`, `idDepartamento`, `telefono1`, `telefono2`, `emailContacto1`, `emailContacto2`, `estado`, `auditoria`) VALUES
-(1, 'Centro de Atención al Sector Agropecuario', 'AGROPECUARIO', 'ddddddddddd', 640, 99, '111', '222', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-05 17:38:56'),
-(2, 'Centro de Diseño e Innovación Tecnológica Industrial', 'CDITI', 'fffffffffff', 657, 99, '333', '444', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-05 17:39:00'),
-(3, 'Centro de Comercio y Servicios', 'COMERCIO', 'ghhhhhhhhhhhhhhhh', 657, 99, '555', '666', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-05 17:39:04'),
-(4, 'Sede Tecnoacademia Centro de Comercio Dosquebradas', 'TECNOACADEMIA', 'jjjjjjjjjjjj', 657, 99, '777', '888', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-05 17:39:12'),
-(5, NULL, '', '', 1, 99, '', '', '', '', 0, '2020-12-05 17:39:15'),
-(6, NULL, '', '', 1, 99, '', '', '', '', 0, '2020-12-05 17:39:17');
+(1, 'Centro de Atención al Sector Agropecuario', 'AGROPECUARIO', 'El Lembo', 640, 99, '111', '222', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-15 00:10:56'),
+(2, 'Centro de Diseño e Innovación Tecnológica Industrial', 'CDITI', 'Santa Isabel', 657, 99, '333', '444', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-15 00:11:08'),
+(3, 'Centro de Comercio y Servicios', 'COMERCIO', 'Centro', 657, 99, '555', '666', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-15 00:11:14'),
+(4, 'Sede Tecnoacademia Centro de Comercio Dosquebradas', 'TECNOACADEMIA', 'Centro', 657, 99, '777', '888', 'email1@correo.com', 'email2@correo.com', 1, '2020-12-15 00:11:26');
 
 -- --------------------------------------------------------
 
@@ -78,11 +71,6 @@ CREATE TABLE `departamentos` (
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncar tablas antes de insertar `departamentos`
---
-
-TRUNCATE TABLE `departamentos`;
 --
 -- Volcado de datos para la tabla `departamentos`
 --
@@ -145,31 +133,11 @@ CREATE TABLE `encuesta_signos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Truncar tablas antes de insertar `encuesta_signos`
---
-
-TRUNCATE TABLE `encuesta_signos`;
---
 -- Volcado de datos para la tabla `encuesta_signos`
 --
 
 INSERT INTO `encuesta_signos` (`idEncuesta`, `idPersona`, `fechaHoraDiligenciamiento`, `idSedeIngreso`, `idHorario`, `aceptacionConsideraciones`, `autorizacionTratamientoDatos`, `autorizacionIngreso`, `observacionAdicional`, `aceptacionRespuestaPositiva`, `estado`, `auditoria`) VALUES
-(1, 7, '2020-12-01 19:39:57', 2, 4, 1, 0, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 1, '2020-12-10 10:54:14'),
-(2, 10, '2020-12-10 09:47:33', 2, 1, -1, 1, 0, 'nota de observaciones', 1, 0, '2020-12-10 11:02:59'),
-(3, 10, '2020-12-02 12:36:31', 4, 10, 0, 1, 0, 'ninguna observacion', -1, 1, '2020-12-10 10:53:49'),
-(5, 5, '2020-12-02 13:04:12', 1, 14, 0, 0, 1, 'aaaaaaaaaaa', 0, 0, '2020-12-10 10:54:09'),
-(6, 5, '2020-12-02 13:06:03', 1, 1, 0, 0, 0, 'qqqqqqqqqqqqqqqqq', 0, 0, '2020-12-02 13:06:16'),
-(7, 5, '2020-12-10 13:07:54', 1, 7, -1, -1, 1, 'qaaaaaaaaaaaassssssssssssssssssss\r\nghfgh\r\ngh\r\nfgh\r\nfgf', 1, 0, '2020-12-10 11:03:19'),
-(8, 5, '2020-12-10 16:27:08', 1, 5, -1, -1, -1, '', -1, 0, '2020-12-10 11:03:06'),
-(9, 5, '2020-12-02 16:27:11', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:11'),
-(10, 5, '2020-12-02 16:27:18', 1, 8, -1, -1, -1, '', -1, 0, '2020-12-10 10:53:52'),
-(11, 5, '2020-12-02 16:27:21', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:27:21'),
-(12, 5, '2020-12-02 16:27:24', 1, 10, -1, -1, -1, '', -1, 0, '2020-12-10 10:54:18'),
-(13, 5, '2020-12-10 16:29:05', 1, 6, -1, -1, -1, '', -1, 0, '2020-12-10 11:03:50'),
-(14, 5, '2020-12-02 16:29:09', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:29:09'),
-(15, 5, '2020-12-10 16:29:18', 1, 6, -1, -1, -1, '', -1, 0, '2020-12-10 11:03:12'),
-(16, 5, '2020-12-02 16:31:39', 1, 1, -1, -1, -1, '', -1, 0, '2020-12-02 16:31:39'),
-(17, 7, '2020-12-05 07:48:10', 1, 1, 1, 1, 1, 'zzzzzzzzzzz', 1, 0, '2020-12-06 10:39:51');
+(1, 1, '2020-12-15 00:35:47', 3, 10, 1, 1, 0, 'Comentario especial', 1, 1, '2020-12-15 00:35:47');
 
 -- --------------------------------------------------------
 
@@ -187,20 +155,11 @@ CREATE TABLE `fichas_formacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Truncar tablas antes de insertar `fichas_formacion`
---
-
-TRUNCATE TABLE `fichas_formacion`;
---
 -- Volcado de datos para la tabla `fichas_formacion`
 --
 
 INSERT INTO `fichas_formacion` (`idFichaFormacion`, `codigoFichaFormacion`, `idProgramaFormacion`, `estado`, `auditoria`) VALUES
-(1, '1752586', 4, 1, '2020-12-01 21:13:12'),
-(2, '78598575s', 4, 0, '0000-00-00 00:00:00'),
-(3, 'asdasdasdsdasdsda', 4, 0, '0000-00-00 00:00:00'),
-(4, '687687687', 4, 0, '0000-00-00 00:00:00'),
-(5, 'vvvvvvvvaaaaa', 4, 0, '2020-12-05 08:28:03');
+(1, '1752586', 4, 1, '2020-12-01 21:13:12');
 
 -- --------------------------------------------------------
 
@@ -219,11 +178,6 @@ CREATE TABLE `horarios` (
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncar tablas antes de insertar `horarios`
---
-
-TRUNCATE TABLE `horarios`;
 --
 -- Volcado de datos para la tabla `horarios`
 --
@@ -260,11 +214,6 @@ CREATE TABLE `municipios` (
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncar tablas antes de insertar `municipios`
---
-
-TRUNCATE TABLE `municipios`;
 --
 -- Volcado de datos para la tabla `municipios`
 --
@@ -1400,23 +1349,11 @@ CREATE TABLE `personas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Truncar tablas antes de insertar `personas`
---
-
-TRUNCATE TABLE `personas`;
---
 -- Volcado de datos para la tabla `personas`
 --
 
 INSERT INTO `personas` (`idPersona`, `idTipoVinculacion`, `nombreCompleto`, `idTipoIdentificacion`, `identificacion`, `email`, `telefonoPersonal`, `telefonoAcudiente`, `fechaNacimiento`, `idTipoGenero`, `direccionResidencia`, `idMunicipio`, `idDepartamento`, `idCentroFormacion`, `idFichaFormacion`, `estado`, `auditoria`) VALUES
-(5, 11, 'Hernán Arango Isaza', 2, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 10, 99, 3, 1, 0, '2020-12-05 17:38:26'),
-(7, 3, 'Hernán Arango Isaza', 2, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 18, 99, 2, 1, 0, '2020-12-05 17:38:29'),
-(8, 4, 'Hernán Arango Isaza', 5, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 2, 'Cra 31#84-20', 223, 99, 1, 1, 0, '2020-12-05 17:38:34'),
-(9, 1, 'Hernán Arango Isazas', 1, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 6, 99, 1, 1, 0, '2020-12-05 17:38:37'),
-(10, 8, '10 Hernán Arango Isaza', 1, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 2, 'Cra 31#84-20', 304, 99, 3, 1, 0, '2020-12-05 17:38:42'),
-(11, 8, 'Hernán Arango Isaza', 2, '5466546546546', 'hernanarangoisaza@gmail.com', '', '3186801552', '2020-12-06', 2, 'Cra 31#84-20', 16, 99, 3, 3, 0, '2020-12-06 11:10:35'),
-(12, 6, '', 1, '', '', '', '', '0000-00-00', 1, '', 1097, 91, 5, 1, 0, '2020-12-06 11:39:56'),
-(13, 6, '', 1, '', '', '', '', '0000-00-00', 1, '', 1097, 91, 5, 1, 1, '2020-12-06 11:40:50');
+(1, 13, 'Hernán Arango Isaza', 2, '75068986', 'hernanarangoisaza@gmail.com', '3006137257', '3186801552', '1972-12-01', 1, 'Cra 31#84-20', 657, 66, 2, 1, 1, '2020-12-15 00:13:19');
 
 -- --------------------------------------------------------
 
@@ -1428,34 +1365,29 @@ DROP TABLE IF EXISTS `preguntas_encuesta`;
 CREATE TABLE `preguntas_encuesta` (
   `idPreguntaEncuesta` int(11) NOT NULL,
   `textoPregunta` text DEFAULT NULL,
+  `orden` tinyint(3) DEFAULT NULL,
   `estado` tinyint(4) NOT NULL DEFAULT 1,
   `auditoria` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Truncar tablas antes de insertar `preguntas_encuesta`
---
-
-TRUNCATE TABLE `preguntas_encuesta`;
---
 -- Volcado de datos para la tabla `preguntas_encuesta`
 --
 
-INSERT INTO `preguntas_encuesta` (`idPreguntaEncuesta`, `textoPregunta`, `estado`, `auditoria`) VALUES
-(1, '¿Dolor de garganta?', 1, '2020-12-05 22:18:10'),
-(2, '¿Malestar general y dolor muscular que te limite las actividades de la vida diaria?', 1, '2020-11-20 16:34:36'),
-(3, '¿Fiebre igual o mayor a 38 grados medida con termómetro?', 1, '2020-11-20 16:34:48'),
-(4, '¿Tos seca y persistente de inicio reciente?', 1, '2020-11-20 16:35:04'),
-(5, '¿Dificultad para respirar de inicio reciente?', 1, '2020-11-20 16:35:16'),
-(6, '¿Pérdida del olfato y/o el gusto?', 1, '2020-11-20 16:35:26'),
-(7, '¿Congestión nasal o exceso de mucosidad?', 1, '2020-11-20 16:35:37'),
-(8, '¿Diarrea?', 1, '2020-11-20 16:35:48'),
-(9, '¿Dolor de cabeza?', 1, '2020-11-20 16:35:57'),
-(10, '¿Actualmente se encuentras en aislamiento y en espera del resultado de una prueba para Coronavirus COVID-19?', 1, '2020-11-20 16:36:06'),
-(11, '¿Actualmente se encuentra en aislamiento luego de haber sido diagnosticado con prueba positiva para Coronavirus COVID-19?', 1, '2020-11-20 16:36:16'),
-(12, '¿Vive con alguien en proceso de diagnóstico (le ordenaron prueba) o confirmado de tener COVID-19?', 1, '2020-11-20 16:36:25'),
-(13, '¿En los últimos 14 días ha tenido contacto estrecho (por más de 15 minutos, a menos de 2 metros y sin usar elementos de protección personal) con alguien en proceso de diagnóstico (le ordenaron prueba) o confirmado de COVID-19?', 1, '2020-11-20 16:36:49'),
-(14, '¿De las anteriores preguntas de control de síntomas, has repondido SI en alguna de ellas?', 1, '2020-11-20 16:36:54');
+INSERT INTO `preguntas_encuesta` (`idPreguntaEncuesta`, `textoPregunta`, `orden`, `estado`, `auditoria`) VALUES
+(1, '¿Dolor de garganta?', 1, 1, '2020-12-11 20:14:04'),
+(2, '¿Malestar general y dolor muscular que te limite las actividades de la vida diaria?', 2, 1, '2020-12-11 20:14:05'),
+(3, '¿Fiebre igual o mayor a 38 grados medida con termómetro?', 3, 1, '2020-12-11 20:14:06'),
+(4, '¿Tos seca y persistente de inicio reciente?', 4, 1, '2020-12-11 20:14:07'),
+(5, '¿Dificultad para respirar de inicio reciente?', 5, 1, '2020-12-11 20:14:08'),
+(6, '¿Pérdida del olfato y/o el gusto?', 6, 1, '2020-12-11 20:14:09'),
+(7, '¿Congestión nasal o exceso de mucosidad?', 7, 1, '2020-12-11 20:14:11'),
+(8, '¿Diarrea?', 8, 1, '2020-12-11 20:14:13'),
+(9, '¿Dolor de cabeza?', 9, 1, '2020-12-11 20:14:17'),
+(10, '¿Actualmente se encuentras en aislamiento y en espera del resultado de una prueba para Coronavirus COVID-19?', 10, 1, '2020-12-11 20:14:20'),
+(11, '¿Actualmente se encuentra en aislamiento luego de haber sido diagnosticado con prueba positiva para Coronavirus COVID-19?', 11, 1, '2020-12-11 20:14:23'),
+(12, '¿Vive con alguien en proceso de diagnóstico (le ordenaron prueba) o confirmado de tener COVID-19?', 12, 1, '2020-12-11 20:14:25'),
+(13, '¿En los últimos 14 días ha tenido contacto estrecho (por más de 15 minutos, a menos de 2 metros y sin usar elementos de protección personal) con alguien en proceso de diagnóstico (le ordenaron prueba) o confirmado de COVID-19?', 13, 1, '2020-12-11 20:14:29');
 
 -- --------------------------------------------------------
 
@@ -1473,18 +1405,11 @@ CREATE TABLE `programas_formacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Truncar tablas antes de insertar `programas_formacion`
---
-
-TRUNCATE TABLE `programas_formacion`;
---
 -- Volcado de datos para la tabla `programas_formacion`
 --
 
 INSERT INTO `programas_formacion` (`idProgramaFormacion`, `nombreLargoProgramaFormacion`, `nombreCorto`, `estado`, `auditoria`) VALUES
-(4, 'Análisis y desarrollo de sistemas de información', 'ADSI', 1, '2020-11-29 14:55:25'),
-(6, 'ffffffff', 'fggggggggggg', 0, '2020-12-06 08:11:38'),
-(7, 'bbbbbbbbbb', 'bjjjjjjjjjjjjjsdsaddadada', 0, '2020-12-06 08:14:36');
+(4, 'Análisis y desarrollo de sistemas de información', 'ADSI', 1, '2020-11-29 14:55:25');
 
 -- --------------------------------------------------------
 
@@ -1503,21 +1428,23 @@ CREATE TABLE `respuestas_encuesta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Truncar tablas antes de insertar `respuestas_encuesta`
---
-
-TRUNCATE TABLE `respuestas_encuesta`;
---
 -- Volcado de datos para la tabla `respuestas_encuesta`
 --
 
 INSERT INTO `respuestas_encuesta` (`idRespuestaEncuesta`, `idEncuesta`, `idPreguntaEncuesta`, `respuestaSiNo`, `estado`, `auditoria`) VALUES
-(1, 1, 9, 1, 1, '2020-12-06 12:51:19'),
-(2, 1, 1, 1, 0, '2020-12-06 09:19:19'),
-(3, 15, 12, 1, 0, '2020-12-06 12:32:53'),
-(4, 9, 11, 0, 0, '2020-12-06 09:50:16'),
-(5, 1, 7, -1, 0, '2020-12-06 09:55:15'),
-(6, 1, 13, 0, 0, '2020-12-06 12:56:48');
+(1, 1, 1, 0, 1, '2020-12-15 00:35:47'),
+(2, 1, 2, 0, 1, '2020-12-15 00:35:47'),
+(3, 1, 3, 0, 1, '2020-12-15 00:35:47'),
+(4, 1, 4, 0, 1, '2020-12-15 00:35:47'),
+(5, 1, 5, 0, 1, '2020-12-15 00:35:47'),
+(6, 1, 6, 0, 1, '2020-12-15 00:35:47'),
+(7, 1, 7, 0, 1, '2020-12-15 00:35:47'),
+(8, 1, 8, 1, 1, '2020-12-15 00:35:47'),
+(9, 1, 9, 0, 1, '2020-12-15 00:35:47'),
+(10, 1, 10, 0, 1, '2020-12-15 00:35:47'),
+(11, 1, 11, 0, 1, '2020-12-15 00:35:47'),
+(12, 1, 12, 0, 1, '2020-12-15 00:35:47'),
+(13, 1, 13, 0, 1, '2020-12-15 00:35:47');
 
 -- --------------------------------------------------------
 
@@ -1538,19 +1465,15 @@ CREATE TABLE `roles_sistema` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Truncar tablas antes de insertar `roles_sistema`
---
-
-TRUNCATE TABLE `roles_sistema`;
---
 -- Volcado de datos para la tabla `roles_sistema`
 --
 
 INSERT INTO `roles_sistema` (`idRolSistema`, `nombreLargoRolSistema`, `nombreCorto`, `descripcionRolSistema`, `permisos`, `restricciones`, `estado`, `auditoria`) VALUES
-(1, 'Administrador', 'admin', 'Súper usuario del sistema que tiene acceso a todas las opciones y acciones del sistema sin ninguna restricción.', '[super-admin]', '[n/a]', 1, '2020-12-09 08:44:25'),
-(2, 'Auxiliar - Toma Temperatura', 'auxtemperatura', 'Usuario colaborador del administrador del sistema que sólo puede gestionar las tomas de temperatura.', '[auxiliar-temperatura]', '[n/a]', 1, '2020-12-09 08:44:34'),
+(1, 'Administrador', 'admin', 'Súper usuario del sistema que tiene acceso a todas las opciones y acciones del sistema sin ninguna restricción.', '[super-admin]', '[n/a]', 1, '2020-12-15 06:52:15'),
+(2, 'Auxiliar - Toma Temperatura', 'auxtemperatura', 'Usuario colaborador del administrador del sistema que sólo puede gestionar las tomas de temperatura a la entrada y salida de la Sede.', '[auxiliar-temperatura]', '[n/a]', 1, '2020-12-12 06:22:42'),
 (3, 'Auxiliar - Encuestas', 'auxencuestas', 'Usuario colaborador del administrador del sistema que sólo puede ayudar a gestionar las encuestas de otras personas que no lo pudieron hacer por sus propios medios.', '[auxiliar-encuestas]', '[n/a]', 1, '2020-12-09 08:44:39'),
-(4, 'Auxiliar - Asistente', 'auxasistente', '', '[auxiliar-temperatura],[auxiliar-encuestas]', '[n/a]', 1, '2020-12-09 08:44:44');
+(4, 'Auxiliar - Asistente', 'auxasistente', 'Usuario colaborador del administrador del sistema que agrupa los demás roles de Auxiliares.', '[auxiliar-temperatura],[auxiliar-encuestas], [auxiliar-aprendices]', '[n/a]', 1, '2020-12-12 06:25:49'),
+(5, 'Auxiliar - Aprendices', 'auxaprendices', 'Usuario colaborador del administrador del sistema que sólo puede ayudar a gestionar la información personal requerida para el uso del sistema.', '[auxiliar-aprendices]', '[n/a]', 1, '2020-12-12 06:25:56');
 
 -- --------------------------------------------------------
 
@@ -1568,18 +1491,12 @@ CREATE TABLE `tipos_generos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Truncar tablas antes de insertar `tipos_generos`
---
-
-TRUNCATE TABLE `tipos_generos`;
---
 -- Volcado de datos para la tabla `tipos_generos`
 --
 
 INSERT INTO `tipos_generos` (`idTipoGenero`, `nombreLargoGenero`, `nombreCorto`, `estado`, `auditoria`) VALUES
 (1, 'Masculino', 'M', 1, '2020-11-25 13:18:15'),
-(2, 'Femenino', 'F', 1, '2020-11-25 13:18:34'),
-(3, 'ddddddddddd', 'rr', 1, '2020-12-08 08:54:42');
+(2, 'Femenino', 'F', 1, '2020-11-25 13:18:34');
 
 -- --------------------------------------------------------
 
@@ -1596,11 +1513,6 @@ CREATE TABLE `tipos_identificacion` (
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncar tablas antes de insertar `tipos_identificacion`
---
-
-TRUNCATE TABLE `tipos_identificacion`;
 --
 -- Volcado de datos para la tabla `tipos_identificacion`
 --
@@ -1621,17 +1533,12 @@ INSERT INTO `tipos_identificacion` (`idTipoIdentificacion`, `nombreLargoIdentifi
 DROP TABLE IF EXISTS `tipos_vinculaciones_sena`;
 CREATE TABLE `tipos_vinculaciones_sena` (
   `idTipoVinculacion` int(11) NOT NULL,
-  `nombreLargoVinculacion` varchar(75) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `nombreCorto` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `nombreLargoVinculacion` varchar(75) DEFAULT NULL,
+  `nombreCorto` varchar(50) DEFAULT NULL,
   `estado` tinyint(4) NOT NULL DEFAULT 1,
   `auditoria` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
---
--- Truncar tablas antes de insertar `tipos_vinculaciones_sena`
---
-
-TRUNCATE TABLE `tipos_vinculaciones_sena`;
 --
 -- Volcado de datos para la tabla `tipos_vinculaciones_sena`
 --
@@ -1668,22 +1575,17 @@ CREATE TABLE `tomas_temperatura` (
   `temperaturaEntrada` decimal(5,2) DEFAULT NULL,
   `fechaHoraTomaSalida` datetime DEFAULT NULL,
   `temperaturaSalida` decimal(5,2) DEFAULT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT 1,
   `auditoria` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Truncar tablas antes de insertar `tomas_temperatura`
---
-
-TRUNCATE TABLE `tomas_temperatura`;
---
 -- Volcado de datos para la tabla `tomas_temperatura`
 --
 
-INSERT INTO `tomas_temperatura` (`idToma`, `idEncuesta`, `fechaHoraTomaEntrada`, `temperaturaEntrada`, `fechaHoraTomaSalida`, `temperaturaSalida`, `estado`, `auditoria`) VALUES
-(2, 6, '2020-12-10 09:24:30', '36.60', NULL, '38.00', 1, '2020-12-10 13:16:06'),
-(3, 5, '2020-12-10 11:58:13', '43.90', '2020-12-10 13:07:39', '43.00', 1, '2020-12-10 13:07:44');
+INSERT INTO `tomas_temperatura` (`idToma`, `idEncuesta`, `fechaHoraTomaEntrada`, `temperaturaEntrada`, `fechaHoraTomaSalida`, `temperaturaSalida`, `idUsuario`, `estado`, `auditoria`) VALUES
+(1, 1, '0000-00-00 00:00:00', '36.00', '0000-00-00 00:00:00', '37.00', 2, 1, '2020-12-15 06:36:53');
 
 -- --------------------------------------------------------
 
@@ -1713,17 +1615,12 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Truncar tablas antes de insertar `usuarios`
---
-
-TRUNCATE TABLE `usuarios`;
---
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `idTipoVinculacion`, `nombreCompleto`, `idTipoIdentificacion`, `identificacion`, `email`, `telefonoPersonal`, `fechaNacimiento`, `idTipoGenero`, `direccionResidencia`, `idMunicipio`, `idDepartamento`, `idCentroFormacion`, `idRolSistema`, `passwordSistema`, `estado`, `auditoria`) VALUES
-(1, 10, 'pedro perez', 4, '541212', 'yo@gfgg.com', '424242', '2020-12-02', 1, 'rrwr 43423 werwerr', 7, 15, 4, 1, '23edrfty', 1, '2020-12-02 05:25:34'),
-(2, 2, 'Luz Catalina', 1, '30327597', 'hernanarangoisaza@gmail.com', '3006137257', '2020-12-08', 1, 'Cra 31#84-20', 1097, 91, 1, 1, '$2y$10$R7XFfUDkrTCBlS1pstZM3Oc77UMMhdmZp4V4KPkbhvOwlyX1eraZ.', 1, '2020-12-09 17:42:35');
+(1, 15, 'Valeria Arango Pérez', 4, '1053798445', 'valeria@dominio.com', '3105176573', '1996-11-01', 2, 'Los Ángeles', 7, 15, 4, 2, '$2y$10$KrMvZvevUfCahcN2rrruB.KZuhvA.p.Nrdqi1nadYicE5O1RrhoD.', 1, '2020-12-15 00:31:54'),
+(2, 4, 'Luz Catalina Salinas Henao', 2, '30327597', 'luzcata@gmail.com', '3006137257', '1973-04-09', 2, 'Cra 31#84-20', 657, 66, 3, 1, '$2y$10$CyJacpngMec8B11jr5rn6e6vyRR46TlP3oqNPHmKSlfSbyNN91diW', 1, '2020-12-15 06:52:25');
 
 --
 -- Índices para tablas volcadas
@@ -1834,7 +1731,8 @@ ALTER TABLE `tipos_vinculaciones_sena`
 --
 ALTER TABLE `tomas_temperatura`
   ADD PRIMARY KEY (`idToma`),
-  ADD KEY `FK_tomas_temperatura_encuesta_signos` (`idEncuesta`);
+  ADD KEY `FK_tomas_temperatura_encuesta_signos` (`idEncuesta`),
+  ADD KEY `FK_tomas_temperatura_usuarios` (`idUsuario`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -1869,13 +1767,13 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `encuesta_signos`
 --
 ALTER TABLE `encuesta_signos`
-  MODIFY `idEncuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idEncuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `fichas_formacion`
 --
 ALTER TABLE `fichas_formacion`
-  MODIFY `idFichaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idFichaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
@@ -1893,13 +1791,13 @@ ALTER TABLE `municipios`
 -- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
-  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas_encuesta`
 --
 ALTER TABLE `preguntas_encuesta`
-  MODIFY `idPreguntaEncuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idPreguntaEncuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `programas_formacion`
@@ -1911,19 +1809,19 @@ ALTER TABLE `programas_formacion`
 -- AUTO_INCREMENT de la tabla `respuestas_encuesta`
 --
 ALTER TABLE `respuestas_encuesta`
-  MODIFY `idRespuestaEncuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idRespuestaEncuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `roles_sistema`
 --
 ALTER TABLE `roles_sistema`
-  MODIFY `idRolSistema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idRolSistema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_generos`
 --
 ALTER TABLE `tipos_generos`
-  MODIFY `idTipoGenero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idTipoGenero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_identificacion`
@@ -1941,7 +1839,7 @@ ALTER TABLE `tipos_vinculaciones_sena`
 -- AUTO_INCREMENT de la tabla `tomas_temperatura`
 --
 ALTER TABLE `tomas_temperatura`
-  MODIFY `idToma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idToma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -2003,7 +1901,8 @@ ALTER TABLE `respuestas_encuesta`
 -- Filtros para la tabla `tomas_temperatura`
 --
 ALTER TABLE `tomas_temperatura`
-  ADD CONSTRAINT `FK_tomas_temperatura_encuesta_signos` FOREIGN KEY (`idEncuesta`) REFERENCES `encuesta_signos` (`idEncuesta`);
+  ADD CONSTRAINT `FK_tomas_temperatura_encuesta_signos` FOREIGN KEY (`idEncuesta`) REFERENCES `encuesta_signos` (`idEncuesta`),
+  ADD CONSTRAINT `FK_tomas_temperatura_usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`);
 
 --
 -- Filtros para la tabla `usuarios`
