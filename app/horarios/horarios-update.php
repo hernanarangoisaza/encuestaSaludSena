@@ -1,4 +1,19 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
+}
+?>
+
+<?php
 // Include config file
 require_once "../core/config.php";
 
@@ -15,37 +30,37 @@ if(isset($_POST["idHorario"]) && !empty($_POST["idHorario"])){
     // Get hidden input value
     $idHorario = $_POST["idHorario"];
 
-        // Prepare an update statement
-        
-        $horaInicial = trim($_POST["horaInicial"]);
-		$horaFinal = trim($_POST["horaFinal"]);
-		$nombreCorto = trim($_POST["nombreCorto"]);
-        $jornada = trim($_POST["jornada"]);
-		$estado = trim($_POST["estado"]);
-		$auditoria = date('Y-m-d H:i:s');
+    // Prepare an update statement
+    
+    $horaInicial = trim($_POST["horaInicial"]);
+	$horaFinal = trim($_POST["horaFinal"]);
+	$nombreCorto = trim($_POST["nombreCorto"]);
+    $jornada = trim($_POST["jornada"]);
+	$estado = trim($_POST["estado"]);
+	$auditoria = date('Y-m-d H:i:s');
 
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió');
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió');
+    }
+   $stmtPDO = $linkPDO->prepare("UPDATE horarios SET horaInicial=?,horaFinal=?,nombreCorto=?,jornada=?,estado=?,auditoria=? WHERE idHorario=?");
+
+    if(!$stmtPDO->execute([ $horaInicial,$horaFinal,$nombreCorto,$jornada,$estado,$auditoria,$idHorario ])) {
+            echo "Algo falló. Por favor intente de nuevo.";
+            header("location: ../core/error.php");
+        } else{
+           $stmtPDO = null;
+            // header("location: horarios-read.php?idHorario=$idHorario");
+            header("location: horarios-index.php");
         }
-       $stmtPDO = $linkPDO->prepare("UPDATE horarios SET horaInicial=?,horaFinal=?,nombreCorto=?,jornada=?,estado=?,auditoria=? WHERE idHorario=?");
-
-        if(!$stmtPDO->execute([ $horaInicial,$horaFinal,$nombreCorto,$jornada,$estado,$auditoria,$idHorario ])) {
-                echo "Algo falló. Por favor intente de nuevo.";
-                header("location: ../core/error.php");
-            } else{
-               $stmtPDO = null;
-                // header("location: horarios-read.php?idHorario=$idHorario");
-                header("location: horarios-index.php");
-            }
 } else {
     // Check existence of id parameter before processing further
     if(isset($_GET["idHorario"]) && !empty(trim($_GET["idHorario"]))){

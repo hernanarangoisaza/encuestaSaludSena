@@ -1,3 +1,18 @@
+<?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

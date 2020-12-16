@@ -1,4 +1,19 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
+}
+?>
+
+<?php
 // Include config file
 require_once "../core/config.php";
 

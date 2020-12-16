@@ -1,17 +1,14 @@
 <?php
 session_start();
 if (empty($_SESSION["login"])) {
-    header("Location: ../index.php");
+    header("Location: ../core/menu.php");
     exit();    
 }
-// foreach ($_SESSION as $key=>$val)
-// echo $key." ".$val."<br/>";
-// echo $_SESSION['permisosRolSistema'];
 ?>
 
 <?php
 if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-    header("Location: ../index.php");
+    header("Location: ../core/menu.php");
     exit();
 }
 ?>

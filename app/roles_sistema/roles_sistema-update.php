@@ -1,4 +1,19 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
+}
+?>
+
+<?php
 // Include config file
 require_once "../core/config.php";
 
@@ -16,38 +31,38 @@ if(isset($_POST["idRolSistema"]) && !empty($_POST["idRolSistema"])){
     // Get hidden input value
     $idRolSistema = $_POST["idRolSistema"];
 
-        // Prepare an update statement
-        
-        $nombreLargoRolSistema = trim($_POST["nombreLargoRolSistema"]);
-		$nombreCorto = trim($_POST["nombreCorto"]);
-		$descripcionRolSistema = trim($_POST["descripcionRolSistema"]);
-		$permisos = trim($_POST["permisos"]);
-		$restricciones = trim($_POST["restricciones"]);
-		$estado = trim($_POST["estado"]);
-		$auditoria = date('Y-m-d H:i:s');
+    // Prepare an update statement
+    
+    $nombreLargoRolSistema = trim($_POST["nombreLargoRolSistema"]);
+	$nombreCorto = trim($_POST["nombreCorto"]);
+	$descripcionRolSistema = trim($_POST["descripcionRolSistema"]);
+	$permisos = trim($_POST["permisos"]);
+	$restricciones = trim($_POST["restricciones"]);
+	$estado = trim($_POST["estado"]);
+	$auditoria = date('Y-m-d H:i:s');
 
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió');
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió');
+    }
+   $stmtPDO = $linkPDO->prepare("UPDATE roles_sistema SET nombreLargoRolSistema=?,nombreCorto=?,descripcionRolSistema=?,permisos=?,restricciones=?,estado=?,auditoria=? WHERE idRolSistema=?");
+
+    if(!$stmtPDO->execute([ $nombreLargoRolSistema,$nombreCorto,$descripcionRolSistema,$permisos,$restricciones,$estado,$auditoria,$idRolSistema  ])) {
+            echo "Algo falló. Por favor intente de nuevo.";
+            header("location: ../core/error.php");
+        } else{
+           $stmtPDO = null;
+            // header("location: roles_sistema-read.php?idRolSistema=$idRolSistema");
+            header("location: roles_sistema-index.php");
         }
-       $stmtPDO = $linkPDO->prepare("UPDATE roles_sistema SET nombreLargoRolSistema=?,nombreCorto=?,descripcionRolSistema=?,permisos=?,restricciones=?,estado=?,auditoria=? WHERE idRolSistema=?");
-
-        if(!$stmtPDO->execute([ $nombreLargoRolSistema,$nombreCorto,$descripcionRolSistema,$permisos,$restricciones,$estado,$auditoria,$idRolSistema  ])) {
-                echo "Algo falló. Por favor intente de nuevo.";
-                header("location: ../core/error.php");
-            } else{
-               $stmtPDO = null;
-                // header("location: roles_sistema-read.php?idRolSistema=$idRolSistema");
-                header("location: roles_sistema-index.php");
-            }
 } else {
     // Check existence of id parameter before processing further
     if(isset($_GET["idRolSistema"]) && !empty(trim($_GET["idRolSistema"]))){

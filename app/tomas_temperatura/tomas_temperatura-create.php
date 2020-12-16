@@ -1,76 +1,80 @@
 <?php
 session_start();
 if (empty($_SESSION["login"])) {
-    header("Location: ../index.php");
+    header("Location: ../core/menu.php");
     exit();    
 }
-// foreach ($_SESSION as $key=>$val)
-// echo $key." ".$val."<br/>";
-// echo $_SESSION['permisosRolSistema'];
 ?>
 
 <?php
-// Include config file
-require_once "../core/config.php";
-
-// Define variables and initialize with empty values
-$idEncuesta = "";
-$fechaHoraTomaEntrada = "";
-$temperaturaEntrada = "";
-$fechaHoraTomaSalida = "";
-$temperaturaSalida = "";
-$idUsuario = "";
-$estado = "1";
-$auditoria = "";
-
-if (isset($_GET['idEncuesta'])) {
-
-    $idEncuesta = isset($_GET['idEncuesta']) ? $_GET['idEncuesta'] : '';
-    $disabled = "xdisabled";
-    $readonly1 = "solo-lectura";
-} else {
-    $idEncuesta = isset($_POST['idEncuesta']) ? $_POST['idEncuesta'] : '';
-    $disabled = "";
-    $readonly1 = "";
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
 }
+?>
 
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+<?php
+    // Include config file
+    require_once "../core/config.php";
 
-    $idEncuesta = trim($_POST["idEncuesta"]);
-    $fechaHoraTomaEntrada = trim($_POST["fechaHoraTomaEntrada"]);
-	$temperaturaEntrada = trim($_POST["temperaturaEntrada"]);
-	$fechaHoraTomaSalida = trim($_POST["fechaHoraTomaSalida"]);
-	$temperaturaSalida = trim($_POST["temperaturaSalida"]);
-    $idUsuario = trim($_POST["idUsuario"]);
-    $estado = trim($_POST["estado"]);
-	$auditoria = date('Y-m-d H:i:s');
+    // Define variables and initialize with empty values
+    $idEncuesta = "";
+    $fechaHoraTomaEntrada = "";
+    $temperaturaEntrada = "";
+    $fechaHoraTomaSalida = "";
+    $temperaturaSalida = "";
+    $idUsuario = "";
+    $estado = "1";
+    $auditoria = "";
 
-    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-    
-    $options = [
-      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-    ];
-    
-    try {
-      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-    } catch (Exception $e) {
-      error_log($e->getMessage());
-      exit('Algo extraño sucedió'); //something a user can understand
+    if (isset($_GET['idEncuesta'])) {
+
+        $idEncuesta = isset($_GET['idEncuesta']) ? $_GET['idEncuesta'] : '';
+        $disabled = "xdisabled";
+        $readonly1 = "solo-lectura";
+    } else {
+        $idEncuesta = isset($_POST['idEncuesta']) ? $_POST['idEncuesta'] : '';
+        $disabled = "";
+        $readonly1 = "";
     }
-    
-    $stmtPDO = $linkPDO->prepare("INSERT INTO tomas_temperatura (idEncuesta,fechaHoraTomaEntrada,temperaturaEntrada,fechaHoraTomaSalida,temperaturaSalida,idUsuario,estado,auditoria) VALUES (?,?,?,?,?,?,?,?)"); 
-    
-    if($stmtPDO->execute([ $idEncuesta,$fechaHoraTomaEntrada,$temperaturaEntrada,$fechaHoraTomaSalida,$temperaturaSalida,$idUsuario,$estado,$auditoria ])) {
-            $stmtPDO = null;
-            $rutaRegresarA = $_SESSION["rutaRegresarA"];
-            header("location: " . $rutaRegresarA);
-        } else{
-            echo "Algo falló. Por favor intente de nuevo.";
+
+    // Processing form data when form is submitted
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+        $idEncuesta = trim($_POST["idEncuesta"]);
+        $fechaHoraTomaEntrada = trim($_POST["fechaHoraTomaEntrada"]);
+    	$temperaturaEntrada = trim($_POST["temperaturaEntrada"]);
+    	$fechaHoraTomaSalida = trim($_POST["fechaHoraTomaSalida"]);
+    	$temperaturaSalida = trim($_POST["temperaturaSalida"]);
+        $idUsuario = trim($_POST["idUsuario"]);
+        $estado = trim($_POST["estado"]);
+    	$auditoria = date('Y-m-d H:i:s');
+
+        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+        
+        $options = [
+          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+        ];
+        
+        try {
+          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+        } catch (Exception $e) {
+          error_log($e->getMessage());
+          exit('Algo extraño sucedió'); //something a user can understand
         }
-}
+        
+        $stmtPDO = $linkPDO->prepare("INSERT INTO tomas_temperatura (idEncuesta,fechaHoraTomaEntrada,temperaturaEntrada,fechaHoraTomaSalida,temperaturaSalida,idUsuario,estado,auditoria) VALUES (?,?,?,?,?,?,?,?)"); 
+        
+        if($stmtPDO->execute([ $idEncuesta,$fechaHoraTomaEntrada,$temperaturaEntrada,$fechaHoraTomaSalida,$temperaturaSalida,$idUsuario,$estado,$auditoria ])) {
+                $stmtPDO = null;
+                $rutaRegresarA = $_SESSION["rutaRegresarA"];
+                header("location: " . $rutaRegresarA);
+            } else{
+                echo "Algo falló. Por favor intente de nuevo.";
+            }
+    }
 ?>
 
 <!DOCTYPE html>

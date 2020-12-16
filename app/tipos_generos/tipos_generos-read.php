@@ -1,4 +1,19 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
+}
+?>
+
+<?php
 // Check existence of id parameter before processing further
 if(isset($_GET["idTipoGenero"]) && !empty(trim($_GET["idTipoGenero"]))){
     // Include config file

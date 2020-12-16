@@ -1,4 +1,19 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
+}
+?>
+
+<?php
 // Include config file
 require_once "../core/config.php";
 
@@ -20,42 +35,42 @@ if(isset($_POST["idEncuesta"]) && !empty($_POST["idEncuesta"])){
     // Get hidden input value
     $idEncuesta = $_POST["idEncuesta"];
 
-        // Prepare an update statement
-        
-        $idPersona = trim($_POST["idPersona"]);
-		$fechaHoraDiligenciamiento = trim($_POST["fechaHoraDiligenciamiento"]);
-		$idSedeIngreso = trim($_POST["idSedeIngreso"]);
-		$idHorario = trim($_POST["idHorario"]);
-		$aceptacionConsideraciones = trim($_POST["aceptacionConsideraciones"]);
-		$autorizacionTratamientoDatos = trim($_POST["autorizacionTratamientoDatos"]);
-		$autorizacionIngreso = trim($_POST["autorizacionIngreso"]);
-		$observacionAdicional = trim($_POST["observacionAdicional"]);
-		$aceptacionRespuestaPositiva = trim($_POST["aceptacionRespuestaPositiva"]);
-		$estado = trim($_POST["estado"]);
-		$auditoria = date('Y-m-d H:i:s');
-		
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió');
-        }
-       $stmtPDO = $linkPDO->prepare("UPDATE encuesta_signos SET idPersona=?,fechaHoraDiligenciamiento=?,idSedeIngreso=?,idHorario=?,aceptacionConsideraciones=?,autorizacionTratamientoDatos=?,autorizacionIngreso=?,observacionAdicional=?,aceptacionRespuestaPositiva=?,estado=?,auditoria=? WHERE idEncuesta=?");
+    // Prepare an update statement
+    
+    $idPersona = trim($_POST["idPersona"]);
+	$fechaHoraDiligenciamiento = trim($_POST["fechaHoraDiligenciamiento"]);
+	$idSedeIngreso = trim($_POST["idSedeIngreso"]);
+	$idHorario = trim($_POST["idHorario"]);
+	$aceptacionConsideraciones = trim($_POST["aceptacionConsideraciones"]);
+	$autorizacionTratamientoDatos = trim($_POST["autorizacionTratamientoDatos"]);
+	$autorizacionIngreso = trim($_POST["autorizacionIngreso"]);
+	$observacionAdicional = trim($_POST["observacionAdicional"]);
+	$aceptacionRespuestaPositiva = trim($_POST["aceptacionRespuestaPositiva"]);
+	$estado = trim($_POST["estado"]);
+	$auditoria = date('Y-m-d H:i:s');
+	
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió');
+    }
+   $stmtPDO = $linkPDO->prepare("UPDATE encuesta_signos SET idPersona=?,fechaHoraDiligenciamiento=?,idSedeIngreso=?,idHorario=?,aceptacionConsideraciones=?,autorizacionTratamientoDatos=?,autorizacionIngreso=?,observacionAdicional=?,aceptacionRespuestaPositiva=?,estado=?,auditoria=? WHERE idEncuesta=?");
 
-        if(!$stmtPDO->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria,$idEncuesta  ])) {
-                echo "Algo falló. Por favor intente de nuevo.";
-                header("location: ../core/error.php");
-            } else{
-               $stmtPDO = null;
-                // header("location: encuesta_signos-read.php?idEncuesta=$idEncuesta");
-                header("location: encuesta_signos-index.php");
-            }
+    if(!$stmtPDO->execute([ $idPersona,$fechaHoraDiligenciamiento,$idSedeIngreso,$idHorario,$aceptacionConsideraciones,$autorizacionTratamientoDatos,$autorizacionIngreso,$observacionAdicional,$aceptacionRespuestaPositiva,$estado,$auditoria,$idEncuesta  ])) {
+            echo "Algo falló. Por favor intente de nuevo.";
+            header("location: ../core/error.php");
+        } else{
+           $stmtPDO = null;
+            // header("location: encuesta_signos-read.php?idEncuesta=$idEncuesta");
+            header("location: encuesta_signos-index.php");
+        }
 } else {
     // Check existence of id parameter before processing further
     if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){

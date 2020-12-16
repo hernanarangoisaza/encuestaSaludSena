@@ -1,4 +1,19 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
+}
+?>
+
+<?php
 // Include config file
 require_once "../core/config.php";
 
@@ -13,34 +28,34 @@ if(isset($_POST["idDepartamento"]) && !empty($_POST["idDepartamento"])){
     // Get hidden input value
     $idDepartamento = $_POST["idDepartamento"];
 
-        // Prepare an update statement
-        
-        $codigoDepartamento = trim($_POST["codigoDepartamento"]);
-        $departamento = trim($_POST["departamento"]);
-		$estado = trim($_POST["estado"]);
-		$auditoria = date('Y-m-d H:i:s');
-		
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió');
+    // Prepare an update statement
+    
+    $codigoDepartamento = trim($_POST["codigoDepartamento"]);
+    $departamento = trim($_POST["departamento"]);
+	$estado = trim($_POST["estado"]);
+	$auditoria = date('Y-m-d H:i:s');
+	
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió');
+    }
+   $stmtPDO = $linkPDO->prepare("UPDATE departamentos SET codigodepartamento=?,departamento=?,estado=?,auditoria=? WHERE idDepartamento=?");
+    if(!$stmtPDO->execute([ $codigoDepartamento,$departamento,$estado,$auditoria,$idDepartamento ])) {
+            echo "Algo falló. Por favor intente de nuevo.";
+            header("location: ../core/error.php");
+        } else{
+           $stmtPDO = null;
+            // header("location: departamentos-read.php?idDepartamento=$idDepartamento");
+            header("location: departamentos-index.php");
         }
-       $stmtPDO = $linkPDO->prepare("UPDATE departamentos SET codigodepartamento=?,departamento=?,estado=?,auditoria=? WHERE idDepartamento=?");
-        if(!$stmtPDO->execute([ $codigoDepartamento,$departamento,$estado,$auditoria,$idDepartamento ])) {
-                echo "Algo falló. Por favor intente de nuevo.";
-                header("location: ../core/error.php");
-            } else{
-               $stmtPDO = null;
-                // header("location: departamentos-read.php?idDepartamento=$idDepartamento");
-                header("location: departamentos-index.php");
-            }
 } else {
     // Check existence of id parameter before processing further
     if(isset($_GET["idDepartamento"]) && !empty(trim($_GET["idDepartamento"]))){

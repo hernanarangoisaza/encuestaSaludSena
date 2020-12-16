@@ -1,4 +1,19 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
+}
+?>
+
+<?php
 // Include config file
 require_once "../core/config.php";
 
@@ -13,35 +28,35 @@ if(isset($_POST["idTipoGenero"]) && !empty($_POST["idTipoGenero"])){
     // Get hidden input value
     $idTipoGenero = $_POST["idTipoGenero"];
 
-        // Prepare an update statement
-        
-        $nombreLargoGenero = trim($_POST["nombreLargoGenero"]);
-		$nombreCorto = trim($_POST["nombreCorto"]);
-		$estado = trim($_POST["estado"]);
-		$auditoria = date('Y-m-d H:i:s');
+    // Prepare an update statement
+    
+    $nombreLargoGenero = trim($_POST["nombreLargoGenero"]);
+	$nombreCorto = trim($_POST["nombreCorto"]);
+	$estado = trim($_POST["estado"]);
+	$auditoria = date('Y-m-d H:i:s');
 
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió');
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió');
+    }
+   $stmtPDO = $linkPDO->prepare("UPDATE tipos_generos SET nombreLargoGenero=?,nombreCorto=?,estado=?,auditoria=? WHERE idTipoGenero=?");
+
+    if(!$stmtPDO->execute([ $nombreLargoGenero,$nombreCorto,$estado,$auditoria,$idTipoGenero  ])) {
+            echo "Algo falló. Por favor intente de nuevo.";
+            header("location: ../core/error.php");
+        } else{
+           $stmtPDO = null;
+            // header("location: tipos_generos-read.php?idTipoGenero=$idTipoGenero");
+            header("location: tipos_generos-index.php");
         }
-       $stmtPDO = $linkPDO->prepare("UPDATE tipos_generos SET nombreLargoGenero=?,nombreCorto=?,estado=?,auditoria=? WHERE idTipoGenero=?");
-
-        if(!$stmtPDO->execute([ $nombreLargoGenero,$nombreCorto,$estado,$auditoria,$idTipoGenero  ])) {
-                echo "Algo falló. Por favor intente de nuevo.";
-                header("location: ../core/error.php");
-            } else{
-               $stmtPDO = null;
-                // header("location: tipos_generos-read.php?idTipoGenero=$idTipoGenero");
-                header("location: tipos_generos-index.php");
-            }
 } else {
     // Check existence of id parameter before processing further
     if(isset($_GET["idTipoGenero"]) && !empty(trim($_GET["idTipoGenero"]))){

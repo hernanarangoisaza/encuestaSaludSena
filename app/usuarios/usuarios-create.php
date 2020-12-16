@@ -1,4 +1,19 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
+}
+?>
+
+<?php
 // Include config file
 require_once "../core/config.php";
 
@@ -22,56 +37,44 @@ $auditoria = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-/*    
-    // Validate input
-    $input_address = trim($_POST["address"]);
-    if(empty($input_address)){
-        $address_err = "Please enter an address.";
-    } else{
-        $address = $input_address;
-    }
 
-    // Check input errors before inserting in database
-    if(empty($name_err) && empty($address_err) && empty($salary_err)){
-        // Prepare an insert statement
- */
-        $idTipoVinculacion = trim($_POST["idTipoVinculacion"]);
-		$nombreCompleto = trim($_POST["nombreCompleto"]);
-		$idTipoIdentificacion = trim($_POST["idTipoIdentificacion"]);
-		$identificacion = trim($_POST["identificacion"]);
-		$email = trim($_POST["email"]);
-		$telefonoPersonal = trim($_POST["telefonoPersonal"]);
-		$fechaNacimiento = trim($_POST["fechaNacimiento"]);
-		$idTipoGenero = trim($_POST["idTipoGenero"]);
-		$direccionResidencia = trim($_POST["direccionResidencia"]);
-		$idMunicipio = trim($_POST["idMunicipio"]);
-		$idDepartamento = trim($_POST["idDepartamento"]);
-		$idCentroFormacion = trim($_POST["idCentroFormacion"]);
-		$idRolSistema = trim($_POST["idRolSistema"]);
-		// $passwordSistema = trim($_POST["passwordSistema"]);
-        $passwordSistema=password_hash($_POST["passwordSistema"], PASSWORD_DEFAULT);
-		$estado = trim($_POST["estado"]);
-		$auditoria = date('Y-m-d H:i:s');
-		
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió'); //something a user can understand
+    $idTipoVinculacion = trim($_POST["idTipoVinculacion"]);
+	$nombreCompleto = trim($_POST["nombreCompleto"]);
+	$idTipoIdentificacion = trim($_POST["idTipoIdentificacion"]);
+	$identificacion = trim($_POST["identificacion"]);
+	$email = trim($_POST["email"]);
+	$telefonoPersonal = trim($_POST["telefonoPersonal"]);
+	$fechaNacimiento = trim($_POST["fechaNacimiento"]);
+	$idTipoGenero = trim($_POST["idTipoGenero"]);
+	$direccionResidencia = trim($_POST["direccionResidencia"]);
+	$idMunicipio = trim($_POST["idMunicipio"]);
+	$idDepartamento = trim($_POST["idDepartamento"]);
+	$idCentroFormacion = trim($_POST["idCentroFormacion"]);
+	$idRolSistema = trim($_POST["idRolSistema"]);
+	// $passwordSistema = trim($_POST["passwordSistema"]);
+    $passwordSistema=password_hash($_POST["passwordSistema"], PASSWORD_DEFAULT);
+	$estado = trim($_POST["estado"]);
+	$auditoria = date('Y-m-d H:i:s');
+	
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió'); //something a user can understand
+    }
+   $stmtPDO = $linkPDO->prepare("INSERT INTO usuarios (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");        
+    if($stmtPDO->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idRolSistema,$passwordSistema,$estado,$auditoria  ])) {
+           $stmtPDO = null;
+            header("location: usuarios-index.php");
+        } else{
+            echo "Algo falló. Por favor intente de nuevo.";
         }
-       $stmtPDO = $linkPDO->prepare("INSERT INTO usuarios (idTipoVinculacion,nombreCompleto,idTipoIdentificacion,identificacion,email,telefonoPersonal,fechaNacimiento,idTipoGenero,direccionResidencia,idMunicipio,idDepartamento,idCentroFormacion,idRolSistema,passwordSistema,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");        
-        if($stmtPDO->execute([ $idTipoVinculacion,$nombreCompleto,$idTipoIdentificacion,$identificacion,$email,$telefonoPersonal,$fechaNacimiento,$idTipoGenero,$direccionResidencia,$idMunicipio,$idDepartamento,$idCentroFormacion,$idRolSistema,$passwordSistema,$estado,$auditoria  ])) {
-               $stmtPDO = null;
-                header("location: usuarios-index.php");
-            } else{
-                echo "Algo falló. Por favor intente de nuevo.";
-            }
 }
 ?>
 

@@ -1,4 +1,19 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
+if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+    header("Location: ../core/menu.php");
+    exit();
+}
+?>
+
+<?php
 // Include config file
 require_once "../core/config.php";
 
@@ -20,42 +35,42 @@ if(isset($_POST["idCentroFormacion"]) && !empty($_POST["idCentroFormacion"])){
     // Get hidden input value
     $idCentroFormacion = $_POST["idCentroFormacion"];
 
-        // Prepare an update statement
-        
-        $nombreCorto = trim($_POST["nombreCorto"]);
-		$nombreLargoCentroFormacion = trim($_POST["nombreLargoCentroFormacion"]);
-		$direccion = trim($_POST["direccion"]);
-		$idMunicipio = trim($_POST["idMunicipio"]);
-		$idDepartamento = trim($_POST["idDepartamento"]);
-		$telefono1 = trim($_POST["telefono1"]);
-		$telefono2 = trim($_POST["telefono2"]);
-		$emailContacto1 = trim($_POST["emailContacto1"]);
-		$emailContacto2 = trim($_POST["emailContacto2"]);
-		$estado = trim($_POST["estado"]);
-		$auditoria = date('Y-m-d H:i:s');
-		
-        $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
-        $options = [
-          PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
-        ];
-        try {
-          $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
-        } catch (Exception $e) {
-          error_log($e->getMessage());
-          exit('Algo extraño sucedió');
-        }
-       $stmtPDO = $linkPDO->prepare("UPDATE centros_formacion SET nombreCorto=?,nombreLargoCentroFormacion=?,direccion=?,idMunicipio=?,idDepartamento=?,telefono1=?,telefono2=?,emailContacto1=?,emailContacto2=?,estado=?,auditoria=? WHERE idCentroFormacion=?");
+    // Prepare an update statement
+    
+    $nombreCorto = trim($_POST["nombreCorto"]);
+	$nombreLargoCentroFormacion = trim($_POST["nombreLargoCentroFormacion"]);
+	$direccion = trim($_POST["direccion"]);
+	$idMunicipio = trim($_POST["idMunicipio"]);
+	$idDepartamento = trim($_POST["idDepartamento"]);
+	$telefono1 = trim($_POST["telefono1"]);
+	$telefono2 = trim($_POST["telefono2"]);
+	$emailContacto1 = trim($_POST["emailContacto1"]);
+	$emailContacto2 = trim($_POST["emailContacto2"]);
+	$estado = trim($_POST["estado"]);
+	$auditoria = date('Y-m-d H:i:s');
+	
+    $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
+    $options = [
+      PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, //make the default fetch be an associative array
+    ];
+    try {
+      $linkPDO = new PDO($dsn, $db_user, $db_password, $options);
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      exit('Algo extraño sucedió');
+    }
+   $stmtPDO = $linkPDO->prepare("UPDATE centros_formacion SET nombreCorto=?,nombreLargoCentroFormacion=?,direccion=?,idMunicipio=?,idDepartamento=?,telefono1=?,telefono2=?,emailContacto1=?,emailContacto2=?,estado=?,auditoria=? WHERE idCentroFormacion=?");
 
-        if(!$stmtPDO->execute([ $nombreCorto,$nombreLargoCentroFormacion,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria,$idCentroFormacion  ])) {
-                echo "Algo falló. Por favor intente de nuevo.";
-                header("location: ../core/error.php");
-            } else{
-               $stmtPDO = null;
-                // header("location: centros_formacion-read.php?idCentroFormacion=$idCentroFormacion");
-                header("location: centros_formacion-index.php");
-            }
+    if(!$stmtPDO->execute([ $nombreCorto,$nombreLargoCentroFormacion,$direccion,$idMunicipio,$idDepartamento,$telefono1,$telefono2,$emailContacto1,$emailContacto2,$estado,$auditoria,$idCentroFormacion  ])) {
+            echo "Algo falló. Por favor intente de nuevo.";
+            header("location: ../core/error.php");
+        } else{
+           $stmtPDO = null;
+            // header("location: centros_formacion-read.php?idCentroFormacion=$idCentroFormacion");
+            header("location: centros_formacion-index.php");
+        }
 } else {
     // Check existence of id parameter before processing further
     if(isset($_GET["idCentroFormacion"]) && !empty(trim($_GET["idCentroFormacion"]))){

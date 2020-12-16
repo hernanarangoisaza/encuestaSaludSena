@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (empty($_SESSION["login"])) {
-    header("Location: ../index.php");
+    header("Location: ../core/menu.php");
     exit();    
 }
 // foreach ($_SESSION as $key=>$val)
@@ -169,7 +169,7 @@ if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
                                 while($row = mysqli_fetch_array($resultMSQLI)){
                                     echo "<tr>";
                                     echo "<td class='centrar-columna'>";
-                                    echo "<a href='encuesta_signos-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
+                                    echo "<a href='../formato_encuesta/encuesta-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
                                     echo "<a href='../personas/personas-read.php?idPersona=". $row['idPersona'] ."'><i class='far fa-user'></i></a>";
                                     echo "<a href='../tomas_temperatura/tomas_temperatura-create.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-thermometer-half'></i></a>";
                                     echo "</td>";                                    

@@ -1,4 +1,12 @@
 <?php
+session_start();
+if (empty($_SESSION["login"])) {
+    header("Location: ../core/menu.php");
+    exit();    
+}
+?>
+
+<?php
 // Check existence of id parameter before processing further
 if(isset($_GET["idToma"]) && !empty(trim($_GET["idToma"]))){
     // Include config file

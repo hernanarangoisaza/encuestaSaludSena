@@ -1,12 +1,9 @@
 <?php
 session_start();
 if (empty($_SESSION["login"])) {
-    header("Location: ../index.php");
+    header("Location: ../core/menu.php");
     exit();    
 }
-// foreach ($_SESSION as $key=>$val)
-// echo $key." ".$val."<br/>";
-// echo $_SESSION['permisosRolSistema'];
 ?>
 
 <?php
@@ -16,9 +13,7 @@ if ((strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 ?>
 
 <?php
-if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '') or 
-   (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '') or 
-   (strstr($_SESSION['permisosRolSistema'], "[auxiliar-aprendices]") != '')) {
+if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-") != '')) {
     $isDisabled = "isDisabled";
     $ariaDisabled = "true";
 }
@@ -32,7 +27,7 @@ else {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Personas</title>
+    <title>Maestro de Personas</title>
     <link rel="stylesheet" href="../css/bootstrap-4.5.3.min.css" rel="stylesheet" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="../js/kit-fontawesome-6b773fe9e4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/estilos.css" />

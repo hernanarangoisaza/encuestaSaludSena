@@ -1,12 +1,9 @@
 <?php
 session_start();
 if (empty($_SESSION["login"])) {
-    header("Location: ../index.php");
+    header("Location: ../core/menu.php");
     exit();    
 }
-// foreach ($_SESSION as $key=>$val)
-// echo $key." ".$val."<br/>";
-// echo $_SESSION['permisosRolSistema'];
 ?>
 
 <?php
@@ -16,8 +13,7 @@ if ((strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 ?>
 
 <?php
-if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '') or 
-   (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
+if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-") != '')) {
     $isDisabled = "isDisabled";
     $ariaDisabled = "true";
 }
@@ -177,7 +173,7 @@ else {
                                         echo "<span class='$isDisabled'>" . "<a href='tomas_temperatura-read.php?idToma=" . $row['idToma'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-eye'></i></a></span>";
                                         echo "<span class='$isDisabled'>" . "<a href='tomas_temperatura-update.php?idToma=" . $row['idToma'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-edit'></i></a></span>";
                                         echo "<span class='$isDisabled'>" . "<a href='tomas_temperatura-delete.php?idToma=" . $row['idToma'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-trash-alt'></i></a></span>";                                        
-                                        echo "<a href='../encuesta_signos/encuesta_signos-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
+                                        echo "<a href='../formato_encuesta/encuesta-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
                                         echo "<a href='../personas/personas-read.php?idPersona=". $row['idPersona'] ."'><i class='far fa-user'></i></a>";
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idToma'] . "</td>";
