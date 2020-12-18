@@ -16,6 +16,7 @@ body {
     font-family: "Muli", sans-serif;
     font-size: 14px; /* Tamaño de fuente base, definir el resto de fuentes con base en font-size: 1em */
     color: #495057; /* Simulación de negro pero menos intenso */
+    height: 100vh;
 }
 
 /* -------------------------------------------------------------------------------------------------- */
@@ -381,16 +382,6 @@ a.btn.btn-secondary.float-right.mr-2 {
     background-color: #FFFFFF;
     font-size: 0.8em;
     font-style: italic;
-}
-
-div.container-fluid {
-    background-color: #F9F9F9;
-    width: 40%;
-    padding: 20px;
-    margin-bottom: 48px;
-    border: 1px;
-    border-radius: 0.25rem;
-    border: 1px solid #ced4da;
 }
 
 div.container-fluid.index {
@@ -1131,9 +1122,6 @@ label.tab {
   width: 25%;
 }
 
-
-
-
 /* -------------------------------------------------------------------------------------------------- */
 
 /*
@@ -1148,4 +1136,103 @@ label.tab {
 
 /* -------------------------------------------------------------------------------------------------- */
 
+#wrapper {
+    overflow-x: hidden;
+ }
 
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-size: 1.2rem;
+  background-color: #ff6719;
+  color: white;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+
+.navbar-light .navbar-toggler-icon {
+    background-image: url('../imagenes/hamburguesa.svg');
+    width: 30px;
+    height: 30px;
+    color: black;
+}
+
+.icon {
+    background-color: var(--bs-light);
+    border-radius: .25rem;
+}
+.bi {
+    margin: .25rem;
+    font-size: 2.5rem;
+}
+
+li::marker {
+  content: "";
+}
+
+.list-group-item {
+    border: none;
+    padding-top: 0.5rem;
+    padding-right: 1.25rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.25rem;
+}
+
+.size-menu {
+    margin-left: 2rem;
+    font-size: 1rem;
+}
+
+.dropdown-item {
+    padding-top: 0.25rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem; 
+    font-size: 0.8rem; 
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+
+.fondo-inicial {
+    background: url(../imagenes/fondo-inicial.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

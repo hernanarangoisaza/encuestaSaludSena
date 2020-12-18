@@ -13,6 +13,7 @@ $no_of_records_per_page = 15;
 
 $aforoJornada = 500;
 $regionalSedes = "Risaralda";
+$sedeUso = "SENA - CDITI";
 
 $cargoResponsableCovid19 = "Enfermera Profesional";
 $nombreResponsableCovid19 = "Carolina Ayala Castellanos";

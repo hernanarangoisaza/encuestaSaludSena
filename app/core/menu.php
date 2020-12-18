@@ -34,7 +34,8 @@ if (empty($_SESSION["login"])) {
     <head>
 
         <meta charset="UTF-8" />
-        <title>Sistema de encuestas para registro de síntomas y temperatura en el SENA - CDITI</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Sistema de encuestas para registro de síntomas y temperatura en <?php echo $sedeUso ?> - <?php echo $regionalSedes ?></title>
         <link rel="stylesheet" href="../css/bootstrap-4.5.3.min.css" rel="stylesheet" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous">
         <link rel="stylesheet" href="../css/estilos.css" />
         <link rel="icon" href="../imagenes/favicon.ico" type="image/png" />

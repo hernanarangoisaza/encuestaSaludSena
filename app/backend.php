@@ -103,82 +103,33 @@ if (isset($_POST['login'])) {
 <!DOCTYPE html>
 
 <html lang="es">
-
     <head>
+
         <meta charset="UTF-8" />
-        <title>Sistema de encuestas para registro de síntomas y temperatura en el SENA - CDITI - <?php echo $regionalSedes ?></title>
-        <link rel="stylesheet" href="css/bootstrap-4.5.3.min.css" rel="stylesheet" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Sistema de encuestas para registro de síntomas y temperatura en <?php echo $sedeUso ?> - <?php echo $regionalSedes ?></title>
+        <link rel="stylesheet" href="css/bootstrap-4.5.3.min.css" rel="stylesheet" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
         <link rel="stylesheet" href="css/estilos.css" />
         <link rel="icon" href="imagenes/favicon.ico" type="image/png" />
+
     </head>
 
-    <body>
+    <body class="fondo-inicial">
 
-        <div class="contenedor-principal">
+        <div class="container-fluid h-100">
 
-            <div class="contenedor-izquierdo-login">
+            <div class="row h-100">
 
-                <div class="contenedor-superior">
+                <div class="col-sm-12 col-xs-12 h-100 d-flex flex-column justify-content-between align-items-center">
 
-                    <div class="intro">
-                        SENA - CDITI<br />
-                        Gestión de encuestas para registro de síntomas y temperatura<br />
-                        COVID-19
-                    </div>
+                    <div class="row mt-3">
 
-                </div>
+                        <div class="col-12 w-100">
 
-                <div class="contenedor-medio">
+                            <div class="text-center">
 
-                    <img src="imagenes/logo-sena-naranja.png" class="logo-responsive" />
-
-                </div>
-
-                <div class="contenedor-inferior">
-
-                    <div class="">
-
-                        <span>Diseñado y desarrollado por CDITI</span>
-                        <br>
-                        <span>ADSI - Ficha 1752586</span>
-                        <br>
-                        <span>Dosquebradas, Risaralda. Diciembre de 2020</span>
-                        
-                    </div>
-                    
-                </div>
-
-            </div>
-
-            <div class="contenedor-derecho-login">
-
-                <section class="section-login">
-
-                    <div class="container-login">
-
-                        <div class="row">
-
-                            <div class="col-md-12 mx-auto">
-
-                                <div class="page-header titulo-login">
-                                    <h1>CREDENCIALES - SISTEMA</h1>
-                                </div>
-
-                                <form method="post" action="" name="signin-form">
-
-                                    <div class="form-group">
-                                        <label>Correo Institucional</label>
-                                        <input type="email" name="correo" class="form-control campo-login" autocomplete="off" required />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Número de Identificación</label>
-                                        <input type="password" name="identificacion" class="form-control campo-login" autocomplete="off" required />
-                                    </div>
-
-                                    <button type="submit" name="login" value="login" class="btn btn-secondary btn-login">Validar</button>
-
-                                </form>   
+                                <H3><?php echo $sedeUso ?></H3>
+                                <H5>Gestión de encuestas para registro de síntomas y temperatura COVID-19</H5>
 
                             </div>
 
@@ -186,7 +137,53 @@ if (isset($_POST['login'])) {
 
                     </div>
 
-                </section>
+                    <div class="row w-100 justify-content-center">
+                        
+                        <div class="col-sm-2 col-x6-12 text-center">
+
+                            <img src="imagenes/logo-sena-naranja.png" class="img-fluid" width="175">
+
+                        </div>
+
+                        <div class="col-sm-3 col-xs-12 text-center">
+
+                           <form method="post" action="" name="signin-form">
+
+                                <div class="form-group">
+                                    <label>Correo Institucional</label>
+                                    <input type="email" name="correo" class="form-control campo-login" autocomplete="off" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Número de Identificación</label>
+                                    <input type="password" name="identificacion" class="form-control campo-login" autocomplete="off" required />
+                                </div>
+
+                                <button type="submit" name="login" value="login" class="btn btn-dark btn-login btn-xl btn-block">Validar credenciales</button>
+
+                            </form>  
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <div class="col-12 w-100">
+
+                            <div class="text-center">
+
+                                <div>Diseñado y desarrollado por</div>
+                                <div><strong> - ADSI Ficha 1752586 - </strong></div>
+                                <div>CDITI, Dosquebradas, Risaralda. Diciembre de 2020.</div>
+
+                            </div>  
+                                                      
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -199,9 +196,6 @@ if (isset($_POST['login'])) {
         <script>
             $(document).ready(function () {});
         </script>
-
+        
     </body>
-
 </html>
-
-
