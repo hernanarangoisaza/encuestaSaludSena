@@ -1236,3 +1236,7 @@ li::marker {
     -o-background-size: cover;
     background-size: cover;
 }
+
+.ajuste-pantalla-menu {
+    height: 90% !important;
+}

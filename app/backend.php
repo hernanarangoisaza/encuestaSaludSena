@@ -139,7 +139,7 @@ if (isset($_POST['login'])) {
 
                     <div class="row w-100 justify-content-center">
                         
-                        <div class="col-sm-2 col-x6-12 text-center">
+                        <div class="col-sm-2 col-xs-12 text-center">
 
                             <img src="imagenes/logo-sena-naranja.png" class="img-fluid" width="175">
 
