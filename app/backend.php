@@ -120,7 +120,7 @@ if (isset($_POST['login'])) {
 
             <div class="row h-100">
 
-                <div class="col-sm-12 col-xs-12 h-100 d-flex flex-column justify-content-between align-items-center">
+                <div class="col-sm-12 col-xs-12 d-flex flex-column justify-content-between align-items-center">
 
                     <div class="row mt-3">
 

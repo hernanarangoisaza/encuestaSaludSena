@@ -23,6 +23,10 @@ if (empty($_SESSION["login"])) {
         $visibilidadContenedorIzquierdo = "ocultar-contenedor-izquierdo";
         $ajusteContenedorCentral = "ajuste-contenedor-central";
         $ajusteContenedorDerecho = "ajuste-contenedor-derecho";
+    } else {
+        $visibilidadContenedorIzquierdo = "";
+        $ajusteContenedorCentral = "";
+        $ajusteContenedorDerecho = "";
     } 
 
 ?>
@@ -48,174 +52,9 @@ if (empty($_SESSION["login"])) {
             <!-- Sidebar -->
             <div class="bg-light border-right" id="sidebar-wrapper">
 
-                <div class="sidebar-heading text-center">MENÚ PRINCIPAL</div>
-
-                <div class="list-group list-group-flush">
-
-                    <a class="list-group-item list-group-item-action bg-light" href="#">Inicio</a>
-
-                    <?php
-                    if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or
-                        (strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '')) {
-                        echo '<a class="list-group-item list-group-item-action bg-light" href="../formato_toma_temperatura/registrar-temperatura.php">Registrar Temperatura</a>';
-                    }
-                    ?>
-
-                    <?php
-                    if (strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '') {
-                        echo '<a class="list-group-item list-group-item-action bg-light" href="../formato_encuesta/encuesta.php">Registrar Encuesta</a>';
-                    }
-                    ?>
-
-                    <li class="nav-item dropdown">
-
-                        <a class="nav-link list-group-item list-group-item-action bg-light" href="#" id="navbarDropdownMenuLink3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Maestros generales&nbsp;&nbsp;
-                            <i class="bi bi-arrow-return-left size-menu"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
-
-                            <?php
-                            if (!strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '') {
-                                echo '<a class="dropdown-item" href="../tomas_temperatura/tomas_temperatura-index.php">Tomas de temperatura</a>';
-                            }
-                            ?>
-
-                            <?php
-                            if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') or
-                                (strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
-                                echo '<a class="dropdown-item" href="../encuesta_signos/encuesta_signos-index.php">Encuestas de signos</a>';
-                            }
-                            ?>
-
-                            <?php
-                            if ((strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '')) {
-                                echo '<a class="dropdown-item" href="../respuestas_encuesta/respuestas_encuesta-index.php">Respuestas de la encuesta</a>';
-                            }
-                            ?>
-
-                        </div>
-
-                    </li>
-
-                    <li class="nav-item dropdown">
-
-                        <a class="nav-link list-group-item list-group-item-action bg-light" href="#" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Maestros del sistema
-                            <i class="bi bi-arrow-return-left size-menu"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../preguntas_encuesta/preguntas_encuesta-index.php">Preguntas de la encuesta</a>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../horarios/horarios-index.php">Horarios</a>';
-                            }
-                            ?>
-
-                            <?php
-                            if (!strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '') {
-                                echo '<a class="dropdown-item" href="../personas/personas-index.php">Personas</a>';
-                            }
-                            ?>
-                            
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../centros_formacion/centros_formacion-index.php">Centros de formación</a>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../programas_formacion/programas_formacion-index.php">Programas de formación</a>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../fichas_formacion/fichas_formacion-index.php">Fichas de formación</a>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../tipos_generos/tipos_generos-index.php">Tipos de géneros</a>';
-                            }
-                            ?>
-                            
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../tipos_identificacion/tipos_identificacion-index.php">Tipos de identificación</a>';
-                            }
-                            ?>
-                            
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../tipos_vinculaciones_sena/tipos_vinculaciones_sena-index.php">Tipos de vinculaciones</a>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../roles_sistema/roles_sistema-index.php">Roles del sistema</a>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../usuarios/usuarios-index.php">Usuarios del sistema</a>';
-                            }
-                            ?>
-                            
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../departamentos/departamentos-index.php">Departamentos</a>';
-                            }
-                            ?>
-
-                            <?php
-                            if (strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-                                echo '<a class="dropdown-item" href="../municipios/municipios-index.php">Municipios</a>';
-                            }
-                            ?>
-
-                        </div>
-
-                    </li>
-
-                    <li class="nav-item dropdown">
-
-                        <a class="nav-link list-group-item list-group-item-action bg-light" href="#" id="navbarDropdownMenuLink3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Estadísticas de Aforo
-                            <i class="bi bi-arrow-return-left size-menu"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
-                            <a class="dropdown-item" href="#">Mañana</a>
-                            <a class="dropdown-item" href="#">Tarde</a>
-                            <a class="dropdown-item" href="#">Noche</a>
-                            <a class="dropdown-item" href="#">Mixta Mañana-Tarde</a>
-                            <a class="dropdown-item" href="#">Mixta Tarde-Noche</a>
-                            <a class="dropdown-item" href="#">Completa</a>
-                        </div>
-
-                    </li>
-
-                    <?php
-                    if ($_SESSION['modoLogin'] == "normal") {
-                        echo '<a class="list-group-item list-group-item-action bg-light" href="../personas/personas-read.php?idPersona=' . $_SESSION['idPersona'] . '">Información Personal</a>';
-                    } if ($_SESSION['modoLogin'] == "backend") {
-                        echo '<a class="list-group-item list-group-item-action bg-light" href="../usuarios/usuarios-read.php?idUsuario=' . $_SESSION['idUsuario'] . '">Información Personal</a>';
-                    }
-                    ?>
-
-                    <a class="list-group-item list-group-item-action bg-light" href="cerrar-sesion.php">Cerrar sesión</a>
-
-                </div>
+                <?php
+                    include "panel-opciones.html";
+                ?>
 
             </div>
             <!-- /#sidebar-wrapper -->
@@ -223,18 +62,17 @@ if (empty($_SESSION["login"])) {
             <!-- Page Content -->
             <div id="page-content-wrapper">
 
-
                 <div class="container-fluid h-100">
 
                     <div class="row h-100">
 
-                        <div class="icon">
-                            <i id="menu-toggle" class="bi bi-justify"></i>
-                        </div>
-
                         <div class="col-sm-12 col-xs-12 h-100 d-flex flex-column justify-content-between align-items-center">
                             
-                            <div class="row mt-3">
+                            <div class="icon align-self-start">
+                                <i id="menu-toggle" class="bi bi-justify"></i>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-12 w-100">
                                     <div class="text-center">
                                         <h3><?php echo $sedeUso ?></h3>
