@@ -83,115 +83,97 @@ if(isset($_GET["idUsuario"]) && !empty(trim($_GET["idUsuario"]))){
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Ver Usuario</title>
-    <link rel="stylesheet" href="../css/bootstrap-4.5.3.min.css" rel="stylesheet" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/estilos.css" />
-    <link rel="icon" href="../imagenes/favicon.ico" type="image/png" />
-</head>
-<body>
-    <section class="pt-4">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 mx-auto">
+<div class="row w-100">
+    <div class="col-sm-12 col-xs-12 mx-auto">
 
-                    <div class="page-header">
-                        <h1>Usuario - Visualizar</h1>
-                    </div>
-                        
-                    <div class="form-group">
-                        <label>Tipo de vinculación</label>
-                        <input type="text" name="idTipoVinculacion" class="form-control" value="<?php echo $row['nombreLargoVinculacion']; ?>" readonly>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Nombre completo</label>
-                        <input type="text" name="nombreCompleto" class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Tipo de identificación</label>
-                        <input type="text" name="idTipoIdentificacion" class="form-control" value="<?php echo $row['nombreLargoIdentificacion']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Identificación</label>
-                        <input type="text" name="identificacion" class="form-control" value="<?php echo $row['identificacion']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Correo electrónico</label>
-                        <input type="text" name="email" class="form-control" value="<?php echo $row['email']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Teléfono personal</label>
-                        <input type="text" name="telefonoPersonal" class="form-control" value="<?php echo $row['telefonoPersonal']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Fecha de nacimiento</label>
-                        <input type="date" name="fechaNacimiento" class="form-control" value="<?php echo $row['fechaNacimiento']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Género</label>
-                        <input type="text" name="idTipoGenero" class="form-control" value="<?php echo $row['nombreLargoGenero']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Dirección de la residencia</label>
-                        <input type="text" name="direccionResidencia" class="form-control" value="<?php echo $row['direccionResidencia']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Departamento</label>
-                        <input type="text" name="idDepartamento" class="form-control" value="<?php echo $row['nombreDepartamento']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Municipio</label>
-                        <input type="text" name="idMunicipio" class="form-control" value="<?php echo $row['nombreMunicipio']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Centro de formación</label>
-                        <input type="text" name="idCentroFormacion" class="form-control" value="<?php echo $row['nombreLargoCentroFormacion']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Rol del sistema</label>
-                        <input type="text" name="idRolSistema" class="form-control" value="<?php echo $row['nombreLargoRolSistema']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group ocultar-columna">
-                        <label>Contraseña del sistema</label>
-                        <input type="password" name="passwordSistema" class="form-control" value="<?php echo $row['passwordSistema']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group ocultar-columna">
-                        <label>Estado del registro</label>
-                        <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Fecha/Hora de auditoría</label>
-                        <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
-                    </div>
-
-                    <?php
-                        $rutaRegresarA = $_SESSION["rutaRegresarA"];
-                        echo "<p><a href='$rutaRegresarA' class='btn btn-primary'>Volver al listado</a></p>";
-                    ?>
-
-                </div>
-            </div>
+        <div class="page-header">
+            <h1>Usuario - Visualizar</h1>
         </div>
-    </section>
-<script src="../js/jquery-3.5.1.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script src="../js/bootstrap.bundle-4.5.3.min.js" integrity="sha512-iceXjjbmB2rwoX93Ka6HAHP+B76IY1z0o3h+N1PeDtRSsyeetU3/0QKJqGyPJcX63zysNehggFwMC/bi7dvMig==" crossorigin="anonymous"></script>
-</body>
-</html>
+            
+        <div class="form-group">
+            <label>Tipo de vinculación</label>
+            <input type="text" name="idTipoVinculacion" class="form-control" value="<?php echo $row['nombreLargoVinculacion']; ?>" readonly>
+        </div>
+        
+        <div class="form-group">
+            <label>Nombre completo</label>
+            <input type="text" name="nombreCompleto" class="form-control" value="<?php echo $row['nombreCompleto']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Tipo de identificación</label>
+            <input type="text" name="idTipoIdentificacion" class="form-control" value="<?php echo $row['nombreLargoIdentificacion']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Identificación</label>
+            <input type="text" name="identificacion" class="form-control" value="<?php echo $row['identificacion']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Correo electrónico</label>
+            <input type="text" name="email" class="form-control" value="<?php echo $row['email']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Teléfono personal</label>
+            <input type="text" name="telefonoPersonal" class="form-control" value="<?php echo $row['telefonoPersonal']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Fecha de nacimiento</label>
+            <input type="date" name="fechaNacimiento" class="form-control" value="<?php echo $row['fechaNacimiento']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Género</label>
+            <input type="text" name="idTipoGenero" class="form-control" value="<?php echo $row['nombreLargoGenero']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Dirección de la residencia</label>
+            <input type="text" name="direccionResidencia" class="form-control" value="<?php echo $row['direccionResidencia']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Departamento</label>
+            <input type="text" name="idDepartamento" class="form-control" value="<?php echo $row['nombreDepartamento']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Municipio</label>
+            <input type="text" name="idMunicipio" class="form-control" value="<?php echo $row['nombreMunicipio']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Centro de formación</label>
+            <input type="text" name="idCentroFormacion" class="form-control" value="<?php echo $row['nombreLargoCentroFormacion']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Rol del sistema</label>
+            <input type="text" name="idRolSistema" class="form-control" value="<?php echo $row['nombreLargoRolSistema']; ?>" readonly>
+        </div>
+
+        <div class="form-group ocultar-columna">
+            <label>Contraseña del sistema</label>
+            <input type="password" name="passwordSistema" class="form-control" value="<?php echo $row['passwordSistema']; ?>" readonly>
+        </div>
+
+        <div class="form-group ocultar-columna">
+            <label>Estado del registro</label>
+            <input type="number" name="estado" class="form-control" value="<?php echo $row['estado']; ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Fecha/Hora de auditoría</label>
+            <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
+        </div>
+
+        <?php
+            $rutaRegresarA = $_SESSION["rutaRegresarA"];
+            echo "<p><a href='$rutaRegresarA' class='btn btn-primary'>Cerrar</a></p>";
+        ?>
+
+    </div>
+</div>

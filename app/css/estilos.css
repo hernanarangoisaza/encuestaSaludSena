@@ -360,6 +360,7 @@ div.form-group {
 div.form-group label {
     margin-bottom: 5px;
     margin-left: 5px;
+    color: #ff6719;
 }
 
 input.btn.btn-primary,
@@ -1239,4 +1240,19 @@ li::marker {
 
 .ajuste-pantalla-menu {
     height: 90% !important;
+}
+
+.fondo-load-jquery {
+  /*background-color: white; */
+  padding-top: 20px;
+  margin-bottom: 50px;
+}
+
+.efecto-blur {
+  background: rgba( 255, 255, 255, 0.5 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );  
 }

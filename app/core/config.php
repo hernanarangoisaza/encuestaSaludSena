@@ -11,6 +11,7 @@ date_default_timezone_set("America/Bogota");
 
 $no_of_records_per_page = 15;
 
+$temperaturaFiebre = 38;
 $aforoJornada = 500;
 $regionalSedes = "Risaralda";
 $sedeUso = "SENA - CDITI";

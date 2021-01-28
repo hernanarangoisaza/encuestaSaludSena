@@ -173,7 +173,7 @@ if(isset($_GET["idEncuesta"]) && !empty(trim($_GET["idEncuesta"]))){
                         <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
                     </div>                    
                     
-                    <p><a href="encuesta_signos-index.php" class="btn btn-primary">Volver al listado</a></p>
+                    <p><a href="encuesta_signos-index.php" class="btn btn-primary">Cerrar</a></p>
 
                 </div>
             </div>

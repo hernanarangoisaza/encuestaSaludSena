@@ -150,12 +150,12 @@ if (isset($_POST['login'])) {
                            <form method="post" action="" name="signin-form">
 
                                 <div class="form-group">
-                                    <label>Correo Institucional</label>
+                                    <label>Correo</label>
                                     <input type="email" name="correo" class="form-control campo-login" autocomplete="off" required />
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Número de Identificación</label>
+                                    <label>Contraseña</label>
                                     <input type="password" name="identificacion" class="form-control campo-login" autocomplete="off" required />
                                 </div>
 

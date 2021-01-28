@@ -97,7 +97,7 @@
     } if ($_SESSION['modoLogin'] == "backend") {
         $ruta = "../usuarios/usuarios-read.php?idUsuario=" . $_SESSION['idUsuario'];
     }
-    echo "<a class='list-group-item list-group-item-action bg-light' href='$ruta'>Información personal</a>";
+    echo "<a id='informacion-personal' class='list-group-item list-group-item-action bg-light' href='$ruta'>Información personal</a>";
     ?>
 
     <a class="list-group-item list-group-item-action bg-light" href="cerrar-sesion.php">Cerrar sesión</a>

@@ -68,7 +68,7 @@
 
                         <div class="col-sm-12 col-xs-12 d-flex flex-column justify-content-center align-items-center">
  
-                            <div id="contenido-central" class="col-sm-6 col-xs-12 d-flex flex-column justify-content-between align-items-center h-100">
+                            <div id="contenido-central" class="col-sm-4 col-xs-12 d-flex flex-column justify-content-between align-items-center h-100">
 
                                 <div class="col-12 w-100 mb-5">
                                     <div class="text-center">
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12 col-xs-12 text-center w-100 mb-5">
+                                <div class="col-12 text-center w-100 mb-5">
                                     <img src="../imagenes/logo-sena-naranja.png" class="img-fluid" width="175" />
                                 </div>
 
@@ -109,13 +109,25 @@
 
             $(document).ready(function () {
 
-                $("#aforo-todas").on("click", function() {
+                $("#aforo-todas").on("click", function(e) {
 
                     $("#contenido-central").removeClass("justify-content-between");
                     $("#contenido-central").addClass("justify-content-center");
                     $("#contenido-central").load("estadisticas-aforo.php");
 
-                })
+                });
+
+                $("#informacion-personal").on("click", function(e) {
+
+                    e.preventDefault();
+                    $("#contenido-central").removeClass("justify-content-between");
+                    $("#contenido-central").addClass("justify-content-center");
+                    $("#contenido-central").addClass("fondo-load-jquery");
+                    $("#contenido-central").addClass("efecto-blur");
+                    var href = $('#informacion-personal').attr('href');
+                    $("#contenido-central").load(href);
+
+                });
 
             });
 

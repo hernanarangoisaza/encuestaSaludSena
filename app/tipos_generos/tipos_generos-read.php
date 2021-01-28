@@ -106,7 +106,7 @@ if(isset($_GET["idTipoGenero"]) && !empty(trim($_GET["idTipoGenero"]))){
                         <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
                     </div>                    
 
-                    <p><a href="tipos_generos-index.php" class="btn btn-primary">Volver al listado</a></p>
+                    <p><a href="tipos_generos-index.php" class="btn btn-primary">Cerrar</a></p>
 
                 </div>
             </div>

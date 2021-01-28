@@ -178,7 +178,7 @@ if(isset($_GET["idPersona"]) && !empty(trim($_GET["idPersona"]))){
 
                     <?php
                         $rutaRegresarA = $_SESSION["rutaRegresarA"];
-                        echo "<p><a href='$rutaRegresarA' class='btn btn-primary'>Volver al listado</a></p>";
+                        echo "<p><a href='$rutaRegresarA' class='btn btn-primary'>Cerrar</a></p>";
                     ?>
 
                 </div>

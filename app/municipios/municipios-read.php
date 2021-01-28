@@ -115,7 +115,7 @@ if(isset($_GET["idMunicipio"]) && !empty(trim($_GET["idMunicipio"]))){
                         <input type="text" name="auditoria" class="form-control" value="<?php echo $row['auditoria']; ?>" readonly>
                     </div>
                     
-                    <p><a href="municipios-index.php" class="btn btn-primary">Volver al listado</a></p>
+                    <p><a href="municipios-index.php" class="btn btn-primary">Cerrar</a></p>
 
                 </div>
             </div>
