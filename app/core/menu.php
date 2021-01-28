@@ -68,7 +68,7 @@
 
                         <div class="col-sm-12 col-xs-12 d-flex flex-column justify-content-center align-items-center">
  
-                            <div id="contenido-central" class="col-sm-4 col-xs-12 d-flex flex-column justify-content-between align-items-center h-100">
+                            <div id="contenido-central" class="col-sm-5 col-xs-12 d-flex flex-column justify-content-between align-items-center h-100">
 
                                 <div class="col-12 w-100 mb-5">
                                     <div class="text-center">
@@ -113,6 +113,8 @@
 
                     $("#contenido-central").removeClass("justify-content-between");
                     $("#contenido-central").addClass("justify-content-center");
+                    $("#contenido-central").addClass("fondo-load-jquery");
+                    $("#contenido-central").addClass("efecto-blur");
                     $("#contenido-central").load("estadisticas-aforo.php");
 
                 });
