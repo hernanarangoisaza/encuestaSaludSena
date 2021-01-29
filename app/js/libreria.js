@@ -63,6 +63,24 @@ function confirmarRespuestasPositivas () {
    return true;        
 }
 
+function contarRespuestasPositivas () {
+   cantidad = $(".respuestaSi").length;
+   if (cantidad > 0) {
+      $("#aptoIngreso").prop("checked", false);
+      $("#noAptoIngreso").prop("checked", true);
+      $("#aceptacionRespuestaPositiva").val("1");
+      $(".textoNoAptoIngreso").removeClass("ocultar-elemento");
+      $(".textoAptoIngreso").addClass("ocultar-elemento");
+    } else {
+      $("#noAptoIngreso").prop("checked", false);
+      $("#aptoIngreso").prop("checked", true);
+      $("#aceptacionRespuestaPositiva").val("0");
+      $(".textoNoAptoIngreso").addClass("ocultar-elemento");
+      $(".textoAptoIngreso").removeClass("ocultar-elemento");
+   }
+   return true;        
+}
+
 function validarEncuesta (idForm) {
   $(idForm + " *").on("change keydown", function() {
     confirmarRespuestasPositivas()

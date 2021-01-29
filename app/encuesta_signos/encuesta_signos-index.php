@@ -8,10 +8,20 @@ if (empty($_SESSION["login"])) {
 
 <?php
 if ((!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and
-    (!strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
+    (!strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '') and
+    (!strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '')) {
     header("Location: ../core/menu.php");
     exit();
 }
+?>
+
+<?php
+    
+    // Dada la funcionalidad, el botón CREAR se deja deshabilitado para todos los perfiles. En esta zona, de ser necesario, se debe plantear otra alternativa similiar a la planteada en otras secciones del código para el mismo botón.
+
+    $isDisabled = "isDisabled";
+    $ariaDisabled = "true";
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +42,7 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and
 
                     <div class="page-header clearfix">
                         <h2 class="float-left">Encuesta de Signos - Panel General</h2>
-                        <a href="encuesta_signos-create.php" class="btn btn-success float-right">Crear</a>
+                        <?php echo '<span class="' . $isDisabled. '"><a href="encuesta_signos-create.php" class="btn btn-success float-right" aria-disabled="' . $ariaDisabled . '">Crear</a></span>' ?>
                         <a href="encuesta_signos-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="../core/menu.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
@@ -95,9 +105,11 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and
 
                     // Attempt select query execution
                     $sql = "SELECT ES.*, 
+                        PE.nombreCompleto AS 'nombreCompleto',
                         CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                         HO.nombreCorto AS 'nombreCorto'
                         FROM encuesta_signos ES
+                        LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
                         LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
                         LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
                         ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
@@ -107,22 +119,26 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
                     $sql = "SELECT ES.*, 
+                            PE.nombreCompleto AS 'nombreCompleto',
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             HO.nombreCorto AS 'nombreCorto'
                             FROM encuesta_signos ES
+                            LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
                             LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
-                            WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
+                            WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,PE.nombreCompleto,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT ES.*, 
+                            PE.nombreCompleto AS 'nombreCompleto',
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             HO.nombreCorto AS 'nombreCorto'
                             FROM encuesta_signos ES
+                            LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
                             LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
                             LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
-                            WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
+                            WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,PE.nombreCompleto,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -143,9 +159,9 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th class='estilo-acciones'>Acciones</th>";
-                                        echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
-										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idPersona&sort=$sort>Id<br>Persona</th>";
+                                        echo "<th class=''><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraDiligenciamiento&sort=$sort>Fecha/Hora<br>de diligenciamiento</th>";
+                                        echo "<th class=''><a href=?search=$search&sort=&order=nombreCompleto&sort=$sort>Persona</th>";
 										echo "<th><a href=?search=$search&sort=&order=idSedeIngreso&sort=$sort>Sede de ingreso</th>";
 										echo "<th><a href=?search=$search&sort=&order=idHorario&sort=$sort>Horario</th>";
 										echo "<th><a href=?search=$search&sort=&order=aceptacionConsideraciones&sort=$sort>Aceptación<br>de consideraciones</th>";
@@ -161,16 +177,16 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and
                                 while($row = mysqli_fetch_array($resultMSQLI)){
                                     echo "<tr>";
                                     echo "<td class='centrar-columna'>";
-                                    echo "<a href='encuesta_signos-read.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-eye'></i></a>";
-                                    echo "<a href='encuesta_signos-update.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-edit'></i></a>";
-                                    echo "<a href='encuesta_signos-delete.php?idEncuesta=". $row['idEncuesta'] ."'><i class='far fa-trash-alt'></i></a>";
-                                    echo "<a href='encuesta_signos-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
-                                    echo "<a href='../personas/personas-read.php?idPersona=". $row['idPersona'] ."'><i class='far fa-user'></i></a>";
+                                    echo "<span class='$isDisabled'>" . "<a href='encuesta_signos-read.php?idEncuesta=". $row['idEncuesta'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-eye'></i></a></span>";
+                                    echo "<span class='$isDisabled'>" . "<a href='encuesta_signos-update.php?idEncuesta=". $row['idEncuesta'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-edit'></i></a></span>";
+                                    echo "<span class='$isDisabled'>" . "<a href='encuesta_signos-delete.php?idEncuesta=". $row['idEncuesta'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-trash-alt'></i></a></span>";
+                                    echo "<a href='../formato_encuesta/encuesta-view.php?idEncuesta=". $row['idEncuesta'] ."&idPersona=". $row['idPersona']."' target='_blank'><i class='fas fa-list-ol'></i></a>";
+                                    echo "<a href='../personas/personas-read.php?idPersona=". $row['idPersona'] ."' target='_blank'><i class='far fa-user'></i></a>";
                                     echo "<a href='../tomas_temperatura/tomas_temperatura-index.php?search=". $row['idPersona'] ."'><i class='fas fa-thermometer-half'></i></a>";
                                     echo "</td>";                                    
-                                    echo "<td class='ocultar-columna'>" . $row['idEncuesta'] . "</td>";
-                                    echo "<td class='ocultar-columna'>" . $row['idPersona'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['idEncuesta'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraDiligenciamiento'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreCompleto'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['nombreLargoCentroFormacion'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['nombreCorto'] . "</td>";
                                     echo "<td class='centrar-columna'>";

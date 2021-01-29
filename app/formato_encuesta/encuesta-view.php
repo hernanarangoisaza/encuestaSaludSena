@@ -9,11 +9,12 @@ if (empty($_SESSION["login"])) {
 // echo $key." ".$val."<br/>";
 // echo $_SESSION['permisosRolSistema'];
 // print_r($_POST);
+// print_r($_GET);
 ?>
 
 <?php
 // Línea temporal para pruebas desde otro tipo de usuarios
-// $_SESSION['permisosRolSistema'] = "[usuario-encuestas]";
+$_SESSION['permisosRolSistema'] = "[usuario-encuestas]";
 if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
     header("Location: ../core/menu.php");
 }
@@ -35,7 +36,57 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 
     <?php
 
-        $idPersona = $_SESSION['idPersona'];
+        if(isset($_GET["idPersona"]) && !empty($_GET["idPersona"])){
+            $idPersona = trim($_GET["idPersona"]);
+        } else {
+            // URL doesn't contain id parameter. Redirect to error page
+            header("location: ../core/error.php");
+            exit();
+        }
+
+        if(isset($_GET["idEncuesta"]) && !empty($_GET["idEncuesta"])){
+            $idEncuesta = trim($_GET["idEncuesta"]);
+        } else {
+            // URL doesn't contain id parameter. Redirect to error page
+            header("location: ../core/error.php");
+            exit();
+        } 
+
+        $sqlEncuesta = "SELECT ES.*,
+            HO.nombreCorto AS 'horario',
+            CF.nombreLargoCentroFormacion AS 'sede'
+            FROM encuesta_signos ES
+            LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
+            LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
+            WHERE ES.idEncuesta = $idEncuesta";
+
+        $resultEncuesta = mysqli_query($linkMYSQLI, $sqlEncuesta);
+
+        if (mysqli_num_rows($resultEncuesta) > 0) {
+
+            $rowEncuesta = mysqli_fetch_array($resultEncuesta, MYSQLI_ASSOC);
+
+        }
+
+        function obtenerRespuesta($idEncuesta, $idPreguntaEncuesta, $linkMYSQLI){
+            $sqlRespuestas = "SELECT RE.*
+                FROM respuestas_encuesta RE
+                WHERE RE.idEncuesta = $idEncuesta
+                AND RE.idPreguntaEncuesta = $idPreguntaEncuesta";
+            $resultRespuestas = mysqli_query($linkMYSQLI, $sqlRespuestas);
+            if (mysqli_num_rows($resultRespuestas) == 0) {
+                $respuesta = "--";
+            }
+            else {
+                $rowRespuestas = mysqli_fetch_array($resultRespuestas, MYSQLI_ASSOC);
+                if ($rowRespuestas['respuestaSiNo'] == '0') {
+                    $respuesta = "<span class='respuestaNo'>No</span>";
+                } else {
+                    $respuesta = "<span class='respuestaSi'>Si</span>";
+                }
+            }
+            return $respuesta;
+        }
 
         $sql1 = "SELECT PE.*, 
             TV.nombreLargoVinculacion AS 'nombreLargoVinculacion', 
@@ -167,19 +218,31 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                             <br>
                                             <br>
 
-                                            <input type="radio" name="autorizacionTratamientoDatos" value="0">&nbsp;&nbsp;&nbsp;No autorizo.
+                                            <input type="radio" name="autorizacionTratamientoDatos" value="0"
+                                            <?php
+                                                if ($rowEncuesta['autorizacionTratamientoDatos'] == 0) { echo 'checked'; }
+                                            ?> disabled
+                                            >&nbsp;&nbsp;&nbsp;No autorizo.
 
                                             <br>
                                             <br>
 
-                                            <input type="radio" name="autorizacionTratamientoDatos" value="1">&nbsp;&nbsp;&nbsp;Si autorizo.
+                                            <input type="radio" name="autorizacionTratamientoDatos" value="1"
+                                            <?php
+                                                if ($rowEncuesta['autorizacionTratamientoDatos'] == 1) { echo 'checked'; }
+                                            ?> disabled
+                                            >&nbsp;&nbsp;&nbsp;Si autorizo.
 
                                             <br>
                                             <br>
                                             <br>
 
-                                            <input type="checkbox" name="aceptacionConsideraciones">&nbsp;&nbsp;&nbsp;Acepto y declaro haber leído y entendido la sección de <b>"Consideraciones previas"</b>.
-                                            
+                                            <input type="checkbox" name="aceptacionConsideraciones"
+                                            <?php
+                                                if ($rowEncuesta['aceptacionConsideraciones'] == 1) { echo 'checked'; }
+                                            ?> disabled
+                                            >&nbsp;&nbsp;&nbsp;Acepto y declaro haber leído y entendido la sección de <b>"Consideraciones previas"</b>.
+
                                         </div>
 
                                     </div>
@@ -267,31 +330,17 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                                 <div class="ajuste-renglon1"></div>
                                                 <label class="label-encuesta-tabla">Sede de ingreso</label>
                                                 <label class="label-encuesta-tabla">Horario</label>
+                                                <label class="label-encuesta-tabla">Diligenciada en</label>
 
                                             </div>
                                             
                                             <div class="texto-tab3-col2">
                                             
-                                                <?php
-                                                    $sql_cb2 = "SELECT idCentroFormacion, nombreLargoCentroFormacion, nombreCorto FROM centros_formacion";
-                                                    $result_cb2 = mysqli_query($linkMYSQLI, $sql_cb2);
-                                                    echo "<select name='idSedeIngreso' id='cb2' class='combo-box form-control campo-tabla'>";
-                                                    while($row = mysqli_fetch_array($result_cb2)) {
-                                                        echo "<option class='item-combo-box' value='" . $row['idCentroFormacion'] . "'>" . $row['nombreLargoCentroFormacion'] . "</option>";
-                                                    }
-                                                    echo "</select>";
-                                                ?>
+                                                <input type="text" name="sede" class="form-control reducido campo-tabla" value="<?php echo $rowEncuesta['sede']; ?>" readonly>
 
-                                                <?php
-                                                    $sql_cb3 = "SELECT idHorario, nombreCorto FROM horarios ORDER BY horaInicial, horaFinal";
-                                                    $result_cb3 = mysqli_query($linkMYSQLI, $sql_cb3);
-                                                    echo "<select name='idHorario' id='cb3' class='combo-box form-control campo-tabla'>";
-                                                    while($row = mysqli_fetch_array($result_cb3)) {
-                                                        if ($idHorario != $row['idHorario'])
-                                                            echo "<option class='item-combo-box' value='" . $row['idHorario'] . "'>" . $row['nombreCorto'] . "</option>";
-                                                    }
-                                                    echo "</select>";
-                                                ?>
+                                                <input type="text" name="horario" class="form-control reducido campo-tabla" value="<?php echo $rowEncuesta['horario']; ?>" readonly>
+
+                                                <input type="text" name="diligenciamiento" class="form-control reducido campo-tabla" value="<?php echo $rowEncuesta['fechaHoraDiligenciamiento']; ?>" readonly>
 
                                                 <p class="aviso-datos-personales"><b>IMPORTANTE</b></p>
 
@@ -331,20 +380,12 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                                     while ($i <= $mitad) {
 
                                                         $row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
-
                                                         $pregunta = $row2['textoPregunta'];
-                                                        $identificadorSi = "idPregunta_" . $i . "_SI";
-                                                        $identificadorNo = "idPregunta_" . $i . "_NO";
                                                         echo "<label class='label-encuesta-preguntas sangria-numeracion-preguntas'>$i. $pregunta</label>";
-                                                        $idPregunta = "idPregunta_" . $row2['idPreguntaEncuesta'];
                                                         echo "<div class='bloqueSiNo'>";
-                                                        echo "<input type='radio' name='$idPregunta' id='$identificadorNo' value='0'>&nbsp;&nbsp;&nbsp;No";
-                                                        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"; 
-                                                        echo "<input type='radio' id='$identificadorSi' name='$idPregunta' value='1'>&nbsp;&nbsp;&nbsp;Si";
+                                                        echo obtenerRespuesta($idEncuesta, $i, $linkMYSQLI);
                                                         echo "</div>";
-
                                                         $i = $i + 1;
-
                                                     }
 
                                                 ?> 
@@ -363,18 +404,11 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                                     while ($i <= $cantidad) {
 
                                                         $row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
-
                                                         $pregunta = $row2['textoPregunta'];
-                                                        $identificadorSi = "idPregunta_" . $i . "_SI";
-                                                        $identificadorNo = "idPregunta_" . $i . "_NO";
                                                         echo "<label class='label-encuesta-preguntas sangria-numeracion-preguntas'>$i. $pregunta</label>";
-                                                        $idPregunta = "idPregunta_" . $row2['idPreguntaEncuesta'];
                                                         echo "<div class='bloqueSiNo'>";
-                                                        echo "<input type='radio' name='$idPregunta' id='$identificadorNo' value='0'> No";
-                                                        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"; 
-                                                        echo "<input type='radio' id='$identificadorSi' name='$idPregunta' value='1'> Si";
+                                                        echo obtenerRespuesta($idEncuesta, $i, $linkMYSQLI);
                                                         echo "</div>";
-
                                                         $i = $i + 1;
 
                                                     }
@@ -396,7 +430,8 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
                                         <div class="texto-tab5a">
 
                                            <div class="observaciones-encuesta">
-                                                <textarea name="observacionAdicional" class="form-control txt-observaciones" rows="4" placeholder="Registre aquí alguna observación o consideración no tenida en cuenta en la encuesta."></textarea>
+                                                <textarea name="observacionAdicional" class="form-control txt-observaciones solo-lectura" rows="4" placeholder="Registre aquí alguna observación o consideración no tenida en cuenta en la encuesta." disabled><?php echo $rowEncuesta['observacionAdicional']; ?>
+                                                </textarea>
                                             </div>
 
                                             <p class="aviso-consideraciones">Su salud y la nuestra dependen de que usted y todas las personas que ingresan a las sedes del SENA tengan en cuenta las consideraciones antes mencionadas al inicio de la encuesta.</p>
@@ -417,10 +452,6 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 
                                             <br>
                                             <br>
-
-                                            <input type="hidden" name="aceptacionRespuestaPositiva" id="aceptacionRespuestaPositiva" value="0">
-
-                                            <button type="submit" name="login" value="login" id="btn-enviar-encuesta" class="btn btn-info centrar-elemento submit">ENVIAR ENCUESTA Y REGISTRAR SUS DATOS</button>
 
                                         </div>
 
@@ -468,39 +499,12 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 
     </form>   
 
-    <!-- Button to Open the Modal -->
-    <button type="button" id="btn-modal-enviar-encuesta" class="btn btn-primary ocultar-elemento" data-toggle="modal" data-target="#modalEnvioEncuesta" data-backdrop='static' data-keyboard='false'></button>
-
-    <!-- The Modal -->
-    <div class="modal" id="modalEnvioEncuesta">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Encuesta enviada exitosamente</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-
-          <!-- Modal body -->
-          <div class="modal-body texto-modal">
-            Muchas gracias por su información. A la entrada de la sede le será validada la información de la encuesta y se le tomará la temperatura tanto a la entrada como a la salida. No olvide seguir los protocolos de Bioseguridad recomendados en esta encuesta.
-          </div>
-
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" id="btn-cerrar-modal-envio-encuesta" class="btn btn-info" data-dismiss="modal">Cerrar</button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
     <?php
 
         /* liberar la serie de resultados */
         mysqli_free_result($result1);
         mysqli_free_result($result2);
+        mysqli_free_result($resultEncuesta);
 
         /* cerrar la conexión */
         mysqli_close($linkMYSQLI);
@@ -515,7 +519,7 @@ if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
 
         $(document).ready(function(){
             
-             validarEncuesta("#frmEncuesta");
+             contarRespuestasPositivas();
 
         });
 

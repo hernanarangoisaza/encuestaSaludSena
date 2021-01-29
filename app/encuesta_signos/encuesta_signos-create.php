@@ -7,10 +7,9 @@ if (empty($_SESSION["login"])) {
 ?>
 
 <?php
-if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
-    header("Location: ../core/menu.php");
+    // Se bloquea dado que es una funcionalidad parcial y temporal. Existe otro formulario para esta información.
+    header("Location: encuesta_signos-index.php");
     exit();
-}
 ?>
 
 <?php

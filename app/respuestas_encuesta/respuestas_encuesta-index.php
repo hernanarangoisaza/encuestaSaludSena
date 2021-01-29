@@ -13,6 +13,15 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
 }
 ?>
 
+<?php
+    
+    // Dada la funcionalidad, el botón CREAR se deja deshabilitado para todos los perfiles. En esta zona, de ser necesario, se debe plantear otra alternativa similiar a la planteada en otras secciones del código para el mismo botón.
+
+    $isDisabled = "isDisabled";
+    $ariaDisabled = "true";
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,7 +40,7 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
 
                     <div class="page-header clearfix">
                         <h2 class="float-left">Respuestas de la Encuesta - Panel General</h2>
-                        <a href="respuestas_encuesta-create.php" class="btn btn-success float-right">Crear</a>
+                        <?php echo '<span class="' . $isDisabled. '"><a href="respuestas_encuesta-create.php" class="btn btn-success float-right" aria-disabled="' . $ariaDisabled . '">Crear</a></span>' ?>
                         <a href="respuestas_encuesta-index.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="../core/menu.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>

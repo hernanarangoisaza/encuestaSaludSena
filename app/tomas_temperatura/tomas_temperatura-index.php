@@ -23,6 +23,15 @@ else {
 }
 ?>
 
+<?php
+    
+    // Dada la funcionalidad, el botón CREAR se deja deshabilitado para todos los perfiles. En esta zona, de ser necesario, se debe plantear otra alternativa similiar a la planteada en otras secciones del código para el mismo botón.
+
+    $isDisabled = "isDisabled";
+    $ariaDisabled = "true";
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -103,9 +112,11 @@ else {
 
                     // Attempt select query execution
                     $sql = "SELECT TT.*, 
+                            PE.nombreCompleto AS 'nombreCompleto',
                             ES.idPersona AS 'idPersona',
                             US.nombreCompleto AS 'nombreCompleto' 
                             FROM tomas_temperatura TT
+                            LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
                             LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
                             LEFT JOIN usuarios US ON US.idUsuario = TT.idUsuario
                             ORDER BY $order $sort 
@@ -117,23 +128,27 @@ else {
                         $search = ($_GET['search']);
 
                         $sql = "SELECT TT.*, 
+                            PE.nombreCompleto AS 'nombreCompleto',
                             ES.idPersona AS 'idPersona',
                             US.nombreCompleto AS 'nombreCompleto' 
                             FROM tomas_temperatura TT
+                            LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
                             LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
                             LEFT JOIN usuarios US ON US.idUsuario = TT.idUsuario
-                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idPersona,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,US.nombreCompleto,TT.estado,TT.auditoria)
+                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idPersona,PE.nombreCompleto,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,US.nombreCompleto,TT.estado,TT.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         
                         $count_pages = "SELECT TT.*, 
+                            PE.nombreCompleto AS 'nombreCompleto',
                             ES.idPersona AS 'idPersona',
                             US.nombreCompleto AS 'nombreCompleto' 
                             FROM tomas_temperatura TT
+                            LEFT JOIN personas PE ON PE.idPersona = ES.idPersona
                             LEFT JOIN encuesta_signos ES ON ES.idEncuesta = TT.idEncuesta
                             LEFT JOIN usuarios US ON US.idUsuario = TT.idUsuario
-                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idPersona,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,US.nombreCompleto,TT.estado,TT.auditoria)
+                            WHERE CONCAT (TT.idToma,TT.idEncuesta,ES.idPersona,PE.nombreCompleto,TT.fechaHoraTomaEntrada,TT.temperaturaEntrada,TT.fechaHoraTomaSalida,TT.temperaturaSalida,US.nombreCompleto,TT.estado,TT.auditoria)
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
@@ -155,8 +170,9 @@ else {
                                     echo "<tr>";
                                         echo "<th class='estilo-acciones'>Acciones</th>";
                                         echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idToma&sort=$sort>Id Toma Temperatura</th>";
-										echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
+										echo "<th class=''><a href=?search=$search&sort=&order=idEncuesta&sort=$sort>Id<br>Encuesta</th>";
                                         echo "<th class='ocultar-columna'><a href=?search=$search&sort=&order=idPersona&sort=$sort>Id<br>Persona</th>";
+                                        echo "<th class=''><a href=?search=$search&sort=&order=nombreCompleto&sort=$sort>Persona</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraTomaEntrada&sort=$sort>Fecha/hora<br>toma de entrada</th>";
 										echo "<th><a href=?search=$search&sort=&order=temperaturaEntrada&sort=$sort>Temperatura<br>a la entrada</th>";
 										echo "<th><a href=?search=$search&sort=&order=fechaHoraTomaSalida&sort=$sort>Fecha/hora<br>toma de salida</th>";
@@ -173,12 +189,13 @@ else {
                                         echo "<span class='$isDisabled'>" . "<a href='tomas_temperatura-read.php?idToma=" . $row['idToma'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-eye'></i></a></span>";
                                         echo "<span class='$isDisabled'>" . "<a href='tomas_temperatura-update.php?idToma=" . $row['idToma'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-edit'></i></a></span>";
                                         echo "<span class='$isDisabled'>" . "<a href='tomas_temperatura-delete.php?idToma=" . $row['idToma'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-trash-alt'></i></a></span>";                                        
-                                        echo "<a href='../formato_encuesta/encuesta-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
+                                        echo "<a href='../formato_encuesta/encuesta-view.php?idEncuesta=". $row['idEncuesta'] ."&idPersona=". $row['idPersona']."' target='_blank'><i class='fas fa-list-ol'></i></a>";
                                         echo "<a href='../personas/personas-read.php?idPersona=". $row['idPersona'] ."'><i class='far fa-user'></i></a>";
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idToma'] . "</td>";
-                                    echo "<td class='ocultar-columna'>" . $row['idEncuesta'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['idEncuesta'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idPersona'] . "</td>";
+                                    echo "<td class='centrar-columna'>" . $row['nombreCompleto'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraTomaEntrada'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['temperaturaEntrada'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraTomaSalida'] . "</td>";

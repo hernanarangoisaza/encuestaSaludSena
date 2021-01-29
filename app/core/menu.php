@@ -131,6 +131,18 @@
 
                 });
 
+                /*
+                $("#preguntas-encuesta").on("click", function(e) {
+
+                    $("#contenido-central").removeClass("justify-content-between");
+                    $("#contenido-central").addClass("justify-content-center");
+                    $("#contenido-central").addClass("fondo-load-jquery");
+                    $("#contenido-central").addClass("efecto-blur");
+                    $("#contenido-central").load("../preguntas_encuesta/preguntas_encuesta-index.php");
+
+                });
+                */
+
             });
 
         </script>

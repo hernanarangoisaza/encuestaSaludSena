@@ -11,7 +11,7 @@
 */
 
 body {
-    background-color: white;
+    background-color: #f9f9f9;
     margin: 0;
     font-family: "Muli", sans-serif;
     font-size: 14px; /* Tamaño de fuente base, definir el resto de fuentes con base en font-size: 1em */
@@ -1098,6 +1098,16 @@ label.tab {
     padding: 15px;
 }
 
+.respuestaSi {
+    background-color: white ;
+    color: #dc3545;
+}
+
+.respuestaNo {
+    background-color: white ;
+    color: #28a745;
+}
+
 .modal {
     background-color: rgba(0,0,0,0.55) !important;
 }
@@ -1161,7 +1171,7 @@ label.tab {
 }
 
 #sidebar-wrapper .list-group {
-  width: 15rem;
+  width: 17rem;
 }
 
 #page-content-wrapper {

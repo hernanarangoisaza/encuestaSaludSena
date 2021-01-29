@@ -10,8 +10,8 @@ if (empty($_SESSION["login"])) {
 ?>
 
 <?php
-if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
-    header("Location: ../core/menu.php");
+if ((!strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") == '')) {
+    //header("Location: ../core/menu.php");
 }
 ?>
 
@@ -103,6 +103,7 @@ if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
                         LEFT JOIN centros_formacion CF ON CF.idCentroFormacion = ES.idSedeIngreso
                         LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
                         LEFT JOIN personas PE USING(idPersona)
+                        WHERE date(fechaHoraDiligenciamiento) = CURDATE()
                         ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
 
                     $count_pages = "SELECT * FROM encuesta_signos";
@@ -118,6 +119,7 @@ if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
                             LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
                             LEFT JOIN personas PE USING(idPersona)
                             WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,PE.nombreCompleto,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
+                            AND date(fechaHoraDiligenciamiento) = CURDATE()
                             LIKE '%$search%'
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
@@ -130,6 +132,7 @@ if ((strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '')) {
                             LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
                             LEFT JOIN personas PE USING(idPersona)
                             WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,PE.nombreCompleto,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
+                            AND date(fechaHoraDiligenciamiento) = CURDATE()
                             LIKE '%$search%'
                             ORDER BY $order $sort";
                     }
