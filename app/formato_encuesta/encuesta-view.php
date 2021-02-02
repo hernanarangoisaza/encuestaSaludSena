@@ -14,8 +14,10 @@ if (empty($_SESSION["login"])) {
 
 <?php
 // Línea temporal para pruebas desde otro tipo de usuarios
-$_SESSION['permisosRolSistema'] = "[usuario-encuestas]";
-if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '')) {
+// $_SESSION['permisosRolSistema'] = "[usuario-encuestas]";
+
+if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '') and
+    !(strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '')) {
     header("Location: ../core/menu.php");
 }
 ?>

@@ -182,7 +182,7 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and
                                     echo "<span class='$isDisabled'>" . "<a href='encuesta_signos-delete.php?idEncuesta=". $row['idEncuesta'] . "' aria-disabled='$ariaDisabled'>" . "<i class='far fa-trash-alt'></i></a></span>";
                                     echo "<a href='../formato_encuesta/encuesta-view.php?idEncuesta=". $row['idEncuesta'] ."&idPersona=". $row['idPersona']."' target='_blank'><i class='fas fa-list-ol'></i></a>";
                                     echo "<a href='../personas/personas-read.php?idPersona=". $row['idPersona'] ."' target='_blank'><i class='far fa-user'></i></a>";
-                                    echo "<a href='../tomas_temperatura/tomas_temperatura-index.php?search=". $row['idPersona'] ."'><i class='fas fa-thermometer-half'></i></a>";
+                                    echo "<a href='../tomas_temperatura/tomas_temperatura-index.php?idEncuesta=". $row['idEncuesta'] ."&idPersona=". $row['idPersona']."' target='_blank'><i class='fas fa-thermometer-half'></i></a>";
                                     echo "</td>";                                    
                                     echo "<td class='centrar-columna'>" . $row['idEncuesta'] . "</td>";
                                     echo "<td class='centrar-columna'>" . $row['fechaHoraDiligenciamiento'] . "</td>";
@@ -205,7 +205,13 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and
                                         else if ($row['autorizacionIngreso'] == -1) { echo 'Sin asignar'; }
                                     echo "</td>";
                                     echo "<td class='ocultar-columna'>" . '< En vista individual >' . "</td>";
-                                    if ($row['aceptacionRespuestaPositiva'] == 1) {$alertaPositivo = "alerta-positivo";} else {$alertaPositivo = "";}
+
+                                    if ($row['aceptacionRespuestaPositiva'] == 1) {
+                                        $alertaPositivo = "alerta-positivo";
+                                    } else {
+                                        $alertaPositivo = "";
+                                    }
+
                                     echo "<td class='centrar-columna $alertaPositivo'>";
                                         if ($row['aceptacionRespuestaPositiva'] == 0) { echo 'No'; }
                                         else if ($row['aceptacionRespuestaPositiva'] == 1) { echo 'Si'; }

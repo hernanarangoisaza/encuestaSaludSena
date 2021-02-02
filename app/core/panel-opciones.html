@@ -93,7 +93,7 @@
     
     <?php
     if ($_SESSION['modoLogin'] == "normal") {
-        $ruta = "../personas/personas-read.php?idPersona=" . $_SESSION['idPersona'];
+        $ruta = "../personas/personas-view.php?idPersona=" . $_SESSION['idPersona'];
     } if ($_SESSION['modoLogin'] == "backend") {
         $ruta = "../usuarios/usuarios-read.php?idUsuario=" . $_SESSION['idUsuario'];
     }

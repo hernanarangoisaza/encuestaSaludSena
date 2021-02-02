@@ -1121,6 +1121,11 @@ label.tab {
     color: black !important;
 }
 
+.alerta-fiebre {
+    background-color: #ffd4e8;
+    color: black !important;
+}
+
 .ocultar-contenedor-izquierdo {
   display: none;
 }

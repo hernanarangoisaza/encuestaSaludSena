@@ -33,7 +33,7 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") == '')) 
 
                     <div class="page-header clearfix">
                         <h2 class="float-left">Toma y Registro de Temperatura</h2>
-                        <a href="../tomas_temperatura/tomas_temperatura-index.php" class="btn btn-dark float-right mr-2">Tomas de Temperatura</a>
+                        <a href="../tomas_temperatura/tomas_temperatura-index.php" class="btn btn-dark float-right mr-2" target='_blank'>Tomas de Temperatura</a>
                         <a href="registrar-temperatura.php" class="btn btn-info float-right mr-2">Restablecer listado</a>
                         <a href="../core/menu.php" class="btn btn-secondary float-right mr-2">Menú Principal</a>
                     </div>
@@ -110,7 +110,7 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") == '')) 
                     
                     if(!empty($_GET['search'])) {
                         $search = ($_GET['search']);
-                    $sql = "SELECT ES.*, 
+                        $sql = "SELECT ES.*, 
                             CF.nombreLargoCentroFormacion AS 'nombreLargoCentroFormacion',
                             HO.nombreCorto AS 'nombreCorto',
                             PE.nombreCompleto AS 'nombreCompleto'
@@ -119,8 +119,8 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") == '')) 
                             LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
                             LEFT JOIN personas PE USING(idPersona)
                             WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,PE.nombreCompleto,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
-                            AND date(fechaHoraDiligenciamiento) = CURDATE()
                             LIKE '%$search%'
+                            AND date(fechaHoraDiligenciamiento) = CURDATE()
                             ORDER BY $order $sort 
                             LIMIT $offset, $no_of_records_per_page";
                         $count_pages = "SELECT ES.*, 
@@ -132,8 +132,8 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") == '')) 
                             LEFT JOIN horarios HO ON HO.idHorario = ES.idHorario
                             LEFT JOIN personas PE USING(idPersona)
                             WHERE CONCAT (ES.idEncuesta,ES.fechaHoraDiligenciamiento,PE.nombreCompleto,CF.nombreLargoCentroFormacion,HO.nombreCorto,ES.aceptacionConsideraciones,ES.autorizacionTratamientoDatos,ES.autorizacionIngreso,ES.observacionAdicional,ES.aceptacionRespuestaPositiva,ES.estado,ES.auditoria)
-                            AND date(fechaHoraDiligenciamiento) = CURDATE()
                             LIKE '%$search%'
+                            AND date(fechaHoraDiligenciamiento) = CURDATE()
                             ORDER BY $order $sort";
                     }
                     else {
@@ -172,9 +172,9 @@ if ((!strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") == '')) 
                                 while($row = mysqli_fetch_array($resultMSQLI)){
                                     echo "<tr>";
                                     echo "<td class='centrar-columna'>";
-                                    echo "<a href='../formato_encuesta/encuesta-view.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-list-ol'></i></a>";
-                                    echo "<a href='../personas/personas-read.php?idPersona=". $row['idPersona'] ."'><i class='far fa-user'></i></a>";
-                                    echo "<a href='../tomas_temperatura/tomas_temperatura-create.php?idEncuesta=". $row['idEncuesta'] ."'><i class='fas fa-thermometer-half'></i></a>";
+                                    echo "<a href='../formato_encuesta/encuesta-view.php?idEncuesta=". $row['idEncuesta'] ."&idPersona=". $row['idPersona']."' target='_blank'><i class='fas fa-list-ol'></i></a>";
+                                    echo "<a href='../personas/personas-read.php?idPersona=". $row['idPersona'] ."' target='_blank'><i class='far fa-user'></i></a>";
+                                    echo "<a href='../tomas_temperatura/tomas_temperatura-create.php?idEncuesta=". $row['idEncuesta'] ."'target='_blank'><i class='fas fa-thermometer-half'></i></a>";
                                     echo "</td>";                                    
                                     echo "<td class='ocultar-columna'>" . $row['idEncuesta'] . "</td>";
                                     echo "<td class='ocultar-columna'>" . $row['idPersona'] . "</td>";

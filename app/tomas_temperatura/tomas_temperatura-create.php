@@ -14,6 +14,7 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
 ?>
 
 <?php
+
     // Include config file
     require_once "../core/config.php";
 
@@ -28,12 +29,11 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
     $auditoria = "";
 
     if (isset($_GET['idEncuesta'])) {
-
         $idEncuesta = isset($_GET['idEncuesta']) ? $_GET['idEncuesta'] : '';
-        $disabled = "xdisabled";
+        $disabled = "disabled";
         $readonly1 = "solo-lectura";
     } else {
-        $idEncuesta = isset($_POST['idEncuesta']) ? $_POST['idEncuesta'] : '';
+        //$idEncuesta = isset($_POST['idEncuesta']) ? $_POST['idEncuesta'] : '';
         $disabled = "";
         $readonly1 = "";
     }
@@ -41,14 +41,30 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+        print_r($_POST);
+
         $idEncuesta = trim($_POST["idEncuesta"]);
         $fechaHoraTomaEntrada = trim($_POST["fechaHoraTomaEntrada"]);
     	$temperaturaEntrada = trim($_POST["temperaturaEntrada"]);
     	$fechaHoraTomaSalida = trim($_POST["fechaHoraTomaSalida"]);
     	$temperaturaSalida = trim($_POST["temperaturaSalida"]);
         $idUsuario = trim($_POST["idUsuario"]);
+        $idPersona = trim($_POST["idPersona"]);
         $estado = trim($_POST["estado"]);
     	$auditoria = date('Y-m-d H:i:s');
+
+        if ($temperaturaEntrada != '' and $temperaturaSalida == '') {
+            $fechaHoraTomaEntrada = date('Y-m-d H:i:s');
+        }
+
+        if ($temperaturaEntrada == '' and $temperaturaSalida != '') {
+            $fechaHoraTomaSalida = date('Y-m-d H:i:s');
+        }
+
+        if ($temperaturaEntrada != '' and $temperaturaSalida != '') {
+            $fechaHoraTomaEntrada = date('Y-m-d H:i:s');
+            $fechaHoraTomaSalida = date('Y-m-d H:i:s');
+        }
 
         $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
         
@@ -64,10 +80,10 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
           error_log($e->getMessage());
           exit('Algo extraño sucedió'); //something a user can understand
         }
+
+        $stmtPDO = $linkPDO->prepare("INSERT INTO tomas_temperatura (idEncuesta,fechaHoraTomaEntrada,temperaturaEntrada,fechaHoraTomaSalida,temperaturaSalida,idUsuario,idPersona,estado,auditoria) VALUES (?,?,?,?,?,?,?,?,?)"); 
         
-        $stmtPDO = $linkPDO->prepare("INSERT INTO tomas_temperatura (idEncuesta,fechaHoraTomaEntrada,temperaturaEntrada,fechaHoraTomaSalida,temperaturaSalida,idUsuario,estado,auditoria) VALUES (?,?,?,?,?,?,?,?)"); 
-        
-        if($stmtPDO->execute([ $idEncuesta,$fechaHoraTomaEntrada,$temperaturaEntrada,$fechaHoraTomaSalida,$temperaturaSalida,$idUsuario,$estado,$auditoria ])) {
+        if($stmtPDO->execute([ $idEncuesta,$fechaHoraTomaEntrada,$temperaturaEntrada,$fechaHoraTomaSalida,$temperaturaSalida,$idUsuario,$idPersona,$estado,$auditoria ])) {
                 $stmtPDO = null;
                 $rutaRegresarA = $_SESSION["rutaRegresarA"];
                 header("location: " . $rutaRegresarA);
@@ -119,9 +135,12 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
                                 echo "<select name='idEncuesta' id='cb5' class='combo-box form-control $readonly1' $disabled>";
                                 while($row = mysqli_fetch_array($result_cb5)) {
                                     $selected = ($idEncuesta != $row['idEncuesta']) ? ('') : ('selected');
-                                    echo "<option class='item-combo-box' $selected value='" . $row['idEncuesta'] . "'>" . $row['idEncuesta'] . ' * ' . $row['fechaHoraDiligenciamiento'] . ' * ' . $row['nombreCompleto'] . "</option>";                                
+                                    echo "<option class='item-combo-box' $selected value='" . $row['idEncuesta'] . "'>" . $row['idEncuesta'] . ' * ' . $row['fechaHoraDiligenciamiento'] . ' * ' . $row['nombreCompleto'] . "</option>"; 
+                                    $idEncuesta = $row['idEncuesta'];
+                                    $idPersona = $row['idPersona'];
                                 }
                                 echo "</select>";
+
                             ?>
                             <span class="form-text"><?php echo $idEncuesta_err; ?></span>
                         </div>
@@ -131,6 +150,8 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
                             <input type="text" name="fechaHoraTomaEntrada" class="form-control" value="<?php echo $fechaHoraTomaEntrada; ?>">
                             <span class="form-text"><?php echo $fechaHoraTomaEntrada_err; ?></span>
                         </div>
+
+                        <?php echo $fechaHoraTomaEntrada; ?>
 
 						<div class="form-group">
                             <label>Temperatura a la entrada</label>
@@ -143,6 +164,8 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
                             <input type="text" name="fechaHoraTomaSalida" class="form-control" value="<?php echo $fechaHoraTomaSalida; ?>">
                             <span class="form-text"><?php echo $fechaHoraTomaSalida_err; ?></span>
                         </div>
+
+                        <?php echo $fechaHoraTomaSalida; ?>
 
 						<div class="form-group">
                             <label>Temperatura a la salida</label>
@@ -163,7 +186,7 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
                                 }
                                 $sql_cb1 = "SELECT idUsuario, nombreCompleto FROM usuarios WHERE $where";
                                 $result_cb1 = mysqli_query($linkMYSQLI, $sql_cb1);
-                                echo "<select name='idUsuario' id='cb1' class='combo-box form-control $readonly2'>";
+                                echo "<select name='idUsuario' id='cb1' class='combo-box form-control $readonly2' $disabled>";
                                 while($row = mysqli_fetch_array($result_cb1)) {
                                     if ($idUsuario != $row['idUsuario'])
                                     {
@@ -171,6 +194,7 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
                                     } else {
                                         echo "<option class='item-combo-box' selected value='" . $row['idUsuario'] . "'>" . $row['nombreCompleto'] . "</option>";
                                     }
+                                    $idUsuario = $row['idUsuario'];
                                 }
                                 echo "</select>";
                             ?>
@@ -188,6 +212,12 @@ if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
                             <input type="text" name="auditoria" class="form-control" value="<?php echo $auditoria; ?>">
                             <span class="form-text"><?php echo $auditoria_err; ?></span>
                         </div>
+
+                        <input type="hidden" name="idUsuario" value="<?php echo $idUsuario; ?>">
+
+                        <input type="hidden" name="idEncuesta" value="<?php echo $idEncuesta; ?>">
+
+                        <input type="hidden" name="idPersona" value="<?php echo $idPersona; ?>">
 
                         <input type="submit" class="btn btn-primary" value="Grabar">
 
