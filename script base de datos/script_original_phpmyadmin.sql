@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-02-2021 a las 21:21:57
+-- Tiempo de generación: 02-02-2021 a las 23:42:22
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.3.17
 
@@ -3924,9 +3924,7 @@ CREATE TABLE `roles_sistema` (
 INSERT INTO `roles_sistema` (`idRolSistema`, `nombreLargoRolSistema`, `nombreCorto`, `descripcionRolSistema`, `permisos`, `restricciones`, `estado`, `auditoria`) VALUES
 (1, 'Administrador', 'admin', 'Súper usuario del sistema que tiene acceso a todas las opciones y acciones del sistema sin ninguna restricción.', '[super-admin]', '[n/a]', 1, '2020-12-15 06:52:15'),
 (2, 'Auxiliar - Toma Temperatura', 'auxtemperatura', 'Usuario colaborador del administrador del sistema que sólo puede gestionar las tomas de temperatura a la entrada y salida de la Sede.', '[auxiliar-temperatura]', '[n/a]', 1, '2020-12-12 06:22:42'),
-(3, 'Auxiliar - Encuestas', 'auxencuestas', 'Usuario colaborador del administrador del sistema que sólo puede ayudar a gestionar las encuestas de otras personas que no lo pudieron hacer por sus propios medios.', '[auxiliar-encuestas]', '[n/a]', 1, '2020-12-09 08:44:39'),
-(4, 'Auxiliar - Asistente', 'auxasistente', 'Usuario colaborador del administrador del sistema que agrupa los demás roles de Auxiliares.', '[auxiliar-temperatura],[auxiliar-encuestas], [auxiliar-aprendices]', '[n/a]', 1, '2020-12-12 06:25:49'),
-(5, 'Auxiliar - Aprendices', 'auxaprendices', 'Usuario colaborador del administrador del sistema que sólo puede ayudar a gestionar la información personal requerida para el uso del sistema.', '[auxiliar-aprendices]', '[n/a]', 1, '2020-12-12 06:25:56');
+(3, 'Auxiliar - Asistente', 'auxasistente', 'Usuario colaborador del administrador del sistema que agrupa los demás roles de Auxiliares.', '[auxiliar-temperatura]', '[n/a]', 1, '2021-02-02 17:38:21');
 
 -- --------------------------------------------------------
 
@@ -4068,7 +4066,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`idUsuario`, `idTipoVinculacion`, `nombreCompleto`, `idTipoIdentificacion`, `identificacion`, `email`, `telefonoPersonal`, `fechaNacimiento`, `idTipoGenero`, `direccionResidencia`, `idMunicipio`, `idDepartamento`, `idCentroFormacion`, `idRolSistema`, `passwordSistema`, `estado`, `auditoria`) VALUES
 (1, 5, 'Administrador sistema', 5, 'N/A', 'admin@sena.edu.co', 'N/A', '2021-01-01', 0, 'N/A', 0, 0, 2, 1, '$2y$10$/MgbsVvlw3m7TkI7h8oQLOInOcJwZl/OjiHSPTHF8i4j8o6M7QLEe', 1, '2021-01-28 10:29:58'),
-(999, 16, 'Pruebas del sistema', 5, 'N/A', 'pruebas@sena.edu.co', 'N/A', '2021-01-01', 0, 'N/A', 0, 0, 2, 1, '$2y$10$dmZhkUYbuJz2C.w3cMClUuEPnoImoNgyti3kBVxDtlO843ma/z0l.', 1, '2021-01-29 07:55:28');
+(999, 16, 'Pruebas del sistema', 5, 'N/A', 'pruebas@sena.edu.co', 'N/A', '2021-01-01', 0, 'N/A', 0, 0, 2, 1, '$2y$10$dmZhkUYbuJz2C.w3cMClUuEPnoImoNgyti3kBVxDtlO843ma/z0l.', 1, '2021-02-02 17:34:34');
 
 --
 -- Índices para tablas volcadas
@@ -4264,7 +4262,7 @@ ALTER TABLE `respuestas_encuesta`
 -- AUTO_INCREMENT de la tabla `roles_sistema`
 --
 ALTER TABLE `roles_sistema`
-  MODIFY `idRolSistema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idRolSistema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_generos`
