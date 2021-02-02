@@ -17,7 +17,8 @@ if (empty($_SESSION["login"])) {
 // $_SESSION['permisosRolSistema'] = "[usuario-encuestas]";
 
 if (!(strstr($_SESSION['permisosRolSistema'], "[usuario-encuestas]") != '') and
-    !(strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '')) {
+    !(strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and
+    !(strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '')) {
     header("Location: ../core/menu.php");
 }
 ?>

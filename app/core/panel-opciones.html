@@ -30,7 +30,11 @@
 
         echo '<a class="dropdown-item" href="../encuesta_signos/encuesta_signos-index.php">Encuestas de signos</a>';
 
-        echo '<a class="dropdown-item" href="../respuestas_encuesta/respuestas_encuesta-index.php">Respuestas de la encuesta</a>';
+        if (!strstr($_SESSION['permisosRolSistema'], "[auxiliar-") != '') {
+
+            echo '<a class="dropdown-item" href="../respuestas_encuesta/respuestas_encuesta-index.php">Respuestas de la encuesta</a>';
+
+        }
 
         echo '<a class="dropdown-item" href="../tomas_temperatura/tomas_temperatura-index.php">Tomas de temperatura</a>';
 

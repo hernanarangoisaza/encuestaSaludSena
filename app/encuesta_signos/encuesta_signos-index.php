@@ -8,7 +8,6 @@ if (empty($_SESSION["login"])) {
 
 <?php
 if ((!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and
-    (!strstr($_SESSION['permisosRolSistema'], "[auxiliar-encuestas]") != '') and
     (!strstr($_SESSION['permisosRolSistema'], "[auxiliar-temperatura]") != '')) {
     header("Location: ../core/menu.php");
     exit();

@@ -100,10 +100,17 @@ function validarEncuesta (idForm) {
 
 $(function () {
 
-    $("#btn-cerrar-modal-envio-encuesta").on("click", function() {
+    /*
+    $('#modalEnvioEncuesta').on('click', function(event) {
+      var $button = $(event.target);
+      alert('Hola');
+    });
+    */
 
-        // window.location.replace("../core/cerrar-encuesta.php");
+    $("#modalEnvioEncuesta").on("click", function() {
+
         $("#frmEncuesta")[0].reset();
+        $(location).attr('href', '../core/cerrar-encuesta.php');
 
     })
 

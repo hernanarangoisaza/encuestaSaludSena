@@ -7,7 +7,8 @@ if (empty($_SESSION["login"])) {
 ?>
 
 <?php
-if (!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') {
+if ((!strstr($_SESSION['permisosRolSistema'], "[super-admin]") != '') and 
+    (!strstr($_SESSION['permisosRolSistema'], "[auxiliar-") != '')) {
     header("Location: ../core/menu.php");
     exit();
 }
